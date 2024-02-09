@@ -1,0 +1,75 @@
+﻿
+@color_1: black;
+@color_2: var(--primary-text);
+@color_3: #f8f8f8;
+@color_4: #333333;
+@color_5: #003c5f;
+@secondary_color_btn: #ffc3a0;
+@font_family_1: Arial, Helvetica, sans-serif;
+@font_family_2: 'Montserrat', sans-serif;
+@font_family_3: 'Geneva', sans-serif;
+@font_family_4: 'Geneva';
+@font_family_5: Montserrat;
+@background_color_1: transparent;
+@background_color_2: white;
+
+a {
+    text-decoration: none;
+}
+
+:root {
+    --primary-text: #89fffd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background-color: @background_color_2 !important;
+    border-radius: 10px !important;
+}
+
+input[type='text'],
+input[type='date'],
+input[type='email'],
+input[type='password'],
+input[type='file'],
+input[type='datetime-local']
+.selectize-control,
+.selectize-input,
+.modal select {
+    /* color: white;
+  background-color: black;
+  border: none; */
+    box-sizing: border-box;
+    margin-top: 10px;
+    border-radius: 10px;
+    height: 36px;
+    background-color: @background_color_2;
+    color: @color_1;
+    border: solid 1px #303030;
+}
+
+.item-icon {
+    margin-left: 12px;
+    height: fit-content;
+    width: 30px;
+}
+
+.item-description {
+    font-family: @font_family_1;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 11px;
+    margin: 0;
+    margin-left: 24px;
+    text-align: center;
+    display: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: @color_1;
+}

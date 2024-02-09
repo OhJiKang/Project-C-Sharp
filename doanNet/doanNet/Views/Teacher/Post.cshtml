@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "Bài Viết";
+    Layout = "~/Views/Shared/layoutteacher.cshtml";
+}
+
+<div class="page-content">
+    <div class="function_bar"
+         style="display: flex; justify-content: space-between">
+        <div class="search_place" style="margin-left: 32px">
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <label class="mdl-button mdl-js-button mdl-button--icon"
+                           for="sample6">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input"
+                               type="text"
+                               id="sample6" />
+                        <label class="mdl-textfield__label" for="sample-expandable">Nhập tựa đề tìm kiếm</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="function_btn"
+             style="
+                display: flex;
+                justify-content: end;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                margin-right: 32px;
+              ">
+            <div class="add_btn" style="margin: 0 8px">
+                <!-- Colored mini FAB button -->
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
+                        style="background-color: #35d66c">
+                    <i class="material-icons">add</i>
+                </button>
+            </div>
+            <div class="delete_btn" style="margin: 0 8px">
+                <!-- Colored mini FAB button -->
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
+                        style="background-color: #ff0000"
+                        disabled>
+                    <i class="material-icons">delete</i>
+                </button>
+            </div>
+        </div>
+        <!-- Expandable Textfield -->
+    </div>
+
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp"
+           style="width: 100%">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">Tiêu đề</th>
+                <th class="mdl-data-table__cell--non-numeric">
+                    Tên người đăng
+                </th>
+                <th class="mdl-data-table__cell--non-numeric">
+                    Thời gian đăng
+                </th>
+                <th class="mdl-data-table__cell--non-numeric">
+                    Lần cuối chỉnh sửa
+                </th>
+                <th class="mdl-data-table__cell--non-numeric">Tên Category</th>
+                <th class="mdl-data-table__cell--non-numeric">Thẻ bài viết</th>
+                <th class="mdl-data-table__cell--non-numeric">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                    Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">
+                    Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">
+                    Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">
+                    Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">
+                    Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">
+                    Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">
+                    Acrylic (Transparent)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
