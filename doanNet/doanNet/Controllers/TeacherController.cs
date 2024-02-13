@@ -21,5 +21,9 @@ namespace doanNet.Controllers
         {
             return View();
         }
+        public ActionResult AddingPost()
+        {
+            return View();
+        }
     }
 }

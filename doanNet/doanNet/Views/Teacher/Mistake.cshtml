@@ -5,103 +5,8 @@
     Layout = "~/Views/Shared/layoutteacher.cshtml";
 }
 
+
 <div class="page-content">
-    <div class="modal fade"
-         id="ModalAddUser"
-         tabindex="-1"
-         aria-labelledby="ModalAddUserLable"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content p-3">
-                <div class="modal-body">
-                    <div class="input-group flex-nowrap">
-                        <form class="container-fluid"
-                              action="#"
-                              method="post"
-                              enctype="multipart/form-data">
-                            <div class="row gy-3 gx-5">
-                                <div class="col-6">
-                                    <span class="form-title"> MSSV </span>
-                                    <input type="text"
-                                           class="form-control"
-                                           aria-label="Name"
-                                           aria-describedby="addon-wrapping"
-                                           id="Name"
-                                           name="Name" />
-                                </div>
-                                <div class="col-6">
-                                    <span class="form-title"> Tên Học sinh </span>
-                                    <input type="text"
-                                           class="form-control"
-                                           aria-label="Price"
-                                           aria-describedby="addon-wrapping"
-                                           id="Price"
-                                           name="Price" />
-                                </div>
-                                <div class="col-6">
-                                    <span class="form-title"> Tên người ghi nhận </span>
-                                    <input type="text"
-                                           class="form-control"
-                                           aria-label="Price"
-                                           aria-describedby="addon-wrapping"
-                                           id="Price"
-                                           name="Price" />
-                                </div>
-                                <div class="col-6">
-                                    <span class="form-title"> Tên Phòng </span>
-                                    <input type="text"
-                                           class="form-control"
-                                           aria-label="Price"
-                                           aria-describedby="addon-wrapping"
-                                           id="Price"
-                                           name="Price" />
-                                </div>
-                                <div class="col-6">
-                                    <span class="form-title"> Sinh viên xác nhận lỗi </span>
-                                    <select class="form-control"
-                                            aria-label="status"
-                                            aria-describedby="addon-wrapping"
-                                            name="status"
-                                            id="status">
-                                        <option value="1">Chưa xác nhận</option>
-                                        <option value="2">Đã xác nhận</option>
-                                    </select>
-                                </div>
-                                <div class="col-6">
-                                    <span class="form-title"> Minh Chứng </span>
-                                    <input type="file"
-                                           class="form-control"
-                                           aria-label="image"
-                                           aria-describedby="addon-wrapping"
-                                           id="image"
-                                           multiple
-                                           name="Image[]" />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="message"></div>
-                    <div class="row">
-                        <div class="col-4"></div>
-                        <div class="col-4"
-                             style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                ">
-                            <button type="button"
-                                    class="btn mt-2 text-white btn-main"
-                                    id="btn-add"
-                                    style="border-radius: 10px">
-                                Thêm Combo
-                            </button>
-                        </div>
-                        <div class="col-4"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="function_bar"
          style="display: flex; justify-content: space-between">
         <div class="search_place" style="margin-left: 32px">
@@ -130,9 +35,8 @@
               ">
             <div class="add_btn" style="margin: 0 8px">
                 <!-- Colored mini FAB button -->
-                <button
-                        data-bs-toggle="modal"
-                        data-bs-target="#ModalAddUser" 
+                <button data-bs-toggle="modal"
+                        data-bs-target="#ModalAddUser"
                         class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
                         style="background-color: #35d66c">
                     <i class="material-icons">add</i>
@@ -197,5 +101,118 @@
             </tr>
         </tbody>
     </table>
+    <nav aria-label="Page navigation example" class="base-pagination">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-active page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">...</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#">6</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</main>
+
+<div class="modal fade"
+     id="ModalAddUser"
+     tabindex="-1"
+     aria-labelledby="ModalAddUserLable"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content p-3">
+            <div class="modal-body">
+                <div class="input-group flex-nowrap">
+                    <form class="container-fluid"
+                          action="#"
+                          method="post"
+                          enctype="multipart/form-data">
+                        <div class="row gy-3 gx-5">
+                            <div class="col-6">
+                                <span class="form-title"> MSSV </span>
+                                <input type="text"
+                                       class="form-control"
+                                       aria-label="Name"
+                                       aria-describedby="addon-wrapping"
+                                       id="Name"
+                                       name="Name" />
+                            </div>
+                            <div class="col-6">
+                                <span class="form-title"> Tên Học sinh </span>
+                                <input type="text"
+                                       class="form-control"
+                                       aria-label="Price"
+                                       aria-describedby="addon-wrapping"
+                                       id="Price"
+                                       name="Price" />
+                            </div>
+                            <div class="col-6">
+                                <span class="form-title"> Tên người ghi nhận </span>
+                                <input type="text"
+                                       class="form-control"
+                                       aria-label="Price"
+                                       aria-describedby="addon-wrapping"
+                                       id="Price"
+                                       name="Price" />
+                            </div>
+                            <div class="col-6">
+                                <span class="form-title"> Tên Phòng </span>
+                                <input type="text"
+                                       class="form-control"
+                                       aria-label="Price"
+                                       aria-describedby="addon-wrapping"
+                                       id="Price"
+                                       name="Price" />
+                            </div>
+                            <div class="col-6">
+                                <span class="form-title"> Sinh viên xác nhận lỗi </span>
+                                <select class="form-control"
+                                        aria-label="status"
+                                        aria-describedby="addon-wrapping"
+                                        name="status"
+                                        id="status">
+                                    <option value="1">Chưa xác nhận</option>
+                                    <option value="2">Đã xác nhận</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <span class="form-title"> Minh Chứng </span>
+                                <input type="file"
+                                       class="form-control"
+                                       aria-label="image"
+                                       aria-describedby="addon-wrapping"
+                                       id="image"
+                                       multiple
+                                       name="Image[]" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="message"></div>
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4"
+                         style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                ">
+                        <button type="button"
+                                class="btn mt-2 text-white btn-main"
+                                id="btn-add"
+                                style="border-radius: 10px; background-color: #1C63EE">
+                            Thêm Combo
+                        </button>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
