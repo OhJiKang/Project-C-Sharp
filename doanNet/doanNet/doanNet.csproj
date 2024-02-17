@@ -132,6 +132,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\TeacherPage\Base.css">
+      <DependentUpon>Base.less</DependentUpon>
+    </Content>
+    <Content Include="Content\TeacherPage\Base.min.css">
+      <DependentUpon>Base.css</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Images\gioi-thieu.png" />
     <Content Include="Images\logo.png" />
@@ -171,7 +177,7 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Assets\CSS\Base.less" />
+    <Content Include="Content\TeacherPage\Base.less" />
     <Content Include="libman.json" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\layout.cshtml" />
