@@ -25,5 +25,9 @@ namespace doanNet.Controllers
         {
             return View();
         }
+        public ActionResult ChoosingRoom()
+        {
+            return View();
+        }
     }
 }

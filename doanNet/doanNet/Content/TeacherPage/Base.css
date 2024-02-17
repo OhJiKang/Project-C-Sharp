@@ -37,6 +37,7 @@ body {
   border-top: 1px #343434 solid;
 }
 .primary-btn {
+  border: none;
   width: 106px;
   height: 30px;
   outline: none;
