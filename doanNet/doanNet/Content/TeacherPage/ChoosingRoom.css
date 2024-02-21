@@ -45,7 +45,7 @@ body .choosing_room_status {
   margin-left: 7%;
   padding: 0 10px;
   border-left: solid 1px #D9D9D9;
-  width: 120px;
+  width: 100%;
 }
 body .heading_number_tag {
   text-align: center;

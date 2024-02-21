@@ -53,6 +53,12 @@
     <Reference Include="dotless.Core, Version=1.6.7.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
       <HintPath>..\packages\dotless.Core.1.6.7\lib\net47\dotless.Core.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.1.1\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
@@ -63,6 +69,8 @@
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -144,9 +152,19 @@
     <Content Include="Content\TeacherPage\ChoosingRoom.min.css">
       <DependentUpon>ChoosingRoom.css</DependentUpon>
     </Content>
+    <Content Include="Content\TeacherPage\RegisterPlace.css">
+      <DependentUpon>RegisterPlace.less</DependentUpon>
+    </Content>
+    <Content Include="Content\TeacherPage\RegisterPlace.min.css">
+      <DependentUpon>RegisterPlace.css</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Images\gioi-thieu.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Models\KTXTDTUModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>KTXTDTUModel.Context.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -162,6 +180,16 @@
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KTXTDTUModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KTXTDTUModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KTXTDTUModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KTXTDTUModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -186,6 +214,14 @@
     <Content Include="Content\TeacherPage\Base.less" />
     <Content Include="libman.json" />
     <Content Include="Content\TeacherPage\ChoosingRoom.less" />
+    <Content Include="Content\TeacherPage\RegisterPlace.less" />
+    <EntityDeploy Include="Models\KTXTDTUModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>KTXTDTUModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\KTXTDTUModel.edmx.diagram">
+      <DependentUpon>KTXTDTUModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <Content Include="Views\Shared\layout.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
@@ -202,6 +238,7 @@
     <Content Include="Views\Teacher\Post.cshtml" />
     <Content Include="Views\Teacher\AddingPost.cshtml" />
     <Content Include="Views\Teacher\ChoosingRoom.cshtml" />
+    <Content Include="Views\Teacher\RegisterPlace.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -211,8 +248,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\App_LocalResources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

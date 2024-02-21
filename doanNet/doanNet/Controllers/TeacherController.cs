@@ -29,5 +29,9 @@ namespace doanNet.Controllers
         {
             return View();
         }
+        public ActionResult RegisterPlace()
+        {
+            return View();
+        }
     }
 }

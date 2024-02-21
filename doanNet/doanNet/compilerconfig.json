@@ -6,5 +6,9 @@
   {
     "outputFile": "Content/TeacherPage/ChoosingRoom.css",
     "inputFile": "Content/TeacherPage/ChoosingRoom.less"
+  },
+  {
+    "outputFile": "Content/TeacherPage/RegisterPlace.css",
+    "inputFile": "Content/TeacherPage/RegisterPlace.less"
   }
 ]

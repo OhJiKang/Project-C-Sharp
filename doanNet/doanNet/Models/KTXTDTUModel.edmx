@@ -1,0 +1,1008 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KTXTDTUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="IDAccount" />
+          </Key>
+          <Property Name="IDAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="text" Nullable="false" />
+          <Property Name="Hide" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="Name" Type="text" Nullable="false" />
+          <Property Name="IDSinhVien" Type="int" Nullable="false" />
+          <Property Name="Meta" Type="nchar" MaxLength="10" />
+          <Property Name="Order" Type="nchar" MaxLength="10" />
+          <Property Name="DateBegin" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="IDAccountType" />
+          </Key>
+          <Property Name="IDAccountType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeDescription" Type="text" Nullable="false" />
+          <Property Name="IDAccount" Type="int" Nullable="false" />
+          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="Meta" Type="nchar" MaxLength="10" />
+          <Property Name="Order" Type="nchar" MaxLength="10" />
+          <Property Name="DateBegin" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="IDContract" />
+          </Key>
+          <Property Name="IDContract" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MSSV" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="IDCitizen" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ProfilePlace" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="IDPlace" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="Order" Type="nchar" MaxLength="10" />
+          <Property Name="DateBegin" Type="datetime" />
+          <Property Name="Meta" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ContractBridge">
+          <Key>
+            <PropertyRef Name="IDContract" />
+            <PropertyRef Name="IDPriority" />
+          </Key>
+          <Property Name="IDContract" Type="int" Nullable="false" />
+          <Property Name="IDPriority" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="IDFalcuty" />
+          </Key>
+          <Property Name="IDFalcuty" Type="int" Nullable="false" />
+          <Property Name="NameFalculty" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="Description" Type="ntext" Nullable="false" />
+          <Property Name="Order" Type="nchar" MaxLength="10" />
+          <Property Name="Meta" Type="nchar" MaxLength="10" />
+          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="DateBegin" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Fee">
+          <Key>
+            <PropertyRef Name="IDFee" />
+          </Key>
+          <Property Name="IDFee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="text" Nullable="false" />
+          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="DateStart" Type="datetime" Nullable="false" />
+          <Property Name="DateEnd" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="IDRoom" Type="int" Nullable="false" />
+          <Property Name="IDLog" Type="int" Nullable="false" />
+          <Property Name="Order" Type="nchar" MaxLength="10" />
+          <Property Name="DateBegin" Type="datetime" />
+          <Property Name="Meta" Type="nchar" MaxLength="10" />
+          <Property Name="Hide" Type="binary" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="IDLog" />
+          </Key>
+          <Property Name="IDLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateDone" Type="datetime" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="IDSinhVien" Type="int" Nullable="false" />
+          <Property Name="DateBegin" Type="datetime" />
+          <Property Name="Order" Type="nchar" MaxLength="10" />
+          <Property Name="Meta" Type="nchar" MaxLength="10" />
+          <Property Name="Hide" Type="binary" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Mistake">
+          <Key>
+            <PropertyRef Name="IDMistake" />
+          </Key>
+          <Property Name="IDMistake" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MistakeDes" Type="text" Nullable="false" />
+          <Property Name="TimeCaught" Type="datetime" Nullable="false" />
+          <Property Name="BedID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IDSinhVien" Type="int" Nullable="false" />
+          <Property Name="IDAccount" Type="int" Nullable="false" />
+          <Property Name="IDRoom" Type="int" Nullable="false" />
+          <Property Name="Order" Type="nchar" MaxLength="10" />
+          <Property Name="Meta" Type="nchar" MaxLength="10" />
+          <Property Name="DateBegin" Type="datetime" />
+          <Property Name="Hide" Type="binary" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="IDPlace" />
+          </Key>
+          <Property Name="IDPlace" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="ntext" Nullable="false" />
+          <Property Name="DateBegin" Type="datetime" />
+          <Property Name="Meta" Type="nchar" MaxLength="10" />
+          <Property Name="Order" Type="nchar" MaxLength="10" />
+          <Property Name="Hide" Type="binary" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Priority">
+          <Key>
+            <PropertyRef Name="IDPriority" />
+          </Key>
+          <Property Name="IDPriority" Type="int" Nullable="false" />
+          <Property Name="PriorityDescription" Type="int" Nullable="false" />
+          <Property Name="Order" Type="nchar" MaxLength="10" />
+          <Property Name="Meta" Type="nchar" MaxLength="10" />
+          <Property Name="DateBegin" Type="datetime" />
+          <Property Name="Hide" Type="binary" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="IDRoom" />
+          </Key>
+          <Property Name="IDRoom" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Floor" Type="int" Nullable="false" />
+          <Property Name="Building" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RoomType" Type="int" Nullable="false" />
+          <Property Name="Order" Type="nchar" MaxLength="10" />
+          <Property Name="Meta" Type="nchar" MaxLength="10" />
+          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="DateBegin" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SinhVien">
+          <Key>
+            <PropertyRef Name="IDSinhVien" />
+          </Key>
+          <Property Name="IDSinhVien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="text" Nullable="false" />
+          <Property Name="BirthDay" Type="date" Nullable="false" />
+          <Property Name="AttendDate" Type="date" Nullable="false" />
+          <Property Name="AttendYear" Type="int" Nullable="false" />
+          <Property Name="GraduateYear" Type="int" Nullable="false" />
+          <Property Name="MSSV" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDFalcuty" Type="int" Nullable="false" />
+          <Property Name="IDContract" Type="int" Nullable="false" />
+          <Property Name="IDRoom" Type="int" Nullable="false" />
+          <Property Name="Order" Type="nchar" MaxLength="10" />
+          <Property Name="Meta" Type="nchar" MaxLength="10" />
+          <Property Name="DateBegin" Type="datetime" />
+          <Property Name="Hide" Type="binary" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK__Account__IDSinhV__4CA06362">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="IDSinhVien" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="IDSinhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AccountTy__IDAcc__4F7CD00D">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="AccountType" Type="Self.AccountType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IDAccount" />
+            </Principal>
+            <Dependent Role="AccountType">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contract__IDPlac__3E52440B">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="IDPlace" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="IDPlace" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContractB__IDCon__412EB0B6">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="ContractBridge" Type="Self.ContractBridge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="IDContract" />
+            </Principal>
+            <Dependent Role="ContractBridge">
+              <PropertyRef Name="IDContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContractB__IDPri__4222D4EF">
+          <End Role="Priority" Type="Self.Priority" Multiplicity="1" />
+          <End Role="ContractBridge" Type="Self.ContractBridge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Priority">
+              <PropertyRef Name="IDPriority" />
+            </Principal>
+            <Dependent Role="ContractBridge">
+              <PropertyRef Name="IDPriority" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fee__IDLog__5812160E">
+          <End Role="Log" Type="Self.Log" Multiplicity="1" />
+          <End Role="Fee" Type="Self.Fee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Log">
+              <PropertyRef Name="IDLog" />
+            </Principal>
+            <Dependent Role="Fee">
+              <PropertyRef Name="IDLog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fee__IDRoom__571DF1D5">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="Fee" Type="Self.Fee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="IDRoom" />
+            </Principal>
+            <Dependent Role="Fee">
+              <PropertyRef Name="IDRoom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log__IDSinhVien__49C3F6B7">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="IDSinhVien" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="IDSinhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mistake__IDAccou__534D60F1">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IDAccount" />
+            </Principal>
+            <Dependent Role="Mistake">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mistake__IDRoom__5441852A">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="IDRoom" />
+            </Principal>
+            <Dependent Role="Mistake">
+              <PropertyRef Name="IDRoom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mistake__IDSinhV__52593CB8">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+          <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="IDSinhVien" />
+            </Principal>
+            <Dependent Role="Mistake">
+              <PropertyRef Name="IDSinhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SinhVien__IDCont__45F365D3">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="IDContract" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="IDContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SinhVien__IDFalc__44FF419A">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="IDFalcuty" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="IDFalcuty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SinhVien__IDRoom__46E78A0C">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="IDRoom" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="IDRoom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KTXTDTUModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountType" EntityType="Self.AccountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractBridge" EntityType="Self.ContractBridge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fee" EntityType="Self.Fee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mistake" EntityType="Self.Mistake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Priority" EntityType="Self.Priority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SinhVien" EntityType="Self.SinhVien" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Account__IDSinhV__4CA06362" Association="Self.FK__Account__IDSinhV__4CA06362">
+            <End Role="SinhVien" EntitySet="SinhVien" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AccountTy__IDAcc__4F7CD00D" Association="Self.FK__AccountTy__IDAcc__4F7CD00D">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="AccountType" EntitySet="AccountType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contract__IDPlac__3E52440B" Association="Self.FK__Contract__IDPlac__3E52440B">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContractB__IDCon__412EB0B6" Association="Self.FK__ContractB__IDCon__412EB0B6">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="ContractBridge" EntitySet="ContractBridge" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContractB__IDPri__4222D4EF" Association="Self.FK__ContractB__IDPri__4222D4EF">
+            <End Role="Priority" EntitySet="Priority" />
+            <End Role="ContractBridge" EntitySet="ContractBridge" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fee__IDLog__5812160E" Association="Self.FK__Fee__IDLog__5812160E">
+            <End Role="Log" EntitySet="Log" />
+            <End Role="Fee" EntitySet="Fee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fee__IDRoom__571DF1D5" Association="Self.FK__Fee__IDRoom__571DF1D5">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="Fee" EntitySet="Fee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log__IDSinhVien__49C3F6B7" Association="Self.FK__Log__IDSinhVien__49C3F6B7">
+            <End Role="SinhVien" EntitySet="SinhVien" />
+            <End Role="Log" EntitySet="Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mistake__IDAccou__534D60F1" Association="Self.FK__Mistake__IDAccou__534D60F1">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Mistake" EntitySet="Mistake" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mistake__IDRoom__5441852A" Association="Self.FK__Mistake__IDRoom__5441852A">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="Mistake" EntitySet="Mistake" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mistake__IDSinhV__52593CB8" Association="Self.FK__Mistake__IDSinhV__52593CB8">
+            <End Role="SinhVien" EntitySet="SinhVien" />
+            <End Role="Mistake" EntitySet="Mistake" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SinhVien__IDCont__45F365D3" Association="Self.FK__SinhVien__IDCont__45F365D3">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="SinhVien" EntitySet="SinhVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SinhVien__IDFalc__44FF419A" Association="Self.FK__SinhVien__IDFalc__44FF419A">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="SinhVien" EntitySet="SinhVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SinhVien__IDRoom__46E78A0C" Association="Self.FK__SinhVien__IDRoom__46E78A0C">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="SinhVien" EntitySet="SinhVien" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KTXTDTUModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="IDAccount" />
+          </Key>
+          <Property Name="IDAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDSinhVien" Type="Int32" Nullable="false" />
+          <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DateBegin" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SinhVien" Relationship="Self.FK__Account__IDSinhV__4CA06362" FromRole="Account" ToRole="SinhVien" />
+          <NavigationProperty Name="AccountTypes" Relationship="Self.FK__AccountTy__IDAcc__4F7CD00D" FromRole="Account" ToRole="AccountType" />
+          <NavigationProperty Name="Mistakes" Relationship="Self.FK__Mistake__IDAccou__534D60F1" FromRole="Account" ToRole="Mistake" />
+        </EntityType>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="IDAccountType" />
+          </Key>
+          <Property Name="IDAccountType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDAccount" Type="Int32" Nullable="false" />
+          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DateBegin" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__AccountTy__IDAcc__4F7CD00D" FromRole="AccountType" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="IDContract" />
+          </Key>
+          <Property Name="IDContract" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MSSV" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDCitizen" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProfilePlace" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="IDPlace" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DateBegin" Type="DateTime" Precision="3" />
+          <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Place" Relationship="Self.FK__Contract__IDPlac__3E52440B" FromRole="Contract" ToRole="Place" />
+          <NavigationProperty Name="SinhViens" Relationship="Self.FK__SinhVien__IDCont__45F365D3" FromRole="Contract" ToRole="SinhVien" />
+          <NavigationProperty Name="Priorities" Relationship="Self.ContractBridge" FromRole="Contract" ToRole="Priority" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="IDFalcuty" />
+          </Key>
+          <Property Name="IDFalcuty" Type="Int32" Nullable="false" />
+          <Property Name="NameFalculty" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="DateBegin" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SinhViens" Relationship="Self.FK__SinhVien__IDFalc__44FF419A" FromRole="Faculty" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="Fee">
+          <Key>
+            <PropertyRef Name="IDFee" />
+          </Key>
+          <Property Name="IDFee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="IDRoom" Type="Int32" Nullable="false" />
+          <Property Name="IDLog" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DateBegin" Type="DateTime" Precision="3" />
+          <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <NavigationProperty Name="Log" Relationship="Self.FK__Fee__IDLog__5812160E" FromRole="Fee" ToRole="Log" />
+          <NavigationProperty Name="Room" Relationship="Self.FK__Fee__IDRoom__571DF1D5" FromRole="Fee" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="IDLog" />
+          </Key>
+          <Property Name="IDLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateDone" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="IDSinhVien" Type="Int32" Nullable="false" />
+          <Property Name="DateBegin" Type="DateTime" Precision="3" />
+          <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <NavigationProperty Name="Fees" Relationship="Self.FK__Fee__IDLog__5812160E" FromRole="Log" ToRole="Fee" />
+          <NavigationProperty Name="SinhVien" Relationship="Self.FK__Log__IDSinhVien__49C3F6B7" FromRole="Log" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="Mistake">
+          <Key>
+            <PropertyRef Name="IDMistake" />
+          </Key>
+          <Property Name="IDMistake" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MistakeDes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TimeCaught" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BedID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDSinhVien" Type="Int32" Nullable="false" />
+          <Property Name="IDAccount" Type="Int32" Nullable="false" />
+          <Property Name="IDRoom" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DateBegin" Type="DateTime" Precision="3" />
+          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Mistake__IDAccou__534D60F1" FromRole="Mistake" ToRole="Account" />
+          <NavigationProperty Name="Room" Relationship="Self.FK__Mistake__IDRoom__5441852A" FromRole="Mistake" ToRole="Room" />
+          <NavigationProperty Name="SinhVien" Relationship="Self.FK__Mistake__IDSinhV__52593CB8" FromRole="Mistake" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="IDPlace" />
+          </Key>
+          <Property Name="IDPlace" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateBegin" Type="DateTime" Precision="3" />
+          <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK__Contract__IDPlac__3E52440B" FromRole="Place" ToRole="Contract" />
+        </EntityType>
+        <EntityType Name="Priority">
+          <Key>
+            <PropertyRef Name="IDPriority" />
+          </Key>
+          <Property Name="IDPriority" Type="Int32" Nullable="false" />
+          <Property Name="PriorityDescription" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DateBegin" Type="DateTime" Precision="3" />
+          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <NavigationProperty Name="Contracts" Relationship="Self.ContractBridge" FromRole="Priority" ToRole="Contract" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="IDRoom" />
+          </Key>
+          <Property Name="IDRoom" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Floor" Type="Int32" Nullable="false" />
+          <Property Name="Building" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoomType" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="DateBegin" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Fees" Relationship="Self.FK__Fee__IDRoom__571DF1D5" FromRole="Room" ToRole="Fee" />
+          <NavigationProperty Name="Mistakes" Relationship="Self.FK__Mistake__IDRoom__5441852A" FromRole="Room" ToRole="Mistake" />
+          <NavigationProperty Name="SinhViens" Relationship="Self.FK__SinhVien__IDRoom__46E78A0C" FromRole="Room" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="SinhVien">
+          <Key>
+            <PropertyRef Name="IDSinhVien" />
+          </Key>
+          <Property Name="IDSinhVien" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BirthDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AttendDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AttendYear" Type="Int32" Nullable="false" />
+          <Property Name="GraduateYear" Type="Int32" Nullable="false" />
+          <Property Name="MSSV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDFalcuty" Type="Int32" Nullable="false" />
+          <Property Name="IDContract" Type="Int32" Nullable="false" />
+          <Property Name="IDRoom" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DateBegin" Type="DateTime" Precision="3" />
+          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__IDSinhV__4CA06362" FromRole="SinhVien" ToRole="Account" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK__SinhVien__IDCont__45F365D3" FromRole="SinhVien" ToRole="Contract" />
+          <NavigationProperty Name="Faculty" Relationship="Self.FK__SinhVien__IDFalc__44FF419A" FromRole="SinhVien" ToRole="Faculty" />
+          <NavigationProperty Name="Logs" Relationship="Self.FK__Log__IDSinhVien__49C3F6B7" FromRole="SinhVien" ToRole="Log" />
+          <NavigationProperty Name="Mistakes" Relationship="Self.FK__Mistake__IDSinhV__52593CB8" FromRole="SinhVien" ToRole="Mistake" />
+          <NavigationProperty Name="Room" Relationship="Self.FK__SinhVien__IDRoom__46E78A0C" FromRole="SinhVien" ToRole="Room" />
+        </EntityType>
+        <Association Name="FK__Account__IDSinhV__4CA06362">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="IDSinhVien" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="IDSinhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AccountTy__IDAcc__4F7CD00D">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="AccountType" Type="Self.AccountType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IDAccount" />
+            </Principal>
+            <Dependent Role="AccountType">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mistake__IDAccou__534D60F1">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IDAccount" />
+            </Principal>
+            <Dependent Role="Mistake">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contract__IDPlac__3E52440B">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="IDPlace" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="IDPlace" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SinhVien__IDCont__45F365D3">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="IDContract" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="IDContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SinhVien__IDFalc__44FF419A">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="IDFalcuty" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="IDFalcuty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fee__IDLog__5812160E">
+          <End Role="Log" Type="Self.Log" Multiplicity="1" />
+          <End Role="Fee" Type="Self.Fee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Log">
+              <PropertyRef Name="IDLog" />
+            </Principal>
+            <Dependent Role="Fee">
+              <PropertyRef Name="IDLog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fee__IDRoom__571DF1D5">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="Fee" Type="Self.Fee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="IDRoom" />
+            </Principal>
+            <Dependent Role="Fee">
+              <PropertyRef Name="IDRoom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log__IDSinhVien__49C3F6B7">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="IDSinhVien" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="IDSinhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mistake__IDRoom__5441852A">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="IDRoom" />
+            </Principal>
+            <Dependent Role="Mistake">
+              <PropertyRef Name="IDRoom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mistake__IDSinhV__52593CB8">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+          <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="IDSinhVien" />
+            </Principal>
+            <Dependent Role="Mistake">
+              <PropertyRef Name="IDSinhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SinhVien__IDRoom__46E78A0C">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="IDRoom" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="IDRoom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ContractBridge">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <End Role="Priority" Type="Self.Priority" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="KTXTDTUEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
+          <EntitySet Name="Contracts" EntityType="Self.Contract" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+          <EntitySet Name="Fees" EntityType="Self.Fee" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="Mistakes" EntityType="Self.Mistake" />
+          <EntitySet Name="Places" EntityType="Self.Place" />
+          <EntitySet Name="Priorities" EntityType="Self.Priority" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="SinhViens" EntityType="Self.SinhVien" />
+          <AssociationSet Name="FK__Account__IDSinhV__4CA06362" Association="Self.FK__Account__IDSinhV__4CA06362">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AccountTy__IDAcc__4F7CD00D" Association="Self.FK__AccountTy__IDAcc__4F7CD00D">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AccountType" EntitySet="AccountTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mistake__IDAccou__534D60F1" Association="Self.FK__Mistake__IDAccou__534D60F1">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Mistake" EntitySet="Mistakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contract__IDPlac__3E52440B" Association="Self.FK__Contract__IDPlac__3E52440B">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SinhVien__IDCont__45F365D3" Association="Self.FK__SinhVien__IDCont__45F365D3">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="SinhVien" EntitySet="SinhViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SinhVien__IDFalc__44FF419A" Association="Self.FK__SinhVien__IDFalc__44FF419A">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="SinhVien" EntitySet="SinhViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fee__IDLog__5812160E" Association="Self.FK__Fee__IDLog__5812160E">
+            <End Role="Log" EntitySet="Logs" />
+            <End Role="Fee" EntitySet="Fees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fee__IDRoom__571DF1D5" Association="Self.FK__Fee__IDRoom__571DF1D5">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Fee" EntitySet="Fees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log__IDSinhVien__49C3F6B7" Association="Self.FK__Log__IDSinhVien__49C3F6B7">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mistake__IDRoom__5441852A" Association="Self.FK__Mistake__IDRoom__5441852A">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Mistake" EntitySet="Mistakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mistake__IDSinhV__52593CB8" Association="Self.FK__Mistake__IDSinhV__52593CB8">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="Mistake" EntitySet="Mistakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SinhVien__IDRoom__46E78A0C" Association="Self.FK__SinhVien__IDRoom__46E78A0C">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="SinhVien" EntitySet="SinhViens" />
+          </AssociationSet>
+          <AssociationSet Name="ContractBridge" Association="Self.ContractBridge">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="Priority" EntitySet="Priorities" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KTXTDTUModelStoreContainer" CdmEntityContainer="KTXTDTUEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountTypes">
+            <EntityTypeMapping TypeName="KTXTDTUModel.AccountType">
+              <MappingFragment StoreEntitySet="AccountType">
+                <ScalarProperty Name="IDAccountType" ColumnName="IDAccountType" />
+                <ScalarProperty Name="TypeDescription" ColumnName="TypeDescription" />
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="IDContract" ColumnName="IDContract" />
+                <ScalarProperty Name="MSSV" ColumnName="MSSV" />
+                <ScalarProperty Name="IDCitizen" ColumnName="IDCitizen" />
+                <ScalarProperty Name="ProfilePlace" ColumnName="ProfilePlace" />
+                <ScalarProperty Name="IDPlace" ColumnName="IDPlace" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Faculty">
+              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="IDFalcuty" ColumnName="IDFalcuty" />
+                <ScalarProperty Name="NameFalculty" ColumnName="NameFalculty" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fees">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Fee">
+              <MappingFragment StoreEntitySet="Fee">
+                <ScalarProperty Name="IDFee" ColumnName="IDFee" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
+                <ScalarProperty Name="IDLog" ColumnName="IDLog" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="IDLog" ColumnName="IDLog" />
+                <ScalarProperty Name="DateDone" ColumnName="DateDone" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mistakes">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Mistake">
+              <MappingFragment StoreEntitySet="Mistake">
+                <ScalarProperty Name="IDMistake" ColumnName="IDMistake" />
+                <ScalarProperty Name="MistakeDes" ColumnName="MistakeDes" />
+                <ScalarProperty Name="TimeCaught" ColumnName="TimeCaught" />
+                <ScalarProperty Name="BedID" ColumnName="BedID" />
+                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
+                <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Place">
+              <MappingFragment StoreEntitySet="Place">
+                <ScalarProperty Name="IDPlace" ColumnName="IDPlace" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Priorities">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Priority">
+              <MappingFragment StoreEntitySet="Priority">
+                <ScalarProperty Name="IDPriority" ColumnName="IDPriority" />
+                <ScalarProperty Name="PriorityDescription" ColumnName="PriorityDescription" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SinhViens">
+            <EntityTypeMapping TypeName="KTXTDTUModel.SinhVien">
+              <MappingFragment StoreEntitySet="SinhVien">
+                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="AttendDate" ColumnName="AttendDate" />
+                <ScalarProperty Name="AttendYear" ColumnName="AttendYear" />
+                <ScalarProperty Name="GraduateYear" ColumnName="GraduateYear" />
+                <ScalarProperty Name="MSSV" ColumnName="MSSV" />
+                <ScalarProperty Name="IDFalcuty" ColumnName="IDFalcuty" />
+                <ScalarProperty Name="IDContract" ColumnName="IDContract" />
+                <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ContractBridge" TypeName="KTXTDTUModel.ContractBridge" StoreEntitySet="ContractBridge">
+            <EndProperty Name="Contract">
+              <ScalarProperty Name="IDContract" ColumnName="IDContract" />
+            </EndProperty>
+            <EndProperty Name="Priority">
+              <ScalarProperty Name="IDPriority" ColumnName="IDPriority" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
