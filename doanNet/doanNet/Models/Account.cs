@@ -24,7 +24,7 @@ namespace doanNet.Models
         public int IDAccount { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public byte[] Hide { get; set; }
+        public Nullable<int> Hide { get; set; }
         public string Name { get; set; }
         public int IDSinhVien { get; set; }
         public string Meta { get; set; }

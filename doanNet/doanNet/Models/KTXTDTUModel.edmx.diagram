@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9db9ac7d66474f80bbe66b447d357b9b" Name="Diagram1">
+      <Diagram DiagramId="173dfbc259834942a28e662a2a26f57a" Name="Diagram1">
         <EntityTypeShape EntityType="KTXTDTUModel.Account" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="KTXTDTUModel.AccountType" Width="1.5" PointX="7.5" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="KTXTDTUModel.Contract" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />

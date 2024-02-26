@@ -13,10 +13,10 @@ namespace doanNet.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class KTXTDTUEntities : DbContext
+    public partial class KTXTDTUEntitiesV2 : DbContext
     {
-        public KTXTDTUEntities()
-            : base("name=KTXTDTUEntities")
+        public KTXTDTUEntitiesV2()
+            : base("name=KTXTDTUEntitiesV2")
         {
         }
     

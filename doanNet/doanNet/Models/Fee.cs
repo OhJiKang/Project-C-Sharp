@@ -25,7 +25,7 @@ namespace doanNet.Models
         public string Order { get; set; }
         public Nullable<System.DateTime> DateBegin { get; set; }
         public string Meta { get; set; }
-        public byte[] Hide { get; set; }
+        public Nullable<int> Hide { get; set; }
     
         public virtual Log Log { get; set; }
         public virtual Room Room { get; set; }

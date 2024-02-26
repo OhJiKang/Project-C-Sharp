@@ -17,7 +17,7 @@ namespace doanNet.Models
         public int IDAccountType { get; set; }
         public string TypeDescription { get; set; }
         public int IDAccount { get; set; }
-        public byte[] Hide { get; set; }
+        public Nullable<int> Hide { get; set; }
         public string Meta { get; set; }
         public string Order { get; set; }
         public Nullable<System.DateTime> DateBegin { get; set; }

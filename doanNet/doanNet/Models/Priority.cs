@@ -25,7 +25,7 @@ namespace doanNet.Models
         public string Order { get; set; }
         public string Meta { get; set; }
         public Nullable<System.DateTime> DateBegin { get; set; }
-        public byte[] Hide { get; set; }
+        public Nullable<int> Hide { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contract> Contracts { get; set; }

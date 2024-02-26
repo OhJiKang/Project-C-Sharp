@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="KTXTDTUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="KTXTDTUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="IDAccount" />
@@ -12,7 +12,7 @@
           <Property Name="IDAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="text" Nullable="false" />
-          <Property Name="Hide" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="Hide" Type="int" />
           <Property Name="Name" Type="text" Nullable="false" />
           <Property Name="IDSinhVien" Type="int" Nullable="false" />
           <Property Name="Meta" Type="nchar" MaxLength="10" />
@@ -26,7 +26,7 @@
           <Property Name="IDAccountType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeDescription" Type="text" Nullable="false" />
           <Property Name="IDAccount" Type="int" Nullable="false" />
-          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="Hide" Type="int" />
           <Property Name="Meta" Type="nchar" MaxLength="10" />
           <Property Name="Order" Type="nchar" MaxLength="10" />
           <Property Name="DateBegin" Type="datetime" />
@@ -40,7 +40,7 @@
           <Property Name="IDCitizen" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="ProfilePlace" Type="binary" MaxLength="1" Nullable="false" />
           <Property Name="IDPlace" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="Hide" Type="int" />
           <Property Name="Order" Type="nchar" MaxLength="10" />
           <Property Name="DateBegin" Type="datetime" />
           <Property Name="Meta" Type="nchar" MaxLength="10" />
@@ -62,7 +62,7 @@
           <Property Name="Description" Type="ntext" Nullable="false" />
           <Property Name="Order" Type="nchar" MaxLength="10" />
           <Property Name="Meta" Type="nchar" MaxLength="10" />
-          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="Hide" Type="int" />
           <Property Name="DateBegin" Type="datetime" />
         </EntityType>
         <EntityType Name="Fee">
@@ -80,7 +80,7 @@
           <Property Name="Order" Type="nchar" MaxLength="10" />
           <Property Name="DateBegin" Type="datetime" />
           <Property Name="Meta" Type="nchar" MaxLength="10" />
-          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="Hide" Type="int" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -93,7 +93,7 @@
           <Property Name="DateBegin" Type="datetime" />
           <Property Name="Order" Type="nchar" MaxLength="10" />
           <Property Name="Meta" Type="nchar" MaxLength="10" />
-          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="Hide" Type="int" />
         </EntityType>
         <EntityType Name="Mistake">
           <Key>
@@ -109,7 +109,7 @@
           <Property Name="Order" Type="nchar" MaxLength="10" />
           <Property Name="Meta" Type="nchar" MaxLength="10" />
           <Property Name="DateBegin" Type="datetime" />
-          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="Hide" Type="int" />
         </EntityType>
         <EntityType Name="Place">
           <Key>
@@ -120,7 +120,7 @@
           <Property Name="DateBegin" Type="datetime" />
           <Property Name="Meta" Type="nchar" MaxLength="10" />
           <Property Name="Order" Type="nchar" MaxLength="10" />
-          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="Hide" Type="int" />
         </EntityType>
         <EntityType Name="Priority">
           <Key>
@@ -131,7 +131,7 @@
           <Property Name="Order" Type="nchar" MaxLength="10" />
           <Property Name="Meta" Type="nchar" MaxLength="10" />
           <Property Name="DateBegin" Type="datetime" />
-          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="Hide" Type="int" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -144,7 +144,7 @@
           <Property Name="RoomType" Type="int" Nullable="false" />
           <Property Name="Order" Type="nchar" MaxLength="10" />
           <Property Name="Meta" Type="nchar" MaxLength="10" />
-          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="Hide" Type="int" />
           <Property Name="DateBegin" Type="datetime" />
         </EntityType>
         <EntityType Name="SinhVien">
@@ -165,7 +165,7 @@
           <Property Name="Order" Type="nchar" MaxLength="10" />
           <Property Name="Meta" Type="nchar" MaxLength="10" />
           <Property Name="DateBegin" Type="datetime" />
-          <Property Name="Hide" Type="binary" MaxLength="1" />
+          <Property Name="Hide" Type="int" />
         </EntityType>
         <Association Name="FK__Account__IDSinhV__4CA06362">
           <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
@@ -405,8 +405,7 @@
             <End Role="SinhVien" EntitySet="SinhVien" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KTXTDTUModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -417,7 +416,7 @@
           <Property Name="IDAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="Hide" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IDSinhVien" Type="Int32" Nullable="false" />
           <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -434,7 +433,7 @@
           <Property Name="IDAccountType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IDAccount" Type="Int32" Nullable="false" />
-          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Hide" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="DateBegin" Type="DateTime" Precision="3" />
@@ -449,7 +448,7 @@
           <Property Name="IDCitizen" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProfilePlace" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
           <Property Name="IDPlace" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Hide" Type="Int32" />
           <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="DateBegin" Type="DateTime" Precision="3" />
           <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -466,7 +465,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Hide" Type="Int32" />
           <Property Name="DateBegin" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SinhViens" Relationship="Self.FK__SinhVien__IDFalc__44FF419A" FromRole="Faculty" ToRole="SinhVien" />
         </EntityType>
@@ -485,7 +484,7 @@
           <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="DateBegin" Type="DateTime" Precision="3" />
           <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Hide" Type="Int32" />
           <NavigationProperty Name="Log" Relationship="Self.FK__Fee__IDLog__5812160E" FromRole="Fee" ToRole="Log" />
           <NavigationProperty Name="Room" Relationship="Self.FK__Fee__IDRoom__571DF1D5" FromRole="Fee" ToRole="Room" />
         </EntityType>
@@ -500,7 +499,7 @@
           <Property Name="DateBegin" Type="DateTime" Precision="3" />
           <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Hide" Type="Int32" />
           <NavigationProperty Name="Fees" Relationship="Self.FK__Fee__IDLog__5812160E" FromRole="Log" ToRole="Fee" />
           <NavigationProperty Name="SinhVien" Relationship="Self.FK__Log__IDSinhVien__49C3F6B7" FromRole="Log" ToRole="SinhVien" />
         </EntityType>
@@ -518,7 +517,7 @@
           <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="DateBegin" Type="DateTime" Precision="3" />
-          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Hide" Type="Int32" />
           <NavigationProperty Name="Account" Relationship="Self.FK__Mistake__IDAccou__534D60F1" FromRole="Mistake" ToRole="Account" />
           <NavigationProperty Name="Room" Relationship="Self.FK__Mistake__IDRoom__5441852A" FromRole="Mistake" ToRole="Room" />
           <NavigationProperty Name="SinhVien" Relationship="Self.FK__Mistake__IDSinhV__52593CB8" FromRole="Mistake" ToRole="SinhVien" />
@@ -532,7 +531,7 @@
           <Property Name="DateBegin" Type="DateTime" Precision="3" />
           <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Hide" Type="Int32" />
           <NavigationProperty Name="Contracts" Relationship="Self.FK__Contract__IDPlac__3E52440B" FromRole="Place" ToRole="Contract" />
         </EntityType>
         <EntityType Name="Priority">
@@ -544,7 +543,7 @@
           <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="DateBegin" Type="DateTime" Precision="3" />
-          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Hide" Type="Int32" />
           <NavigationProperty Name="Contracts" Relationship="Self.ContractBridge" FromRole="Priority" ToRole="Contract" />
         </EntityType>
         <EntityType Name="Room">
@@ -558,7 +557,7 @@
           <Property Name="RoomType" Type="Int32" Nullable="false" />
           <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Hide" Type="Int32" />
           <Property Name="DateBegin" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Fees" Relationship="Self.FK__Fee__IDRoom__571DF1D5" FromRole="Room" ToRole="Fee" />
           <NavigationProperty Name="Mistakes" Relationship="Self.FK__Mistake__IDRoom__5441852A" FromRole="Room" ToRole="Mistake" />
@@ -582,7 +581,7 @@
           <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Meta" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="DateBegin" Type="DateTime" Precision="3" />
-          <Property Name="Hide" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Hide" Type="Int32" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__IDSinhV__4CA06362" FromRole="SinhVien" ToRole="Account" />
           <NavigationProperty Name="Contract" Relationship="Self.FK__SinhVien__IDCont__45F365D3" FromRole="SinhVien" ToRole="Contract" />
           <NavigationProperty Name="Faculty" Relationship="Self.FK__SinhVien__IDFalc__44FF419A" FromRole="SinhVien" ToRole="Faculty" />
@@ -738,7 +737,7 @@
           <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
           <End Role="Priority" Type="Self.Priority" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="KTXTDTUEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="KTXTDTUEntitiesV2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
           <EntitySet Name="Contracts" EntityType="Self.Contract" />
@@ -808,7 +807,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="KTXTDTUModelStoreContainer" CdmEntityContainer="KTXTDTUEntities">
+        <EntityContainerMapping StorageEntityContainer="KTXTDTUModelStoreContainer" CdmEntityContainer="KTXTDTUEntitiesV2">
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="KTXTDTUModel.Account">
               <MappingFragment StoreEntitySet="Account">
