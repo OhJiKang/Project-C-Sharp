@@ -192,6 +192,7 @@
   <ItemGroup>
     <Compile Include="ApiControllers\ContractController.cs" />
     <Compile Include="ApiControllers\FalcutiesController.cs" />
+    <Compile Include="ApiControllers\PriorityController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />

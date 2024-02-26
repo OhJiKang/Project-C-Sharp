@@ -1,4 +1,4 @@
-CREATE TABLE Faculty
+﻿CREATE TABLE Faculty
 (
   IDFalcuty INT NOT NULL,
   NameFalculty NVARCHAR(70) NOT NULL,
@@ -128,3 +128,22 @@ CREATE TABLE Fee
   FOREIGN KEY (IDRoom) REFERENCES Room(IDRoom),
   FOREIGN KEY (IDLog) REFERENCES Log(IDLog)
 );
+-----Data-----
+USE [KTXTDTU]
+GO
+
+INSERT INTO [dbo].[Priority]
+           ([IDPriority]
+           ,[PriorityDescription]
+           ,[Order]
+           ,[Meta]
+           ,[DateBegin]
+           ,[Hide])
+     VALUES
+           (10
+           ,N'Sinh viên khu vực tuyển sinh theo thứ tự: KV1 không thuộc thành phố, thị xã, KV2-NT không thuộc thành phố, thị xã; KV1 thuộc thành phố, thị xã; KV2-NT thuộc thành phố, thị xã; KV2; KV3.'
+           ,null
+           ,null
+           ,GETDATE()
+           ,0)
+GO
