@@ -31,6 +31,7 @@ namespace doanNet.Models
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Fee> Fees { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<Mistake> Mistakes { get; set; }
         public virtual DbSet<Place> Places { get; set; }
         public virtual DbSet<Priority> Priorities { get; set; }

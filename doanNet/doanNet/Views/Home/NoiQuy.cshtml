@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "NoiQuy";
+    Layout = "~/Views/Shared/layout.cshtml";
+}
+<style>
+    .card {
+        transition: box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            border: 1px solid #ced4da; /* Gray border color */
+            box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.3); /* Elevation effect */
+        }
+
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container-full {
+        min-height: 100%;
+        background-color: lightgray;
+        padding-bottom: 300px;
+    }
+    .card {
+        cursor: pointer;
+    }
+
+</style>
+
+<div class="container-full">
+    <div class="container" style="padding-top: 50px; padding-right: 50px; padding-left: 50px;">
+        <div class="row">
+            <h2>NỘI QUY</h2>
+            <hr style="border-top: 4px solid blue;">
+        </div>
+        <div class="row row-cols-4 g-4" style="padding: 0px 100px 0px 100px">
+            <div class="col">
+                <div class="card" style="display: flex; align-items: center; justify-content: center; height: 200px">
+                    <img src="~/Images/house-rules.png" class="card-img-top" style="width: 120px; height: 120px; padding: 20px">
+                    <div class="card-body">
+                        <p class="card-title" style="font-weight: bold; font-size: 15px; padding-bottom: 30px; text-align: center">Nội quy ký túc xá</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="display: flex; align-items: center; justify-content: center; height: 200px">
+                    <img src="~/Images/regulation.png" class="card-img-top" style="width: 120px; height: 120px; padding: 20px">
+                    <div class="card-body">
+                        <p class="card-title" style="font-weight: bold; font-size: 15px; padding-bottom: 30px; text-align: center">Nội dung vi phạm và khung hình phạt xử lý kỷ luật</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="display: flex; align-items: center; justify-content: center; height: 200px">
+                    <img src="~/Images/guidelines.png" class="card-img-top" style="width: 120px; height: 120px; padding: 20px">
+                    <div class="card-body">
+                        <p class="card-title" style="font-weight: bold; font-size: 15px; padding-bottom: 30px; text-align: center">Quy định về tiếp nhận lưu trú, chấm dứt HĐ nội trú</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="display: flex; align-items: center; justify-content: center; height: 200px">
+                    <img src="~/Images/teamrules.png" class="card-img-top" style="width: 120px; height: 120px; padding: 20px">
+                    <div class="card-body">
+                        <p class="card-title" style="font-weight: bold; font-size: 15px; padding-bottom: 30px; text-align: center">Quy định về sinh hoạt, học tập, ứng xử tại ký túc xá</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="display: flex; align-items: center; justify-content: center; height: 200px">
+                    <img src="~/Images/behavior.png" class="card-img-top" style="width: 120px; height: 120px; padding: 20px">
+                    <div class="card-body">
+                        <p class="card-title" style="font-weight: bold; font-size: 15px; padding-bottom: 30px; text-align: center">Quy định đánh giá tổ trưởng phòng & tính lỗi vi phạm</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="display: flex; align-items: center; justify-content: center; height: 200px">
+                    <img src="~/Images/book-club.png" class="card-img-top" style="width: 120px; height: 120px; padding: 20px">
+                    <div class="card-body">
+                        <p class="card-title" style="font-weight: bold; font-size: 15px; padding-bottom: 30px; text-align: center">Quy định về việc tham gia câu lạc bộ TDTU</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="display: flex; align-items: center; justify-content: center; height: 200px">
+                    <img src="~/Images/users.png" class="card-img-top" style="width: 120px; height: 120px; padding: 20px">
+                    <div class="card-body">
+                        <p class="card-title" style="font-weight: bold; font-size: 15px; padding-bottom: 30px; text-align: center">Đội sinh viên tự quản ký túc xá</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="display: flex; align-items: center; justify-content: center; height: 200px">
+                    <img src="~/Images/management.png" class="card-img-top" style="width: 120px; height: 120px; padding: 20px">
+                    <div class="card-body">
+                        <p class="card-title" style="font-weight: bold; font-size: 15px; padding-bottom: 30px; text-align: center">Tổ trưởng phòng ở ký túc xá</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Các cột khác -->
+        </div>
+    </div>
+
+
+</div>
+

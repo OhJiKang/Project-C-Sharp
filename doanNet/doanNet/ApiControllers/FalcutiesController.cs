@@ -16,7 +16,7 @@ namespace doanNet.ApiControllers
         // GET: Falcuties
         public List<Faculty> GetAllFaculties()
         {
-
+          
             return db.Faculties.ToList();
         }
         public Faculty PostFalculty(Faculty faculty)
@@ -32,11 +32,12 @@ namespace doanNet.ApiControllers
             updateFaculty.Description= faculty.Description;
             updateFaculty.DateBegin = DateTime.Now;
             db.SaveChangesAsync();
-            return faculty;
+            return updateFaculty;
         }
         [HttpPost]
         public Faculty ChangeStatusFalculty(Faculty faculty)
         {
+      
             Faculty hideFaculty = db.Faculties.Where(row => row.IDFalcuty == faculty.IDFalcuty).FirstOrDefault();
             hideFaculty.Hide = hideFaculty.Hide==0?1:0;
             db.SaveChangesAsync();

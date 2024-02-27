@@ -21,7 +21,7 @@ namespace doanNet.Models
         }
     
         public int IDPriority { get; set; }
-        public int PriorityDescription { get; set; }
+        public string PriorityDescription { get; set; }
         public string Order { get; set; }
         public string Meta { get; set; }
         public Nullable<System.DateTime> DateBegin { get; set; }

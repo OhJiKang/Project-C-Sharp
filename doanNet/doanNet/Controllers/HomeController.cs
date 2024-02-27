@@ -17,5 +17,25 @@ namespace doanNet.Controllers
         {
             return View();
         }
+        public ActionResult HoatDong()
+        {
+            return View();
+        }
+        public ActionResult ThongBao()
+        {
+            return View();
+        }
+        public ActionResult HuongDan()
+        {
+            return View();
+        }
+        public ActionResult NoiQuy()
+        {
+            return View();
+        }
+        public ActionResult ChiTietBaiDang()
+        {
+            return View();
+        }
     }
 }

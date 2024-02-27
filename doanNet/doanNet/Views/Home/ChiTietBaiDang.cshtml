@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "ChiTietBaiDang";
+    Layout = "~/Views/Shared/layout.cshtml";
+}
+<style>
+    .custom-button {
+        background-color: white;
+        color: #4b77be; /* Medium blue color */
+        border: 2px solid #4b77be; /* Medium blue border */
+        border-radius: 0; /* Square corners */
+        font-weight: bold;
+        padding: 5px 10px; /* Adjust padding as needed */
+        font-size: 14px; /* Adjust font size as needed */
+        cursor: pointer;
+    }
+
+        .custom-button:hover {
+            background-color: gainsboro; /* Light gray on hover */
+        }
+</style>
+<div class="container">
+    <div class="row" style="padding-top: 50px">
+        <div class="col-7">
+            <h3 style="font-weight: bold">Tên bài đăng</h3>
+            <p>Nội dung bài đăng </p>
+        </div>
+        <div class="col-5">
+            <div class="row">
+                <h3 style="font-weight: bold">Thể loại</h3>
+                <hr style="border-top: 4px solid blue;">
+
+            </div>
+            <div class="row">
+                <!-- Hàng 1 -->
+                <div class="col">
+                    <button class="custom-button" style="background-color: lightskyblue; border: none; font-weight: 200; margin: 0px 20px 20px 20px">
+                        <i class="fa-solid fa-arrow-right" style="color: darkblue; font-size: 14px; margin-right: 5px;"></i>
+                        <span style="vertical-align: middle; color: darkblue">Nhiệm vụ</span>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Hàng 2 -->
+                <div class="col">
+                    <button class="custom-button" style="background-color: lightskyblue; border: none; font-weight: 200; margin: 0px 20px 20px 20px">
+                        <i class="fa-solid fa-arrow-right" style="color: darkblue; font-size: 14px; margin-right: 5px;"></i>
+                        <span style="vertical-align: middle; color: darkblue">Tổ chức và Nhân sự</span>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Hàng 3 -->
+                <div class="col">
+                    <button class="custom-button" style="background-color: lightskyblue; border: none; font-weight: 200; margin: 0px 20px 20px 20px">
+                        <i class="fa-solid fa-arrow-right" style="color: darkblue; font-size: 14px; margin-right: 5px;"></i>
+                        <span style="vertical-align: middle; color: darkblue">Cơ sở vật chất</span>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <h3 style="font-weight: bold">Các bài viết liên quan</h3>
+                <hr style="border-top: 4px solid blue;">
+
+            </div>
+            <div class="row">
+                <div class="card mb-3" style="max-width: 540px; border: none; padding: 10px">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center">
+                            <img src="~/Images/logo.png" class="img-fluid rounded-start" style="width: auto; height: 100px">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card-body" style="font-size: 12px">
+                                <p style="font-weight: bold">Card title</p>
+                                <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card mb-3" style="max-width: 540px; border: none; padding: 10px">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center">
+                            <img src="~/Images/logo.png" class="img-fluid rounded-start" style="width: auto; height: 100px">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card-body" style="font-size: 12px">
+                                <p style="font-weight: bold">Card title</p>
+                                <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card mb-3" style="max-width: 540px; border: none; padding: 10px">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center">
+                            <img src="~/Images/logo.png" class="img-fluid rounded-start" style="width: auto; height: 100px">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card-body" style="font-size: 12px">
+                                <p style="font-weight: bold">Card title</p>
+                                <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .flex-wrap {
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+
+            </style>
+            <div class="row">
+                <h3 style="font-weight: bold">Thẻ</h3>
+                <hr style="border-top: 4px solid blue;">
+            </div>
+            <div class="container">
+                <div class="row flex-wrap">
+                    <div class="col-auto">
+                        <p class="dynamic-width" style="background-color: darkblue; color: white; text-align: center; margin: 5px; padding: 5px;">TDTU</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="dynamic-width" style="background-color: darkblue; color: white; text-align: center; padding: 5px;">Chiếu Cà Mau</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="dynamic-width" style="background-color: darkblue; color: white; text-align: center; padding: 5px;">Chiếu Cà Mau</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="dynamic-width" style="background-color: darkblue; color: white; text-align: center; padding: 5px;">Chiếu Cà Mau</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="dynamic-width" style="background-color: darkblue; color: white; text-align: center; padding: 5px;">Chiếu Cà Mau</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="dynamic-width" style="background-color: darkblue; color: white; text-align: center; padding: 5px;">Chiếu Cà Mau</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="dynamic-width" style="background-color: darkblue; color: white; text-align: center; padding: 5px;">Chiếu Cà Mau</p>
+                    </div>
+                    <!-- Thêm các cột và phần tử p khác ở đây -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

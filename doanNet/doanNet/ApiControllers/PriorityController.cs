@@ -13,7 +13,31 @@ namespace doanNet.ApiControllers
     public class PriorityController : ApiController
     {
         KTXTDTUEntitiesV2 db = new KTXTDTUEntitiesV2();
-        
-
+        public List<Priority> Get()
+        {
+            return db.Priorities.ToList();
+        }
+        public Priority PostPriority(Priority priority) {
+            db.Priorities.Add(priority);
+            db.SaveChangesAsync();
+            return priority;
+        }
+        public Priority PutPriority(Priority priority)
+        {
+            Priority updatePriority = db.Priorities.Where(row => row.IDPriority == priority.IDPriority).FirstOrDefault();
+            updatePriority.PriorityDescription = priority.PriorityDescription;
+            updatePriority.Contracts = priority.Contracts;
+            updatePriority.DateBegin = DateTime.Now;
+            db.SaveChangesAsync();
+            return updatePriority;
+        }
+        [HttpPost]
+        public Priority ChangeStatusPriority(Priority priority)
+        {
+            Priority hidePriorirty = db.Priorities.Where(row => row.IDPriority == priority.IDPriority).FirstOrDefault();
+            hidePriorirty.Hide = hidePriorirty.Hide == 0 ? 1 : 0;
+            db.SaveChangesAsync();
+            return hidePriorirty;
+        }
     }
 }

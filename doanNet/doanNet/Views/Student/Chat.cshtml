@@ -1,0 +1,292 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+    Layout = "~/Views/Shared/layout3.cshtml";
+}
+<style>
+    .sender {
+        font-weight: bold; /* In đậm tên người gửi */
+        margin-right: 5px; /* Tạo khoảng cách giữa tên người gửi và tin nhắn */
+    }
+
+    .chat-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .chat-messages {
+        padding: 20px;
+    }
+
+    .message {
+        display: flex;
+        margin-bottom: 15px;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        background-color: #ccc;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .message-content {
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        padding: 10px;
+        max-width: 70%;
+    }
+
+    .message-text {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .message-meta {
+        font-size: 12px;
+        color: #666;
+    }
+
+    .received .message-content {
+        order: 2;
+    }
+
+    .sent .message-content {
+        background-color: blue; /* Màu nền cho tin nhắn gửi */
+        color: #fff; /* Màu chữ cho tin nhắn gửi */
+    }
+
+    .sent {
+        justify-content: flex-end; /* Căn tin nhắn gửi sang phải */
+    }
+
+        .sent .message-meta {
+            order: -1; /* Đảo ngược thứ tự hiển thị của thời gian nhắn tin */
+            text-align: right; /* Căn phải cho thời gian nhắn tin */
+        }
+
+        .sent .message-content {
+            order: 1;
+        }
+
+        .sent .avatar {
+            order: 2;
+            margin-left: 10px;
+        }
+
+
+
+
+    .send-box {
+        padding: 15px;
+        border-top: 1px solid #ccc;
+    }
+
+        .send-box form {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .send-box .form-control {
+            display: block;
+            width: 85%;
+            padding: 0.375rem 0.75rem;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #222;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ccc;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: 0.25rem;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+        .send-box button {
+            border: none;
+            background: #3867d6;
+            padding: 0.375rem 5px;
+            color: #fff;
+            border-radius: 0.25rem;
+            font-size: 14px;
+            font-weight: 400;
+            width: 24%;
+            margin-left: 1%;
+        }
+
+            .send-box button i {
+                margin-right: 5px;
+            }
+
+    .send-btns .button-wrapper {
+        position: relative;
+        width: 125px;
+        height: auto;
+        text-align: left;
+        margin: 0 auto;
+        display: block;
+        background: #F6F7FA;
+        border-radius: 3px;
+        padding: 5px 15px;
+        float: left;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        overflow: hidden;
+    }
+
+        .send-btns .button-wrapper span.label {
+            position: relative;
+            z-index: 1;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            width: 100%;
+            cursor: pointer;
+            color: #343945;
+            font-weight: 400;
+            text-transform: capitalize;
+            font-size: 13px;
+        }
+
+    #upload {
+        display: inline-block;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .send-btns .attach .form-control {
+        display: inline-block;
+        width: 120px;
+        height: auto;
+        padding: 5px 8px;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #343945;
+        background-color: #F6F7FA;
+        background-clip: padding-box;
+        border: 1px solid #F6F7FA;
+        border-radius: 3px;
+        margin-bottom: 5px;
+    }
+
+    .send-btns .button-wrapper span.label img {
+        margin-right: 5px;
+    }
+
+    .button-wrapper {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    button:focus {
+        outline: 0;
+    }
+
+    .add-apoint {
+        display: inline-block;
+        margin-left: 5px;
+    }
+
+        .add-apoint a {
+            text-decoration: none;
+            background: #F6F7FA;
+            border-radius: 8px;
+            padding: 8px 8px;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.2;
+            color: #343945;
+        }
+
+            .add-apoint a svg {
+                margin-right: 5px;
+            }
+
+    .chat-icon {
+        display: none;
+    }
+
+    .closess i {
+        display: none;
+    }
+
+
+</style>
+<div>
+    <p style="font-weight: bold"># Hiện tại em có thể đăng ký ký túc xá bổ sung được hay không?</p>
+    <hr />
+</div>
+
+<div class="chat-container">
+    <div class="chat-messages">
+        <div class="message received">
+            <div class="avatar"></div>
+            <div class="message-content">
+                <span class="sender">Alice:</span>
+                <div class="message-text">This is a received message</div>
+                <div class="message-meta">11:30 AM</div>
+            </div>
+        </div>
+        <div class="message sent">
+            <div class="message-content">
+                <span class="sender">Bob:</span>
+                <div class="message-text">This is a sent message</div>
+                <div class="message-meta" style="color: white">11:35 AM</div>
+            </div>
+            <div class="avatar"><img src="~/Images/profile.png" style="width: 50px" /></div>
+        </div>
+        <!-- Add more messages here -->
+    </div>
+
+    <div class="send-box">
+        <form action="">
+            <input type="text" class="form-control" aria-label="message…" placeholder="Write message…">
+
+            <button type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
+        </form>
+
+        <div class="send-btns">
+            <div class="attach">
+                <div class="button-wrapper">
+                    <span class="label">
+                        <img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/upload.svg" alt="image title"> attached file
+                    </span><input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File" aria-label="Upload File">
+                </div>
+
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <option>Select template</option>
+                    <option>Template 1</option>
+                    <option>Template 2</option>
+                </select>
+
+                <div class="add-apoint">
+                    <a href="#" data-toggle="modal" data-target="#exampleModal4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 16 16" fill="none"><path d="M8 16C3.58862 16 0 12.4114 0 8C0 3.58862 3.58862 0 8 0C12.4114 0 16 3.58862 16 8C16 12.4114 12.4114 16 8 16ZM8 1C4.14001 1 1 4.14001 1 8C1 11.86 4.14001 15 8 15C11.86 15 15 11.86 15 8C15 4.14001 11.86 1 8 1Z" fill="#7D7D7D" /><path d="M11.5 8.5H4.5C4.224 8.5 4 8.276 4 8C4 7.724 4.224 7.5 4.5 7.5H11.5C11.776 7.5 12 7.724 12 8C12 8.276 11.776 8.5 11.5 8.5Z" fill="#7D7D7D" /><path d="M8 12C7.724 12 7.5 11.776 7.5 11.5V4.5C7.5 4.224 7.724 4 8 4C8.276 4 8.5 4.224 8.5 4.5V11.5C8.5 11.776 8.276 12 8 12Z" fill="#7D7D7D" /></svg> Appoinment</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+                           
+                   
+
