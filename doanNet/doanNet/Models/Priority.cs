@@ -17,17 +17,17 @@ namespace doanNet.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Priority()
         {
-            this.Contracts = new HashSet<Contract>();
+            this.ContractBridges = new HashSet<ContractBridge>();
         }
     
         public int IDPriority { get; set; }
         public string PriorityDescription { get; set; }
-        public string Order { get; set; }
+        public Nullable<int> Order { get; set; }
         public string Meta { get; set; }
-        public Nullable<System.DateTime> DateBegin { get; set; }
-        public Nullable<int> Hide { get; set; }
+        public System.DateTime DateBegin { get; set; }
+        public int Hide { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contract> Contracts { get; set; }
+        public virtual ICollection<ContractBridge> ContractBridges { get; set; }
     }
 }

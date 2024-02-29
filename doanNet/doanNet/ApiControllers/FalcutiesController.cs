@@ -11,7 +11,7 @@ namespace doanNet.ApiControllers
 {
     public class FalcutiesController : ApiController
     {
-        KTXTDTUEntitiesV2 db = new KTXTDTUEntitiesV2();
+        KTXTDTUEntities1 db = new KTXTDTUEntities1();
 
         // GET: Falcuties
         public List<Faculty> GetAllFaculties()

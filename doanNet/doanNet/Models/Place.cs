@@ -22,10 +22,10 @@ namespace doanNet.Models
     
         public string IDPlace { get; set; }
         public string Description { get; set; }
-        public Nullable<System.DateTime> DateBegin { get; set; }
+        public Nullable<int> Order { get; set; }
         public string Meta { get; set; }
-        public string Order { get; set; }
-        public Nullable<int> Hide { get; set; }
+        public System.DateTime DateBegin { get; set; }
+        public int Hide { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contract> Contracts { get; set; }

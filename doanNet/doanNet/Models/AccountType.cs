@@ -17,10 +17,10 @@ namespace doanNet.Models
         public int IDAccountType { get; set; }
         public string TypeDescription { get; set; }
         public int IDAccount { get; set; }
-        public Nullable<int> Hide { get; set; }
+        public Nullable<int> Order { get; set; }
         public string Meta { get; set; }
-        public string Order { get; set; }
-        public Nullable<System.DateTime> DateBegin { get; set; }
+        public System.DateTime DateBegin { get; set; }
+        public int Hide { get; set; }
     
         public virtual Account Account { get; set; }
     }

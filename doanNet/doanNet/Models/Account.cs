@@ -24,12 +24,13 @@ namespace doanNet.Models
         public int IDAccount { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public Nullable<int> Hide { get; set; }
+        public byte[] Available { get; set; }
         public string Name { get; set; }
         public int IDSinhVien { get; set; }
+        public Nullable<int> Order { get; set; }
         public string Meta { get; set; }
-        public string Order { get; set; }
-        public Nullable<System.DateTime> DateBegin { get; set; }
+        public System.DateTime DateBegin { get; set; }
+        public int Hide { get; set; }
     
         public virtual SinhVien SinhVien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

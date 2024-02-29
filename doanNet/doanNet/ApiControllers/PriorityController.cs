@@ -12,7 +12,7 @@ namespace doanNet.ApiControllers
 {
     public class PriorityController : ApiController
     {
-        KTXTDTUEntitiesV2 db = new KTXTDTUEntitiesV2();
+        KTXTDTUEntities1 db = new KTXTDTUEntities1();
         public List<Priority> Get()
         {
             return db.Priorities.ToList();
@@ -26,7 +26,6 @@ namespace doanNet.ApiControllers
         {
             Priority updatePriority = db.Priorities.Where(row => row.IDPriority == priority.IDPriority).FirstOrDefault();
             updatePriority.PriorityDescription = priority.PriorityDescription;
-            updatePriority.Contracts = priority.Contracts;
             updatePriority.DateBegin = DateTime.Now;
             db.SaveChangesAsync();
             return updatePriority;

@@ -24,10 +24,11 @@ namespace doanNet.Models
         public System.DateTime DateDone { get; set; }
         public int Quantity { get; set; }
         public int IDSinhVien { get; set; }
-        public Nullable<System.DateTime> DateBegin { get; set; }
-        public string Order { get; set; }
+        public string Note { get; set; }
+        public Nullable<int> Order { get; set; }
         public string Meta { get; set; }
-        public Nullable<int> Hide { get; set; }
+        public System.DateTime DateBegin { get; set; }
+        public int Hide { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Fee> Fees { get; set; }

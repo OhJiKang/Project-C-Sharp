@@ -10,6 +10,6 @@ namespace doanNet.ApiControllers
 {
     public class MenuController : ApiController
     {
-        KTXTDTUEntitiesV2 db = new KTXTDTUEntitiesV2();
+        KTXTDTUEntities1 db = new KTXTDTUEntities1();
     }
 }

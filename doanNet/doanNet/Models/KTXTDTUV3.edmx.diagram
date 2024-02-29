@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a94a2da9d63c4c879c406c58e2fa1c8a" Name="Diagram1">
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Account" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.AccountType" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Contract" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.ContractBridge" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Faculty" Width="1.5" PointX="0.75" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Fee" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Log" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Mistake" Width="1.5" PointX="6" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Place" Width="1.5" PointX="1.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Priority" Width="1.5" PointX="3.75" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Room" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.SinhVien" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__Account__IDSinhV__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__AccountTy__IDAcc__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__Mistake__IDAccou__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__Contract__IDPlac__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__ContractB__IDCon__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__SinhVien__IDCont__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__ContractB__IDPri__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__SinhVien__IDFalc__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__Fee__IDLog__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__Fee__IDRoom__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__Log__IDSinhVien__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__Mistake__IDRoom__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__Mistake__IDSinhV__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="KTXTDTUModelV3.FK__SinhVien__IDRoom__46E78A0C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

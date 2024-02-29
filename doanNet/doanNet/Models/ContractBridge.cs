@@ -12,13 +12,16 @@ namespace doanNet.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Menu
+    public partial class ContractBridge
     {
-        public int ID { get; set; }
-        public string MenuText { get; set; }
+        public int IDContract { get; set; }
+        public int IDPriority { get; set; }
         public Nullable<int> Order { get; set; }
         public string Meta { get; set; }
-        public Nullable<System.DateTime> Datebegin { get; set; }
-        public Nullable<int> Hide { get; set; }
+        public System.DateTime DateBegin { get; set; }
+        public int Hide { get; set; }
+    
+        public virtual Contract Contract { get; set; }
+        public virtual Priority Priority { get; set; }
     }
 }

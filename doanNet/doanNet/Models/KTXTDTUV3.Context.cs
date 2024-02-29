@@ -13,10 +13,10 @@ namespace doanNet.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class KTXTDTUEntitiesV2 : DbContext
+    public partial class KTXTDTUEntities1 : DbContext
     {
-        public KTXTDTUEntitiesV2()
-            : base("name=KTXTDTUEntitiesV2")
+        public KTXTDTUEntities1()
+            : base("name=KTXTDTUEntities1")
         {
         }
     
@@ -28,10 +28,10 @@ namespace doanNet.Models
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountType> AccountTypes { get; set; }
         public virtual DbSet<Contract> Contracts { get; set; }
+        public virtual DbSet<ContractBridge> ContractBridges { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Fee> Fees { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
-        public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<Mistake> Mistakes { get; set; }
         public virtual DbSet<Place> Places { get; set; }
         public virtual DbSet<Priority> Priorities { get; set; }
