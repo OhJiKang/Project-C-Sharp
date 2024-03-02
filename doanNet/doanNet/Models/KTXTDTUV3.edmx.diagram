@@ -31,6 +31,9 @@
         <AssociationConnector Association="KTXTDTUModelV3.FK__Mistake__IDRoom__5441852A" ManuallyRouted="false" />
         <AssociationConnector Association="KTXTDTUModelV3.FK__Mistake__IDSinhV__52593CB8" ManuallyRouted="false" />
         <AssociationConnector Association="KTXTDTUModelV3.FK__SinhVien__IDRoom__46E78A0C" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Menu" Width="1.5" PointX="5.375" PointY="0.75" />
+      </Diagram>
+      <Diagram DiagramId="64775d9dcacf436682c7d337cee81bbe" Name="Diagram2" >
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

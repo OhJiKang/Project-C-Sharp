@@ -11,5 +11,9 @@ namespace doanNet.ApiControllers
     public class MenuController : ApiController
     {
         KTXTDTUEntities1 db = new KTXTDTUEntities1();
+        public List<Menu> GetAllMenu()
+        {
+            return db.Menus.ToList();
+        }
     }
 }

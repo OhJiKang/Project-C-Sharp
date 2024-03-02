@@ -37,5 +37,6 @@ namespace doanNet.Models
         public virtual DbSet<Priority> Priorities { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<SinhVien> SinhViens { get; set; }
+        public virtual DbSet<Menu> Menus { get; set; }
     }
 }

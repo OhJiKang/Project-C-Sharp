@@ -31,8 +31,10 @@
     }
 
     .button_outer {
-        background: #83ccd3;
-        border-radius: 30px;
+        background: #fff;
+        border-style: solid;
+        border-radius: 10px;
+        border-color: royalblue;
         text-align: center;
         height: 50px;
         width: 200px;
@@ -44,7 +46,7 @@
 
     .btn_upload {
         padding: 17px 30px 12px;
-        color: #fff;
+        color: royalblue;
         text-align: center;
         position: relative;
         display: inline-block;
@@ -170,116 +172,111 @@
 </style>
 
 <div class="container">
-    <div class="d-flex justify-content-end mb-3" style="padding: 10px">
-        <button style="background-color: darkblue; color: white" data-bs-toggle="modal" data-bs-target="#taodon">
-            <i class="fa-solid fa-plus" style="padding: 10px;"></i> Tạo đơn
+    <div class="d-flex justify-content-end mb-3" style="padding: 20px;">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taodon">
+            <i class="fa fa-plus" style="margin-right: 5px;"></i> Tạo đơn
         </button>
     </div>
+
     <div class="modal fade" id="taodon" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    
 
-                                            <div class="row align-items-center pt-4 pb-3">
-                                                <div class="col-md-4 ps-5">
+                    <div class="row align-items-center pt-4 pb-3">
+                        <div class="col-md-4 ps-5">
 
-                                                    <h6 class="mb-0">Tiêu đề</h6>
+                            <h6 class="mb-0 font-weight-bold">Tiêu đề</h6>
 
-                                                </div>
-                                                <div class="col-md-8 pe-5">
+                        </div>
+                        <div class="col-md-8 pe-5">
 
-                                                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                            <textarea class="form-control" aria-label="With textarea"></textarea>
 
-                                                </div>
+                        </div>
+                    </div>
+
+                    <hr class="mx-n3">
+
+                    <div class="row align-items-center py-3">
+                        <div class="col-md-3 ps-5">
+
+                            <h6 class="mb-0 font-weight-bold">Nội dung</h6>
+
+                        </div>
+                        <div class="col-md-9 pe-5">
+
+                            <textarea class="form-control" aria-label="With textarea"></textarea>
+
+                        </div>
+                    </div>
+
+                    <hr class="mx-n3">
+
+                    <div class="row align-items-center py-3">
+                        <div class="col-md-4 ps-5">
+
+                            <h6 class="mb-0 ">Hình ảnh</h6>
+
+                        </div>
+                        <div class="col-md-8 pe-5">
+
+                            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                            <main class="main_full">
+                                <div class="container">
+                                    <div class="panel">
+                                        <div class="button_outer">
+                                            <div class="btn_upload">
+                                                <input type="file" id="uploadFiles" name="images" multiple accept="image/*">
+                                                Upload Image
                                             </div>
-
-                                            <hr class="mx-n3">
-
-                                            <div class="row align-items-center py-3">
-                                                <div class="col-md-3 ps-5">
-
-                                                    <h6 class="mb-0">Nội dung</h6>
-
-                                                </div>
-                                                <div class="col-md-9 pe-5">
-
-                                                    <textarea class="form-control" aria-label="With textarea"></textarea>
-
-                                                </div>
-                                            </div>
-
-                                            <hr class="mx-n3">
-
-                                            <div class="row align-items-center py-3">
-                                                <div class="col-md-4 ps-5">
-
-                                                    <h6 class="mb-0">Hình ảnh</h6>
-
-                                                </div>
-                                                <div class="col-md-8 pe-5">
-
-                                                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-                                                    <main class="main_full">
-                                                        <div class="container">
-                                                            <div class="panel">
-                                                                <div class="button_outer">
-                                                                    <div class="btn_upload">
-                                                                        <input type="file" id="upload_file" name="">
-                                                                        Upload Image
-                                                                    </div>
-                                                                    <div class="processing_bar"></div>
-                                                                    <div class="success_box"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="error_msg"></div>
-                                                            <div class="uploaded_file_view" id="uploaded_view">
-                                                                <span class="file_remove">X</span>
-                                                            </div>
-                                                        </div>
-                                                    </main>
-                                                    <script>
-                                                        var btnUpload = $("#upload_file"),
-                                                            btnOuter = $(".button_outer");
-                                                        btnUpload.on("change", function (e) {
-                                                            var ext = btnUpload.val().split('.').pop().toLowerCase();
-                                                            if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
-                                                                $(".error_msg").text("Not an Image...");
-                                                            } else {
-                                                                $(".error_msg").text("");
-                                                                btnOuter.addClass("file_uploading");
-                                                                setTimeout(function () {
-                                                                    btnOuter.addClass("file_uploaded");
-                                                                }, 3000);
-                                                                var uploadedFile = URL.createObjectURL(e.target.files[0]);
-                                                                setTimeout(function () {
-                                                                    $("#uploaded_view").append('<img src="' + uploadedFile + '" />').addClass("show");
-                                                                }, 3500);
-                                                            }
-                                                        });
-                                                        $(".file_remove").on("click", function (e) {
-                                                            $("#uploaded_view").removeClass("show");
-                                                            $("#uploaded_view").find("img").remove();
-                                                            btnOuter.removeClass("file_uploading");
-                                                            btnOuter.removeClass("file_uploaded");
-                                                        });
-                                                    </script>
-
-                                                </div>
-                                            </div>
+                                            <div class="processing_bar"></div>
+                                            <div class="success_box"></div>
                                         </div>
                                     </div>
+                                    <div class="error_msg"></div>
+                                    <div class="uploaded_file_view" id="uploaded_view">
+                                        <span class="file_remove">X</span>
+                                    </div>
+                                </div>
+                            </main>
+                            <script>
+                                var btnUpload = $("#upload_file"),
+                                    btnOuter = $(".button_outer");
+                                btnUpload.on("change", function (e) {
+                                    var ext = btnUpload.val().split('.').pop().toLowerCase();
+                                    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+                                        $(".error_msg").text("Not an Image...");
+                                    } else {
+                                        $(".error_msg").text("");
+                                        btnOuter.addClass("file_uploading");
+                                        setTimeout(function () {
+                                            btnOuter.addClass("file_uploaded");
+                                        }, 3000);
+                                        var uploadedFile = URL.createObjectURL(e.target.files[0]);
+                                        setTimeout(function () {
+                                            $("#uploaded_view").append('<img src="' + uploadedFile + '" />').addClass("show");
+                                        }, 3500);
+                                    }
+                                });
+                                $(".file_remove").on("click", function (e) {
+                                    $("#uploaded_view").removeClass("show");
+                                    $("#uploaded_view").find("img").remove();
+                                    btnOuter.removeClass("file_uploading");
+                                    btnOuter.removeClass("file_uploaded");
+                                });
+                            </script>
 
-                           
-                       
-                    
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary">Tạo đơn</button>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary">Tạo đơn</button>
             </div>
         </div>
     </div>
@@ -312,7 +309,7 @@
 
             </tbody>
         </table>
-  
+    </div>
 </div>
 
 
