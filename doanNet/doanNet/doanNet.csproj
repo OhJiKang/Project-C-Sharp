@@ -192,15 +192,14 @@
     <Content Include="Images\volleyball.png" />
     <Content Include="Images\working.png" />
     <Content Include="Images\written-paper.png" />
-    <Content Include="Models\KTXTDTUModel.Context.tt">
+    <Content Include="Models\KTXTDTUV3.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KTXTDTUModel.edmx</DependentUpon>
-      <LastGenOutput>KTXTDTUModel.Context.cs</LastGenOutput>
+      <LastGenOutput>KTXTDTUV3.Context1.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\KTXTDTUModel.tt">
+    <Content Include="Models\KTXTDTUV3.edmx.sql" />
+    <Content Include="Models\KTXTDTUV3.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KTXTDTUModel.edmx</DependentUpon>
-      <LastGenOutput>KTXTDTUModel.cs</LastGenOutput>
+      <LastGenOutput>KTXTDTUV32.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -213,7 +212,6 @@
   <ItemGroup>
     <Compile Include="ApiControllers\ContractController.cs" />
     <Compile Include="ApiControllers\FalcutiesController.cs" />
-    <Compile Include="ApiControllers\MenuController.cs" />
     <Compile Include="ApiControllers\PriorityController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -221,60 +219,68 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\StudentSeftRegulationController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs">
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountType.cs">
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Contract.cs">
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContractBridge.cs">
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Faculty.cs">
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Fee.cs">
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\KTXTDTUModel.Context.cs">
+    <Compile Include="Models\KTXTDTUV3.Context.cs" />
+    <Compile Include="Models\KTXTDTUV3.cs" />
+    <Compile Include="Models\KTXTDTUV3.Designer.cs">
+      <DependentUpon>KTXTDTUV3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KTXTDTUV31.cs" />
+    <Compile Include="Models\KTXTDTUV31.Designer.cs">
+      <DependentUpon>KTXTDTUV31.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KTXTDTUV32.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>KTXTDTUModel.Context.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\KTXTDTUModel.cs">
+    <Compile Include="Models\KTXTDTUV32.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\KTXTDTUModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KTXTDTUModel.edmx</DependentUpon>
+      <DependentUpon>KTXTDTUV3.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Log.cs">
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Menu.cs">
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mistake.cs">
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Place.cs">
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Priority.cs">
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Room.cs">
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SinhVien.cs">
-      <DependentUpon>KTXTDTUModel.tt</DependentUpon>
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -297,12 +303,12 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="libman.json" />
-    <EntityDeploy Include="Models\KTXTDTUModel.edmx">
+    <EntityDeploy Include="Models\KTXTDTUV3.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>KTXTDTUModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>KTXTDTUV32.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\KTXTDTUModel.edmx.diagram">
-      <DependentUpon>KTXTDTUModel.edmx</DependentUpon>
+    <Content Include="Models\KTXTDTUV3.edmx.diagram">
+      <DependentUpon>KTXTDTUV3.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\Shared\layout.cshtml" />
@@ -331,6 +337,9 @@
     <Content Include="Views\Teacher\AddingPost.cshtml" />
     <Content Include="Views\Teacher\ChoosingRoom.cshtml" />
     <Content Include="Views\Teacher\RegisterPlace.cshtml" />
+    <Content Include="Views\StudentSeftRegulation\DangKyLichGacCong.cshtml" />
+    <Content Include="Views\StudentSeftRegulation\GhiLoiKTX.cshtml" />
+    <Content Include="Views\StudentSeftRegulation\LichTrucTuan.cshtml" />
     <Content Include="Views\Student\Chat.cshtml" />
     <Content Include="Views\Student\DangKyKyTucXa.cshtml" />
     <Content Include="Views\Student\DanhSachHopDong.cshtml" />
