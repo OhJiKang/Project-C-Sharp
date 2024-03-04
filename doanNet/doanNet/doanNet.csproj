@@ -219,6 +219,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DTO\AccountDTO.cs" />
+    <Compile Include="Controllers\DTO\ContractDTO.cs" />
     <Compile Include="Controllers\DTO\LogDTO.cs" />
     <Compile Include="Controllers\DTO\MistakeDTO.cs" />
     <Compile Include="Controllers\DTO\RoomDTO.cs" />
