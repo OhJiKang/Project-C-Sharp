@@ -10,8 +10,8 @@ namespace doanNet.Controllers.DTO
         public int IDSinhVien { get; set; }
         public string FullName { get; set; }
         public string Address { get; set; }
-        public System.DateTime BirthDay { get; set; }
-        public System.DateTime AttendDate { get; set; }
+        public DateTime BirthDay { get; set; }
+        public DateTime AttendDate { get; set; }
         public int AttendYear { get; set; }
         public int GraduateYear { get; set; }
         public string MSSV { get; set; }
