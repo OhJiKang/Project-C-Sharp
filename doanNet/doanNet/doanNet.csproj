@@ -218,6 +218,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DTO\AccountDTO.cs" />
+    <Compile Include="Controllers\DTO\LogDTO.cs" />
+    <Compile Include="Controllers\DTO\MistakeDTO.cs" />
+    <Compile Include="Controllers\DTO\RoomDTO.cs" />
+    <Compile Include="Controllers\DTO\SinhVienDTO.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
