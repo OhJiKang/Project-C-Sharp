@@ -1,6 +1,4 @@
-﻿@model IEnumerable<doanNet.Models.MenuMst>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid d-flex align-items-center">
         <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -9,10 +7,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                @foreach (var menuItem in Model)
+                @foreach (var menuItem in ViewBag.MenuItems)
                 {
                     <li class="nav-item">
-                        <a class="nav-link" href="@menuItem.MenuURL">@menuItem.MenuText</a>
+                        <a class="nav-link" href="@menuItem.Meta">@menuItem.TextMenu</a>
                     </li>
                 }
             </ul>

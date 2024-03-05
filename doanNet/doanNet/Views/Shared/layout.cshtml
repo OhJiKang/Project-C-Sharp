@@ -63,10 +63,12 @@
     </style>
 </head>
 <body>
-    @{ /*Html.RenderAction("GenerateMenu", "Menu");*/}
+    
     <div class="container-fluid">
+        @Html.Action("GenerateMenu", "Menu")
         @RenderBody()
     </div>
+
     <!-- Footer -->
     <footer class="text-center text-lg-start fixed-bottom text-muted" style="background-color: midnightblue; font-size: 10px">
         <!-- Section: Links  -->

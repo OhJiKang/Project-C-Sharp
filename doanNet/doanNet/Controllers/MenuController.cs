@@ -4,33 +4,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace doanNet.Controllers
 {
     public class MenuController : Controller
-    {/*
+    {
         // GET: Menu
-        private readonly KTXTDTUEntities1 _db = new KTXTDTUEntities1();
+       KTXTDTUEntities1 _db = new KTXTDTUEntities1();
 
-        public PartialViewResult GenerateMenu()
+        public ActionResult GenerateMenu()
         {
-            var menuList = _db.Menus.ToList();
+            var menuItems = _db.Menus.ToList();
+            ViewBag.MenuItems = menuItems.ToArray();
             // Thực hiện các xử lý khác nếu cần
-            return PartialView("GenerateMenu", menuList);
+            return PartialView("GenerateMenu");
         }
 
-        public PartialViewResult GenerateMenu2()
-        {
-            var menuList = _db.Menus.ToList();
-            // Thực hiện các xử lý khác nếu cần
-            return PartialView("GenerateMenu2", menuList);
-        }
+           public PartialViewResult GenerateMenu2()
+           {
+               var menuItems = _db.Menus.ToList();
+            ViewBag.MenuItems = menuItems.ToArray();
 
-        public PartialViewResult GenerateMenu3()
-        {
-            var menuList = _db.Menus.ToList();
             // Thực hiện các xử lý khác nếu cần
-            return PartialView("GenerateMenu3", menuList);
-        }*/
-    } 
+            return PartialView("GenerateMenu2");
+           }
+
+           public PartialViewResult GenerateMenu3()
+           {
+               var menuList = _db.Menus.ToList();
+            ViewBag.MenuItems = menuList;
+            // Thực hiện các xử lý khác nếu cần
+            return PartialView("GenerateMenu3");
+           }
+    }
 }

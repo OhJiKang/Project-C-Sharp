@@ -150,6 +150,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\TeacherPage\Base.css" />
+    <Content Include="Content\TeacherPage\Base.min.css" />
+    <Content Include="Content\TeacherPage\ChoosingRoom.css" />
+    <Content Include="Content\TeacherPage\ChoosingRoom.min.css" />
+    <Content Include="Content\TeacherPage\RegisterPlace.css" />
+    <Content Include="Content\TeacherPage\RegisterPlace.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\approved.png" />
     <Content Include="Images\basketball.png" />
@@ -318,6 +324,9 @@
     <Content Include="Models\KTXTDTUV3.edmx.diagram">
       <DependentUpon>KTXTDTUV3.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\TeacherPage\Base.less" />
+    <Content Include="Content\TeacherPage\ChoosingRoom.less" />
+    <Content Include="Content\TeacherPage\RegisterPlace.less" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\layout.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
@@ -350,7 +359,7 @@
     <Content Include="Views\StudentSeftRegulation\LichTrucTuan.cshtml" />
     <Content Include="Views\Student\Chat.cshtml" />
     <Content Include="Views\Student\DangKyKyTucXa.cshtml" />
-    <Content Include="Views\Student\DanhSachHopDong.cshtml" />
+    <Content Include="Views\Teacher\DanhSachHopDong.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\QuanLyDon.cshtml" />
     <Content Include="Views\Student\TrangChu.cshtml" />

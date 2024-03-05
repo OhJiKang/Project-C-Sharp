@@ -52,16 +52,35 @@
         font-size: 15px;
     }
 </style>
-<br><div class="container">
-    <div class="row">
-        <div class="col-sm-2 imgUp">
-            <div class="imagePreview"></div>
-            <label class="btn btn-primary">
-                Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
-            </label>
-        </div><!-- col-2 -->
-        <i class="fa fa-plus imgAdd"></i>
-    </div><!-- row -->
+
+<div class="container" style="padding: 20px">
+    <h3 style="font-weight: bold; padding: 20px">GHI LỖI KÝ TÚC XÁ</h3>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label" style="font-weight: bold">MSSV</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label" style="font-weight: bold">Nội dung lỗi</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" style="font-weight: bold">Minh chứng</label>
+
+        <div class="row">
+            <div class="col-sm-2 imgUp">
+                <div class="imagePreview"></div>
+                <label class="btn btn-primary">
+                    Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                </label>
+            </div><!-- col-2 -->
+            <i class="fa fa-plus imgAdd"></i>
+        </div><!-- row -->
+
+        <div class="col-12 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary w-100 m-1">Nộp</button>
+        </div>
+
+    </div>
 </div><!-- container -->
 <script>
     $(".imgAdd").click(function () {

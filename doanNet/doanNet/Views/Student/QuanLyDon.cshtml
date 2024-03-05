@@ -4,6 +4,51 @@
     Layout = "~/Views/Shared/layout3.cshtml";
 }
 <style>
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1050;
+        overflow: hidden;
+        outline: 0;
+    }
+
+    .modal-dialog {
+        position: relative;
+        width: auto;
+        max-width: 80%; /* Đặt độ rộng tối đa */
+        margin: 1.75rem auto;
+    }
+
+    .modal-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: .3rem;
+        outline: 0;
+ 
+    }
+
+    .modal-open {
+        overflow: hidden;
+    }
+
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1040;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.5);
+    }
+
     * {
         margin: 0;
         padding: 0;
@@ -173,11 +218,19 @@
 
 <div class="container">
     <div class="d-flex justify-content-end mb-3" style="padding: 20px;">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taodon">
-            <i class="fa fa-plus" style="margin-right: 5px;"></i> Tạo đơn
+        <button style="background-color: darkblue; color: white" onclick="showModal()">
+            <i class="fa-solid fa-plus" style="padding: 10px;"></i> Tạo đơn
         </button>
+        
     </div>
+    <script>
+        // Hàm hiển thị modal
+        function showModal() {
+            var myModal = new bootstrap.Modal(document.getElementById('taodon'));
+            myModal.show();
+        }
 
+    </script>
     <div class="modal fade" id="taodon" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -273,11 +326,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary">Tạo đơn</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary">Tạo đơn</button>
-            </div>
+           
         </div>
     </div>
     <div class="row" style="padding: 20px">

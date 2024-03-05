@@ -12,7 +12,7 @@ namespace doanNet.ApiControllers
     {
         KTXTDTUEntities1 db = new KTXTDTUEntities1();
 
-        public List<Menu> GetAllFaculties()
+        public List<Menu> GetAllMenu()
         {
             return db.Menus.ToList();
         }
