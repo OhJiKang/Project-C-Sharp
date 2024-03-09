@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace doanNet.Controllers
 {
-    public class StudentController : Controller
+    public class SinhVienController : Controller
     {
         // GET: Student
         public ActionResult TrangChu()

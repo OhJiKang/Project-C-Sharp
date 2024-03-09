@@ -1,29 +1,21 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid d-flex align-items-center">
-        <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand me-auto" href="#"><img src="~/Images/logo.png" /></a> <!-- Đặt class "me-auto" để logo tự động dịch sang phải -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                @foreach (var menuItem in ViewBag.MenuItems)
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" href="@menuItem.Meta">@menuItem.TextMenu</a>
-                    </li>
-                }
-            </ul>
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid gray; width: 100%;">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center">
+            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+            <a class="navbar-brand" href="#"><img src="~/Images/logo.png" style="padding-left: 60px" /></a>
         </div>
-        <div class="dropdown">
-            <button class="custom-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: skyblue">
-                User name
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user" style="padding: 5px"></i> Thông tin cá nhân</a></li>
-                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-arrow-right-from-bracket" style="padding: 5px"></i>Đăng xuất</a></li>
-
-            </ul>
+        <div class="collapse navbar-collapse d-flex w-auto my-auto" style="float: right">
+            <form class="input-group">
+                <div class="dropdown">
+                    <button class="custom-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none; font-weight: bold; color: darkblue; width: 200px">
+                        User name
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user" style="padding: 5px"></i> Thông tin cá nhân</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-arrow-right" style="padding: 5px"></i> Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </form>
         </div>
     </div>
 </nav>

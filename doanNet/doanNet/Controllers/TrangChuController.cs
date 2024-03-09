@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace doanNet.Controllers
 {
-    public class HomeController : Controller
+    public class TrangChuController : Controller
     {
         // GET: Home
         public ActionResult Index()
@@ -29,11 +29,27 @@ namespace doanNet.Controllers
         {
             return View();
         }
+        public ActionResult TinTuc()
+        {
+            return View();
+        }
         public ActionResult NoiQuy()
         {
             return View();
         }
         public ActionResult ChiTietBaiDang()
+        {
+            return View();
+        }
+        public ActionResult DangNhap()
+        {
+            return View();
+        }
+        public ActionResult DangNhapGiaoVien()
+        {
+            return View();
+        }
+        public ActionResult DangNhapSinhVien()
         {
             return View();
         }

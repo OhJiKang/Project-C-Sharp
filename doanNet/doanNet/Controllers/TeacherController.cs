@@ -33,5 +33,9 @@ namespace doanNet.Controllers
         {
             return View();
         }
+        public ActionResult QuanLyMenu()
+        {
+            return View();
+        }
     }
 }
