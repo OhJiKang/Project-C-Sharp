@@ -15,5 +15,6 @@ namespace doanNet.ApiControllers
         {
             return db.Contracts.ToList();
         }
+        
     }
 }

@@ -221,11 +221,13 @@
     <Compile Include="ApiControllers\MenuController.cs" />
     <Compile Include="ApiControllers\PlaceController.cs" />
     <Compile Include="ApiControllers\PriorityController.cs" />
+    <Compile Include="ApiControllers\SinhVienController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DTO\AccountDTO.cs" />
     <Compile Include="Controllers\DTO\ContractDTO.cs" />
+    <Compile Include="Controllers\DTO\FeeDTO.cs" />
     <Compile Include="Controllers\DTO\LogDTO.cs" />
     <Compile Include="Controllers\DTO\MistakeDTO.cs" />
     <Compile Include="Controllers\DTO\RoomDTO.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\StudentSeftRegulationController.cs" />
+    <Compile Include="Controllers\SVTuQuanController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
