@@ -227,11 +227,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\AccountController.cs" />
     <Compile Include="ApiControllers\ContractController.cs" />
     <Compile Include="ApiControllers\FalcutiesController.cs" />
+    <Compile Include="ApiControllers\FeeController.cs" />
+    <Compile Include="ApiControllers\LogController.cs" />
     <Compile Include="ApiControllers\MenuController.cs" />
+    <Compile Include="ApiControllers\MistakeController.cs" />
     <Compile Include="ApiControllers\PlaceController.cs" />
     <Compile Include="ApiControllers\PriorityController.cs" />
+    <Compile Include="ApiControllers\RoomController.cs" />
     <Compile Include="ApiControllers\SinhVienController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -240,13 +245,14 @@
     <Compile Include="Controllers\DTO\ContractDTO.cs" />
     <Compile Include="Controllers\DTO\FeeDTO.cs" />
     <Compile Include="Controllers\DTO\LogDTO.cs" />
+    <Compile Include="Controllers\DTO\LoginDTO.cs" />
     <Compile Include="Controllers\DTO\MistakeDTO.cs" />
     <Compile Include="Controllers\DTO\RoomDTO.cs" />
     <Compile Include="Controllers\DTO\SinhVienDTO.cs" />
+    <Compile Include="Controllers\SinhVienTuQuanController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\SinhVienController.cs" />
-    <Compile Include="Controllers\StudentSeftRegulationController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -381,6 +387,9 @@
     <Content Include="Views\SinhVien\TrangChu.cshtml" />
     <Content Include="Views\Teacher\QuanLyMenu.cshtml" />
     <Content Include="Views\TrangChu\TinTuc.cshtml" />
+    <Content Include="Views\SinhVienTuQuan\DangKyLichGacCong.cshtml" />
+    <Content Include="Views\SinhVienTuQuan\GhiLoiKTX.cshtml" />
+    <Content Include="Views\SinhVienTuQuan\LichTrucTuan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -391,7 +400,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\App_LocalResources\" />
-    <Folder Include="Views\Falcuties\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

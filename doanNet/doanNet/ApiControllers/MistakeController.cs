@@ -1,60 +1,60 @@
-﻿using doanNet.Controllers.DTO;
-using doanNet.Models;
+﻿using doanNet.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
-using System.Web.Services.Description;
 
 namespace doanNet.ApiControllers
 {
-    public class SinhVienController : ApiController
+    public class MistakeController : ApiController
     {
         KTXTDTUEntities1 db = new KTXTDTUEntities1();
 
-        public List<SinhVien> GetAll(int? page)
+        public List<Mistake> GetAll()
         {
-            return db.SinhViens.ToList();
+            return db.Mistakes.ToList();
         }
 
-        public SinhVien GetByMSSV(int mssv)
+
+        public Mistake GetByMistakeId(int id)
         {
-            return db.SinhViens.Where(row => row.MSSV == mssv.ToString()).FirstOrDefault();
+            return db.Mistakes.Where(row => row.IDMistake == id).FirstOrDefault();
         }
-        public List<SinhVien> GetAllSinhVienByRoom(int roomid,int? page)
+
+        public Mistake GetBySinhVien(int mssv)
         {
-            return db.SinhViens.Where(row =>row.IDRoom==roomid).ToList();
+            return db.Mistakes.Where(row => row.SinhVien.MSSV == mssv.ToString()).FirstOrDefault();
         }
-        public IHttpActionResult AddingSinhVien([FromBody] SinhVien SinhVien)
+        public IHttpActionResult AddingMistake([FromBody] Mistake Mistake)
         {
 
             try
             {
-                db.SinhViens.Add(SinhVien);
+                db.Mistakes.Add(Mistake);
                 db.SaveChangesAsync();
                 return Json(new { Message = "Data received successfully!" });
             }
             catch (Exception ex)
             {
-                return Json(new { Message = "Adding Failed!Error: "+ex,});
+                return Json(new { Message = "Adding Failed!Error: " + ex, });
             }
         }
         [HttpPut]
         private bool EntityExists(int id)
         {
-            return db.SinhViens.Any(e => e.IDSinhVien == id);
+            return db.Mistakes.Any(e => e.IDMistake == id);
         }
-        public async Task<IHttpActionResult> PutSinhVien(int id,[FromBody] SinhVien SinhVien)
+        public async Task<IHttpActionResult> PutMistake(int id, [FromBody] Mistake Mistake)
         {
 
             try
             {
-                db.Entry(SinhVien).State = EntityState.Modified;
+                db.Entry(Mistake).State = EntityState.Modified;
                 try
                 {
                     await db.SaveChangesAsync();
@@ -78,12 +78,13 @@ namespace doanNet.ApiControllers
             }
         }
         [HttpPut]
-        public IHttpActionResult HiddingSinhVien(int id)
+        public IHttpActionResult HiddingMistake(int id)
         {
-            SinhVien hideSinhVien = db.SinhViens.Where(row => row.IDSinhVien == id).FirstOrDefault();
-            hideSinhVien.Hide = hideSinhVien.Hide == 0 ? 1 : 0;
+            Mistake hideMistake = db.Mistakes.Where(row => row.IDMistake == id).FirstOrDefault();
+            hideMistake.Hide = hideMistake.Hide == 0 ? 1 : 0;
             db.SaveChangesAsync();
             return Json(new { Message = "Hiding Succesfully!" });
         }
     }
+}
 }

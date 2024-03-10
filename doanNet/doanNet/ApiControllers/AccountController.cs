@@ -1,60 +1,63 @@
-﻿using doanNet.Controllers.DTO;
-using doanNet.Models;
+﻿using doanNet.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
-using System.Web.Services.Description;
+using doanNet.Controllers.DTO;
 
 namespace doanNet.ApiControllers
 {
-    public class SinhVienController : ApiController
+    public class AccountController : ApiController
     {
         KTXTDTUEntities1 db = new KTXTDTUEntities1();
 
-        public List<SinhVien> GetAll(int? page)
+        public List<Account> GetAll()
         {
-            return db.SinhViens.ToList();
+            return db.Accounts.ToList();
         }
 
-        public SinhVien GetByMSSV(int mssv)
-        {
-            return db.SinhViens.Where(row => row.MSSV == mssv.ToString()).FirstOrDefault();
+        public bool CheckingLogin([FromBody] LoginDTO loginTemp) {
+            if (db.Accounts.Where(row => row.Password == loginTemp.password && row.SinhVien.MSSV == loginTemp.account).FirstOrDefault()==null)
+            {
+                return false;
+            }
+            return true;
         }
-        public List<SinhVien> GetAllSinhVienByRoom(int roomid,int? page)
+
+        public Account GetByAccountId(int id)
         {
-            return db.SinhViens.Where(row =>row.IDRoom==roomid).ToList();
+            return db.Accounts.Where(row => row.IDAccount == id).FirstOrDefault();
         }
-        public IHttpActionResult AddingSinhVien([FromBody] SinhVien SinhVien)
+        public IHttpActionResult AddingAccount([FromBody] Account Account)
         {
 
             try
             {
-                db.SinhViens.Add(SinhVien);
+                db.Accounts.Add(Account);
                 db.SaveChangesAsync();
                 return Json(new { Message = "Data received successfully!" });
             }
             catch (Exception ex)
             {
-                return Json(new { Message = "Adding Failed!Error: "+ex,});
+                return Json(new { Message = "Adding Failed!Error: " + ex, });
             }
         }
         [HttpPut]
         private bool EntityExists(int id)
         {
-            return db.SinhViens.Any(e => e.IDSinhVien == id);
+            return db.Accounts.Any(e => e.IDAccount == id);
         }
-        public async Task<IHttpActionResult> PutSinhVien(int id,[FromBody] SinhVien SinhVien)
+        public async Task<IHttpActionResult> PutAccount(int id, [FromBody] Account Account)
         {
 
             try
             {
-                db.Entry(SinhVien).State = EntityState.Modified;
+                db.Entry(Account).State = EntityState.Modified;
                 try
                 {
                     await db.SaveChangesAsync();
@@ -78,10 +81,10 @@ namespace doanNet.ApiControllers
             }
         }
         [HttpPut]
-        public IHttpActionResult HiddingSinhVien(int id)
+        public IHttpActionResult HiddingAccount(int id)
         {
-            SinhVien hideSinhVien = db.SinhViens.Where(row => row.IDSinhVien == id).FirstOrDefault();
-            hideSinhVien.Hide = hideSinhVien.Hide == 0 ? 1 : 0;
+            Account hideAccount = db.Accounts.Where(row => row.IDAccount == id).FirstOrDefault();
+            hideAccount.Hide = hideAccount.Hide == 0 ? 1 : 0;
             db.SaveChangesAsync();
             return Json(new { Message = "Hiding Succesfully!" });
         }

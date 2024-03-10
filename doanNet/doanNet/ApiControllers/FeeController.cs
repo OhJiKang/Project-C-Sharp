@@ -1,60 +1,58 @@
-﻿using doanNet.Controllers.DTO;
-using doanNet.Models;
+﻿using doanNet.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
-using System.Web.Services.Description;
 
 namespace doanNet.ApiControllers
 {
-    public class SinhVienController : ApiController
+    public class FeeController : ApiController
     {
         KTXTDTUEntities1 db = new KTXTDTUEntities1();
 
-        public List<SinhVien> GetAll(int? page)
+        public List<Fee> GetAll(int? page)
         {
-            return db.SinhViens.ToList();
+            return db.Fees.ToList();
         }
 
-        public SinhVien GetByMSSV(int mssv)
+        public Fee GetByFeeId(int id)
         {
-            return db.SinhViens.Where(row => row.MSSV == mssv.ToString()).FirstOrDefault();
+            return db.Fees.Where(row => row.IDFee == id).FirstOrDefault();
         }
-        public List<SinhVien> GetAllSinhVienByRoom(int roomid,int? page)
+        public List<Fee> GetAllByRoomID(int roomid)
         {
-            return db.SinhViens.Where(row =>row.IDRoom==roomid).ToList();
+            return db.Fees.Where(row => row.Room.IDRoom == roomid).ToList();
         }
-        public IHttpActionResult AddingSinhVien([FromBody] SinhVien SinhVien)
+        public IHttpActionResult AddingFee([FromBody] Fee Fee)
         {
 
             try
             {
-                db.SinhViens.Add(SinhVien);
+                db.Fees.Add(Fee);
                 db.SaveChangesAsync();
                 return Json(new { Message = "Data received successfully!" });
             }
             catch (Exception ex)
             {
-                return Json(new { Message = "Adding Failed!Error: "+ex,});
+                return Json(new { Message = "Adding Failed!Error: " + ex, });
             }
         }
         [HttpPut]
         private bool EntityExists(int id)
         {
-            return db.SinhViens.Any(e => e.IDSinhVien == id);
+            return db.Fees.Any(e => e.IDFee == id);
         }
-        public async Task<IHttpActionResult> PutSinhVien(int id,[FromBody] SinhVien SinhVien)
+        public async Task<IHttpActionResult> PutFee(int id, [FromBody] Fee Fee)
         {
 
             try
             {
-                db.Entry(SinhVien).State = EntityState.Modified;
+                db.Entry(Fee).State = EntityState.Modified;
                 try
                 {
                     await db.SaveChangesAsync();
@@ -70,18 +68,18 @@ namespace doanNet.ApiControllers
                         throw;
                     }
                 }
-                return StatusCode(HttpStatusCode.NoContent);
+                return Json(new { Message = "Putting Success "});
             }
             catch (Exception ex)
             {
-                return Json(new { Message = "Adding Failed!Error: " + ex, });
+                return Json(new { Message = "Putting Failed!Error: " + ex, });
             }
         }
         [HttpPut]
-        public IHttpActionResult HiddingSinhVien(int id)
+        public IHttpActionResult HiddingFee(int id)
         {
-            SinhVien hideSinhVien = db.SinhViens.Where(row => row.IDSinhVien == id).FirstOrDefault();
-            hideSinhVien.Hide = hideSinhVien.Hide == 0 ? 1 : 0;
+            Fee hideFee = db.Fees.Where(row => row.IDFee == id).FirstOrDefault();
+            hideFee.Hide = hideFee.Hide == 0 ? 1 : 0;
             db.SaveChangesAsync();
             return Json(new { Message = "Hiding Succesfully!" });
         }
