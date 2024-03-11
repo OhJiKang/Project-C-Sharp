@@ -209,10 +209,6 @@
     <Content Include="Images\working.png" />
     <Content Include="Images\writing.png" />
     <Content Include="Images\written-paper.png" />
-    <Content Include="Models\KTXTDTUV3.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>KTXTDTUV3.Context1.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\KTXTDTUV3.edmx.sql" />
     <Content Include="Models\KTXTDTUV3.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

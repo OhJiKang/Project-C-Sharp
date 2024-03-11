@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a94a2da9d63c4c879c406c58e2fa1c8a" Name="Diagram1" ZoomLevel="132">
-        <EntityTypeShape EntityType="KTXTDTUModelV3.Account" Width="1.5" PointX="5.25" PointY="3.875" />
-        <EntityTypeShape EntityType="KTXTDTUModelV3.AccountType" Width="1.5" PointX="7.5" PointY="4.375" />
-        <EntityTypeShape EntityType="KTXTDTUModelV3.Contract" Width="1.5" PointX="0.75" PointY="4.125" />
-        <EntityTypeShape EntityType="KTXTDTUModelV3.ContractBridge" Width="1.5" PointX="3" PointY="4.625" />
-        <EntityTypeShape EntityType="KTXTDTUModelV3.Faculty" Width="1.5" PointX="0.75" PointY="13.5" />
-        <EntityTypeShape EntityType="KTXTDTUModelV3.Fee" Width="1.5" PointX="6" PointY="8.75" />
-        <EntityTypeShape EntityType="KTXTDTUModelV3.Log" Width="1.5" PointX="5.25" PointY="14.125" />
-        <EntityTypeShape EntityType="KTXTDTUModelV3.Mistake" Width="1.5" PointX="8.25" PointY="8.75" />
-        <EntityTypeShape EntityType="KTXTDTUModelV3.Place" Width="1.5" PointX="1.5" PointY="0.75" />
-        <EntityTypeShape EntityType="KTXTDTUModelV3.Priority" Width="1.5" PointX="0.75" PointY="16.75" />
-        <EntityTypeShape EntityType="KTXTDTUModelV3.Room" Width="1.5" PointX="0.75" PointY="8.875" />
-        <EntityTypeShape EntityType="KTXTDTUModelV3.SinhVien" Width="1.5" PointX="3" PointY="8" />
-        <EntityTypeShape EntityType="KTXTDTUModelV3.Menu" Width="1.5" PointX="7.75" PointY="1.5" />
+      <Diagram DiagramId="a94a2da9d63c4c879c406c58e2fa1c8a" Name="Diagram1" ZoomLevel="112">
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Account" Width="1.5" PointX="5.25" PointY="3.125" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.AccountType" Width="1.5" PointX="7.5" PointY="3.625" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Contract" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.ContractBridge" Width="1.5" PointX="3" PointY="13.125" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Faculty" Width="1.5" PointX="0.75" PointY="4.5" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Fee" Width="1.5" PointX="6" PointY="8" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Log" Width="1.5" PointX="5.25" PointY="13.375" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Mistake" Width="1.5" PointX="8.25" PointY="8" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Place" Width="1.5" PointX="1.5" PointY="17.25" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Priority" Width="1.5" PointX="0.75" PointY="21.25" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Room" Width="1.5" PointX="0.75" PointY="8.125" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.SinhVien" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="KTXTDTUModelV3.Menu" Width="1.5" PointX="0.75" PointY="0.75" />
         <AssociationConnector Association="KTXTDTUModelV3.FK__Account__IDSinhV__4CA06362" />
         <AssociationConnector Association="KTXTDTUModelV3.FK__AccountTy__IDAcc__4F7CD00D" />
         <AssociationConnector Association="KTXTDTUModelV3.FK__Mistake__IDAccou__534D60F1" />

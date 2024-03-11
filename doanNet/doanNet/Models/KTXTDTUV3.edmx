@@ -37,9 +37,8 @@
             <PropertyRef Name="IDContract" />
           </Key>
           <Property Name="IDContract" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MSSV" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="IDCitizen" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="ProfilePlace" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="ProfilePlace" Type="int" />
           <Property Name="IDPlace" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Ending" Type="int" />
           <Property Name="Order" Type="int" />
@@ -109,13 +108,12 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             <PropertyRef Name="Order" />
             <PropertyRef Name="Meta" />
             <PropertyRef Name="Hide" />
-            <PropertyRef Name="TextMenu" />
           </Key>
           <Property Name="Order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Meta" Type="text" Nullable="false" />
           <Property Name="DateBegin" Type="datetime" />
           <Property Name="Hide" Type="int" Nullable="false" />
-          <Property Name="TextMenu" Type="text" Nullable="false" />
+          <Property Name="TextMenu" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Mistake">
           <Key>
@@ -547,9 +545,8 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             <PropertyRef Name="IDContract" />
           </Key>
           <Property Name="IDContract" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MSSV" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="IDCitizen" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ProfilePlace" Type="Binary" Nullable="false" MaxLength="1" FixedLength="true" />
+          <Property Name="ProfilePlace" Type="Int32" />
           <Property Name="IDPlace" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Ending" Type="Int32" />
           <Property Name="Order" Type="Int32" />
@@ -713,13 +710,12 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             <PropertyRef Name="Order" />
             <PropertyRef Name="Meta" />
             <PropertyRef Name="Hide" />
-            <PropertyRef Name="TextMenu" />
           </Key>
           <Property Name="Order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Meta" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <Property Name="TextMenu" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TextMenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__Account__IDSinhV__4CA06362">
           <End Type="KTXTDTUModelV3.SinhVien" Role="SinhVien" Multiplicity="1" />
@@ -889,7 +885,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -935,7 +931,6 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
                 <ScalarProperty Name="IDPlace" ColumnName="IDPlace" />
                 <ScalarProperty Name="ProfilePlace" ColumnName="ProfilePlace" />
                 <ScalarProperty Name="IDCitizen" ColumnName="IDCitizen" />
-                <ScalarProperty Name="MSSV" ColumnName="MSSV" />
                 <ScalarProperty Name="IDContract" ColumnName="IDContract" />
               </MappingFragment>
             </EntityTypeMapping>

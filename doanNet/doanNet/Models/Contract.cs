@@ -22,9 +22,8 @@ namespace doanNet.Models
         }
     
         public int IDContract { get; set; }
-        public string MSSV { get; set; }
         public string IDCitizen { get; set; }
-        public byte[] ProfilePlace { get; set; }
+        public Nullable<int> ProfilePlace { get; set; }
         public string IDPlace { get; set; }
         public Nullable<int> Ending { get; set; }
         public Nullable<int> Order { get; set; }

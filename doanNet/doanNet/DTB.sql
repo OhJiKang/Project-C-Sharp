@@ -132,6 +132,22 @@ CREATE TABLE Fee
 USE [KTXTDTU]
 GO
 
+INSERT INTO [dbo].[Place]
+           ([IDPlace]
+           ,[Description]
+           ,[Order]
+           ,[Meta]
+           ,[DateBegin]
+           ,[Hide])
+     VALUES
+           ('KV1'
+           ,N'Khu Vực 1'
+           ,null
+           ,null
+           ,GETDATE()
+           ,0)
+GO
+
 INSERT INTO [dbo].[Priority]
            ([IDPriority]
            ,[PriorityDescription]
