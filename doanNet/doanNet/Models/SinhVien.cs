@@ -18,6 +18,7 @@ namespace doanNet.Models
         public SinhVien()
         {
             this.Accounts = new HashSet<Account>();
+            this.AttendanceBridges = new HashSet<AttendanceBridge>();
             this.Logs = new HashSet<Log>();
             this.Mistakes = new HashSet<Mistake>();
         }
@@ -40,6 +41,8 @@ namespace doanNet.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AttendanceBridge> AttendanceBridges { get; set; }
         public virtual Contract Contract { get; set; }
         public virtual Faculty Faculty { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

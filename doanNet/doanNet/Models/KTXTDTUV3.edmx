@@ -32,6 +32,49 @@
           <Property Name="DateBegin" Type="datetime" Nullable="false" />
           <Property Name="Hide" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="IDAttendance" />
+          </Key>
+          <Property Name="IDAttendance" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsAttend" Type="int" Nullable="false" />
+          <Property Name="Reason" Type="text" />
+          <Property Name="Order" Type="int" />
+          <Property Name="Meta" Type="text" />
+          <Property Name="DateBegin" Type="datetime" Nullable="false" />
+          <Property Name="Hide" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttendanceBridge">
+          <Key>
+            <PropertyRef Name="IDAttendance" />
+            <PropertyRef Name="IDSinhVien" />
+            <PropertyRef Name="IDAccount" />
+          </Key>
+          <Property Name="IDAttendance" Type="int" Nullable="false" />
+          <Property Name="IDSinhVien" Type="int" Nullable="false" />
+          <Property Name="IDAccount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="IDCategory" />
+          </Key>
+          <Property Name="IDCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryTitle" Type="text" Nullable="false" />
+          <Property Name="CategoryDetail" Type="text" Nullable="false" />
+          <Property Name="ColorChip" Type="text" />
+          <Property Name="Order" Type="int" />
+          <Property Name="Meta" Type="text" />
+          <Property Name="DateBegin" Type="datetime" Nullable="false" />
+          <Property Name="Hide" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategoryBridge">
+          <Key>
+            <PropertyRef Name="IDCategory" />
+            <PropertyRef Name="IDPost" />
+          </Key>
+          <Property Name="IDCategory" Type="int" Nullable="false" />
+          <Property Name="IDPost" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Contract">
           <Key>
             <PropertyRef Name="IDContract" />
@@ -142,6 +185,19 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <Property Name="DateBegin" Type="datetime" Nullable="false" />
           <Property Name="Hide" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="IDPost" />
+          </Key>
+          <Property Name="IDPost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostTitle" Type="text" Nullable="false" />
+          <Property Name="PostDetail" Type="text" Nullable="false" />
+          <Property Name="IDAccount" Type="int" />
+          <Property Name="Order" Type="int" />
+          <Property Name="Meta" Type="text" />
+          <Property Name="DateBegin" Type="datetime" Nullable="false" />
+          <Property Name="Hide" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Priority">
           <Key>
             <PropertyRef Name="IDPriority" />
@@ -208,6 +264,66 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Principal>
             <Dependent Role="AccountType">
               <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Attendanc__IDAcc__6FE99F9F">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="AttendanceBridge" Type="Self.AttendanceBridge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IDAccount" />
+            </Principal>
+            <Dependent Role="AttendanceBridge">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Attendanc__IDAtt__6E01572D">
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+          <End Role="AttendanceBridge" Type="Self.AttendanceBridge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attendance">
+              <PropertyRef Name="IDAttendance" />
+            </Principal>
+            <Dependent Role="AttendanceBridge">
+              <PropertyRef Name="IDAttendance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Attendanc__IDSin__6EF57B66">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+          <End Role="AttendanceBridge" Type="Self.AttendanceBridge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="IDSinhVien" />
+            </Principal>
+            <Dependent Role="AttendanceBridge">
+              <PropertyRef Name="IDSinhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CategoryB__IDCat__72C60C4A">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="CategoryBridge" Type="Self.CategoryBridge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="IDCategory" />
+            </Principal>
+            <Dependent Role="CategoryBridge">
+              <PropertyRef Name="IDCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CategoryB__IDPos__73BA3083">
+          <End Role="Post" Type="Self.Post" Multiplicity="1" />
+          <End Role="CategoryBridge" Type="Self.CategoryBridge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="IDPost" />
+            </Principal>
+            <Dependent Role="CategoryBridge">
+              <PropertyRef Name="IDPost" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -319,6 +435,18 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Post__IDAccount__60A75C0F">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IDAccount" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__SinhVien__IDCont__45F365D3">
           <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
           <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
@@ -358,6 +486,10 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
         <EntityContainer Name="KTXTDTUModelV3StoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountType" EntityType="Self.AccountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttendanceBridge" EntityType="Self.AttendanceBridge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryBridge" EntityType="Self.CategoryBridge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContractBridge" EntityType="Self.ContractBridge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
@@ -365,6 +497,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mistake" EntityType="Self.Mistake" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Priority" EntityType="Self.Priority" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SinhVien" EntityType="Self.SinhVien" Schema="dbo" store:Type="Tables" />
@@ -384,6 +517,26 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <AssociationSet Name="FK__AccountTy__IDAcc__4F7CD00D" Association="Self.FK__AccountTy__IDAcc__4F7CD00D">
             <End Role="Account" EntitySet="Account" />
             <End Role="AccountType" EntitySet="AccountType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__IDAcc__6FE99F9F" Association="Self.FK__Attendanc__IDAcc__6FE99F9F">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="AttendanceBridge" EntitySet="AttendanceBridge" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__IDAtt__6E01572D" Association="Self.FK__Attendanc__IDAtt__6E01572D">
+            <End Role="Attendance" EntitySet="Attendance" />
+            <End Role="AttendanceBridge" EntitySet="AttendanceBridge" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__IDSin__6EF57B66" Association="Self.FK__Attendanc__IDSin__6EF57B66">
+            <End Role="SinhVien" EntitySet="SinhVien" />
+            <End Role="AttendanceBridge" EntitySet="AttendanceBridge" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryB__IDCat__72C60C4A" Association="Self.FK__CategoryB__IDCat__72C60C4A">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryBridge" EntitySet="CategoryBridge" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryB__IDPos__73BA3083" Association="Self.FK__CategoryB__IDPos__73BA3083">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="CategoryBridge" EntitySet="CategoryBridge" />
           </AssociationSet>
           <AssociationSet Name="FK__Contract__IDPlac__3E52440B" Association="Self.FK__Contract__IDPlac__3E52440B">
             <End Role="Place" EntitySet="Place" />
@@ -421,6 +574,10 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             <End Role="SinhVien" EntitySet="SinhVien" />
             <End Role="Mistake" EntitySet="Mistake" />
           </AssociationSet>
+          <AssociationSet Name="FK__Post__IDAccount__60A75C0F" Association="Self.FK__Post__IDAccount__60A75C0F">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
           <AssociationSet Name="FK__SinhVien__IDCont__45F365D3" Association="Self.FK__SinhVien__IDCont__45F365D3">
             <End Role="Contract" EntitySet="Contract" />
             <End Role="SinhVien" EntitySet="SinhVien" />
@@ -441,6 +598,9 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
         <EntityContainer Name="KTXTDTUEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="KTXTDTUModelV3.Account" />
           <EntitySet Name="AccountTypes" EntityType="KTXTDTUModelV3.AccountType" />
+          <EntitySet Name="Attendances" EntityType="KTXTDTUModelV3.Attendance" />
+          <EntitySet Name="AttendanceBridges" EntityType="KTXTDTUModelV3.AttendanceBridge" />
+          <EntitySet Name="Categories" EntityType="KTXTDTUModelV3.Category" />
           <EntitySet Name="Contracts" EntityType="KTXTDTUModelV3.Contract" />
           <EntitySet Name="ContractBridges" EntityType="KTXTDTUModelV3.ContractBridge" />
           <EntitySet Name="Faculties" EntityType="KTXTDTUModelV3.Faculty" />
@@ -448,6 +608,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <EntitySet Name="Logs" EntityType="KTXTDTUModelV3.Log" />
           <EntitySet Name="Mistakes" EntityType="KTXTDTUModelV3.Mistake" />
           <EntitySet Name="Places" EntityType="KTXTDTUModelV3.Place" />
+          <EntitySet Name="Posts" EntityType="KTXTDTUModelV3.Post" />
           <EntitySet Name="Priorities" EntityType="KTXTDTUModelV3.Priority" />
           <EntitySet Name="Rooms" EntityType="KTXTDTUModelV3.Room" />
           <EntitySet Name="SinhViens" EntityType="KTXTDTUModelV3.SinhVien" />
@@ -460,9 +621,25 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             <End Role="Account" EntitySet="Accounts" />
             <End Role="AccountType" EntitySet="AccountTypes" />
           </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__IDAcc__6FE99F9F" Association="KTXTDTUModelV3.FK__Attendanc__IDAcc__6FE99F9F">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AttendanceBridge" EntitySet="AttendanceBridges" />
+          </AssociationSet>
           <AssociationSet Name="FK__Mistake__IDAccou__534D60F1" Association="KTXTDTUModelV3.FK__Mistake__IDAccou__534D60F1">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Mistake" EntitySet="Mistakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Post__IDAccount__60A75C0F" Association="KTXTDTUModelV3.FK__Post__IDAccount__60A75C0F">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__IDAtt__6E01572D" Association="KTXTDTUModelV3.FK__Attendanc__IDAtt__6E01572D">
+            <End Role="Attendance" EntitySet="Attendances" />
+            <End Role="AttendanceBridge" EntitySet="AttendanceBridges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__IDSin__6EF57B66" Association="KTXTDTUModelV3.FK__Attendanc__IDSin__6EF57B66">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="AttendanceBridge" EntitySet="AttendanceBridges" />
           </AssociationSet>
           <AssociationSet Name="FK__Contract__IDPlac__3E52440B" Association="KTXTDTUModelV3.FK__Contract__IDPlac__3E52440B">
             <End Role="Place" EntitySet="Places" />
@@ -508,6 +685,10 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             <End Role="Room" EntitySet="Rooms" />
             <End Role="SinhVien" EntitySet="SinhViens" />
           </AssociationSet>
+          <AssociationSet Name="CategoryBridge" Association="KTXTDTUModelV3.CategoryBridge">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -525,7 +706,9 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <Property Name="Hide" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SinhVien" Relationship="KTXTDTUModelV3.FK__Account__IDSinhV__4CA06362" FromRole="Account" ToRole="SinhVien" />
           <NavigationProperty Name="AccountTypes" Relationship="KTXTDTUModelV3.FK__AccountTy__IDAcc__4F7CD00D" FromRole="Account" ToRole="AccountType" />
+          <NavigationProperty Name="AttendanceBridges" Relationship="KTXTDTUModelV3.FK__Attendanc__IDAcc__6FE99F9F" FromRole="Account" ToRole="AttendanceBridge" />
           <NavigationProperty Name="Mistakes" Relationship="KTXTDTUModelV3.FK__Mistake__IDAccou__534D60F1" FromRole="Account" ToRole="Mistake" />
+          <NavigationProperty Name="Posts" Relationship="KTXTDTUModelV3.FK__Post__IDAccount__60A75C0F" FromRole="Account" ToRole="Post" />
         </EntityType>
         <EntityType Name="AccountType">
           <Key>
@@ -539,6 +722,46 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="KTXTDTUModelV3.FK__AccountTy__IDAcc__4F7CD00D" FromRole="AccountType" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="IDAttendance" />
+          </Key>
+          <Property Name="IDAttendance" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsAttend" Type="Int32" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Hide" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AttendanceBridges" Relationship="KTXTDTUModelV3.FK__Attendanc__IDAtt__6E01572D" FromRole="Attendance" ToRole="AttendanceBridge" />
+        </EntityType>
+        <EntityType Name="AttendanceBridge">
+          <Key>
+            <PropertyRef Name="IDAttendance" />
+            <PropertyRef Name="IDSinhVien" />
+            <PropertyRef Name="IDAccount" />
+          </Key>
+          <Property Name="IDAttendance" Type="Int32" Nullable="false" />
+          <Property Name="IDSinhVien" Type="Int32" Nullable="false" />
+          <Property Name="IDAccount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="KTXTDTUModelV3.FK__Attendanc__IDAcc__6FE99F9F" FromRole="AttendanceBridge" ToRole="Account" />
+          <NavigationProperty Name="Attendance" Relationship="KTXTDTUModelV3.FK__Attendanc__IDAtt__6E01572D" FromRole="AttendanceBridge" ToRole="Attendance" />
+          <NavigationProperty Name="SinhVien" Relationship="KTXTDTUModelV3.FK__Attendanc__IDSin__6EF57B66" FromRole="AttendanceBridge" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="IDCategory" />
+          </Key>
+          <Property Name="IDCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryDetail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ColorChip" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Hide" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Posts" Relationship="KTXTDTUModelV3.CategoryBridge" FromRole="Category" ToRole="Post" />
         </EntityType>
         <EntityType Name="Contract">
           <Key>
@@ -650,6 +873,21 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <Property Name="Hide" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Contracts" Relationship="KTXTDTUModelV3.FK__Contract__IDPlac__3E52440B" FromRole="Place" ToRole="Contract" />
         </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="IDPost" />
+          </Key>
+          <Property Name="IDPost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostDetail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IDAccount" Type="Int32" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Hide" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="KTXTDTUModelV3.FK__Post__IDAccount__60A75C0F" FromRole="Post" ToRole="Account" />
+          <NavigationProperty Name="Categories" Relationship="KTXTDTUModelV3.CategoryBridge" FromRole="Post" ToRole="Category" />
+        </EntityType>
         <EntityType Name="Priority">
           <Key>
             <PropertyRef Name="IDPriority" />
@@ -699,6 +937,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Accounts" Relationship="KTXTDTUModelV3.FK__Account__IDSinhV__4CA06362" FromRole="SinhVien" ToRole="Account" />
+          <NavigationProperty Name="AttendanceBridges" Relationship="KTXTDTUModelV3.FK__Attendanc__IDSin__6EF57B66" FromRole="SinhVien" ToRole="AttendanceBridge" />
           <NavigationProperty Name="Contract" Relationship="KTXTDTUModelV3.FK__SinhVien__IDCont__45F365D3" FromRole="SinhVien" ToRole="Contract" />
           <NavigationProperty Name="Faculty" Relationship="KTXTDTUModelV3.FK__SinhVien__IDFalc__44FF419A" FromRole="SinhVien" ToRole="Faculty" />
           <NavigationProperty Name="Logs" Relationship="KTXTDTUModelV3.FK__Log__IDSinhVien__49C3F6B7" FromRole="SinhVien" ToRole="Log" />
@@ -741,6 +980,18 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Attendanc__IDAcc__6FE99F9F">
+          <End Type="KTXTDTUModelV3.Account" Role="Account" Multiplicity="1" />
+          <End Type="KTXTDTUModelV3.AttendanceBridge" Role="AttendanceBridge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IDAccount" />
+            </Principal>
+            <Dependent Role="AttendanceBridge">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Mistake__IDAccou__534D60F1">
           <End Type="KTXTDTUModelV3.Account" Role="Account" Multiplicity="1" />
           <End Type="KTXTDTUModelV3.Mistake" Role="Mistake" Multiplicity="*" />
@@ -750,6 +1001,42 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Principal>
             <Dependent Role="Mistake">
               <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Post__IDAccount__60A75C0F">
+          <End Type="KTXTDTUModelV3.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="KTXTDTUModelV3.Post" Role="Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IDAccount" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Attendanc__IDAtt__6E01572D">
+          <End Type="KTXTDTUModelV3.Attendance" Role="Attendance" Multiplicity="1" />
+          <End Type="KTXTDTUModelV3.AttendanceBridge" Role="AttendanceBridge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attendance">
+              <PropertyRef Name="IDAttendance" />
+            </Principal>
+            <Dependent Role="AttendanceBridge">
+              <PropertyRef Name="IDAttendance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Attendanc__IDSin__6EF57B66">
+          <End Type="KTXTDTUModelV3.SinhVien" Role="SinhVien" Multiplicity="1" />
+          <End Type="KTXTDTUModelV3.AttendanceBridge" Role="AttendanceBridge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="IDSinhVien" />
+            </Principal>
+            <Dependent Role="AttendanceBridge">
+              <PropertyRef Name="IDSinhVien" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -885,6 +1172,10 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="CategoryBridge">
+          <End Type="KTXTDTUModelV3.Category" Role="Category" Multiplicity="*" />
+          <End Type="KTXTDTUModelV3.Post" Role="Post" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -917,6 +1208,42 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
                 <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
                 <ScalarProperty Name="TypeDescription" ColumnName="TypeDescription" />
                 <ScalarProperty Name="IDAccountType" ColumnName="IDAccountType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendances">
+            <EntityTypeMapping TypeName="KTXTDTUModelV3.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="IsAttend" ColumnName="IsAttend" />
+                <ScalarProperty Name="IDAttendance" ColumnName="IDAttendance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttendanceBridges">
+            <EntityTypeMapping TypeName="KTXTDTUModelV3.AttendanceBridge">
+              <MappingFragment StoreEntitySet="AttendanceBridge">
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
+                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
+                <ScalarProperty Name="IDAttendance" ColumnName="IDAttendance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="KTXTDTUModelV3.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="ColorChip" ColumnName="ColorChip" />
+                <ScalarProperty Name="CategoryDetail" ColumnName="CategoryDetail" />
+                <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
+                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1022,6 +1349,20 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="KTXTDTUModelV3.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
+                <ScalarProperty Name="PostDetail" ColumnName="PostDetail" />
+                <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+                <ScalarProperty Name="IDPost" ColumnName="IDPost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Priorities">
             <EntityTypeMapping TypeName="KTXTDTUModelV3.Priority">
               <MappingFragment StoreEntitySet="Priority">
@@ -1081,6 +1422,14 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="CategoryBridge" TypeName="KTXTDTUModelV3.CategoryBridge" StoreEntitySet="CategoryBridge">
+            <EndProperty Name="Post">
+              <ScalarProperty Name="IDPost" ColumnName="IDPost" />
+            </EndProperty>
+            <EndProperty Name="Category">
+              <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

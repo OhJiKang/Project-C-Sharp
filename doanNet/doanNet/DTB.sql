@@ -3,6 +3,10 @@
   IDFalcuty INT NOT NULL,
   NameFalculty NVARCHAR(70) NOT NULL,
   Description NTEXT NOT NULL,
+  [Order] int,
+  [Meta] text,
+  DateBegin timedate NOT NULL,
+  Hide int NOT NULL,
   PRIMARY KEY (IDFalcuty)
 );
 
@@ -128,6 +132,52 @@ CREATE TABLE Fee
   FOREIGN KEY (IDRoom) REFERENCES Room(IDRoom),
   FOREIGN KEY (IDLog) REFERENCES Log(IDLog)
 );
+Create Table Post(
+	IDPost int identity Primary key,
+	PostTitle text NOT NULL,
+	PostDetail text NOT NULL,
+	IDAccount int,
+	FOREIGN KEY (IDAccount) REFERENCES Account(IDAccount),
+	[Order] int,
+	[Meta] text,
+	DateBegin datetime NOT NULL,
+	Hide int NOT NULL,
+);
+Create Table Category(
+	IDCategory int identity Primary key,
+	CategoryTitle text NOT NULL,
+	CategoryDetail text NOT NULL,
+	ColorChip text,
+	[Order] int,
+	[Meta] text,
+	DateBegin datetime NOT NULL,
+	Hide int NOT NULL,
+);
+Create Table CategoryBridge(
+	IDCategory int NOT NULL,
+	IDPost int NOT NULL,
+	PRIMARY KEY (IDCategory, IDPost),
+	FOREIGN KEY (IDCategory) REFERENCES Category(IDCategory),
+	FOREIGN KEY (IDPost) REFERENCES Post(IDPost),
+);
+Create Table Attendance(
+	IDAttendance int primary key identity,
+	IsAttend int NOT NULL,
+	Reason text,
+	[Order] int,
+	[Meta] text,
+	DateBegin datetime NOT NULL,
+	Hide int NOT NULL,
+);
+Create Table AttendanceBridge(
+	IDAttendance int NOT NULL,
+	IDSinhVien int NOT NULL,
+	IDAccount int NOT NULL,
+	PRIMARY KEY (IDAttendance, IDSinhVien,IDAccount),
+	FOREIGN KEY (IDAttendance) REFERENCES Attendance(IDAttendance),
+	FOREIGN KEY (IDSinhVien) REFERENCES SinhVien(IDSinhVien),
+	FOREIGN KEY (IDAccount) REFERENCES Account(IDAccount),
+)
 -----Data-----
 USE [KTXTDTU]
 GO
