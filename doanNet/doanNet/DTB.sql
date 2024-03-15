@@ -156,6 +156,10 @@ Create Table Category(
 Create Table CategoryBridge(
 	IDCategory int NOT NULL,
 	IDPost int NOT NULL,
+	[Order] int,
+	[Meta] text,
+	DateBegin datetime NOT NULL,
+	Hide int NOT NULL,
 	PRIMARY KEY (IDCategory, IDPost),
 	FOREIGN KEY (IDCategory) REFERENCES Category(IDCategory),
 	FOREIGN KEY (IDPost) REFERENCES Post(IDPost),

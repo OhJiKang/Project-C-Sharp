@@ -12,25 +12,16 @@ namespace doanNet.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Post
+    public partial class CategoryBridge
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Post()
-        {
-            this.CategoryBridges = new HashSet<CategoryBridge>();
-        }
-    
+        public int IDCategory { get; set; }
         public int IDPost { get; set; }
-        public string PostTitle { get; set; }
-        public string PostDetail { get; set; }
-        public Nullable<int> IDAccount { get; set; }
         public Nullable<int> Order { get; set; }
         public string Meta { get; set; }
         public System.DateTime DateBegin { get; set; }
         public int Hide { get; set; }
     
-        public virtual Account Account { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CategoryBridge> CategoryBridges { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Post Post { get; set; }
     }
 }

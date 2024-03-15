@@ -224,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\AccountController.cs" />
+    <Compile Include="ApiControllers\CategoryController.cs" />
     <Compile Include="ApiControllers\ContractController.cs" />
     <Compile Include="ApiControllers\FalcutiesController.cs" />
     <Compile Include="ApiControllers\FeeController.cs" />
@@ -269,6 +270,9 @@
       <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
+      <DependentUpon>KTXTDTUV3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CategoryBridge.cs">
       <DependentUpon>KTXTDTUV3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Contract.cs">

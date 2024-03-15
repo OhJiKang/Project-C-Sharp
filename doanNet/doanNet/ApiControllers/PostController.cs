@@ -8,6 +8,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using doanNet.Controllers.DTO;
+using System.Collections;
 
 namespace doanNet.ApiControllers
 {
@@ -15,23 +17,36 @@ namespace doanNet.ApiControllers
     {
         KTXTDTUEntities1 db = new KTXTDTUEntities1();
 
-        public List<Contract> GetAll()
+        public List<Post> GetAll()
         {
-            return db.Contracts.ToList();
+            return db.Posts.ToList();
         }
 
 
-        public Contract GetByContractId(int id)
+        public Post GetByPostId(int id)
         {
-            return db.Contracts.Where(row => row.IDContract == id).FirstOrDefault();
+            return db.Posts.Where(row => row.IDPost == id).FirstOrDefault();
         }
-        public IHttpActionResult AddingContract([FromBody] Contract Contract)
+        public IHttpActionResult AddingPost([FromBody] PostDTO Post)
         {
-
             try
             {
-                db.Contracts.Add(Contract);
+                var tempPost = new Post();
+                tempPost.PostTitle = Post.PostTittle;
+                tempPost.PostDetail = Post.PostDetail;
+                tempPost.DateBegin=DateTime.Now;
+                tempPost.Hide = 0;
+
+                db.Posts.Add(tempPost);
                 db.SaveChangesAsync();
+                foreach (var category in Post.CategoryList) {
+                    var tempCategory = new CategoryBridge();
+                    tempCategory.IDCategory = category.IDCategory;
+                    tempCategory.IDPost = tempPost.IDPost;
+                    tempCategory.DateBegin = DateTime.Now;
+                    tempCategory.Hide = 0;
+                    db.CategoryBridges.Add(tempCategory);
+                }
                 return Json(new { Message = "Data received successfully!" });
             }
             catch (DbEntityValidationException e)
@@ -57,19 +72,59 @@ namespace doanNet.ApiControllers
 
         private bool EntityExists(int id)
         {
-            return db.Contracts.Any(e => e.IDContract == id);
+            return db.Posts.Any(e => e.IDPost == id);
         }
+
         [HttpPut]
-        public async Task<IHttpActionResult> PutContract(int? id, [FromBody] Contract Contract)
+        public async Task<IHttpActionResult> PutPost(int? id, [FromBody] PostDTO Post)
         {
 
             try
             {
-                var contractmodifier = db.Contracts.Where(row => row.IDContract == id).FirstOrDefault();
-                contractmodifier.IDCitizen = Contract.IDCitizen;
-                contractmodifier.IDPlace = Contract.IDPlace;
-                contractmodifier.ProfilePlace = Contract.ProfilePlace;
-                db.Entry(contractmodifier).State = EntityState.Modified;
+                var Postmodifier = db.Posts.Where(row => row.IDPost == id).FirstOrDefault();
+                Postmodifier.PostDetail = Post.PostDetail;
+                Postmodifier.PostTitle = Post.PostTittle;
+                Postmodifier.DateBegin = DateTime.Now;
+                Postmodifier.IDAccount = Post.IDAccount;
+                var oldCategories = db.CategoryBridges.Where(row => row.IDPost == id).ToList();
+               
+                // 1. Identify categories to hide in OldCategory:
+                var categoriesToHide = oldCategories
+                    .Where(oldCat => !Post.CategoryList.Any(newCat => newCat.IDCategory == oldCat.IDCategory))
+                    .ToList();
+
+                // 2. Update Hidden property:
+                foreach (var category in categoriesToHide)
+                {
+                    category.DateBegin= DateTime.Now;
+                    category.Hide = 1; // Set Hidden to true for categories not in NewCategory
+                }
+
+                // 3. Identify new categories to add:
+                var categoriesToAdd = Post.CategoryList
+                    .Where(newCat => !oldCategories.Any(oldCat => oldCat.IDCategory == newCat.IDCategory))
+                    .ToList();
+
+                // 4. Add new categories to database:
+                foreach (var category in categoriesToAdd)
+                {
+                    var tempCategory = new CategoryBridge();
+                    tempCategory.IDCategory = category.IDCategory;
+                    tempCategory.IDPost = Postmodifier.IDPost;
+                    tempCategory.DateBegin= DateTime.Now;
+                    tempCategory.Hide = 0;
+                    db.CategoryBridges.Add(tempCategory); // Use your database access method
+                }
+
+                // 5. Remove Hidden flag for categories in both lists:
+                foreach (var oldCat in oldCategories)
+                {
+                    if (Post.CategoryList.Any(newCat => newCat.IDCategory == oldCat.IDCategory))
+                    {
+                        oldCat.Hide = 0; // Set Hidden to false if category exists in both lists
+                    }
+                }
+                db.Entry(Postmodifier).State = EntityState.Modified;
                 try
                 {
                     await db.SaveChangesAsync();
@@ -99,10 +154,10 @@ namespace doanNet.ApiControllers
             }
         }
         [HttpPut]
-        public IHttpActionResult HiddingContract(int id)
+        public IHttpActionResult HiddingPost(int id)
         {
-            Contract hideContract = db.Contracts.Where(row => row.IDContract == id).FirstOrDefault();
-            hideContract.Hide = hideContract.Hide == 0 ? 1 : 0;
+            Post hidePost = db.Posts.Where(row => row.IDPost == id).FirstOrDefault();
+            hidePost.Hide = hidePost.Hide == 0 ? 1 : 0;
             db.SaveChangesAsync();
             return Json(new { Message = "Hiding Succesfully!" });
         }

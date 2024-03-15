@@ -74,6 +74,10 @@
           </Key>
           <Property Name="IDCategory" Type="int" Nullable="false" />
           <Property Name="IDPost" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" />
+          <Property Name="Meta" Type="text" />
+          <Property Name="DateBegin" Type="datetime" Nullable="false" />
+          <Property Name="Hide" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Contract">
           <Key>
@@ -303,7 +307,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CategoryB__IDCat__72C60C4A">
+        <Association Name="FK__CategoryB__IDCat__7A672E12">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="CategoryBridge" Type="Self.CategoryBridge" Multiplicity="*" />
           <ReferentialConstraint>
@@ -315,7 +319,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CategoryB__IDPos__73BA3083">
+        <Association Name="FK__CategoryB__IDPos__7B5B524B">
           <End Role="Post" Type="Self.Post" Multiplicity="1" />
           <End Role="CategoryBridge" Type="Self.CategoryBridge" Multiplicity="*" />
           <ReferentialConstraint>
@@ -530,11 +534,11 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             <End Role="SinhVien" EntitySet="SinhVien" />
             <End Role="AttendanceBridge" EntitySet="AttendanceBridge" />
           </AssociationSet>
-          <AssociationSet Name="FK__CategoryB__IDCat__72C60C4A" Association="Self.FK__CategoryB__IDCat__72C60C4A">
+          <AssociationSet Name="FK__CategoryB__IDCat__7A672E12" Association="Self.FK__CategoryB__IDCat__7A672E12">
             <End Role="Category" EntitySet="Category" />
             <End Role="CategoryBridge" EntitySet="CategoryBridge" />
           </AssociationSet>
-          <AssociationSet Name="FK__CategoryB__IDPos__73BA3083" Association="Self.FK__CategoryB__IDPos__73BA3083">
+          <AssociationSet Name="FK__CategoryB__IDPos__7B5B524B" Association="Self.FK__CategoryB__IDPos__7B5B524B">
             <End Role="Post" EntitySet="Post" />
             <End Role="CategoryBridge" EntitySet="CategoryBridge" />
           </AssociationSet>
@@ -601,6 +605,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <EntitySet Name="Attendances" EntityType="KTXTDTUModelV3.Attendance" />
           <EntitySet Name="AttendanceBridges" EntityType="KTXTDTUModelV3.AttendanceBridge" />
           <EntitySet Name="Categories" EntityType="KTXTDTUModelV3.Category" />
+          <EntitySet Name="CategoryBridges" EntityType="KTXTDTUModelV3.CategoryBridge" />
           <EntitySet Name="Contracts" EntityType="KTXTDTUModelV3.Contract" />
           <EntitySet Name="ContractBridges" EntityType="KTXTDTUModelV3.ContractBridge" />
           <EntitySet Name="Faculties" EntityType="KTXTDTUModelV3.Faculty" />
@@ -640,6 +645,14 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <AssociationSet Name="FK__Attendanc__IDSin__6EF57B66" Association="KTXTDTUModelV3.FK__Attendanc__IDSin__6EF57B66">
             <End Role="SinhVien" EntitySet="SinhViens" />
             <End Role="AttendanceBridge" EntitySet="AttendanceBridges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryB__IDCat__7A672E12" Association="KTXTDTUModelV3.FK__CategoryB__IDCat__7A672E12">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CategoryBridge" EntitySet="CategoryBridges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryB__IDPos__7B5B524B" Association="KTXTDTUModelV3.FK__CategoryB__IDPos__7B5B524B">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="CategoryBridge" EntitySet="CategoryBridges" />
           </AssociationSet>
           <AssociationSet Name="FK__Contract__IDPlac__3E52440B" Association="KTXTDTUModelV3.FK__Contract__IDPlac__3E52440B">
             <End Role="Place" EntitySet="Places" />
@@ -684,10 +697,6 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <AssociationSet Name="FK__SinhVien__IDRoom__46E78A0C" Association="KTXTDTUModelV3.FK__SinhVien__IDRoom__46E78A0C">
             <End Role="Room" EntitySet="Rooms" />
             <End Role="SinhVien" EntitySet="SinhViens" />
-          </AssociationSet>
-          <AssociationSet Name="CategoryBridge" Association="KTXTDTUModelV3.CategoryBridge">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Post" EntitySet="Posts" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
@@ -761,7 +770,21 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Posts" Relationship="KTXTDTUModelV3.CategoryBridge" FromRole="Category" ToRole="Post" />
+          <NavigationProperty Name="CategoryBridges" Relationship="KTXTDTUModelV3.FK__CategoryB__IDCat__7A672E12" FromRole="Category" ToRole="CategoryBridge" />
+        </EntityType>
+        <EntityType Name="CategoryBridge">
+          <Key>
+            <PropertyRef Name="IDCategory" />
+            <PropertyRef Name="IDPost" />
+          </Key>
+          <Property Name="IDCategory" Type="Int32" Nullable="false" />
+          <Property Name="IDPost" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Hide" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="KTXTDTUModelV3.FK__CategoryB__IDCat__7A672E12" FromRole="CategoryBridge" ToRole="Category" />
+          <NavigationProperty Name="Post" Relationship="KTXTDTUModelV3.FK__CategoryB__IDPos__7B5B524B" FromRole="CategoryBridge" ToRole="Post" />
         </EntityType>
         <EntityType Name="Contract">
           <Key>
@@ -886,7 +909,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="KTXTDTUModelV3.FK__Post__IDAccount__60A75C0F" FromRole="Post" ToRole="Account" />
-          <NavigationProperty Name="Categories" Relationship="KTXTDTUModelV3.CategoryBridge" FromRole="Post" ToRole="Category" />
+          <NavigationProperty Name="CategoryBridges" Relationship="KTXTDTUModelV3.FK__CategoryB__IDPos__7B5B524B" FromRole="Post" ToRole="CategoryBridge" />
         </EntityType>
         <EntityType Name="Priority">
           <Key>
@@ -1040,6 +1063,30 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__CategoryB__IDCat__7A672E12">
+          <End Type="KTXTDTUModelV3.Category" Role="Category" Multiplicity="1" />
+          <End Type="KTXTDTUModelV3.CategoryBridge" Role="CategoryBridge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="IDCategory" />
+            </Principal>
+            <Dependent Role="CategoryBridge">
+              <PropertyRef Name="IDCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CategoryB__IDPos__7B5B524B">
+          <End Type="KTXTDTUModelV3.Post" Role="Post" Multiplicity="1" />
+          <End Type="KTXTDTUModelV3.CategoryBridge" Role="CategoryBridge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="IDPost" />
+            </Principal>
+            <Dependent Role="CategoryBridge">
+              <PropertyRef Name="IDPost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Contract__IDPlac__3E52440B">
           <End Type="KTXTDTUModelV3.Place" Role="Place" Multiplicity="1" />
           <End Type="KTXTDTUModelV3.Contract" Role="Contract" Multiplicity="*" />
@@ -1172,10 +1219,6 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="CategoryBridge">
-          <End Type="KTXTDTUModelV3.Category" Role="Category" Multiplicity="*" />
-          <End Type="KTXTDTUModelV3.Post" Role="Post" Multiplicity="*" />
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1243,6 +1286,18 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
                 <ScalarProperty Name="ColorChip" ColumnName="ColorChip" />
                 <ScalarProperty Name="CategoryDetail" ColumnName="CategoryDetail" />
                 <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
+                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryBridges">
+            <EntityTypeMapping TypeName="KTXTDTUModelV3.CategoryBridge">
+              <MappingFragment StoreEntitySet="CategoryBridge">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDPost" ColumnName="IDPost" />
                 <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1422,14 +1477,6 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="CategoryBridge" TypeName="KTXTDTUModelV3.CategoryBridge" StoreEntitySet="CategoryBridge">
-            <EndProperty Name="Post">
-              <ScalarProperty Name="IDPost" ColumnName="IDPost" />
-            </EndProperty>
-            <EndProperty Name="Category">
-              <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
