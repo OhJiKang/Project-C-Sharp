@@ -224,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\AccountController.cs" />
+    <Compile Include="ApiControllers\AttendanceController.cs" />
     <Compile Include="ApiControllers\CategoryController.cs" />
     <Compile Include="ApiControllers\ContractController.cs" />
     <Compile Include="ApiControllers\FalcutiesController.cs" />
@@ -240,6 +241,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DTO\AccountDTO.cs" />
+    <Compile Include="Controllers\DTO\AttendanceDTO.cs" />
     <Compile Include="Controllers\DTO\CategoryDTO.cs" />
     <Compile Include="Controllers\DTO\ContractDTO.cs" />
     <Compile Include="Controllers\DTO\FeeDTO.cs" />
