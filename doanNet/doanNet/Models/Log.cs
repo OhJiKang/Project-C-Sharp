@@ -14,24 +14,17 @@ namespace doanNet.Models
     
     public partial class Log
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Log()
-        {
-            this.Fees = new HashSet<Fee>();
-        }
-    
         public int IDLog { get; set; }
+        public int IDFee { get; set; }
         public System.DateTime DateDone { get; set; }
         public int Quantity { get; set; }
         public int IDSinhVien { get; set; }
-        public string Note { get; set; }
         public Nullable<int> Order { get; set; }
         public string Meta { get; set; }
         public System.DateTime DateBegin { get; set; }
         public int Hide { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Fee> Fees { get; set; }
+        public virtual Fee Fee { get; set; }
         public virtual SinhVien SinhVien { get; set; }
     }
 }

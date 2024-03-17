@@ -57,7 +57,7 @@ CREATE TABLE SinhVien
 (
   IDSinhVien INT NOT NULL IDENTITY(1,1),
   FullName NVARCHAR(50) NOT NULL,
-  Address TEXT NOT NULL,
+  Address NTEXT NOT NULL,
   BirthDay DATE NOT NULL,
   AttendDate DATE NOT NULL,
   AttendYear INT NOT NULL,
@@ -66,6 +66,10 @@ CREATE TABLE SinhVien
   IDFalcuty INT NOT NULL,
   IDContract INT NOT NULL,
   IDRoom INT NOT NULL,
+  [Order] int,
+	[Meta] text,
+	DateBegin datetime NOT NULL,
+	Hide int NOT NULL,
   PRIMARY KEY (IDSinhVien),
   FOREIGN KEY (IDFalcuty) REFERENCES Faculty(IDFalcuty),
   FOREIGN KEY (IDContract) REFERENCES Contract(IDContract),
@@ -75,11 +79,17 @@ CREATE TABLE SinhVien
 CREATE TABLE Log
 (
   IDLog INT NOT NULL IDENTITY(1,1),
+  IDFee INT NOT NULL,
   DateDone DATETIME NOT NULL,
   Quantity INT NOT NULL,
   IDSinhVien INT NOT NULL,
+  [Order] int,
+	[Meta] text,
+	DateBegin datetime NOT NULL,
+	Hide int NOT NULL,
   PRIMARY KEY (IDLog),
-  FOREIGN KEY (IDSinhVien) REFERENCES SinhVien(IDSinhVien)
+  FOREIGN KEY (IDSinhVien) REFERENCES SinhVien(IDSinhVien),
+  FOREIGN KEY (IDFee) REFERENCES Fee(IDFee)
 );
 
 CREATE TABLE Account
@@ -90,6 +100,10 @@ CREATE TABLE Account
   Available BINARY NOT NULL,
   Name TEXT NOT NULL,
   IDSinhVien INT NOT NULL,
+   [Order] int,
+	[Meta] text,
+	DateBegin datetime NOT NULL,
+	Hide int NOT NULL,
   PRIMARY KEY (IDAccount),
   FOREIGN KEY (IDSinhVien) REFERENCES SinhVien(IDSinhVien)
 );
@@ -99,6 +113,10 @@ CREATE TABLE AccountType
   IDAccountType INT NOT NULL IDENTITY(1,1),
   TypeDescription TEXT NOT NULL,
   IDAccount INT NOT NULL,
+   [Order] int,
+	[Meta] text,
+	DateBegin datetime NOT NULL,
+	Hide int NOT NULL,
   PRIMARY KEY (IDAccountType),
   FOREIGN KEY (IDAccount) REFERENCES Account(IDAccount)
 );
@@ -106,32 +124,42 @@ CREATE TABLE AccountType
 CREATE TABLE Mistake
 (
   IDMistake INT NOT NULL IDENTITY(1,1),
-  MistakeDes TEXT NOT NULL,
+  MistakeDes NTEXT NOT NULL,
   TimeCaught DATETIME NOT NULL,
   BedID NVARCHAR(10) NOT NULL,
   IDSinhVien INT NOT NULL,
   IDAccount INT NOT NULL,
   IDRoom INT NOT NULL,
+  [Order] int,
+	[Meta] text,
+	DateBegin datetime NOT NULL,
+	Hide int NOT NULL,
   PRIMARY KEY (IDMistake),
   FOREIGN KEY (IDSinhVien) REFERENCES SinhVien(IDSinhVien),
   FOREIGN KEY (IDAccount) REFERENCES Account(IDAccount),
   FOREIGN KEY (IDRoom) REFERENCES Room(IDRoom)
 );
 
+drop table Fee
+GO
 CREATE TABLE Fee
 (
   IDFee INT NOT NULL IDENTITY(1,1),
-  Name TEXT NOT NULL,
+  Name NTEXT NOT NULL,
   Description TEXT NOT NULL,
   DateStart DATETIME NOT NULL,
   DateEnd DATETIME NOT NULL,
   Status BINARY NOT NULL,
+  Quantity INT NOT NULL,
   IDRoom INT NOT NULL,
-  IDLog INT NOT NULL,
+  [Order] int,
+	[Meta] text,
+	DateBegin datetime NOT NULL,
+	Hide int NOT NULL,
   PRIMARY KEY (IDFee),
   FOREIGN KEY (IDRoom) REFERENCES Room(IDRoom),
-  FOREIGN KEY (IDLog) REFERENCES Log(IDLog)
 );
+
 Create Table Post(
 	IDPost int identity Primary key,
 	PostTitle text NOT NULL,
@@ -167,7 +195,7 @@ Create Table CategoryBridge(
 Create Table Attendance(
 	IDAttendance int primary key identity,
 	IsAttend int NOT NULL,
-	Reason text,
+	Reason ntext,
 	[Order] int,
 	[Meta] text,
 	DateBegin datetime NOT NULL,
