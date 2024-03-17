@@ -140,13 +140,11 @@ CREATE TABLE Mistake
   FOREIGN KEY (IDRoom) REFERENCES Room(IDRoom)
 );
 
-drop table Fee
-GO
 CREATE TABLE Fee
 (
   IDFee INT NOT NULL IDENTITY(1,1),
   Name NTEXT NOT NULL,
-  Description TEXT NOT NULL,
+  Description NTEXT NOT NULL,
   DateStart DATETIME NOT NULL,
   DateEnd DATETIME NOT NULL,
   Status BINARY NOT NULL,

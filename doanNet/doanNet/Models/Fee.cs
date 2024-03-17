@@ -25,7 +25,7 @@ namespace doanNet.Models
         public string Description { get; set; }
         public System.DateTime DateStart { get; set; }
         public System.DateTime DateEnd { get; set; }
-        public byte[] Status { get; set; }
+        public int Status { get; set; }
         public int Quantity { get; set; }
         public int IDRoom { get; set; }
         public Nullable<int> Order { get; set; }

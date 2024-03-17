@@ -123,10 +123,10 @@
           </Key>
           <Property Name="IDFee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="ntext" Nullable="false" />
-          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="Description" Type="ntext" Nullable="false" />
           <Property Name="DateStart" Type="datetime" Nullable="false" />
           <Property Name="DateEnd" Type="datetime" Nullable="false" />
-          <Property Name="Status" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="IDRoom" Type="int" Nullable="false" />
           <Property Name="Order" Type="int" />
@@ -367,7 +367,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Fee__IDRoom__498EEC8D">
+        <Association Name="FK__Fee__IDRoom__57DD0BE4">
           <End Role="Room" Type="Self.Room" Multiplicity="1" />
           <End Role="Fee" Type="Self.Fee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -379,7 +379,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Log__IDFee__4D5F7D71">
+        <Association Name="FK__Log__IDFee__5BAD9CC8">
           <End Role="Fee" Type="Self.Fee" Multiplicity="1" />
           <End Role="Log" Type="Self.Log" Multiplicity="*" />
           <ReferentialConstraint>
@@ -391,7 +391,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Log__IDSinhVien__4C6B5938">
+        <Association Name="FK__Log__IDSinhVien__5AB9788F">
           <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
           <End Role="Log" Type="Self.Log" Multiplicity="*" />
           <ReferentialConstraint>
@@ -585,15 +585,15 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             <End Role="Priority" EntitySet="Priority" />
             <End Role="ContractBridge" EntitySet="ContractBridge" />
           </AssociationSet>
-          <AssociationSet Name="FK__Fee__IDRoom__498EEC8D" Association="Self.FK__Fee__IDRoom__498EEC8D">
+          <AssociationSet Name="FK__Fee__IDRoom__57DD0BE4" Association="Self.FK__Fee__IDRoom__57DD0BE4">
             <End Role="Room" EntitySet="Room" />
             <End Role="Fee" EntitySet="Fee" />
           </AssociationSet>
-          <AssociationSet Name="FK__Log__IDFee__4D5F7D71" Association="Self.FK__Log__IDFee__4D5F7D71">
+          <AssociationSet Name="FK__Log__IDFee__5BAD9CC8" Association="Self.FK__Log__IDFee__5BAD9CC8">
             <End Role="Fee" EntitySet="Fee" />
             <End Role="Log" EntitySet="Log" />
           </AssociationSet>
-          <AssociationSet Name="FK__Log__IDSinhVien__4C6B5938" Association="Self.FK__Log__IDSinhVien__4C6B5938">
+          <AssociationSet Name="FK__Log__IDSinhVien__5AB9788F" Association="Self.FK__Log__IDSinhVien__5AB9788F">
             <End Role="SinhVien" EntitySet="SinhVien" />
             <End Role="Log" EntitySet="Log" />
           </AssociationSet>
@@ -735,15 +735,15 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             <End Role="Faculty" EntitySet="Faculties" />
             <End Role="SinhVien" EntitySet="SinhViens" />
           </AssociationSet>
-          <AssociationSet Name="FK__Fee__IDRoom__498EEC8D" Association="KTXTDTUModelV3.FK__Fee__IDRoom__498EEC8D">
+          <AssociationSet Name="FK__Fee__IDRoom__57DD0BE4" Association="KTXTDTUModelV3.FK__Fee__IDRoom__57DD0BE4">
             <End Role="Room" EntitySet="Rooms" />
             <End Role="Fee" EntitySet="Fees" />
           </AssociationSet>
-          <AssociationSet Name="FK__Log__IDFee__4D5F7D71" Association="KTXTDTUModelV3.FK__Log__IDFee__4D5F7D71">
+          <AssociationSet Name="FK__Log__IDFee__5BAD9CC8" Association="KTXTDTUModelV3.FK__Log__IDFee__5BAD9CC8">
             <End Role="Fee" EntitySet="Fees" />
             <End Role="Log" EntitySet="Logs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Log__IDSinhVien__4C6B5938" Association="KTXTDTUModelV3.FK__Log__IDSinhVien__4C6B5938">
+          <AssociationSet Name="FK__Log__IDSinhVien__5AB9788F" Association="KTXTDTUModelV3.FK__Log__IDSinhVien__5AB9788F">
             <End Role="SinhVien" EntitySet="SinhViens" />
             <End Role="Log" EntitySet="Logs" />
           </AssociationSet>
@@ -759,7 +759,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             <End Role="Room" EntitySet="Rooms" />
             <End Role="SinhVien" EntitySet="SinhViens" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -908,18 +908,18 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           </Key>
           <Property Name="IDFee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Status" Type="Binary" Nullable="false" MaxLength="1" FixedLength="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="IDRoom" Type="Int32" Nullable="false" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Room" Relationship="KTXTDTUModelV3.FK__Fee__IDRoom__498EEC8D" FromRole="Fee" ToRole="Room" />
-          <NavigationProperty Name="Logs" Relationship="KTXTDTUModelV3.FK__Log__IDFee__4D5F7D71" FromRole="Fee" ToRole="Log" />
+          <NavigationProperty Name="Room" Relationship="KTXTDTUModelV3.FK__Fee__IDRoom__57DD0BE4" FromRole="Fee" ToRole="Room" />
+          <NavigationProperty Name="Logs" Relationship="KTXTDTUModelV3.FK__Log__IDFee__5BAD9CC8" FromRole="Fee" ToRole="Log" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -934,8 +934,8 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Fee" Relationship="KTXTDTUModelV3.FK__Log__IDFee__4D5F7D71" FromRole="Log" ToRole="Fee" />
-          <NavigationProperty Name="SinhVien" Relationship="KTXTDTUModelV3.FK__Log__IDSinhVien__4C6B5938" FromRole="Log" ToRole="SinhVien" />
+          <NavigationProperty Name="Fee" Relationship="KTXTDTUModelV3.FK__Log__IDFee__5BAD9CC8" FromRole="Log" ToRole="Fee" />
+          <NavigationProperty Name="SinhVien" Relationship="KTXTDTUModelV3.FK__Log__IDSinhVien__5AB9788F" FromRole="Log" ToRole="SinhVien" />
         </EntityType>
         <EntityType Name="Mistake">
           <Key>
@@ -1008,7 +1008,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Fees" Relationship="KTXTDTUModelV3.FK__Fee__IDRoom__498EEC8D" FromRole="Room" ToRole="Fee" />
+          <NavigationProperty Name="Fees" Relationship="KTXTDTUModelV3.FK__Fee__IDRoom__57DD0BE4" FromRole="Room" ToRole="Fee" />
           <NavigationProperty Name="Mistakes" Relationship="KTXTDTUModelV3.FK__Mistake__IDRoom__3C34F16F" FromRole="Room" ToRole="Mistake" />
           <NavigationProperty Name="SinhViens" Relationship="KTXTDTUModelV3.FK__SinhVien__IDRoom__1EA48E88" FromRole="Room" ToRole="SinhVien" />
         </EntityType>
@@ -1035,7 +1035,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <NavigationProperty Name="AttendanceBridges" Relationship="KTXTDTUModelV3.FK__Attendanc__IDSin__367C1819" FromRole="SinhVien" ToRole="AttendanceBridge" />
           <NavigationProperty Name="Contract" Relationship="KTXTDTUModelV3.FK__SinhVien__IDCont__1DB06A4F" FromRole="SinhVien" ToRole="Contract" />
           <NavigationProperty Name="Faculty" Relationship="KTXTDTUModelV3.FK__SinhVien__IDFalc__1CBC4616" FromRole="SinhVien" ToRole="Faculty" />
-          <NavigationProperty Name="Logs" Relationship="KTXTDTUModelV3.FK__Log__IDSinhVien__4C6B5938" FromRole="SinhVien" ToRole="Log" />
+          <NavigationProperty Name="Logs" Relationship="KTXTDTUModelV3.FK__Log__IDSinhVien__5AB9788F" FromRole="SinhVien" ToRole="Log" />
           <NavigationProperty Name="Mistakes" Relationship="KTXTDTUModelV3.FK__Mistake__IDSinhV__3A4CA8FD" FromRole="SinhVien" ToRole="Mistake" />
           <NavigationProperty Name="Room" Relationship="KTXTDTUModelV3.FK__SinhVien__IDRoom__1EA48E88" FromRole="SinhVien" ToRole="Room" />
         </EntityType>
@@ -1219,7 +1219,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Fee__IDRoom__498EEC8D">
+        <Association Name="FK__Fee__IDRoom__57DD0BE4">
           <End Type="KTXTDTUModelV3.Room" Role="Room" Multiplicity="1" />
           <End Type="KTXTDTUModelV3.Fee" Role="Fee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1231,7 +1231,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Log__IDFee__4D5F7D71">
+        <Association Name="FK__Log__IDFee__5BAD9CC8">
           <End Type="KTXTDTUModelV3.Fee" Role="Fee" Multiplicity="1" />
           <End Type="KTXTDTUModelV3.Log" Role="Log" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1243,7 +1243,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Log__IDSinhVien__4C6B5938">
+        <Association Name="FK__Log__IDSinhVien__5AB9788F">
           <End Type="KTXTDTUModelV3.SinhVien" Role="SinhVien" Multiplicity="1" />
           <End Type="KTXTDTUModelV3.Log" Role="Log" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1573,7 +1573,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
