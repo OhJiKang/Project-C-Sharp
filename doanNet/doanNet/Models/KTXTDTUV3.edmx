@@ -247,6 +247,16 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <Property Name="DateBegin" Type="datetime" Nullable="false" />
           <Property Name="Hide" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <Association Name="FK__Account__IDSinhV__245D67DE">
           <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
@@ -536,6 +546,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <EntitySet Name="Priority" EntityType="Self.Priority" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SinhVien" EntityType="Self.SinhVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Menu].[Order] AS [Order], 
@@ -678,6 +689,7 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <EntitySet Name="Priorities" EntityType="KTXTDTUModelV3.Priority" />
           <EntitySet Name="Rooms" EntityType="KTXTDTUModelV3.Room" />
           <EntitySet Name="SinhViens" EntityType="KTXTDTUModelV3.SinhVien" />
+          <EntitySet Name="sysdiagrams" EntityType="KTXTDTUModelV3.sysdiagram" />
           <EntitySet Name="Menus" EntityType="KTXTDTUModelV3.Menu" />
           <AssociationSet Name="FK__Account__IDSinhV__245D67DE" Association="KTXTDTUModelV3.FK__Account__IDSinhV__245D67DE">
             <End Role="SinhVien" EntitySet="SinhViens" />
@@ -1038,6 +1050,16 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
           <NavigationProperty Name="Logs" Relationship="KTXTDTUModelV3.FK__Log__IDSinhVien__5AB9788F" FromRole="SinhVien" ToRole="Log" />
           <NavigationProperty Name="Mistakes" Relationship="KTXTDTUModelV3.FK__Mistake__IDSinhV__3A4CA8FD" FromRole="SinhVien" ToRole="Mistake" />
           <NavigationProperty Name="Room" Relationship="KTXTDTUModelV3.FK__SinhVien__IDRoom__1EA48E88" FromRole="SinhVien" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -1559,6 +1581,17 @@ warning 6002: The table/view 'KTXTDTU.dbo.Menu' does not have a primary key defi
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KTXTDTUModelV3.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
