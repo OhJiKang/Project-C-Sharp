@@ -14,7 +14,7 @@ namespace doanNet.ApiControllers
 {
     public class AccountController : ApiController
     {
-        KTXTDTUEntities1 db = new KTXTDTUEntities1();
+        KTXTDTUEntities2 db = new KTXTDTUEntities2();
 
         public List<Account> GetAll()
         {

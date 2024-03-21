@@ -12,7 +12,7 @@ namespace doanNet.ApiControllers
 {
     public class PriorityController : ApiController
     {
-        KTXTDTUEntities1 db = new KTXTDTUEntities1();
+        KTXTDTUEntities2 db = new KTXTDTUEntities2();
         public List<Priority> Get()
         {
             return db.Priorities.ToList();

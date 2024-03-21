@@ -13,7 +13,7 @@ namespace doanNet.ApiControllers
 {
     public class MistakeController : ApiController
     {
-        KTXTDTUEntities1 db = new KTXTDTUEntities1();
+        KTXTDTUEntities2 db = new KTXTDTUEntities2();
 
         public List<Mistake> GetAll()
         {

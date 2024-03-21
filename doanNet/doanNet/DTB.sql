@@ -5,7 +5,7 @@
   Description NTEXT NOT NULL,
   [Order] int,
   [Meta] text,
-  DateBegin timedate NOT NULL,
+  DateBegin datetime NOT NULL,
   Hide int NOT NULL,
   PRIMARY KEY (IDFalcuty)
 );
@@ -14,13 +14,22 @@ CREATE TABLE Place
 (
   IDPlace NVARCHAR(10) NOT NULL,
   Description NTEXT NOT NULL,
+  [Order] int,
+  [Meta] text,
+  DateBegin datetime NOT NULL,
+  Hide int NOT NULL,
   PRIMARY KEY (IDPlace)
+
 );
 
 CREATE TABLE Priority
 (
   IDPriority INT NOT NULL,
   PriorityDescription INT NOT NULL,
+  [Order] int,
+  [Meta] text,
+  DateBegin datetime NOT NULL,
+  Hide int NOT NULL,
   PRIMARY KEY (IDPriority)
 );
 
@@ -31,6 +40,10 @@ CREATE TABLE Room
   Floor INT NOT NULL,
   Building VARCHAR(10) NOT NULL,
   RoomType INT NOT NULL,
+  [Order] int,
+  [Meta] text,
+  DateBegin datetime NOT NULL,
+  Hide int NOT NULL,
 );
 
 CREATE TABLE Contract
@@ -40,6 +53,10 @@ CREATE TABLE Contract
   IDCitizen NVARCHAR(20) NOT NULL,
   ProfilePlace BINARY NOT NULL,
   IDPlace NVARCHAR(10) NOT NULL,
+  [Order] int,
+  [Meta] text,
+  DateBegin datetime NOT NULL,
+  Hide int NOT NULL,
   PRIMARY KEY (IDContract),
   FOREIGN KEY (IDPlace) REFERENCES Place(IDPlace)
 );
@@ -48,6 +65,10 @@ CREATE TABLE ContractBridge
 (
   IDContract INT NOT NULL,
   IDPriority INT NOT NULL,
+  [Order] int,
+  [Meta] text,
+  DateBegin datetime NOT NULL,
+  Hide int NOT NULL,
   PRIMARY KEY (IDContract, IDPriority),
   FOREIGN KEY (IDContract) REFERENCES Contract(IDContract),
   FOREIGN KEY (IDPriority) REFERENCES Priority(IDPriority)
@@ -76,21 +97,6 @@ CREATE TABLE SinhVien
   FOREIGN KEY (IDRoom) REFERENCES Room(IDRoom)
 );
 
-CREATE TABLE Log
-(
-  IDLog INT NOT NULL IDENTITY(1,1),
-  IDFee INT NOT NULL,
-  DateDone DATETIME NOT NULL,
-  Quantity INT NOT NULL,
-  IDSinhVien INT NOT NULL,
-  [Order] int,
-	[Meta] text,
-	DateBegin datetime NOT NULL,
-	Hide int NOT NULL,
-  PRIMARY KEY (IDLog),
-  FOREIGN KEY (IDSinhVien) REFERENCES SinhVien(IDSinhVien),
-  FOREIGN KEY (IDFee) REFERENCES Fee(IDFee)
-);
 
 CREATE TABLE Account
 (
@@ -140,6 +146,7 @@ CREATE TABLE Mistake
   FOREIGN KEY (IDRoom) REFERENCES Room(IDRoom)
 );
 
+
 CREATE TABLE Fee
 (
   IDFee INT NOT NULL IDENTITY(1,1),
@@ -147,7 +154,7 @@ CREATE TABLE Fee
   Description NTEXT NOT NULL,
   DateStart DATETIME NOT NULL,
   DateEnd DATETIME NOT NULL,
-  Status BINARY NOT NULL,
+  Status int NOT NULL,
   Quantity INT NOT NULL,
   IDRoom INT NOT NULL,
   [Order] int,
@@ -208,6 +215,22 @@ Create Table AttendanceBridge(
 	FOREIGN KEY (IDSinhVien) REFERENCES SinhVien(IDSinhVien),
 	FOREIGN KEY (IDAccount) REFERENCES Account(IDAccount),
 )
+CREATE TABLE Log
+(
+  IDLog INT NOT NULL IDENTITY(1,1),
+  IDFee INT NOT NULL,
+  DateDone DATETIME NOT NULL,
+  Quantity INT NOT NULL,
+  IDSinhVien INT NOT NULL,
+  [Order] int,
+	[Meta] text,
+	DateBegin datetime NOT NULL,
+	Hide int NOT NULL,
+  PRIMARY KEY (IDLog),
+  FOREIGN KEY (IDSinhVien) REFERENCES SinhVien(IDSinhVien),
+  FOREIGN KEY (IDFee) REFERENCES Fee(IDFee)
+);
+
 -----Data-----
 USE [KTXTDTU]
 GO

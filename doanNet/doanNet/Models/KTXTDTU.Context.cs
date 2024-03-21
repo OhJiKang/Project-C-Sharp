@@ -13,10 +13,10 @@ namespace doanNet.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class KTXTDTUEntities1 : DbContext
+    public partial class KTXTDTUEntities2 : DbContext
     {
-        public KTXTDTUEntities1()
-            : base("name=KTXTDTUEntities1")
+        public KTXTDTUEntities2()
+            : base("name=KTXTDTUEntities2")
         {
         }
     
@@ -27,22 +27,20 @@ namespace doanNet.Models
     
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountType> AccountTypes { get; set; }
+        public virtual DbSet<Attendance> Attendances { get; set; }
+        public virtual DbSet<AttendanceBridge> AttendanceBridges { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<CategoryBridge> CategoryBridges { get; set; }
         public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<ContractBridge> ContractBridges { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<CategoryBridge> CategoryBridges { get; set; }
-        public virtual DbSet<Attendance> Attendances { get; set; }
-        public virtual DbSet<Post> Posts { get; set; }
-
-        public virtual DbSet<AttendanceBridge> AttendanceBridges { get; set; }
         public virtual DbSet<Fee> Fees { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<Mistake> Mistakes { get; set; }
         public virtual DbSet<Place> Places { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Priority> Priorities { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<SinhVien> SinhViens { get; set; }
-        public virtual DbSet<Menu> Menus { get; set; }
     }
 }

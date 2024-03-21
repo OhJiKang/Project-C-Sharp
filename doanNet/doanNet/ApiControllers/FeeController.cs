@@ -13,7 +13,7 @@ namespace doanNet.ApiControllers
 {
     public class FeeController : ApiController
     {
-        KTXTDTUEntities1 db = new KTXTDTUEntities1();
+        KTXTDTUEntities2 db = new KTXTDTUEntities2();
 
         public List<Fee> GetAll(int? page)
         {

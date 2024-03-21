@@ -13,7 +13,7 @@ namespace doanNet.ApiControllers
 {
     public class LogController : ApiController
     {
-        KTXTDTUEntities1 db = new KTXTDTUEntities1();
+        KTXTDTUEntities2 db = new KTXTDTUEntities2();
 
         public List<Log> GetAll(int? page)
         {

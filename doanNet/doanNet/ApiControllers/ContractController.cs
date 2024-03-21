@@ -16,7 +16,7 @@ namespace doanNet.ApiControllers
 {
     public class ContractController : ApiController
     {
-        KTXTDTUEntities1 db = new KTXTDTUEntities1();
+        KTXTDTUEntities2 db = new KTXTDTUEntities2();
 
         public List<Contract> GetAll()
         {

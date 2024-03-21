@@ -17,6 +17,10 @@ namespace doanNet.Models
         public int IDAttendance { get; set; }
         public int IDSinhVien { get; set; }
         public int IDAccount { get; set; }
+        public Nullable<int> Order { get; set; }
+        public string Meta { get; set; }
+        public System.DateTime DateBegin { get; set; }
+        public int Hide { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Attendance Attendance { get; set; }

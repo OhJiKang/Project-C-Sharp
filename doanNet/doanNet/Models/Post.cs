@@ -21,13 +21,13 @@ namespace doanNet.Models
         }
     
         public int IDPost { get; set; }
+        public string PostTitle { get; set; }
+        public string PostDetail { get; set; }
+        public Nullable<int> IDAccount { get; set; }
         public Nullable<int> Order { get; set; }
         public string Meta { get; set; }
         public System.DateTime DateBegin { get; set; }
         public int Hide { get; set; }
-        public Nullable<int> IDAccount { get; set; }
-        public string PostDetails { get; set; }
-        public string PostTitles { get; set; }
     
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

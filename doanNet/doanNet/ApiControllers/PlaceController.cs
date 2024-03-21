@@ -10,7 +10,7 @@ namespace doanNet.ApiControllers
 {
     public class PlaceController : ApiController
     {
-        KTXTDTUEntities1 db = new KTXTDTUEntities1();
+        KTXTDTUEntities2 db = new KTXTDTUEntities2();
         public List<Place> Get()
         {
             return db.Places.ToList();
