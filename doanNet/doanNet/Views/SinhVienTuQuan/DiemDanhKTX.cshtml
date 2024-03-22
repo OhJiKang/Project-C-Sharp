@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "DiemDanhKTX";
+    Layout = "~/Views/Shared/layoutteacher.cshtml";
+}
+<style>
+    .select-container {
+        position: relative;
+        text-align: right;
+    }
+
+    .select-container select {
+        position: absolute;
+        right: 0;
+    }
+    .content {
+        display: flex;
+        align-items: center;
+    }
+
+    h8, p {
+        margin: 0;
+    }
+    .container-fluid {
+        position: relative;
+    }
+    .fa-solid.fa-arrow-right {
+      margin-left: auto;
+    }
+</style>
+<h6 style="font-weight: bold">ĐIỂM DANH KÝ TÚC XÁ</h6>
+<div class="select-container">
+    <select name="tang" id="tang">
+        <option value="0">Tầng</option>
+        <option value="1">Tầng 1</option>
+    </select>
+</div>
+<div class="container-fluid" style="padding-top: 40px">s
+    <div class="content" style="border: 2px solid black; padding: 10px">
+        <input type="checkbox" style="padding: 20px" />
+        <h8 style="font-weight: bold; padding: 20px;">L111</h8>
+        <p style="background-color: blue; color: white; width: 35px; padding: 5px; margin: 0;">7/8</p>
+        <i class="fa-solid fa-arrow-right"></i>   
+    </div>
+
+</div>

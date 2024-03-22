@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace doanNet.Controllers
 {
-    public class TeacherController : Controller
+    public class GiaoVienController : Controller
     {
         // GET: Teacher
         public ActionResult Mistake()
@@ -21,7 +21,7 @@ namespace doanNet.Controllers
         {
             return View();
         }
-        public ActionResult AddingPost()
+        public ActionResult ThemBaiViet()
         {
             return View();
         }
@@ -34,6 +34,22 @@ namespace doanNet.Controllers
             return View();
         }
         public ActionResult QuanLyMenu()
+        {
+            return View();
+        }
+        public ActionResult DanhSachHopDong()
+        {
+            return View();
+        }
+        public ActionResult GhiLoiKTX()
+        {
+            return View();
+        }
+        public ActionResult QuanLySinhVien()
+        {
+            return View();
+        }
+        public ActionResult DanhSachHoaDonDienNuoc()
         {
             return View();
         }

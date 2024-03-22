@@ -11,7 +11,7 @@ namespace doanNet.Controllers
     public class MenuController : Controller
     {
         // GET: Menu
-       KTXTDTUEntities1 _db = new KTXTDTUEntities1();
+       KTXTDTUEntities2 _db = new KTXTDTUEntities2();
 
         public ActionResult GenerateMenu()
         {

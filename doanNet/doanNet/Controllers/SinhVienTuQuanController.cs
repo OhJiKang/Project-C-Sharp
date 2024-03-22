@@ -21,5 +21,9 @@ namespace doanNet.Controllers
         {
             return View();
         }
+        public ActionResult DiemDanhKTX()
+        {
+            return View();
+        }
     }
 }

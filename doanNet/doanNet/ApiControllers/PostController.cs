@@ -32,8 +32,8 @@ namespace doanNet.ApiControllers
             try
             {
                 var tempPost = new Post();
-                tempPost.PostTitles = Post.PostTittle;
-                tempPost.PostDetails = Post.PostDetail;
+                tempPost.PostTitle = Post.PostTittle;
+                tempPost.PostDetail = Post.PostDetail;
                 tempPost.DateBegin=DateTime.Now;
                 tempPost.Hide = 0;
 
@@ -82,8 +82,8 @@ namespace doanNet.ApiControllers
             try
             {
                 var Postmodifier = db.Posts.Where(row => row.IDPost == id).FirstOrDefault();
-                Postmodifier.PostTitles = Post.PostTittle;
-                Postmodifier.PostDetails = Post.PostDetail;
+                Postmodifier.PostTitle = Post.PostTittle;
+                Postmodifier.PostDetail = Post.PostDetail;
                 Postmodifier.DateBegin = DateTime.Now;
                 Postmodifier.IDAccount = Post.IDAccount;
                 var oldCategories = db.CategoryBridges.Where(row => row.IDPost == id).ToList();
