@@ -53,5 +53,9 @@ namespace doanNet.Controllers
         {
             return View();
         }
+        public ActionResult QuanLyPhong()
+        {
+            return View();
+        }
     }
 }

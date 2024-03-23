@@ -293,6 +293,11 @@
       <DependentUpon>KTXTDTU.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KTXTDTU.Context.cs" />
+    <Compile Include="Models\KTXTDTU.Context1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KTXTDTU.Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\KTXTDTU.cs" />
     <Compile Include="Models\KTXTDTU.Designer.cs">
       <DependentUpon>KTXTDTU.cs</DependentUpon>
@@ -389,6 +394,7 @@
     <Content Include="Views\GiaoVien\GhiLoiKTX.cshtml" />
     <Content Include="Views\GiaoVien\QuanLySinhVien.cshtml" />
     <Content Include="Views\GiaoVien\DanhSachHoaDonDienNuoc.cshtml" />
+    <Content Include="Views\GiaoVien\QuanLyPhong.cshtml" />
     <None Include="Views\Shared\layoutteacher.cshtml" />
     <Content Include="Views\GiaoVien\Mistake.cshtml" />
     <Content Include="Views\GiaoVien\Post.cshtml" />

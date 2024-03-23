@@ -1,0 +1,376 @@
+﻿
+@{
+    ViewBag.Title = "QuanLyPhong";
+    Layout = "~/Views/Shared/layoutteacher.cshtml";
+}
+
+
+<style>
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1050;
+        overflow: hidden;
+        outline: 0;
+    }
+
+    .modal-dialog {
+        position: relative;
+        width: auto;
+        max-width: 80%; /* Đặt độ rộng tối đa */
+        margin: 1.75rem auto;
+    }
+
+    .modal-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: .3rem;
+        outline: 0;
+    }
+
+    .modal-open {
+        overflow: hidden;
+    }
+
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1040;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.5);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body, input {
+        color: #171717;
+    }
+
+    body, .search-bar {
+        display: flex;
+    }
+
+        .search-bar input,
+        .search-btn,
+        .search-btn:before,
+        .search-btn:after {
+            transition: all 0.25s ease-out;
+        }
+
+        .search-bar input,
+        .search-btn {
+            width: 3em;
+            height: 3em;
+        }
+
+            .search-bar input:invalid:not(:focus),
+            .search-btn {
+                cursor: pointer;
+            }
+
+            .search-bar,
+            .search-bar input:focus,
+            .search-bar input:valid {
+                width: 100%;
+            }
+
+                .search-bar input:focus,
+                .search-bar input:not(:focus) + .search-btn:focus {
+                    outline: transparent;
+                }
+
+    .search-bar {
+        margin: auto;
+        padding: 1.5em;
+        justify-content: center;
+        max-width: 30em;
+    }
+
+        .search-bar input {
+            background: transparent;
+            border-radius: 1.5em;
+            box-shadow: 0 0 0 0.4em #171717 inset;
+            padding: 0.75em;
+            transform: translate(0.5em,0.5em) scale(0.5);
+            transform-origin: 100% 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+            .search-bar input::-webkit-search-decoration {
+                -webkit-appearance: none;
+            }
+
+            .search-bar input:focus,
+            .search-bar input:valid {
+                background: #fff;
+                border-radius: 0.375em 0 0 0.375em;
+                box-shadow: 0 0 0 0.1em #d9d9d9 inset;
+                transform: scale(1);
+            }
+
+    .search-btn {
+        background: #171717;
+        border-radius: 0 0.75em 0.75em 0 / 0 1.5em 1.5em 0;
+        padding: 0.75em;
+        position: relative;
+        transform: translate(0.25em,0.25em) rotate(45deg) scale(0.25,0.125);
+        transform-origin: 0 50%;
+    }
+
+        .search-btn:before,
+        .search-btn:after {
+            content: "";
+            display: block;
+            opacity: 0;
+            position: absolute;
+        }
+
+        .search-btn:before {
+            border-radius: 50%;
+            box-shadow: 0 0 0 0.2em #f1f1f1 inset;
+            top: 0.75em;
+            left: 0.75em;
+            width: 1.2em;
+            height: 1.2em;
+        }
+
+        .search-btn:after {
+            background: #f1f1f1;
+            border-radius: 0 0.25em 0.25em 0;
+            top: 51%;
+            left: 51%;
+            width: 0.75em;
+            height: 0.25em;
+            transform: translate(0.2em,0) rotate(45deg);
+            transform-origin: 0 50%;
+        }
+
+        .search-btn span {
+            display: inline-block;
+            overflow: hidden;
+            width: 1px;
+            height: 1px;
+        }
+
+    /* Active state */
+    .search-bar input:focus + .search-btn,
+    .search-bar input:valid + .search-btn {
+        background: #2762f3;
+        border-radius: 0 0.375em 0.375em 0;
+        transform: scale(1);
+    }
+
+        .search-bar input:focus + .search-btn:before,
+        .search-bar input:focus + .search-btn:after,
+        .search-bar input:valid + .search-btn:before,
+        .search-bar input:valid + .search-btn:after {
+            opacity: 1;
+        }
+
+        .search-bar input:focus + .search-btn:hover,
+        .search-bar input:valid + .search-btn:hover,
+        .search-bar input:valid:not(:focus) + .search-btn:focus {
+            background: #0c48db;
+        }
+
+        .search-bar input:focus + .search-btn:active,
+        .search-bar input:valid + .search-btn:active {
+            transform: translateY(1px);
+        }
+
+    @@media screen and (prefers-color-scheme: dark) {
+        body, input {
+            color: #f1f1f1;
+        }
+
+        body {
+            background: #171717;
+        }
+
+        .search-bar input {
+            box-shadow: 0 0 0 0.4em #f1f1f1 inset;
+        }
+
+            .search-bar input:focus,
+            .search-bar input:valid {
+                background: #3d3d3d;
+                box-shadow: 0 0 0 0.1em #3d3d3d inset;
+            }
+
+        .search-btn {
+            background: #f1f1f1;
+        }
+    }
+</style>
+<div class="container">
+
+    <div class="col-12 text-center" style="padding:20px">
+        <h2 style="font-weight: bold">QUẢN LÝ PHÒNG</h2>
+    </div>
+    <form action="" class="search-bar">
+        <input type="search" name="search" pattern=".*\S.*" required>
+        <button class="search-btn" type="submit">
+            <span>Search</span>
+        </button>
+    </form>
+    <div class="row">
+        <div class="function_btn"
+             style=" display: flex;justify-content: end; margin-top: 8px; margin-bottom: 8px; margin-right: 32px;">
+            <div class="add_btn" style="margin: 10px">
+                <!-- Colored mini FAB button -->
+                <button onclick="showModal()"
+                        class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
+                        style="background-color: #35d66c">
+                    <i class="fa-solid fa-plus" style="margin: 10px"></i>
+                </button>
+            </div>
+            <script>
+                function showModal() {
+                    var myModal = new bootstrap.Modal(document.getElementById('ThemPhong'));
+                    myModal.show();
+                }
+
+            </script>
+        </div>
+        <div class="modal fade" id="ThemPhong" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row align-items-center pt-4 pb-3">
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">ID Phòng</h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <input type="text" class="form-control" disabled/>
+                            </div>
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">Họ và tên Sinh viên</h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <input type="text" class="form-control" />
+                            </div>
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">Địa chỉ</h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <input type="text" class="form-control" />
+                            </div>
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">Ngày sinh</h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <input type="date" class="form-control" />
+                            </div>
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">Thời gian vào KTX</h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <input type="date" class="form-control" />
+                            </div>
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">Năm học</h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="year1" class="form-label"></label>
+                                        <input type="number" class="form-control" id="year1" placeholder="YYYY" min="1900" max="2099" step="1">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="year2" class="form-label"></label>
+                                        <input type="number" class="form-control" id="year2" placeholder="YYYY" min="1900" max="2099" step="1">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">Khoa</h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <select name="khoa" id="khoa" style="width: 100%">
+                                    <option value="cntt">Công nghệ thông tin</option>
+                                    <option value="nna">Ngôn ngữ Anh</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">Mã số hợp đồng</h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <select name="hd" id="hd" style="width: 100%">
+                                    <option value="1111">1111</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">Mã phòng</h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <select name="phong" id="phong" style="width: 100%">
+                                    <option value="l01">L01</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-primary">Thêm phòng</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID phòng</th>
+                        <th scope="col">Tên phòng</th>
+                        <th scope="col">Tầng</th>
+                        <th scope="col">Tòa</th>
+                        <th scope="col">Loại phòng</th>
+                        <th scope="col">Giá phòng</th>
+                      
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

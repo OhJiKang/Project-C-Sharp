@@ -4,15 +4,66 @@
     Layout = "~/Views/Shared/layoutteacher.cshtml";
 }
 <style>
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1050;
+        overflow: hidden;
+        outline: 0;
+    }
+
+    .modal-dialog {
+        position: relative;
+        width: auto;
+        max-width: 80%; /* Đặt độ rộng tối đa */
+        margin: 1.75rem auto;
+    }
+
+    .modal-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: .3rem;
+        outline: 0;
+    }
+
+    .modal-open {
+        overflow: hidden;
+    }
+
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1040;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.5);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     .select-container {
         position: relative;
         text-align: right;
     }
 
-    .select-container select {
-        position: absolute;
-        right: 0;
-    }
+        .select-container select {
+            position: absolute;
+            right: 0;
+        }
+
     .content {
         display: flex;
         align-items: center;
@@ -21,11 +72,13 @@
     h8, p {
         margin: 0;
     }
+
     .container-fluid {
         position: relative;
     }
+
     .fa-solid.fa-arrow-right {
-      margin-left: auto;
+        margin-left: auto;
     }
 </style>
 <h6 style="font-weight: bold">ĐIỂM DANH KÝ TÚC XÁ</h6>
@@ -35,12 +88,71 @@
         <option value="1">Tầng 1</option>
     </select>
 </div>
-<div class="container-fluid" style="padding-top: 40px">s
-    <div class="content" style="border: 2px solid black; padding: 10px">
+<div class="container-fluid" style="padding-top: 40px">
+    <div class="content" style="border: 2px solid black; padding: 10px; cursor: pointer" onclick="showModal()">
         <input type="checkbox" style="padding: 20px" />
         <h8 style="font-weight: bold; padding: 20px;">L111</h8>
         <p style="background-color: blue; color: white; width: 35px; padding: 5px; margin: 0;">7/8</p>
-        <i class="fa-solid fa-arrow-right"></i>   
+        <i class="fa-solid fa-arrow-right"></i>
     </div>
+    <script>
+        function showModal() {
+            var myModal = new bootstrap.Modal(document.getElementById('ThemSinhVien'));
+            myModal.show();
+        }
 
+    </script>
+    <div class="modal fade" id="ThemSinhVien" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="padding: 40px">
+                    <h6 style="text-align: center; font-weight: bold; padding-bottom: 20px">Điêm danh phòng - L111</h6>
+                    <div class="row align-items-center pt-4 pb-3">
+                        <div class="row" style="background-color: #c6f9d7; padding: 10px">
+                            <div class="col-md-6 ps-5">
+                                <h6 class="mb-0 font-weight-bold">Nguyễn Trần Phúc Bảo Long</h6>
+                            </div>
+                            <div class="col-md-6 pe-5">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="showReasonInput()">
+                                    <label class="form-check-label" for="inlineRadio1">Không phép</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="hideReasonInput()">
+                                    <label class="form-check-label" for="inlineRadio2">Có phép</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="reasonInput" style="background-color:white; text-align: center; font: 12px; color: grey">
+                            <div class="col-md-3 ps-5 d-flex justify-content-center align-items-center">
+                                <label for="reason">Lý do vắng</label>
+                            </div>
+                            <div class="col-md-9 pe-5">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="reason" placeholder="Nhập lý do vắng" style="border: none; border-bottom: 1px solid gray;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                       
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </div>
+
+        </div>
+        <script>
+            function showReasonInput() {
+                document.getElementById('reasonInput').style.display = 'flex';
+            }
+
+            function hideReasonInput() {
+                document.getElementById('reasonInput').style.display = 'none';
+            }
+        </script>
+    </div>
 </div>
