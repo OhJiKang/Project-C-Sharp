@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "QuanLyDon";
-    Layout = "~/Views/Shared/layout2.cshtml";
+    Layout = "~/Views/Shared/layoutteacher.cshtml";
 }
 <style>
     .modal {
@@ -218,7 +218,7 @@
 
 <div class="container">
     <div class="d-flex justify-content-end mb-3" style="padding: 20px;">
-        <button style="background-color: darkblue; color: white" onclick="showModal()">
+        <button style="background-color: darkblue; color: white; padding-right: 20px" onclick="showModal()">
             <i class="fa-solid fa-plus" style="padding: 10px;"></i> Tạo menu mới
         </button>
 
@@ -238,99 +238,38 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
                     <div class="row align-items-center pt-4 pb-3">
                         <div class="col-md-4 ps-5">
-
-                            <h6 class="mb-0 font-weight-bold">Tiêu đề</h6>
-
+                            <h6 class="mb-0 font-weight-bold">Mã Menu</h6>
                         </div>
                         <div class="col-md-8 pe-5">
-
-                            <textarea class="form-control" aria-label="With textarea"></textarea>
-
+                            <input type="text" class="form-control" disabled />
                         </div>
-                    </div>
-
-                    <hr class="mx-n3">
-
-                    <div class="row align-items-center py-3">
-                        <div class="col-md-3 ps-5">
-
-                            <h6 class="mb-0 font-weight-bold">Nội dung</h6>
-
-                        </div>
-                        <div class="col-md-9 pe-5">
-
-                            <textarea class="form-control" aria-label="With textarea"></textarea>
-
-                        </div>
-                    </div>
-
-                    <hr class="mx-n3">
-
-                    <div class="row align-items-center py-3">
                         <div class="col-md-4 ps-5">
-
-                            <h6 class="mb-0 ">Hình ảnh</h6>
-
+                            <h6 class="mb-0 font-weight-bold">Link</h6>
                         </div>
                         <div class="col-md-8 pe-5">
-
-                            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-                            <main class="main_full">
-                                <div class="container">
-                                    <div class="panel">
-                                        <div class="button_outer">
-                                            <div class="btn_upload">
-                                                <input type="file" id="uploadFiles" name="images" multiple accept="image/*">
-                                                Upload Image
-                                            </div>
-                                            <div class="processing_bar"></div>
-                                            <div class="success_box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="error_msg"></div>
-                                    <div class="uploaded_file_view" id="uploaded_view">
-                                        <span class="file_remove">X</span>
-                                    </div>
-                                </div>
-                            </main>
-                            <script>
-                                var btnUpload = $("#upload_file"),
-                                    btnOuter = $(".button_outer");
-                                btnUpload.on("change", function (e) {
-                                    var ext = btnUpload.val().split('.').pop().toLowerCase();
-                                    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
-                                        $(".error_msg").text("Not an Image...");
-                                    } else {
-                                        $(".error_msg").text("");
-                                        btnOuter.addClass("file_uploading");
-                                        setTimeout(function () {
-                                            btnOuter.addClass("file_uploaded");
-                                        }, 3000);
-                                        var uploadedFile = URL.createObjectURL(e.target.files[0]);
-                                        setTimeout(function () {
-                                            $("#uploaded_view").append('<img src="' + uploadedFile + '" />').addClass("show");
-                                        }, 3500);
-                                    }
-                                });
-                                $(".file_remove").on("click", function (e) {
-                                    $("#uploaded_view").removeClass("show");
-                                    $("#uploaded_view").find("img").remove();
-                                    btnOuter.removeClass("file_uploading");
-                                    btnOuter.removeClass("file_uploaded");
-                                });
-                            </script>
-
+                            <input type="text" class="form-control" />
                         </div>
+                        <div class="col-md-4 ps-5">
+                            <h6 class="mb-0 font-weight-bold">Tiêu đề</h6>
+                        </div>
+                        <div class="col-md-8 pe-5">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="col-md-4 ps-5">
+                            <h6 class="mb-0 font-weight-bold">Ngày tạo</h6>
+                        </div>
+                        <div class="col-md-8 pe-5">
+                            <input type="text" class="form-control" disabled />
+                        </div>
+                       </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-primary">Tạo menu</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary">Tạo đơn</button>
-                </div>
-            </div>
 
         </div>
     </div>
@@ -338,26 +277,22 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Mã đơn</th>
+                    <th scope="col">Mã menu</th>
+                    <th scope="col">Link</th>
                     <th scope="col">Tiêu đề</th>
-                    <th scope="col">Nội dung</th>
-                    <th scope="col">Ngày tạo đơn</th>
-                    <th scope="col">Số đơn trả lời</th>
-                    <th scope="col">Chi tiết</th>
+                    <th scope="col">Ngày tạo</th>
+                    <th scope="col">Ẩn/hiện</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th>12341234</th>
-                    <td>Đăng ký Ký túc xá</td>
-                    <td>Nội dung</td>
-                    <td>05/05/2002 14:06:00</td>
-                    <td>Số đơn trả lời</td>
-                    <td>
-                        <button class="btn btn-primary" style="color: white">
-                            <i class="fa-regular fa-comment" style="padding: 5px"></i> Chat
-                        </button>
-                    </td>
+                    <th></th>
+                    <td></td>
+                    <td><td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
 
                 </tr>
 

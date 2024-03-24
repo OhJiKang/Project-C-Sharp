@@ -49,11 +49,20 @@ namespace doanNet.Controllers
         {
             return View();
         }
-        public ActionResult DanhSachHoaDonDienNuoc()
+
+        public ActionResult DanhSachHoaDon()
+        {
+            return View();
+        }
+        public ActionResult DanhSachHoaDonTheoThang()
         {
             return View();
         }
         public ActionResult QuanLyPhong()
+        {
+            return View();
+        }
+        public ActionResult QuanLyTaiKhoan()
         {
             return View();
         }

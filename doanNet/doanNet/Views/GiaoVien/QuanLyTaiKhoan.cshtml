@@ -1,9 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "QuanLyPhong";
+    ViewBag.Title = "QuanLyTaiKhoan";
     Layout = "~/Views/Shared/layoutteacher.cshtml";
 }
-
 
 <style>
 
@@ -56,7 +55,6 @@
         padding: 0;
         box-sizing: border-box;
     }
-
     body, input {
         color: #171717;
     }
@@ -222,128 +220,37 @@
 <div class="container">
 
     <div class="col-12 text-center" style="padding:20px">
-        <h2 style="font-weight: bold">QUẢN LÝ PHÒNG</h2>
+        <h2 style="font-weight: bold">QUẢN LÝ TÀI KHOẢN</h2>
     </div>
     <form action="" class="search-bar">
         <input type="search" name="search" pattern=".*\S.*" required>
         <button class="search-btn" type="submit">
             <span>Search</span>
         </button>
-    </form>
+    </form>  
     <div class="row">
-        <div class="function_btn"
-             style=" display: flex;justify-content: end; margin-top: 8px; margin-bottom: 8px; margin-right: 32px;">
-            <div class="add_btn" style="margin: 10px">
-                <!-- Colored mini FAB button -->
-                <button onclick="showModal()"
-                        class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
-                        style="background-color: #35d66c">
-                    <i class="fa-solid fa-plus" style="margin: 10px"></i>
-                </button>
-            </div>
-            <script>
-                function showModal() {
-                    var myModal = new bootstrap.Modal(document.getElementById('ThemPhong'));
-                    myModal.show();
-                }
+        <table class="table" style="text-align: center">
+            <thead>
+                <tr>
+                    <th scope="col">Tên đăng nhập</th>
+                    <th scope="col">Mật khẩu</th>
+                    <th scope="col">MSSV</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Khóa</th>
+                    <th scope="col">Sinh viên tự quản</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>52100099</th>
+                    <td>nhquynh12</td>
+                    <td>52100099</td>
+                    <td>dd</td>
+                    <td><input type="checkbox" /></td>
+                    <td><input type="checkbox" /></td>
 
-            </script>
-        </div>
-        <div class="modal fade" id="ThemPhong" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="row align-items-center pt-4 pb-3">
-                            <div class="col-md-4 ps-5">
-                                <h6 class="mb-0 font-weight-bold">ID Phòng</h6>
-                            </div>
-                            <div class="col-md-8 pe-5">
-                                <input type="text" class="form-control" disabled />
-                            </div>
-                            <div class="col-md-4 ps-5">
-                                <h6 class="mb-0 font-weight-bold">Tên phòng</h6>
-                            </div>
-                            <div class="col-md-8 pe-5">
-                                <input type="text" class="form-control" />
-                            </div>
-                            <div class="col-md-4 ps-5">
-                                <h6 class="mb-0 font-weight-bold">Tầng</h6>
-                            </div>
-                            <div class="col-md-8 pe-5">
-                                <select name="khoa" id="khoa" style="width: 100%">
-                                    <option value="1">Tầng 1</option>
-                                    <option value="2">Tầng 2</option>
-                                    <option value="3">Tầng 3</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4 ps-5">
-                                <h6 class="mb-0 font-weight-bold">Tòa</h6>
-                            </div>
-                            <div class="col-md-8 pe-5">
-                                <select name="hd" id="hd" style="width: 100%">
-                                    <option value="1">L</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4 ps-5">
-                                <h6 class="mb-0 font-weight-bold">Loại phòng</h6>
-                            </div>
-                            <div class="col-md-8 pe-5">
-                                <select name="phong" id="phong" style="width: 100%">
-                                    <option value="6">6 người</option>
-                                    <option value="8">8 người</option>
-                                </select>
-
-                            </div>
-                            <div class="col-md-4 ps-5">
-                                <h6 class="mb-0 font-weight-bold">Giá phòng</h6>
-                            </div>
-                            <div class="col-md-8 pe-5">
-                                <input type="text" class="form-control" placeholder="VNĐ" disabled/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-primary">Thêm phòng</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-        <div class="row">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">ID phòng</th>
-                        <th scope="col">Tên phòng</th>
-                        <th scope="col">Tầng</th>
-                        <th scope="col">Tòa</th>
-                        <th scope="col">Loại phòng</th>
-                        <th scope="col">Giá phòng</th>
-                      
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
-
-
-

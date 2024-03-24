@@ -53,5 +53,9 @@ namespace doanNet.Controllers
         {
             return View();
         }
+        public ActionResult DoiMatKhau()
+        {
+            return View();
+        }
     }
 }

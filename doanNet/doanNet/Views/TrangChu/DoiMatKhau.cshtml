@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "DoiMatKhau";
+    Layout = "~/Views/Shared/layout3.cshtml";
+}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .corner-image {
+        padding-top: 10px;
+        padding-right: 50px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 128px;
+        height: auto;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .login-page {
+        width: 100%;
+        padding-top: 50px;
+        display: inline-block;
+        display: flex;
+        align-items: center;
+    }
+
+    .form-right i {
+        font-size: 100px;
+    }
+</style>
+
+
+<div class="container-fluid" style="background-color: darkblue; height:150px">
+    <h1 style="font-weight: bold; color: white; text-align: center; padding-top: 50px;">ĐỔI MẬT KHẨU</h1>
+    <img src="~/Images/reset-password.png" class="corner-image">
+</div>
+
+<div class="login-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+
+                <div class="bg-white">
+                    <div class="row">
+                        <div class="col-md-12 pe-0">
+                            <div class="form-left h-100 py-5 px-5">
+                                <form action="" class="row g-4">
+                                    <div class="col-12">
+                                        <label>Tên đăng nhập<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="fa-solid fa-user"></i></div>
+                                            <input type="text" class="form-control" placeholder="Nhập tên đăng nhập">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label>Mật khẩu cũ<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="fa-solid fa-lock"></i></div>
+                                            <input type="text" class="form-control" placeholder="Nhập mật khẩu cũ">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Mật khẩu mới<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="fa-solid fa-lock"></i></div>
+                                            <input type="text" class="form-control" placeholder="Nhập mật khẩu mới">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary px-4 float-end mt-4">Đổi mật khẩu </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

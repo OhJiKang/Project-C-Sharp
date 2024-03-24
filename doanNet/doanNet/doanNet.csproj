@@ -192,6 +192,7 @@
     <Content Include="Images\permission.png" />
     <Content Include="Images\profile.png" />
     <Content Include="Images\regulation.png" />
+    <Content Include="Images\reset-password.png" />
     <Content Include="Images\running.png" />
     <Content Include="Images\sign-in-manage-bg.png" />
     <Content Include="Images\sign-in-student-bg.png" />
@@ -293,11 +294,6 @@
       <DependentUpon>KTXTDTU.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KTXTDTU.Context.cs" />
-    <Compile Include="Models\KTXTDTU.Context1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KTXTDTU.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\KTXTDTU.cs" />
     <Compile Include="Models\KTXTDTU.Designer.cs">
       <DependentUpon>KTXTDTU.cs</DependentUpon>
@@ -393,8 +389,10 @@
     <Content Include="Views\TrangChu\DangNhapSinhVien.cshtml" />
     <Content Include="Views\GiaoVien\GhiLoiKTX.cshtml" />
     <Content Include="Views\GiaoVien\QuanLySinhVien.cshtml" />
-    <Content Include="Views\GiaoVien\DanhSachHoaDonDienNuoc.cshtml" />
+    <Content Include="Views\GiaoVien\DanhSachHoaDonTheoThang.cshtml" />
     <Content Include="Views\GiaoVien\QuanLyPhong.cshtml" />
+    <Content Include="Views\GiaoVien\DanhSachHoaDon.cshtml" />
+    <Content Include="Views\GiaoVien\QuanLyTaiKhoan.cshtml" />
     <None Include="Views\Shared\layoutteacher.cshtml" />
     <Content Include="Views\GiaoVien\Mistake.cshtml" />
     <Content Include="Views\GiaoVien\Post.cshtml" />
@@ -413,6 +411,7 @@
     <Content Include="Views\SinhVienTuQuan\GhiLoiKTX.cshtml" />
     <Content Include="Views\SinhVienTuQuan\LichTrucTuan.cshtml" />
     <Content Include="Views\SinhVienTuQuan\DiemDanhKTX.cshtml" />
+    <Content Include="Views\TrangChu\DoiMatKhau.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

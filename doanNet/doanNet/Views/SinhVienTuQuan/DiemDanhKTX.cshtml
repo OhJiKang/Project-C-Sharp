@@ -109,24 +109,29 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="padding: 40px">
-                    <h6 style="text-align: center; font-weight: bold; padding-bottom: 20px">Điêm danh phòng - L111</h6>
+                    <h6 style="text-align: center; font-weight: bold; padding-bottom: 20px">Điểm danh phòng - L111</h6>
                     <div class="row align-items-center pt-4 pb-3">
-                        <div class="row" style="background-color: #c6f9d7; padding: 10px">
+                        <div class="row" id="background" style="padding: 10px">
                             <div class="col-md-6 ps-5">
                                 <h6 class="mb-0 font-weight-bold">Nguyễn Trần Phúc Bảo Long</h6>
                             </div>
                             <div class="col-md-6 pe-5">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="showReasonInput()">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="khongphep()">
                                     <label class="form-check-label" for="inlineRadio1">Không phép</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="hideReasonInput()">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="cophep()">
                                     <label class="form-check-label" for="inlineRadio2">Có phép</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" onclick="comat()">
+                                    <label class="form-check-label" for="inlineRadio3">Có mặt</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" id="reasonInput" style="background-color:white; text-align: center; font: 12px; color: grey">
+                    </div>
+                        <div class="row" id="reasonInput" style="background-color:white; text-align: center; font: 12px; color: grey; display: none">
                             <div class="col-md-3 ps-5 d-flex justify-content-center align-items-center">
                                 <label for="reason">Lý do vắng</label>
                             </div>
@@ -136,7 +141,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                   
                        
                 </div>
                 <div class="modal-footer">
@@ -152,6 +157,20 @@
 
             function hideReasonInput() {
                 document.getElementById('reasonInput').style.display = 'none';
+            }
+
+            function comat() {
+                hideReasonInput();
+                document.querySelector('.modal-body .row.align-items-center').style.backgroundColor = '#c6f9d7';
+            }
+
+            function cophep() {
+                showReasonInput();
+                document.querySelector('.modal-body .row.align-items-center').style.backgroundColor = '#d9d9d9';
+            }
+            function khongphep() {
+                hideReasonInput();
+                document.querySelector('.modal-body .row.align-items-center').style.backgroundColor = '#afadad';
             }
         </script>
     </div>
