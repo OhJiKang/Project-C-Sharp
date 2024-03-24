@@ -1,6 +1,8 @@
 ﻿@{
     Layout = "~/Views/Shared/layoutteacher.cshtml";
 }
+<script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+
 <style>
     .modal {
         display: none;
@@ -62,7 +64,7 @@
 </div>
 <div class='container_body_address_input_'>
     <label class='label_address_modifier base_label_inline'>Tag bài post</label>
-    <input type='text' class='address_input_modifier secondary_input' disabled/>
+    <input type='text' class='address_input_modifier secondary_input' disabled />
     <!-- Colored mini FAB button -->
     <button onclick="showModal()"
             class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
@@ -76,7 +78,7 @@
             }
 
         </script>
-  
+
     </button>
 </div>
 <label class='label_address_modifier base_label_inline' style="width:100%;text-align:center;margin-bottom:24px">Nội dung bài post</label>
