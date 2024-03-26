@@ -31,6 +31,7 @@
           <Property Name="Meta" Type="text" />
           <Property Name="DateBegin" Type="datetime" Nullable="false" />
           <Property Name="Hide" Type="int" Nullable="false" />
+          <Property Name="IDType" Type="int" />
         </EntityType>
         <EntityType Name="Attendance">
           <Key>
@@ -591,38 +592,139 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KTXTDTUModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="KTXTDTUEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="KTXTDTUModel.Account" />
+          <EntitySet Name="AccountTypes" EntityType="KTXTDTUModel.AccountType" />
+          <EntitySet Name="Attendances" EntityType="KTXTDTUModel.Attendance" />
+          <EntitySet Name="AttendanceBridges" EntityType="KTXTDTUModel.AttendanceBridge" />
+          <EntitySet Name="Categories" EntityType="KTXTDTUModel.Category" />
+          <EntitySet Name="CategoryBridges" EntityType="KTXTDTUModel.CategoryBridge" />
+          <EntitySet Name="Contracts" EntityType="KTXTDTUModel.Contract" />
+          <EntitySet Name="ContractBridges" EntityType="KTXTDTUModel.ContractBridge" />
+          <EntitySet Name="Faculties" EntityType="KTXTDTUModel.Faculty" />
+          <EntitySet Name="Fees" EntityType="KTXTDTUModel.Fee" />
+          <EntitySet Name="Logs" EntityType="KTXTDTUModel.Log" />
+          <EntitySet Name="Menus" EntityType="KTXTDTUModel.Menu" />
+          <EntitySet Name="Mistakes" EntityType="KTXTDTUModel.Mistake" />
+          <EntitySet Name="Places" EntityType="KTXTDTUModel.Place" />
+          <EntitySet Name="Posts" EntityType="KTXTDTUModel.Post" />
+          <EntitySet Name="Priorities" EntityType="KTXTDTUModel.Priority" />
+          <EntitySet Name="Rooms" EntityType="KTXTDTUModel.Room" />
+          <EntitySet Name="SinhViens" EntityType="KTXTDTUModel.SinhVien" />
+          <AssociationSet Name="FK__Account__IDSinhV__6FE99F9F" Association="KTXTDTUModel.FK__Account__IDSinhV__6FE99F9F">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AccountTy__IDAcc__72C60C4A" Association="KTXTDTUModel.FK__AccountTy__IDAcc__72C60C4A">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AccountType" EntitySet="AccountTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__IDAcc__09A971A2" Association="KTXTDTUModel.FK__Attendanc__IDAcc__09A971A2">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AttendanceBridge" EntitySet="AttendanceBridges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mistake__IDAccou__76969D2E" Association="KTXTDTUModel.FK__Mistake__IDAccou__76969D2E">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Mistake" EntitySet="Mistakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Post__IDAccount__7D439ABD" Association="KTXTDTUModel.FK__Post__IDAccount__7D439ABD">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__IDAtt__07C12930" Association="KTXTDTUModel.FK__Attendanc__IDAtt__07C12930">
+            <End Role="Attendance" EntitySet="Attendances" />
+            <End Role="AttendanceBridge" EntitySet="AttendanceBridges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__IDSin__08B54D69" Association="KTXTDTUModel.FK__Attendanc__IDSin__08B54D69">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="AttendanceBridge" EntitySet="AttendanceBridges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryB__IDCat__02084FDA" Association="KTXTDTUModel.FK__CategoryB__IDCat__02084FDA">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CategoryBridge" EntitySet="CategoryBridges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryB__IDPos__02FC7413" Association="KTXTDTUModel.FK__CategoryB__IDPos__02FC7413">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="CategoryBridge" EntitySet="CategoryBridges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contract__IDPlac__6477ECF3" Association="KTXTDTUModel.FK__Contract__IDPlac__6477ECF3">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContractB__IDCon__6754599E" Association="KTXTDTUModel.FK__ContractB__IDCon__6754599E">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="ContractBridge" EntitySet="ContractBridges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SinhVien__IDCont__6C190EBB" Association="KTXTDTUModel.FK__SinhVien__IDCont__6C190EBB">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="SinhVien" EntitySet="SinhViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContractB__IDPri__68487DD7" Association="KTXTDTUModel.FK__ContractB__IDPri__68487DD7">
+            <End Role="Priority" EntitySet="Priorities" />
+            <End Role="ContractBridge" EntitySet="ContractBridges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SinhVien__IDFalc__6B24EA82" Association="KTXTDTUModel.FK__SinhVien__IDFalc__6B24EA82">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="SinhVien" EntitySet="SinhViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fee__IDRoom__7A672E12" Association="KTXTDTUModel.FK__Fee__IDRoom__7A672E12">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Fee" EntitySet="Fees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log__IDFee__0D7A0286" Association="KTXTDTUModel.FK__Log__IDFee__0D7A0286">
+            <End Role="Fee" EntitySet="Fees" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log__IDSinhVien__0C85DE4D" Association="KTXTDTUModel.FK__Log__IDSinhVien__0C85DE4D">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mistake__IDRoom__778AC167" Association="KTXTDTUModel.FK__Mistake__IDRoom__778AC167">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Mistake" EntitySet="Mistakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mistake__IDSinhV__75A278F5" Association="KTXTDTUModel.FK__Mistake__IDSinhV__75A278F5">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="Mistake" EntitySet="Mistakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SinhVien__IDRoom__6D0D32F4" Association="KTXTDTUModel.FK__SinhVien__IDRoom__6D0D32F4">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="SinhVien" EntitySet="SinhViens" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="IDAccount" />
           </Key>
           <Property Name="IDAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Available" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Available" Type="Binary" Nullable="false" MaxLength="1" FixedLength="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IDSinhVien" Type="Int32" Nullable="false" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="SinhVien" Relationship="Self.FK__Account__IDSinhV__6FE99F9F" FromRole="Account" ToRole="SinhVien" />
-          <NavigationProperty Name="AccountTypes" Relationship="Self.FK__AccountTy__IDAcc__72C60C4A" FromRole="Account" ToRole="AccountType" />
-          <NavigationProperty Name="AttendanceBridges" Relationship="Self.FK__Attendanc__IDAcc__09A971A2" FromRole="Account" ToRole="AttendanceBridge" />
-          <NavigationProperty Name="Mistakes" Relationship="Self.FK__Mistake__IDAccou__76969D2E" FromRole="Account" ToRole="Mistake" />
-          <NavigationProperty Name="Posts" Relationship="Self.FK__Post__IDAccount__7D439ABD" FromRole="Account" ToRole="Post" />
+          <NavigationProperty Name="SinhVien" Relationship="KTXTDTUModel.FK__Account__IDSinhV__6FE99F9F" FromRole="Account" ToRole="SinhVien" />
+          <NavigationProperty Name="AccountTypes" Relationship="KTXTDTUModel.FK__AccountTy__IDAcc__72C60C4A" FromRole="Account" ToRole="AccountType" />
+          <NavigationProperty Name="AttendanceBridges" Relationship="KTXTDTUModel.FK__Attendanc__IDAcc__09A971A2" FromRole="Account" ToRole="AttendanceBridge" />
+          <NavigationProperty Name="Mistakes" Relationship="KTXTDTUModel.FK__Mistake__IDAccou__76969D2E" FromRole="Account" ToRole="Mistake" />
+          <NavigationProperty Name="Posts" Relationship="KTXTDTUModel.FK__Post__IDAccount__7D439ABD" FromRole="Account" ToRole="Post" />
         </EntityType>
         <EntityType Name="AccountType">
           <Key>
             <PropertyRef Name="IDAccountType" />
           </Key>
           <Property Name="IDAccountType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TypeDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IDAccount" Type="Int32" Nullable="false" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__AccountTy__IDAcc__72C60C4A" FromRole="AccountType" ToRole="Account" />
+          <Property Name="IDType" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="KTXTDTUModel.FK__AccountTy__IDAcc__72C60C4A" FromRole="AccountType" ToRole="Account" />
         </EntityType>
         <EntityType Name="Attendance">
           <Key>
@@ -635,7 +737,7 @@
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AttendanceBridges" Relationship="Self.FK__Attendanc__IDAtt__07C12930" FromRole="Attendance" ToRole="AttendanceBridge" />
+          <NavigationProperty Name="AttendanceBridges" Relationship="KTXTDTUModel.FK__Attendanc__IDAtt__07C12930" FromRole="Attendance" ToRole="AttendanceBridge" />
         </EntityType>
         <EntityType Name="AttendanceBridge">
           <Key>
@@ -650,23 +752,23 @@
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__Attendanc__IDAcc__09A971A2" FromRole="AttendanceBridge" ToRole="Account" />
-          <NavigationProperty Name="Attendance" Relationship="Self.FK__Attendanc__IDAtt__07C12930" FromRole="AttendanceBridge" ToRole="Attendance" />
-          <NavigationProperty Name="SinhVien" Relationship="Self.FK__Attendanc__IDSin__08B54D69" FromRole="AttendanceBridge" ToRole="SinhVien" />
+          <NavigationProperty Name="Account" Relationship="KTXTDTUModel.FK__Attendanc__IDAcc__09A971A2" FromRole="AttendanceBridge" ToRole="Account" />
+          <NavigationProperty Name="Attendance" Relationship="KTXTDTUModel.FK__Attendanc__IDAtt__07C12930" FromRole="AttendanceBridge" ToRole="Attendance" />
+          <NavigationProperty Name="SinhVien" Relationship="KTXTDTUModel.FK__Attendanc__IDSin__08B54D69" FromRole="AttendanceBridge" ToRole="SinhVien" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="IDCategory" />
           </Key>
           <Property Name="IDCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CategoryDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryDetail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ColorChip" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CategoryBridges" Relationship="Self.FK__CategoryB__IDCat__02084FDA" FromRole="Category" ToRole="CategoryBridge" />
+          <NavigationProperty Name="CategoryBridges" Relationship="KTXTDTUModel.FK__CategoryB__IDCat__02084FDA" FromRole="Category" ToRole="CategoryBridge" />
         </EntityType>
         <EntityType Name="CategoryBridge">
           <Key>
@@ -679,25 +781,25 @@
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK__CategoryB__IDCat__02084FDA" FromRole="CategoryBridge" ToRole="Category" />
-          <NavigationProperty Name="Post" Relationship="Self.FK__CategoryB__IDPos__02FC7413" FromRole="CategoryBridge" ToRole="Post" />
+          <NavigationProperty Name="Category" Relationship="KTXTDTUModel.FK__CategoryB__IDCat__02084FDA" FromRole="CategoryBridge" ToRole="Category" />
+          <NavigationProperty Name="Post" Relationship="KTXTDTUModel.FK__CategoryB__IDPos__02FC7413" FromRole="CategoryBridge" ToRole="Post" />
         </EntityType>
         <EntityType Name="Contract">
           <Key>
             <PropertyRef Name="IDContract" />
           </Key>
           <Property Name="IDContract" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MSSV" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IDCitizen" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProfilePlace" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
-          <Property Name="IDPlace" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MSSV" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="IDCitizen" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilePlace" Type="Binary" Nullable="false" MaxLength="1" FixedLength="true" />
+          <Property Name="IDPlace" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Place" Relationship="Self.FK__Contract__IDPlac__6477ECF3" FromRole="Contract" ToRole="Place" />
-          <NavigationProperty Name="ContractBridges" Relationship="Self.FK__ContractB__IDCon__6754599E" FromRole="Contract" ToRole="ContractBridge" />
-          <NavigationProperty Name="SinhViens" Relationship="Self.FK__SinhVien__IDCont__6C190EBB" FromRole="Contract" ToRole="SinhVien" />
+          <NavigationProperty Name="Place" Relationship="KTXTDTUModel.FK__Contract__IDPlac__6477ECF3" FromRole="Contract" ToRole="Place" />
+          <NavigationProperty Name="ContractBridges" Relationship="KTXTDTUModel.FK__ContractB__IDCon__6754599E" FromRole="Contract" ToRole="ContractBridge" />
+          <NavigationProperty Name="SinhViens" Relationship="KTXTDTUModel.FK__SinhVien__IDCont__6C190EBB" FromRole="Contract" ToRole="SinhVien" />
         </EntityType>
         <EntityType Name="ContractBridge">
           <Key>
@@ -710,29 +812,29 @@
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Contract" Relationship="Self.FK__ContractB__IDCon__6754599E" FromRole="ContractBridge" ToRole="Contract" />
-          <NavigationProperty Name="Priority" Relationship="Self.FK__ContractB__IDPri__68487DD7" FromRole="ContractBridge" ToRole="Priority" />
+          <NavigationProperty Name="Contract" Relationship="KTXTDTUModel.FK__ContractB__IDCon__6754599E" FromRole="ContractBridge" ToRole="Contract" />
+          <NavigationProperty Name="Priority" Relationship="KTXTDTUModel.FK__ContractB__IDPri__68487DD7" FromRole="ContractBridge" ToRole="Priority" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
             <PropertyRef Name="IDFalcuty" />
           </Key>
           <Property Name="IDFalcuty" Type="Int32" Nullable="false" />
-          <Property Name="NameFalculty" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameFalculty" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="SinhViens" Relationship="Self.FK__SinhVien__IDFalc__6B24EA82" FromRole="Faculty" ToRole="SinhVien" />
+          <NavigationProperty Name="SinhViens" Relationship="KTXTDTUModel.FK__SinhVien__IDFalc__6B24EA82" FromRole="Faculty" ToRole="SinhVien" />
         </EntityType>
         <EntityType Name="Fee">
           <Key>
             <PropertyRef Name="IDFee" />
           </Key>
           <Property Name="IDFee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Status" Type="Int32" Nullable="false" />
@@ -742,8 +844,8 @@
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Room" Relationship="Self.FK__Fee__IDRoom__7A672E12" FromRole="Fee" ToRole="Room" />
-          <NavigationProperty Name="Logs" Relationship="Self.FK__Log__IDFee__0D7A0286" FromRole="Fee" ToRole="Log" />
+          <NavigationProperty Name="Room" Relationship="KTXTDTUModel.FK__Fee__IDRoom__7A672E12" FromRole="Fee" ToRole="Room" />
+          <NavigationProperty Name="Logs" Relationship="KTXTDTUModel.FK__Log__IDFee__0D7A0286" FromRole="Fee" ToRole="Log" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -758,17 +860,27 @@
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Fee" Relationship="Self.FK__Log__IDFee__0D7A0286" FromRole="Log" ToRole="Fee" />
-          <NavigationProperty Name="SinhVien" Relationship="Self.FK__Log__IDSinhVien__0C85DE4D" FromRole="Log" ToRole="SinhVien" />
+          <NavigationProperty Name="Fee" Relationship="KTXTDTUModel.FK__Log__IDFee__0D7A0286" FromRole="Log" ToRole="Fee" />
+          <NavigationProperty Name="SinhVien" Relationship="KTXTDTUModel.FK__Log__IDSinhVien__0C85DE4D" FromRole="Log" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Order" />
+          </Key>
+          <Property Name="Order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Meta" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Hide" Type="Int32" Nullable="false" />
+          <Property Name="TextMenu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Mistake">
           <Key>
             <PropertyRef Name="IDMistake" />
           </Key>
           <Property Name="IDMistake" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MistakeDes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MistakeDes" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TimeCaught" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="BedID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BedID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IDSinhVien" Type="Int32" Nullable="false" />
           <Property Name="IDAccount" Type="Int32" Nullable="false" />
           <Property Name="IDRoom" Type="Int32" Nullable="false" />
@@ -776,36 +888,36 @@
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__Mistake__IDAccou__76969D2E" FromRole="Mistake" ToRole="Account" />
-          <NavigationProperty Name="Room" Relationship="Self.FK__Mistake__IDRoom__778AC167" FromRole="Mistake" ToRole="Room" />
-          <NavigationProperty Name="SinhVien" Relationship="Self.FK__Mistake__IDSinhV__75A278F5" FromRole="Mistake" ToRole="SinhVien" />
+          <NavigationProperty Name="Account" Relationship="KTXTDTUModel.FK__Mistake__IDAccou__76969D2E" FromRole="Mistake" ToRole="Account" />
+          <NavigationProperty Name="Room" Relationship="KTXTDTUModel.FK__Mistake__IDRoom__778AC167" FromRole="Mistake" ToRole="Room" />
+          <NavigationProperty Name="SinhVien" Relationship="KTXTDTUModel.FK__Mistake__IDSinhV__75A278F5" FromRole="Mistake" ToRole="SinhVien" />
         </EntityType>
         <EntityType Name="Place">
           <Key>
             <PropertyRef Name="IDPlace" />
           </Key>
-          <Property Name="IDPlace" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDPlace" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Contracts" Relationship="Self.FK__Contract__IDPlac__6477ECF3" FromRole="Place" ToRole="Contract" />
+          <NavigationProperty Name="Contracts" Relationship="KTXTDTUModel.FK__Contract__IDPlac__6477ECF3" FromRole="Place" ToRole="Contract" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
             <PropertyRef Name="IDPost" />
           </Key>
           <Property Name="IDPost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PostTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PostDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PostTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostDetail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IDAccount" Type="Int32" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__Post__IDAccount__7D439ABD" FromRole="Post" ToRole="Account" />
-          <NavigationProperty Name="CategoryBridges" Relationship="Self.FK__CategoryB__IDPos__02FC7413" FromRole="Post" ToRole="CategoryBridge" />
+          <NavigationProperty Name="Account" Relationship="KTXTDTUModel.FK__Post__IDAccount__7D439ABD" FromRole="Post" ToRole="Account" />
+          <NavigationProperty Name="CategoryBridges" Relationship="KTXTDTUModel.FK__CategoryB__IDPos__02FC7413" FromRole="Post" ToRole="CategoryBridge" />
         </EntityType>
         <EntityType Name="Priority">
           <Key>
@@ -817,37 +929,37 @@
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ContractBridges" Relationship="Self.FK__ContractB__IDPri__68487DD7" FromRole="Priority" ToRole="ContractBridge" />
+          <NavigationProperty Name="ContractBridges" Relationship="KTXTDTUModel.FK__ContractB__IDPri__68487DD7" FromRole="Priority" ToRole="ContractBridge" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
             <PropertyRef Name="IDRoom" />
           </Key>
           <Property Name="IDRoom" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Floor" Type="Int32" Nullable="false" />
-          <Property Name="Building" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Building" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="RoomType" Type="Int32" Nullable="false" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Fees" Relationship="Self.FK__Fee__IDRoom__7A672E12" FromRole="Room" ToRole="Fee" />
-          <NavigationProperty Name="Mistakes" Relationship="Self.FK__Mistake__IDRoom__778AC167" FromRole="Room" ToRole="Mistake" />
-          <NavigationProperty Name="SinhViens" Relationship="Self.FK__SinhVien__IDRoom__6D0D32F4" FromRole="Room" ToRole="SinhVien" />
+          <NavigationProperty Name="Fees" Relationship="KTXTDTUModel.FK__Fee__IDRoom__7A672E12" FromRole="Room" ToRole="Fee" />
+          <NavigationProperty Name="Mistakes" Relationship="KTXTDTUModel.FK__Mistake__IDRoom__778AC167" FromRole="Room" ToRole="Mistake" />
+          <NavigationProperty Name="SinhViens" Relationship="KTXTDTUModel.FK__SinhVien__IDRoom__6D0D32F4" FromRole="Room" ToRole="SinhVien" />
         </EntityType>
         <EntityType Name="SinhVien">
           <Key>
             <PropertyRef Name="IDSinhVien" />
           </Key>
           <Property Name="IDSinhVien" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BirthDay" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="AttendDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="AttendYear" Type="Int32" Nullable="false" />
           <Property Name="GraduateYear" Type="Int32" Nullable="false" />
-          <Property Name="MSSV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MSSV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IDFalcuty" Type="Int32" Nullable="false" />
           <Property Name="IDContract" Type="Int32" Nullable="false" />
           <Property Name="IDRoom" Type="Int32" Nullable="false" />
@@ -855,17 +967,17 @@
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__IDSinhV__6FE99F9F" FromRole="SinhVien" ToRole="Account" />
-          <NavigationProperty Name="AttendanceBridges" Relationship="Self.FK__Attendanc__IDSin__08B54D69" FromRole="SinhVien" ToRole="AttendanceBridge" />
-          <NavigationProperty Name="Contract" Relationship="Self.FK__SinhVien__IDCont__6C190EBB" FromRole="SinhVien" ToRole="Contract" />
-          <NavigationProperty Name="Faculty" Relationship="Self.FK__SinhVien__IDFalc__6B24EA82" FromRole="SinhVien" ToRole="Faculty" />
-          <NavigationProperty Name="Logs" Relationship="Self.FK__Log__IDSinhVien__0C85DE4D" FromRole="SinhVien" ToRole="Log" />
-          <NavigationProperty Name="Mistakes" Relationship="Self.FK__Mistake__IDSinhV__75A278F5" FromRole="SinhVien" ToRole="Mistake" />
-          <NavigationProperty Name="Room" Relationship="Self.FK__SinhVien__IDRoom__6D0D32F4" FromRole="SinhVien" ToRole="Room" />
+          <NavigationProperty Name="Accounts" Relationship="KTXTDTUModel.FK__Account__IDSinhV__6FE99F9F" FromRole="SinhVien" ToRole="Account" />
+          <NavigationProperty Name="AttendanceBridges" Relationship="KTXTDTUModel.FK__Attendanc__IDSin__08B54D69" FromRole="SinhVien" ToRole="AttendanceBridge" />
+          <NavigationProperty Name="Contract" Relationship="KTXTDTUModel.FK__SinhVien__IDCont__6C190EBB" FromRole="SinhVien" ToRole="Contract" />
+          <NavigationProperty Name="Faculty" Relationship="KTXTDTUModel.FK__SinhVien__IDFalc__6B24EA82" FromRole="SinhVien" ToRole="Faculty" />
+          <NavigationProperty Name="Logs" Relationship="KTXTDTUModel.FK__Log__IDSinhVien__0C85DE4D" FromRole="SinhVien" ToRole="Log" />
+          <NavigationProperty Name="Mistakes" Relationship="KTXTDTUModel.FK__Mistake__IDSinhV__75A278F5" FromRole="SinhVien" ToRole="Mistake" />
+          <NavigationProperty Name="Room" Relationship="KTXTDTUModel.FK__SinhVien__IDRoom__6D0D32F4" FromRole="SinhVien" ToRole="Room" />
         </EntityType>
         <Association Name="FK__Account__IDSinhV__6FE99F9F">
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
-          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <End Type="KTXTDTUModel.SinhVien" Role="SinhVien" Multiplicity="1" />
+          <End Type="KTXTDTUModel.Account" Role="Account" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SinhVien">
               <PropertyRef Name="IDSinhVien" />
@@ -876,8 +988,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__AccountTy__IDAcc__72C60C4A">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="AccountType" Type="Self.AccountType" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="KTXTDTUModel.AccountType" Role="AccountType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="IDAccount" />
@@ -888,8 +1000,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Attendanc__IDAcc__09A971A2">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="AttendanceBridge" Type="Self.AttendanceBridge" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="KTXTDTUModel.AttendanceBridge" Role="AttendanceBridge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="IDAccount" />
@@ -900,8 +1012,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Mistake__IDAccou__76969D2E">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="KTXTDTUModel.Mistake" Role="Mistake" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="IDAccount" />
@@ -912,8 +1024,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Post__IDAccount__7D439ABD">
-          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
-          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="KTXTDTUModel.Post" Role="Post" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="IDAccount" />
@@ -924,8 +1036,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Attendanc__IDAtt__07C12930">
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
-          <End Role="AttendanceBridge" Type="Self.AttendanceBridge" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Attendance" Role="Attendance" Multiplicity="1" />
+          <End Type="KTXTDTUModel.AttendanceBridge" Role="AttendanceBridge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Attendance">
               <PropertyRef Name="IDAttendance" />
@@ -936,8 +1048,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Attendanc__IDSin__08B54D69">
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
-          <End Role="AttendanceBridge" Type="Self.AttendanceBridge" Multiplicity="*" />
+          <End Type="KTXTDTUModel.SinhVien" Role="SinhVien" Multiplicity="1" />
+          <End Type="KTXTDTUModel.AttendanceBridge" Role="AttendanceBridge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SinhVien">
               <PropertyRef Name="IDSinhVien" />
@@ -948,8 +1060,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__CategoryB__IDCat__02084FDA">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="CategoryBridge" Type="Self.CategoryBridge" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="KTXTDTUModel.CategoryBridge" Role="CategoryBridge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="IDCategory" />
@@ -960,8 +1072,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__CategoryB__IDPos__02FC7413">
-          <End Role="Post" Type="Self.Post" Multiplicity="1" />
-          <End Role="CategoryBridge" Type="Self.CategoryBridge" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Post" Role="Post" Multiplicity="1" />
+          <End Type="KTXTDTUModel.CategoryBridge" Role="CategoryBridge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Post">
               <PropertyRef Name="IDPost" />
@@ -972,8 +1084,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Contract__IDPlac__6477ECF3">
-          <End Role="Place" Type="Self.Place" Multiplicity="1" />
-          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Place" Role="Place" Multiplicity="1" />
+          <End Type="KTXTDTUModel.Contract" Role="Contract" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Place">
               <PropertyRef Name="IDPlace" />
@@ -984,8 +1096,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ContractB__IDCon__6754599E">
-          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
-          <End Role="ContractBridge" Type="Self.ContractBridge" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Contract" Role="Contract" Multiplicity="1" />
+          <End Type="KTXTDTUModel.ContractBridge" Role="ContractBridge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contract">
               <PropertyRef Name="IDContract" />
@@ -996,8 +1108,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__SinhVien__IDCont__6C190EBB">
-          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Contract" Role="Contract" Multiplicity="1" />
+          <End Type="KTXTDTUModel.SinhVien" Role="SinhVien" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contract">
               <PropertyRef Name="IDContract" />
@@ -1008,8 +1120,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ContractB__IDPri__68487DD7">
-          <End Role="Priority" Type="Self.Priority" Multiplicity="1" />
-          <End Role="ContractBridge" Type="Self.ContractBridge" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Priority" Role="Priority" Multiplicity="1" />
+          <End Type="KTXTDTUModel.ContractBridge" Role="ContractBridge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Priority">
               <PropertyRef Name="IDPriority" />
@@ -1020,8 +1132,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__SinhVien__IDFalc__6B24EA82">
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Faculty" Role="Faculty" Multiplicity="1" />
+          <End Type="KTXTDTUModel.SinhVien" Role="SinhVien" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Faculty">
               <PropertyRef Name="IDFalcuty" />
@@ -1032,8 +1144,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Fee__IDRoom__7A672E12">
-          <End Role="Room" Type="Self.Room" Multiplicity="1" />
-          <End Role="Fee" Type="Self.Fee" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Room" Role="Room" Multiplicity="1" />
+          <End Type="KTXTDTUModel.Fee" Role="Fee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Room">
               <PropertyRef Name="IDRoom" />
@@ -1044,8 +1156,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Log__IDFee__0D7A0286">
-          <End Role="Fee" Type="Self.Fee" Multiplicity="1" />
-          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Fee" Role="Fee" Multiplicity="1" />
+          <End Type="KTXTDTUModel.Log" Role="Log" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Fee">
               <PropertyRef Name="IDFee" />
@@ -1056,8 +1168,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Log__IDSinhVien__0C85DE4D">
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
-          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <End Type="KTXTDTUModel.SinhVien" Role="SinhVien" Multiplicity="1" />
+          <End Type="KTXTDTUModel.Log" Role="Log" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SinhVien">
               <PropertyRef Name="IDSinhVien" />
@@ -1068,8 +1180,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Mistake__IDRoom__778AC167">
-          <End Role="Room" Type="Self.Room" Multiplicity="1" />
-          <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Room" Role="Room" Multiplicity="1" />
+          <End Type="KTXTDTUModel.Mistake" Role="Mistake" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Room">
               <PropertyRef Name="IDRoom" />
@@ -1080,8 +1192,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Mistake__IDSinhV__75A278F5">
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
-          <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
+          <End Type="KTXTDTUModel.SinhVien" Role="SinhVien" Multiplicity="1" />
+          <End Type="KTXTDTUModel.Mistake" Role="Mistake" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SinhVien">
               <PropertyRef Name="IDSinhVien" />
@@ -1092,8 +1204,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__SinhVien__IDRoom__6D0D32F4">
-          <End Role="Room" Type="Self.Room" Multiplicity="1" />
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <End Type="KTXTDTUModel.Room" Role="Room" Multiplicity="1" />
+          <End Type="KTXTDTUModel.SinhVien" Role="SinhVien" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Room">
               <PropertyRef Name="IDRoom" />
@@ -1103,117 +1215,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="KTXTDTUEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Accounts" EntityType="Self.Account" />
-          <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
-          <EntitySet Name="Attendances" EntityType="Self.Attendance" />
-          <EntitySet Name="AttendanceBridges" EntityType="Self.AttendanceBridge" />
-          <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="CategoryBridges" EntityType="Self.CategoryBridge" />
-          <EntitySet Name="Contracts" EntityType="Self.Contract" />
-          <EntitySet Name="ContractBridges" EntityType="Self.ContractBridge" />
-          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
-          <EntitySet Name="Fees" EntityType="Self.Fee" />
-          <EntitySet Name="Logs" EntityType="Self.Log" />
-          <EntitySet Name="Mistakes" EntityType="Self.Mistake" />
-          <EntitySet Name="Places" EntityType="Self.Place" />
-          <EntitySet Name="Posts" EntityType="Self.Post" />
-          <EntitySet Name="Priorities" EntityType="Self.Priority" />
-          <EntitySet Name="Rooms" EntityType="Self.Room" />
-          <EntitySet Name="SinhViens" EntityType="Self.SinhVien" />
-          <AssociationSet Name="FK__Account__IDSinhV__6FE99F9F" Association="Self.FK__Account__IDSinhV__6FE99F9F">
-            <End Role="SinhVien" EntitySet="SinhViens" />
-            <End Role="Account" EntitySet="Accounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AccountTy__IDAcc__72C60C4A" Association="Self.FK__AccountTy__IDAcc__72C60C4A">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="AccountType" EntitySet="AccountTypes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Attendanc__IDAcc__09A971A2" Association="Self.FK__Attendanc__IDAcc__09A971A2">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="AttendanceBridge" EntitySet="AttendanceBridges" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Mistake__IDAccou__76969D2E" Association="Self.FK__Mistake__IDAccou__76969D2E">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="Mistake" EntitySet="Mistakes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Post__IDAccount__7D439ABD" Association="Self.FK__Post__IDAccount__7D439ABD">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="Post" EntitySet="Posts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Attendanc__IDAtt__07C12930" Association="Self.FK__Attendanc__IDAtt__07C12930">
-            <End Role="Attendance" EntitySet="Attendances" />
-            <End Role="AttendanceBridge" EntitySet="AttendanceBridges" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Attendanc__IDSin__08B54D69" Association="Self.FK__Attendanc__IDSin__08B54D69">
-            <End Role="SinhVien" EntitySet="SinhViens" />
-            <End Role="AttendanceBridge" EntitySet="AttendanceBridges" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CategoryB__IDCat__02084FDA" Association="Self.FK__CategoryB__IDCat__02084FDA">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="CategoryBridge" EntitySet="CategoryBridges" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CategoryB__IDPos__02FC7413" Association="Self.FK__CategoryB__IDPos__02FC7413">
-            <End Role="Post" EntitySet="Posts" />
-            <End Role="CategoryBridge" EntitySet="CategoryBridges" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Contract__IDPlac__6477ECF3" Association="Self.FK__Contract__IDPlac__6477ECF3">
-            <End Role="Place" EntitySet="Places" />
-            <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ContractB__IDCon__6754599E" Association="Self.FK__ContractB__IDCon__6754599E">
-            <End Role="Contract" EntitySet="Contracts" />
-            <End Role="ContractBridge" EntitySet="ContractBridges" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SinhVien__IDCont__6C190EBB" Association="Self.FK__SinhVien__IDCont__6C190EBB">
-            <End Role="Contract" EntitySet="Contracts" />
-            <End Role="SinhVien" EntitySet="SinhViens" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ContractB__IDPri__68487DD7" Association="Self.FK__ContractB__IDPri__68487DD7">
-            <End Role="Priority" EntitySet="Priorities" />
-            <End Role="ContractBridge" EntitySet="ContractBridges" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SinhVien__IDFalc__6B24EA82" Association="Self.FK__SinhVien__IDFalc__6B24EA82">
-            <End Role="Faculty" EntitySet="Faculties" />
-            <End Role="SinhVien" EntitySet="SinhViens" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Fee__IDRoom__7A672E12" Association="Self.FK__Fee__IDRoom__7A672E12">
-            <End Role="Room" EntitySet="Rooms" />
-            <End Role="Fee" EntitySet="Fees" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Log__IDFee__0D7A0286" Association="Self.FK__Log__IDFee__0D7A0286">
-            <End Role="Fee" EntitySet="Fees" />
-            <End Role="Log" EntitySet="Logs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Log__IDSinhVien__0C85DE4D" Association="Self.FK__Log__IDSinhVien__0C85DE4D">
-            <End Role="SinhVien" EntitySet="SinhViens" />
-            <End Role="Log" EntitySet="Logs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Mistake__IDRoom__778AC167" Association="Self.FK__Mistake__IDRoom__778AC167">
-            <End Role="Room" EntitySet="Rooms" />
-            <End Role="Mistake" EntitySet="Mistakes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Mistake__IDSinhV__75A278F5" Association="Self.FK__Mistake__IDSinhV__75A278F5">
-            <End Role="SinhVien" EntitySet="SinhViens" />
-            <End Role="Mistake" EntitySet="Mistakes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SinhVien__IDRoom__6D0D32F4" Association="Self.FK__SinhVien__IDRoom__6D0D32F4">
-            <End Role="Room" EntitySet="Rooms" />
-            <End Role="SinhVien" EntitySet="SinhViens" />
-          </AssociationSet>
-          <EntitySet Name="Menus" EntityType="KTXTDTUModel.Menu" />
-        </EntityContainer>
-        <EntityType Name="Menu">
-          <Key>
-            <PropertyRef Name="Order" />
-          </Key>
-          <Property Name="Order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Meta" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Hide" Type="Int32" Nullable="false" />
-          <Property Name="TextMenu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1222,245 +1224,155 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="KTXTDTUModel.Account">
               <MappingFragment StoreEntitySet="Account">
-                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Available" ColumnName="Available" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Available" ColumnName="Available" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AccountTypes">
             <EntityTypeMapping TypeName="KTXTDTUModel.AccountType">
               <MappingFragment StoreEntitySet="AccountType">
-                <ScalarProperty Name="IDAccountType" ColumnName="IDAccountType" />
-                <ScalarProperty Name="TypeDescription" ColumnName="TypeDescription" />
-                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="IDType" ColumnName="IDType" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
+                <ScalarProperty Name="TypeDescription" ColumnName="TypeDescription" />
+                <ScalarProperty Name="IDAccountType" ColumnName="IDAccountType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Attendances">
             <EntityTypeMapping TypeName="KTXTDTUModel.Attendance">
               <MappingFragment StoreEntitySet="Attendance">
-                <ScalarProperty Name="IDAttendance" ColumnName="IDAttendance" />
-                <ScalarProperty Name="IsAttend" ColumnName="IsAttend" />
-                <ScalarProperty Name="Reason" ColumnName="Reason" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="IsAttend" ColumnName="IsAttend" />
+                <ScalarProperty Name="IDAttendance" ColumnName="IDAttendance" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AttendanceBridges">
             <EntityTypeMapping TypeName="KTXTDTUModel.AttendanceBridge">
               <MappingFragment StoreEntitySet="AttendanceBridge">
-                <ScalarProperty Name="IDAttendance" ColumnName="IDAttendance" />
-                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
-                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
+                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
+                <ScalarProperty Name="IDAttendance" ColumnName="IDAttendance" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="KTXTDTUModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
-                <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
-                <ScalarProperty Name="CategoryDetail" ColumnName="CategoryDetail" />
-                <ScalarProperty Name="ColorChip" ColumnName="ColorChip" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="ColorChip" ColumnName="ColorChip" />
+                <ScalarProperty Name="CategoryDetail" ColumnName="CategoryDetail" />
+                <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
+                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CategoryBridges">
             <EntityTypeMapping TypeName="KTXTDTUModel.CategoryBridge">
               <MappingFragment StoreEntitySet="CategoryBridge">
-                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
-                <ScalarProperty Name="IDPost" ColumnName="IDPost" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDPost" ColumnName="IDPost" />
+                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Contracts">
             <EntityTypeMapping TypeName="KTXTDTUModel.Contract">
               <MappingFragment StoreEntitySet="Contract">
-                <ScalarProperty Name="IDContract" ColumnName="IDContract" />
-                <ScalarProperty Name="MSSV" ColumnName="MSSV" />
-                <ScalarProperty Name="IDCitizen" ColumnName="IDCitizen" />
-                <ScalarProperty Name="ProfilePlace" ColumnName="ProfilePlace" />
-                <ScalarProperty Name="IDPlace" ColumnName="IDPlace" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDPlace" ColumnName="IDPlace" />
+                <ScalarProperty Name="ProfilePlace" ColumnName="ProfilePlace" />
+                <ScalarProperty Name="IDCitizen" ColumnName="IDCitizen" />
+                <ScalarProperty Name="MSSV" ColumnName="MSSV" />
+                <ScalarProperty Name="IDContract" ColumnName="IDContract" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ContractBridges">
             <EntityTypeMapping TypeName="KTXTDTUModel.ContractBridge">
               <MappingFragment StoreEntitySet="ContractBridge">
-                <ScalarProperty Name="IDContract" ColumnName="IDContract" />
-                <ScalarProperty Name="IDPriority" ColumnName="IDPriority" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDPriority" ColumnName="IDPriority" />
+                <ScalarProperty Name="IDContract" ColumnName="IDContract" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Faculties">
             <EntityTypeMapping TypeName="KTXTDTUModel.Faculty">
               <MappingFragment StoreEntitySet="Faculty">
-                <ScalarProperty Name="IDFalcuty" ColumnName="IDFalcuty" />
-                <ScalarProperty Name="NameFalculty" ColumnName="NameFalculty" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NameFalculty" ColumnName="NameFalculty" />
+                <ScalarProperty Name="IDFalcuty" ColumnName="IDFalcuty" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Fees">
             <EntityTypeMapping TypeName="KTXTDTUModel.Fee">
               <MappingFragment StoreEntitySet="Fee">
-                <ScalarProperty Name="IDFee" ColumnName="IDFee" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
-                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDFee" ColumnName="IDFee" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Logs">
             <EntityTypeMapping TypeName="KTXTDTUModel.Log">
               <MappingFragment StoreEntitySet="Log">
-                <ScalarProperty Name="IDLog" ColumnName="IDLog" />
-                <ScalarProperty Name="IDFee" ColumnName="IDFee" />
-                <ScalarProperty Name="DateDone" ColumnName="DateDone" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
-                <ScalarProperty Name="Hide" ColumnName="Hide" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Mistakes">
-            <EntityTypeMapping TypeName="KTXTDTUModel.Mistake">
-              <MappingFragment StoreEntitySet="Mistake">
-                <ScalarProperty Name="IDMistake" ColumnName="IDMistake" />
-                <ScalarProperty Name="MistakeDes" ColumnName="MistakeDes" />
-                <ScalarProperty Name="TimeCaught" ColumnName="TimeCaught" />
-                <ScalarProperty Name="BedID" ColumnName="BedID" />
-                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
-                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
-                <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
-                <ScalarProperty Name="Hide" ColumnName="Hide" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Places">
-            <EntityTypeMapping TypeName="KTXTDTUModel.Place">
-              <MappingFragment StoreEntitySet="Place">
-                <ScalarProperty Name="IDPlace" ColumnName="IDPlace" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
-                <ScalarProperty Name="Hide" ColumnName="Hide" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Posts">
-            <EntityTypeMapping TypeName="KTXTDTUModel.Post">
-              <MappingFragment StoreEntitySet="Post">
-                <ScalarProperty Name="IDPost" ColumnName="IDPost" />
-                <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
-                <ScalarProperty Name="PostDetail" ColumnName="PostDetail" />
-                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
-                <ScalarProperty Name="Hide" ColumnName="Hide" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Priorities">
-            <EntityTypeMapping TypeName="KTXTDTUModel.Priority">
-              <MappingFragment StoreEntitySet="Priority">
-                <ScalarProperty Name="IDPriority" ColumnName="IDPriority" />
-                <ScalarProperty Name="PriorityDescription" ColumnName="PriorityDescription" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
-                <ScalarProperty Name="Hide" ColumnName="Hide" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Rooms">
-            <EntityTypeMapping TypeName="KTXTDTUModel.Room">
-              <MappingFragment StoreEntitySet="Room">
-                <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Floor" ColumnName="Floor" />
-                <ScalarProperty Name="Building" ColumnName="Building" />
-                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
-                <ScalarProperty Name="Hide" ColumnName="Hide" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SinhViens">
-            <EntityTypeMapping TypeName="KTXTDTUModel.SinhVien">
-              <MappingFragment StoreEntitySet="SinhVien">
-                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
-                <ScalarProperty Name="AttendDate" ColumnName="AttendDate" />
-                <ScalarProperty Name="AttendYear" ColumnName="AttendYear" />
-                <ScalarProperty Name="GraduateYear" ColumnName="GraduateYear" />
-                <ScalarProperty Name="MSSV" ColumnName="MSSV" />
-                <ScalarProperty Name="IDFalcuty" ColumnName="IDFalcuty" />
-                <ScalarProperty Name="IDContract" ColumnName="IDContract" />
-                <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
-                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateDone" ColumnName="DateDone" />
+                <ScalarProperty Name="IDFee" ColumnName="IDFee" />
+                <ScalarProperty Name="IDLog" ColumnName="IDLog" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1472,6 +1384,97 @@
                 <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Meta" ColumnName="Meta" />
                 <ScalarProperty Name="Order" ColumnName="Order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mistakes">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Mistake">
+              <MappingFragment StoreEntitySet="Mistake">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
+                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
+                <ScalarProperty Name="BedID" ColumnName="BedID" />
+                <ScalarProperty Name="TimeCaught" ColumnName="TimeCaught" />
+                <ScalarProperty Name="MistakeDes" ColumnName="MistakeDes" />
+                <ScalarProperty Name="IDMistake" ColumnName="IDMistake" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Place">
+              <MappingFragment StoreEntitySet="Place">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IDPlace" ColumnName="IDPlace" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
+                <ScalarProperty Name="PostDetail" ColumnName="PostDetail" />
+                <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+                <ScalarProperty Name="IDPost" ColumnName="IDPost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Priorities">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Priority">
+              <MappingFragment StoreEntitySet="Priority">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="PriorityDescription" ColumnName="PriorityDescription" />
+                <ScalarProperty Name="IDPriority" ColumnName="IDPriority" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SinhViens">
+            <EntityTypeMapping TypeName="KTXTDTUModel.SinhVien">
+              <MappingFragment StoreEntitySet="SinhVien">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
+                <ScalarProperty Name="IDContract" ColumnName="IDContract" />
+                <ScalarProperty Name="IDFalcuty" ColumnName="IDFalcuty" />
+                <ScalarProperty Name="MSSV" ColumnName="MSSV" />
+                <ScalarProperty Name="GraduateYear" ColumnName="GraduateYear" />
+                <ScalarProperty Name="AttendYear" ColumnName="AttendYear" />
+                <ScalarProperty Name="AttendDate" ColumnName="AttendDate" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

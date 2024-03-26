@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using doanNet.Controllers.DTO;
 
 namespace doanNet.ApiControllers
 {
@@ -43,10 +44,12 @@ namespace doanNet.ApiControllers
             }
         }
         [HttpPut]
-        private bool EntityExists(int id)
+        
+            private bool EntityExists(int id)
         {
             return db.Fees.Any(e => e.IDFee == id);
         }
+        [HttpPut]
         public async Task<IHttpActionResult> PutFee(int id, [FromBody] Fee Fee)
         {
 

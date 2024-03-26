@@ -14,6 +14,5 @@ namespace doanNet.Controllers.DTO
         public System.DateTime DateEnd { get; set; }
         public byte[] Status { get; set; }
         public int IDRoom { get; set; }
-        public int IDLog { get; set; }
     }
 }

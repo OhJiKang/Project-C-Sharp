@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using doanNet.Controllers.DTO;
 
 namespace doanNet.ApiControllers
 {
@@ -27,13 +28,30 @@ namespace doanNet.ApiControllers
         public List<Log> GetAllByMSSV(int mssv) {
             return db.Logs.Where(row => row.SinhVien.MSSV == mssv.ToString()).ToList();
         }
-        public IHttpActionResult AddingLog([FromBody] Log Log)
+        public void updateFeeWhenTransaction(int quantity,int idMSSV,int idFee)
+        {
+            var FeeNeedToUpdate = db.Fees.Where(row => row.IDFee == idFee).FirstOrDefault();
+            var allLog= db.Logs.Where(row=>row.IDSinhVien == idMSSV).ToList();
+            int previousLogs = allLog.Aggregate(0, (acc, x) => acc + x.Quantity);
+            if(previousLogs > FeeNeedToUpdate.Quantity) {
+                FeeNeedToUpdate.Status = 1;
+            }
+        }
+        public IHttpActionResult AddingLog([FromBody] LogDTO Log)
         {
 
             try
             {
-                db.Logs.Add(Log);
+                var newLog= new Log();
+                newLog.IDFee = Log.FeeID;
+                newLog.DateDone = Log.DateDone;
+                newLog.Quantity = Log.Quantity;
+                newLog.IDSinhVien = Log.IDSinhVien;
+                newLog.DateBegin=DateTime.Now;
+                newLog.Hide = 0;
+                db.Logs.Add(newLog);
                 db.SaveChangesAsync();
+                updateFeeWhenTransaction(Log.Quantity, Log.IDSinhVien, Log.FeeID);
                 return Json(new { Message = "Data received successfully!" });
             }
             catch (Exception ex)

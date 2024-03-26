@@ -33,12 +33,20 @@ namespace doanNet.ApiControllers
         {
             return db.Accounts.Where(row => row.IDAccount == id).FirstOrDefault();
         }
-        public IHttpActionResult AddingAccount([FromBody] Account Account)
+        [HttpPost]
+        public IHttpActionResult AddingAccountStudent([FromBody] Account Account)
         {
 
             try
             {
                 db.Accounts.Add(Account);
+                var newAccountType=new AccountType();
+                newAccountType.TypeDescription = "Sinh viên";
+                newAccountType.IDAccount = Account.IDAccount;
+                newAccountType.IDType = 1;
+                newAccountType.DateBegin= DateTime.Now;
+                newAccountType.Hide = 0;
+                db.AccountTypes.Add(newAccountType);
                 db.SaveChangesAsync();
                 return Json(new { Message = "Data received successfully!" });
             }

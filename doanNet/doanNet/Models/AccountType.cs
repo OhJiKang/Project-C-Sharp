@@ -21,6 +21,7 @@ namespace doanNet.Models
         public string Meta { get; set; }
         public System.DateTime DateBegin { get; set; }
         public int Hide { get; set; }
+        public Nullable<int> IDType { get; set; }
     
         public virtual Account Account { get; set; }
     }
