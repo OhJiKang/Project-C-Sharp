@@ -79,10 +79,10 @@ namespace doanNet.ApiControllers
                 var Attendancemodifier = db.Attendances.Where(row => row.IDAttendance == id).FirstOrDefault();
                 Attendancemodifier.IsAttend = Attendance.IsAttend;
                 Attendancemodifier.Reason = Attendance.Reason;
-                var AttendanceBridgemodifier = db.AttendanceBridges.Where(row => row.IDAttendance == id).FirstOrDefault();
-                AttendanceBridgemodifier.IDAccount=Attendance.IDAccount;
+                //var AttendanceBridgemodifier = db.AttendanceBridges.Where(row => row.IDAttendance == id).FirstOrDefault();
+                //AttendanceBridgemodifier.IDAccount=Attendance.IDAccount;
                 db.Entry(Attendancemodifier).State = EntityState.Modified;
-                db.Entry(AttendanceBridgemodifier).State = EntityState.Modified;
+                //db.Entry(AttendanceBridgemodifier).State = EntityState.Modified;
 
                 try
                 {
