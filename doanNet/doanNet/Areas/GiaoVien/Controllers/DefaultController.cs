@@ -18,11 +18,7 @@ namespace doanNet.Areas.GiaoVien.Controllers
         }
         public ActionResult QuanLySinhVien()
         {
-            var sinhviens = JsonConvert.SerializeObject(db.SinhViens.ToList(), Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
-                });
+            var sinhviens = db.SinhViens.ToList();
             ViewBag.sinhviens=sinhviens;
             return View();
         }

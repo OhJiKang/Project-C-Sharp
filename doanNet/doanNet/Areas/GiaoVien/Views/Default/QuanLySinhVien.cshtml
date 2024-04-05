@@ -347,9 +347,10 @@
 
 
         <div class="row">
-            <table class="table">
+            <table class="table" id="datatableform" style="width:100%">
                 <thead>
                     <tr>
+                        <th scope="col">STT</th>
                         <th scope="col">MSSV</th>
                         <th scope="col">Họ và tên Sinh viên</th>
                         <th scope="col">Địa chỉ</th>
@@ -362,17 +363,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    @{var number = 1; }
+                    @foreach (var item in ViewBag.sinhviens)
+                    {
+                        <tr>
+                            <td>@Html.Raw(number++)</td>
+                            <td>@item.MSSV</td>
+                            <td>@item.FullName</td>
+                            <td>@item.Address</td>
+                            <td>@item.BirthDay</td>
+                            <td>@item.AttendDate</td>
+                            <td>@item.AttendYear</td>
+                            <td>@item.Faculty.NameFalculty</td>
+                            <td>@item.Contract.IDContract</td>
+                            <td>@item.Room.IDRoom</td>
+                        </tr>
+                    }
+
                 </tbody>
             </table>
         </div>
@@ -381,13 +388,8 @@
 
 
 <script>
-    var sinhvien = JSON.parse(@Html.Raw(Json.Encode(ViewBag.sinhviens)));
-    const data = []
-    sinhvien.forEach((element) => {
-        console.log(element)
-        data.push({
-            MSSV:element.MSSV,FullName:element.FullName,Address:element.Address,BirthDay:element.BirthDay,AttendDate:element.AttendDate,AttendYear:element.AttendYear,Faculty:element.Faculty.NameFalculty
-        })
+    $(document).ready(() => {
+        let table = new DataTable('#datatableform');
+        
     })
-    console.log(data);
 </script>
