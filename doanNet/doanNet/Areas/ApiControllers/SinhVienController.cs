@@ -22,17 +22,34 @@ namespace doanNet.ApiControllers
             return db.SinhViens.ToList();
         }
 
+        public SinhVien GetByID(int? id)
+        {
+            return db.SinhViens.Where(row => row.IDSinhVien == id).FirstOrDefault();
+        }
+
         public SinhVien GetByMSSV(int mssv)
         {
             return db.SinhViens.Where(row => row.MSSV == mssv.ToString()).FirstOrDefault();
         }
+
         public List<SinhVien> GetAllSinhVienByRoom(int roomid,int? page)
         {
             return db.SinhViens.Where(row =>row.IDRoom==roomid).ToList();
         }
+
+        [HttpPost]
         public IHttpActionResult AddingSinhVien([FromBody] SinhVien SinhVien)
         {
-
+            SinhVien.DateBegin = DateTime.Now;
+            SinhVien.Hide = 0;
+            if(db.Contracts.Where(row=>row.MSSV == SinhVien.MSSV).FirstOrDefault() == null)
+            {
+                SinhVien.IDContract = 4;
+            }
+            else
+            {
+                SinhVien.IDContract = db.Contracts.Where(row => row.MSSV == SinhVien.MSSV).FirstOrDefault().IDContract;
+            }
             try
             {
                 db.SinhViens.Add(SinhVien);
@@ -54,10 +71,21 @@ namespace doanNet.ApiControllers
 
             try
             {
-                db.Entry(SinhVien).State = EntityState.Modified;
+                var SinhVienmodifier = db.SinhViens.Where(row => row.IDSinhVien == id).FirstOrDefault();
+                SinhVienmodifier.FullName = SinhVien.FullName;
+                SinhVienmodifier.MSSV = SinhVien.MSSV;
+                SinhVienmodifier.IDFalcuty = SinhVien.IDFalcuty;
+                SinhVienmodifier.AttendDate = SinhVien.AttendDate;
+                SinhVienmodifier.BirthDay = SinhVien.BirthDay;
+                SinhVienmodifier.AttendYear = SinhVien.AttendYear;
+                SinhVienmodifier.GraduateYear = SinhVien.GraduateYear;
+                SinhVienmodifier.IDRoom = SinhVien.IDRoom;
+                SinhVienmodifier.Address = SinhVien.Address;
+                SinhVienmodifier.DateBegin = DateTime.Now;
                 try
                 {
                     await db.SaveChangesAsync();
+                    return Ok(SinhVienmodifier);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -70,7 +98,6 @@ namespace doanNet.ApiControllers
                         throw;
                     }
                 }
-                return StatusCode(HttpStatusCode.NoContent);
             }
             catch (Exception ex)
             {
