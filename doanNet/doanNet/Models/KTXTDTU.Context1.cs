@@ -32,7 +32,6 @@ namespace doanNet.Models
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CategoryBridge> CategoryBridges { get; set; }
         public virtual DbSet<Contract> Contracts { get; set; }
-        public virtual DbSet<ContractBridge> ContractBridges { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Fee> Fees { get; set; }
         public virtual DbSet<Log> Logs { get; set; }

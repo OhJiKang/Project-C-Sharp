@@ -235,6 +235,7 @@ CREATE TABLE Log
 USE [KTXTDTU]
 GO
 
+ 
 INSERT INTO [dbo].[Place]
            ([IDPlace]
            ,[Description]
@@ -243,14 +244,13 @@ INSERT INTO [dbo].[Place]
            ,[DateBegin]
            ,[Hide])
      VALUES
-           ('KV1'
-           ,N'Khu Vực 1'
+           ('KV3'
+           ,N'Khu vực 3'
            ,null
            ,null
            ,GETDATE()
            ,0)
 GO
-
 INSERT INTO [dbo].[Priority]
            ([IDPriority]
            ,[PriorityDescription]
@@ -259,8 +259,8 @@ INSERT INTO [dbo].[Priority]
            ,[DateBegin]
            ,[Hide])
      VALUES
-           (10
-           ,N'Sinh viên khu vực tuyển sinh theo thứ tự: KV1 không thuộc thành phố, thị xã, KV2-NT không thuộc thành phố, thị xã; KV1 thuộc thành phố, thị xã; KV2-NT thuộc thành phố, thị xã; KV2; KV3.'
+           (11
+           ,N'Sinh viên khu vực tuyển sinh theo thứ tự: KV1 không thuộc thành phố, thị xã, KV2-NT không thuộc thành phố, thị xã; KV1 thuộc thành phố, thị xã; KV2-NT thuộc thành phố, thị xã; KV2; KV3'
            ,null
            ,null
            ,GETDATE()

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using doanNet.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,7 @@ namespace doanNet.Areas.GiaoVien.Controllers
 {
     public class DefaultController : Controller
     {
+        KTXTDTUEntities2 db = new KTXTDTUEntities2();
         // GET: GiaoVien/Default
         public ActionResult ChoosingRoom()
         {
@@ -15,6 +18,12 @@ namespace doanNet.Areas.GiaoVien.Controllers
         }
         public ActionResult QuanLySinhVien()
         {
+            var sinhviens = JsonConvert.SerializeObject(db.SinhViens.ToList(), Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                });
+            ViewBag.sinhviens=sinhviens;
             return View();
         }
         public ActionResult DanhSachHopDong()

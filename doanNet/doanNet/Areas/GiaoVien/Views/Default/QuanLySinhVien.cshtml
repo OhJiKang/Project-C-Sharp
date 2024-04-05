@@ -3,7 +3,11 @@
     ViewBag.Title = "QuanLySinhVien";
     Layout = "~/Views/Shared/layoutteacher.cshtml";
 }
+<script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/2.0.3/js/dataTables.js" crossorigin="anonymous"></script>
+<link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" rel="stylesheet">
 
+<link />
 <style>
 
     .modal {
@@ -55,6 +59,7 @@
         padding: 0;
         box-sizing: border-box;
     }
+
     body, input {
         color: #171717;
     }
@@ -227,7 +232,7 @@
         <button class="search-btn" type="submit">
             <span>Search</span>
         </button>
-    </form>  
+    </form>
     <div class="row">
         <div class="function_btn"
              style=" display: flex;justify-content: end; margin-top: 8px; margin-bottom: 8px; margin-right: 32px;">
@@ -304,33 +309,33 @@
 
                             </div>
 
-                        <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">Khoa</h6>
-                        </div>
-                        <div class="col-md-8 pe-5">
-                            <select name="khoa" id="khoa" style="width: 100%">
-                                <option value="cntt">Công nghệ thông tin</option>
-                                <option value="nna">Ngôn ngữ Anh</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">Mã số hợp đồng</h6>
-                        </div>
-                        <div class="col-md-8 pe-5">
-                            <select name="hd" id="hd" style="width: 100%">
-                                <option value="1111">1111</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">Mã phòng</h6>
-                        </div>
-                        <div class="col-md-8 pe-5">
-                            <select name="phong" id="phong" style="width: 100%">
-                                <option value="l01">L01</option>
-                            </select>
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">Khoa</h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <select name="khoa" id="khoa" style="width: 100%">
+                                    <option value="cntt">Công nghệ thông tin</option>
+                                    <option value="nna">Ngôn ngữ Anh</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">Mã số hợp đồng</h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <select name="hd" id="hd" style="width: 100%">
+                                    <option value="1111">1111</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">Mã phòng</h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <select name="phong" id="phong" style="width: 100%">
+                                    <option value="l01">L01</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                   </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                         <button type="button" class="btn btn-primary">Thêm sinh viên</button>
@@ -375,3 +380,14 @@
 </div>
 
 
+<script>
+    var sinhvien = JSON.parse(@Html.Raw(Json.Encode(ViewBag.sinhviens)));
+    const data = []
+    sinhvien.forEach((element) => {
+        console.log(element)
+        data.push({
+            MSSV:element.MSSV,FullName:element.FullName,Address:element.Address,BirthDay:element.BirthDay,AttendDate:element.AttendDate,AttendYear:element.AttendYear,Faculty:element.Faculty.NameFalculty
+        })
+    })
+    console.log(data);
+</script>

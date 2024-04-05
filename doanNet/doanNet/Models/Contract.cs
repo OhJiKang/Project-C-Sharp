@@ -17,24 +17,23 @@ namespace doanNet.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Contract()
         {
-            this.ContractBridges = new HashSet<ContractBridge>();
             this.SinhViens = new HashSet<SinhVien>();
         }
     
         public int IDContract { get; set; }
         public string MSSV { get; set; }
         public string IDCitizen { get; set; }
-        public byte[] ProfilePlace { get; set; }
+        public Nullable<int> ProfilePlace { get; set; }
         public string IDPlace { get; set; }
         public Nullable<int> Order { get; set; }
         public string Meta { get; set; }
         public System.DateTime DateBegin { get; set; }
         public int Hide { get; set; }
+        public Nullable<int> IDPriority { get; set; }
     
         public virtual Place Place { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContractBridge> ContractBridges { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SinhVien> SinhViens { get; set; }
+        public virtual Priority Priority { get; set; }
     }
 }
