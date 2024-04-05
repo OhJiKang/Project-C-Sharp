@@ -13,5 +13,13 @@ namespace doanNet.Areas.GiaoVien.Controllers
         {
             return View();
         }
+        public ActionResult QuanLySinhVien()
+        {
+            return View();
+        }
+        public ActionResult DanhSachHopDong()
+        {
+            return View();
+        }
     }
 }

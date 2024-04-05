@@ -379,6 +379,8 @@
     <Content Include="Areas\GiaoVien\Views\Default\ChoosingRoom.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Menu\GenerateMenu2.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Shared\layoutteacher.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\QuanLySinhVien.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\DanhSachHopDong.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\layout.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
