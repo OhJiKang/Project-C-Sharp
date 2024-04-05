@@ -1,9 +1,12 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+
+    <link href="~/Content/TeacherPage/Base.min.css" rel="stylesheet" />
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS -->
@@ -215,10 +218,8 @@
 </head>
 
 <body id="body-pd">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
     <header class="header" id="header">
-      
+        @{Html.RenderAction("GenerateMenu2", "Menu");}
 
     </header>
     <div class="l-navbar" id="nav-bar">
@@ -230,6 +231,8 @@
     </div>
     <!--Container Main start-->
     <div class="height-100 bg-light" style="margin-top: 80px">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
         @RenderBody()
     </div>
     <!-- Modal markup -->

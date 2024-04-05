@@ -247,6 +247,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\GiaoVien\Controllers\DefaultController.cs" />
+    <Compile Include="Areas\GiaoVien\Controllers\MenuController.cs" />
+    <Compile Include="Areas\GiaoVien\GiaoVienAreaRegistration.cs" />
     <Compile Include="Controllers\DTO\AccountDTO.cs" />
     <Compile Include="Controllers\DTO\AttendanceDTO.cs" />
     <Compile Include="Controllers\DTO\CategoryDTO.cs" />
@@ -371,6 +374,11 @@
     <Content Include="Models\KTXTDTU.edmx.diagram">
       <DependentUpon>KTXTDTU.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\GiaoVien\Views\web.config" />
+    <Content Include="Areas\GiaoVien\Views\Shared\Layout2.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\ChoosingRoom.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Menu\GenerateMenu2.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Shared\layoutteacher.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\layout.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
@@ -428,6 +436,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\GiaoVien\Data\" />
     <Folder Include="Content\CSS\" />
     <Folder Include="Views\App_LocalResources\" />
   </ItemGroup>
