@@ -1,7 +1,7 @@
-﻿import * as ApiConfig from "./APIConfig"
-const url = `${ApiConfig.baseURL}/attendance`
+﻿let baseURL = "/api"
+const url = `${baseURL}/attendance`
 
-export function Postattendance(AttedanceData) {
+function Postattendance(AttedanceData) {
     axios({
         method: 'post', 
         url: `${url}/AddingAttendance`,
@@ -13,7 +13,7 @@ export function Postattendance(AttedanceData) {
         }
     });
 }
-export function Putattendance(int id) {
+function Putattendance(id) {
     axios({
         method: 'put',
         url: `${url}/PutAttendance/${id}`,

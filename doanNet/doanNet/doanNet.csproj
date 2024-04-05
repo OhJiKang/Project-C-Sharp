@@ -134,9 +134,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\JSAPI\APIConfig.js" />
-    <Content Include="Content\JSAPI\AttendanceAPI.js" />
-    <Content Include="Content\JSAPI\RoomAPI.js" />
+    <Content Include="Content\Script\JSAPI\APIConfig.js" />
+    <Content Include="Content\Script\JSAPI\AttendanceAPI.js" />
+    <Content Include="Content\Script\JSAPI\RoomAPI.js" />
+    <Content Include="Content\Script\JSAPI\SinhVienAPI.js" />
     <Content Include="Images\agreement.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
