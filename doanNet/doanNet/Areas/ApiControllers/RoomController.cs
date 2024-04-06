@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Threading;
 
 namespace doanNet.ApiControllers
 {
@@ -25,9 +26,9 @@ namespace doanNet.ApiControllers
         {
             return db.Rooms.Where(row => row.IDRoom == id).FirstOrDefault();
         }
-        public IHttpActionResult AddingRoom([FromBody] Room Room)
+        public IHttpActionResult PostRoom([FromBody] Room Room)
         {
-
+            
             try
             {
                 db.Rooms.Add(Room);
@@ -46,13 +47,17 @@ namespace doanNet.ApiControllers
         }
         public async Task<IHttpActionResult> PutRoom(int id, [FromBody] Room Room)
         {
-
+            var Roommodifier = db.Rooms.Where(row => row.IDRoom == id).FirstOrDefault();
+            Roommodifier.Building = Room.Building;
+            Roommodifier.Floor= Room.Floor;
+            Roommodifier.Name= Room.Name;
+            Roommodifier.DateBegin = DateTime.Now;
             try
             {
-                db.Entry(Room).State = EntityState.Modified;
                 try
                 {
                     await db.SaveChangesAsync();
+                    return Ok(Roommodifier);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -65,8 +70,7 @@ namespace doanNet.ApiControllers
                         throw;
                     }
                 }
-                return StatusCode(HttpStatusCode.NoContent);
-            }
+\            }
             catch (Exception ex)
             {
                 return Json(new { Message = "Adding Failed!Error: " + ex, });
