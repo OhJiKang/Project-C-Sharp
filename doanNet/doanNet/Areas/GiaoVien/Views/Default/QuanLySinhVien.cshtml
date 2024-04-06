@@ -320,12 +320,12 @@
                                 </select>
                             </div>
                             <div class="col-md-4 ps-5">
-                                <h6 class="mb-0 font-weight-bold">Mã phòng</h6>
+                                <h6 class="mb-0 font-weight-bold">Mã phòng</h6>
                             </div>
-                            <div class="col-md-8 pe-5">
-                                <select name="phong" id="phong" class="IDRoom-Place" style="width: 100%">
-                                    <option value="1">L01</option>
-                                </select>
+                            <div class="col-md-8 mt-2 pe-5">
+                                <a href=@Url.Action("ChoosingRoom","Default")>
+                                    <button type="button" class="btn btn-primary Choosing_Room">Chọn phòng</button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -405,13 +405,16 @@
                                 </select>
                             </div>
                             <div class="col-md-4 ps-5">
-                                <h6 class="mb-0 font-weight-bold">Mã phòng</h6>
+                                <h6 class="mb-0 font-weight-bold">Tên phòng</h6>
                             </div>
-                            <div class="col-md-8 pe-5">
-                                <select name="phong" id="phong" class="IDRoom-Place" style="width: 100%">
-                                    <option value="1">L01</option>
-                                    <option value="2">L02</option>
-                                </select>
+                            <div class="col-md-8 mt-2 pe-5" style="display:flex;align-content:center">
+                                <input type="text" style="width:20%;margin-top:0; margin-right:12px" class="form-control IDRoom-Place" readonly />
+                                <div class="Choosing_Place">
+                                    <a href=@Url.Action("ChoosingRoom","Default")>
+                                        <button type="button" class="btn btn-primary Choosing_Room">Chọn lại phòng</button>
+                                    </a>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -449,9 +452,9 @@
                             <td>@item.MSSV</td>
                             <td>@item.FullName</td>
                             <td>@item.Address</td>
-                            <td>@item.BirthDay</td>
-                            <td>@item.AttendDate</td>
-                            <td>@item.AttendYear</td>
+                            <td>@MyHelper.FormatDate(item.BirthDay)</td>
+                            <td>@MyHelper.FormatDate(item.AttendDate)</td>
+                            <td>@item.AttendYear - @item.GraduateYear</td>
                             <td>@item.Faculty.NameFalculty</td>
                             <td>@item.Contract.IDContract</td>
                             <td>@item.Room.Name</td>

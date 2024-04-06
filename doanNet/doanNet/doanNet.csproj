@@ -379,6 +379,7 @@
     <Content Include="Areas\GiaoVien\Views\Shared\layoutteacher.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\QuanLySinhVien.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\DanhSachHopDong.cshtml" />
+    <Content Include="App_Code\MyHelper.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\layout.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
