@@ -26,5 +26,42 @@ namespace doanNet.Areas.GiaoVien.Controllers
         {
             return View();
         }
+        public ActionResult DanhSachHopDongTheoThang()
+        {
+            return View();
+        }
+        public ActionResult GhiLoiKTX()
+        {
+            return View();
+        }
+        public ActionResult Mistake()
+        {
+            return View();
+        }
+        public ActionResult Post()
+        {
+            return View();
+        }
+        public ActionResult QuanLyMenu()
+        {
+            return View();
+        }
+        public ActionResult QuanLyPhong()
+        {
+            return View();
+        }
+        public ActionResult QuanLyTaiKhoan()
+        {
+            return View();
+        }
+        public ActionResult RegisterPlace()
+        {
+            return View();
+        }
+        public ActionResult ThemBaiViet()
+        {
+            return View();
+        }
+
     }
 }

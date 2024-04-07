@@ -70,7 +70,7 @@ namespace doanNet.ApiControllers
                         throw;
                     }
                 }
-\            }
+            }
             catch (Exception ex)
             {
                 return Json(new { Message = "Adding Failed!Error: " + ex, });
