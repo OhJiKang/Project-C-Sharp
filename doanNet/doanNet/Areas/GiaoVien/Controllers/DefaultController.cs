@@ -14,6 +14,15 @@ namespace doanNet.Areas.GiaoVien.Controllers
         // GET: GiaoVien/Default
         public ActionResult ChoosingRoom()
         {
+            var rooms = db.Rooms.ToList();
+            var ArrNumOfStudent =new List<int>();
+            foreach(var room in rooms)
+            {
+                int NumberStudentOfRoom=db.SinhViens.Where(row=>row.IDRoom==room.IDRoom).Count(); ;
+                ArrNumOfStudent.Add(NumberStudentOfRoom);
+            }
+            ViewBag.ArrNumOfStudent = ArrNumOfStudent;
+            ViewBag.rooms = rooms;
             return View();
         }
         public ActionResult QuanLySinhVien()

@@ -198,7 +198,9 @@
         .search-bar input:valid + .search-btn:active {
             transform: translateY(1px);
         }
-
+    .edit_modal_open_btn:hover{
+        cursor:pointer;
+    }
     @@media screen and (prefers-color-scheme: dark) {
         body, input {
             color: #f1f1f1;
@@ -246,6 +248,7 @@
                 }
 
             </script>
+
         </div>
         <div class="modal fade" id="ThemSinhVien" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -314,13 +317,35 @@
                                 </select>
                             </div>
                             <div class="col-md-4 ps-5">
-                                <h6 class="mb-0 font-weight-bold">Mã phòng</h6>
+                                <h6 class="mb-0 font-weight-bold">Tên Phòng</h6>
                             </div>
-                            <div class="col-md-8 mt-2 pe-5">
-                                <a href=@Url.Action("ChoosingRoom","Default")>
-                                    <button type="button" class="btn btn-primary Choosing_Room">Chọn phòng</button>
-                                </a>
+                            <div class="col-md-8 mt-2 pe-5 room-function-place" style="display:flex;align-content:center">
+
+
                             </div>
+                            <script>
+
+                                const SinhVienData = JSON.parse(sessionStorage.getItem("StudentTempData"))
+                                if (SinhVienData && SinhVienData.RoomID) {
+                                    const editHTML = `
+                                                                <input type="text" value=${SinhVienData.RoomName} id=${SinhVienData.RoomID} style="width:20%;margin-top:0; margin-right:12px" class="form-control IDRoom-Place" readonly />
+                                                            <div class="Choosing_Place">
+                                                                <a href="#" class="Edit-Choosing-Btn">
+                                                                    <button type="button" class="btn btn-primary Choosing_Room">Chọn lại phòng</button>
+                                                                </a>
+                                                            </div>
+                                                                `
+                                    $(".room-function-place").append(editHTML);
+                                }
+                                else {
+                                    const ChoosingHTML = `
+                                                                <a href="#">
+                                                                <button type="button" class="btn btn-primary Choosing_Room">Chọn phòng</button>
+                                                            </a>
+                                                                `
+                                    $(".room-function-place").append(ChoosingHTML);
+                                }
+                            </script>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -331,7 +356,25 @@
 
             </div>
         </div>
-        
+
+        <script>
+            $(".Choosing_Room").click((e) => {
+                e.preventDefault();
+                 const SinhVienData = {
+                        FullName: $(".FullName-Place").val(),
+                        Address: $(".Address-Place").val(),
+                        BirthDay: $(".BirthDay-Place").val(),
+                        AttendDate: $(".AttendDate-Place").val(),
+                        AttendYear: $(".AttendYear-Place").val(),
+                        GraduateYear: $(".GraduateYear-Place").val(),
+                        MSSV: $(".MSSV-Place").val(),
+                        IDFalcuty: $(".IDFalcuty-Place").val(),
+                    }
+                hrefChoosingRoom='@Url.Action("ChoosingRoom", "Default")';
+                window.sessionStorage.setItem("StudentTempData", JSON.stringify(SinhVienData));
+                window.location.href = hrefChoosingRoom;
+            })
+        </script>
         <div class="modal fade" id="EditSinhVien" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -404,11 +447,11 @@
                             <div class="col-md-8 mt-2 pe-5" style="display:flex;align-content:center">
                                 <input type="text" style="width:20%;margin-top:0; margin-right:12px" class="form-control IDRoom-Place" readonly />
                                 <div class="Choosing_Place">
-                                    <a href=@Url.Action("ChoosingRoom","Default")>
-                                        <button type="button" class="btn btn-primary Choosing_Room">Chọn lại phòng</button>
+                                    <a href="#">
+                                        <button type="button" class="btn btn-primary Choosing_Room_Edit_Modal">Chọn lại phòng</button>
                                     </a>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -420,6 +463,40 @@
 
             </div>
         </div>
+        <script>
+            $(".Choosing_Room_Edit_Modal").click((e) => {
+                e.preventDefault();
+                 const SinhVienData = {
+                     FullName: $("#EditSinhVien .FullName-Place").val(),
+                     Address: $("#EditSinhVien .Address-Place").val(),
+                     BirthDay: $("#EditSinhVien .BirthDay-Place").val(),
+                     AttendDate: $("#EditSinhVien .AttendDate-Place").val(),
+                     AttendYear: $("#EditSinhVien .AttendYear-Place").val(),
+                     GraduateYear: $("#EditSinhVien .GraduateYear-Place").val(),
+                     MSSV: $("#EditSinhVien .MSSV-Place").val(),
+                     IDFalcuty: $("#EditSinhVien .IDFalcuty-Place").val(),
+                    }
+                hrefChoosingRoom='@Url.Action("ChoosingRoom", "Default")';
+                window.sessionStorage.setItem("StudentTempDataEdit", JSON.stringify(SinhVienData));
+                window.location.href = hrefChoosingRoom;
+            })
+            $(".Choosing_Room").click((e) => {
+                e.preventDefault();
+                const SinhVienData = {
+                        FullName: $(".FullName-Place").val(),
+                        Address: $(".Address-Place").val(),
+                        BirthDay: $(".BirthDay-Place").val(),
+                        AttendDate: $(".AttendDate-Place").val(),
+                        AttendYear: $(".AttendYear-Place").val(),
+                        GraduateYear: $(".GraduateYear-Place").val(),
+                        MSSV: $(".MSSV-Place").val(),
+                        IDFalcuty: $(".IDFalcuty-Place").val(),
+                    }
+                hrefChoosingRoom='@Url.Action("ChoosingRoom", "Default")';
+                window.sessionStorage.setItem("StudentTempData", JSON.stringify(SinhVienData));
+                window.location.href = hrefChoosingRoom;
+            })
+        </script>
         <div class="row">
             <table class="table" id="datatableform" style="width:100%">
                 <thead>
@@ -466,9 +543,36 @@
 @Scripts.Render("~/Content/Script/JSAPI/SinhVienAPI.js")
 
 <script>
-    /* END EXTERNAL SOURCE */
-    /* BEGIN EXTERNAL SOURCE */
     $(document).ready(async () => {
+        /* Checking Student*/
+        if (sessionStorage.getItem("StudentTempData")) {
+            const StudentTempData = JSON.parse(sessionStorage.getItem("StudentTempData"))
+            $(".FullName-Place").val(StudentTempData.FullName),
+            $(".Address-Place").val(StudentTempData.Address),
+            $(".BirthDay-Place").val(StudentTempData.BirthDay),
+            $(".AttendDate-Place").val(StudentTempData.AttendDate),
+            $(".AttendYear-Place").val(StudentTempData.AttendYear),
+            $(".GraduateYear-Place").val(StudentTempData.GraduateYear),
+            $(".MSSV-Place").val(StudentTempData.MSSV),
+            $(".IDFalcuty-Place").val(StudentTempData.IDFalcuty)
+            showModal();
+        }
+        if (sessionStorage.getItem("StudentTempDataEdit")) {
+            const StudentTempData = JSON.parse(sessionStorage.getItem("StudentTempDataEdit"))
+            $("#EditSinhVien .FullName-Place").val(StudentTempData.FullName),
+                $("#EditSinhVien .Address-Place").val(StudentTempData.Address),
+                $("#EditSinhVien .BirthDay-Place").val(StudentTempData.BirthDay),
+                $("#EditSinhVien .AttendDate-Place").val(StudentTempData.AttendDate),
+                $("#EditSinhVien .AttendYear-Place").val(StudentTempData.AttendYear),
+                $("#EditSinhVien .GraduateYear-Place").val(StudentTempData.GraduateYear),
+                $("#EditSinhVien .MSSV-Place").val(StudentTempData.MSSV),
+                $("#EditSinhVien .IDFalcuty-Place").val(StudentTempData.IDFalcuty)
+                $("#EditSinhVien .IDRoom-Place").val(StudentTempData.RoomName)
+                $("#EditSinhVien .IDRoom-Place").attr("id", StudentTempData.RoomName)
+
+            var myModal = new bootstrap.Modal(document.getElementById('EditSinhVien'));
+            myModal.show();
+        }
         let table = new DataTable('#datatableform');
         //Thêm Sinh Viên
         const addStudent = async () => {
@@ -493,8 +597,8 @@
                 AttendYear: $(".AttendYear-Place").val(),
                 GraduateYear: $(".GraduateYear-Place").val(),
                 MSSV: $(".MSSV-Place").val(),
-                IDFalcuty: $(".IDFalcuty-Place").val(),
-                IDRoom: $('.IDRoom-Place').val()
+                IDFalcuty: $(".IDFalcuty-Place").val(), 
+                IDRoom: $('.IDRoom-Place').attr("id")
             }
             let result = await PostSinhVien(SinhVienData);
             document.location.reload();
@@ -502,6 +606,7 @@
         }
         $(".add-student").click(async () => {
             await addStudent();
+            sessionStorage.removeItem("StudentTempData");
         });
         
 
@@ -541,7 +646,7 @@
                 GraduateYear: $("#EditSinhVien .GraduateYear-Place").val(),
                 MSSV: $("#EditSinhVien .MSSV-Place").val(),
                 IDFalcuty: $("#EditSinhVien .IDFalcuty-Place").val(),
-                IDRoom: $('#EditSinhVien .IDRoom-Place').val()
+                IDRoom: $('#EditSinhVien .IDRoom-Place').id()
             }
             let result = await PutSinhVien(id, SinhVienData);
             document.location.reload();

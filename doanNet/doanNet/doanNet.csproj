@@ -485,6 +485,13 @@
     <Content Include="Areas\GiaoVien\Views\Default\QuanLyPhong.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\DanhSachHoaDonTheoThang .cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\DanhSachHopDongTheoThang.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\GhiLoiKTX.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\Mistake.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\Post.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\QuanLyMenu.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\QuanLyTaiKhoan.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\RegisterPlace.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\ThemBaiViet.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\layout.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
