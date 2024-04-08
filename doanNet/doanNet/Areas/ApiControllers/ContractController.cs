@@ -28,6 +28,11 @@ namespace doanNet.ApiControllers
         {
             return db.Contracts.Where(row => row.IDContract == id).FirstOrDefault();
         }
+
+        public Contract GetContractByMSSV(string MSSV)
+        {
+            return db.Contracts.Where(row => row.MSSV == MSSV).FirstOrDefault();
+        }
         public IHttpActionResult AddingContract([FromBody] Contract Contract)
         {
 

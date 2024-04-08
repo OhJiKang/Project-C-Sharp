@@ -28,10 +28,10 @@ namespace doanNet.ApiControllers
         public List<Log> GetAllByMSSV(int mssv) {
             return db.Logs.Where(row => row.SinhVien.MSSV == mssv.ToString()).ToList();
         }
-        public void updateFeeWhenTransaction(int quantity,int idMSSV,int idFee)
+        public void updateFeeWhenTransaction(int idFee)
         {
             var FeeNeedToUpdate = db.Fees.Where(row => row.IDFee == idFee).FirstOrDefault();
-            var allLog= db.Logs.Where(row=>row.IDSinhVien == idMSSV).ToList();
+            var allLog= db.Logs.Where(row=>row.IDFee == idFee).ToList();
             int previousLogs = allLog.Aggregate(0, (acc, x) => acc + x.Quantity);
             if(previousLogs > FeeNeedToUpdate.Quantity) {
                 FeeNeedToUpdate.Status = 1;
@@ -42,16 +42,15 @@ namespace doanNet.ApiControllers
 
             try
             {
-                var newLog= new Log();
-                newLog.IDFee = Log.FeeID;
-                newLog.DateDone = Log.DateDone;
-                newLog.Quantity = Log.Quantity;
-                newLog.IDSinhVien = Log.IDSinhVien;
-                newLog.DateBegin=DateTime.Now;
-                newLog.Hide = 0;
-                db.Logs.Add(newLog);
+                var LogNeedToAdd= new Log();
+                LogNeedToAdd.DateDone = Log.DateDone;
+                LogNeedToAdd.Quantity = Log.Quantity;
+                LogNeedToAdd.IDSinhVien = Log.IDSinhVien;
+                LogNeedToAdd.DateBegin=DateTime.Now;
+                LogNeedToAdd.Hide = 0;
+                db.Logs.Add(LogNeedToAdd);
                 db.SaveChangesAsync();
-                updateFeeWhenTransaction(Log.Quantity, Log.IDSinhVien, Log.FeeID);
+                updateFeeWhenTransaction(Log.FeeID);
                 return Json(new { Message = "Data received successfully!" });
             }
             catch (Exception ex)
@@ -69,27 +68,19 @@ namespace doanNet.ApiControllers
 
             try
             {
-                db.Entry(Log).State = EntityState.Modified;
-                try
-                {
-                    await db.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EntityExists(id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return Json(new { Message = "Putting Success " });
+                var LogNeedToChange = db.Logs.Where(e => e.IDLog == id).FirstOrDefault();
+                LogNeedToChange.DateDone = Log.DateDone;
+                LogNeedToChange.Quantity = Log.Quantity;
+                LogNeedToChange.IDSinhVien = Log.IDSinhVien;
+                LogNeedToChange.DateBegin = DateTime.Now;
+                LogNeedToChange.Hide = 0;
+                await db.SaveChangesAsync();
+                updateFeeWhenTransaction(id);
+                return Json(new { Message = "Data received successfully!" });
             }
             catch (Exception ex)
             {
-                return Json(new { Message = "Putting Failed!Error: " + ex, });
+                return Json(new { Message = "Adding Failed!Error: " + ex, });
             }
         }
         [HttpPut]

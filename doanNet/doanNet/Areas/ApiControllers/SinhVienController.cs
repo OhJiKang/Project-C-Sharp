@@ -27,9 +27,9 @@ namespace doanNet.ApiControllers
             return db.SinhViens.Where(row => row.IDSinhVien == id).FirstOrDefault();
         }
 
-        public SinhVien GetByMSSV(int mssv)
+        public SinhVien GetByMSSV(string mssv)
         {
-            return db.SinhViens.Where(row => row.MSSV == mssv.ToString()).FirstOrDefault();
+            return db.SinhViens.Where(row => row.MSSV == mssv).FirstOrDefault();
         }
 
         public List<SinhVien> GetAllSinhVienByRoom(int roomid,int? page)

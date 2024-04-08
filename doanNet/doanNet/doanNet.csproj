@@ -47,6 +47,9 @@
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net472\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="dotless.AspNet, Version=1.6.7.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
       <HintPath>..\packages\dotless.AspNetHandler.1.6.7\lib\net461\dotless.AspNet.dll</HintPath>
     </Reference>
@@ -69,9 +72,22 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -215,8 +231,16 @@
     <Content Include="Areas\SinhVienTuQuan\Views\bin\System.Web.Webpages.Razor.xml" />
     <Content Include="Areas\SinhVienTuQuan\Views\bin\System.Web.Webpages.xml" />
     <Content Include="Areas\SinhVienTuQuan\Views\bin\WebGrease.dll" />
-    <Content Include="Content\Script\JSAPI\APIConfig.js" />
+    <Content Include="Content\Script\JSAPI\AccountAPI.js" />
     <Content Include="Content\Script\JSAPI\AttendanceAPI.js" />
+    <Content Include="Content\Script\JSAPI\CategoryAPI.js" />
+    <Content Include="Content\Script\JSAPI\ContractAPI.js" />
+    <Content Include="Content\Script\JSAPI\FeeAPI.js" />
+    <Content Include="Content\Script\JSAPI\LogAPI.js" />
+    <Content Include="Content\Script\JSAPI\LoginAPI.js" />
+    <Content Include="Content\Script\JSAPI\MenuAPI.js" />
+    <Content Include="Content\Script\JSAPI\MistakeAPI.js" />
+    <Content Include="Content\Script\JSAPI\PostAPI.js" />
     <Content Include="Content\Script\JSAPI\RoomAPI.js" />
     <Content Include="Content\Script\JSAPI\SinhVienAPI.js" />
     <Content Include="Images\agreement.png" />
@@ -373,9 +397,6 @@
       <DependentUpon>KTXTDTU.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Contract.cs">
-      <DependentUpon>KTXTDTU.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\database_firewall_rules.cs">
       <DependentUpon>KTXTDTU.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Faculty.cs">

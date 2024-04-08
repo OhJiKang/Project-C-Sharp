@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using doanNet.Controllers.DTO;
+using BCrypt.Net;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 
 namespace doanNet.ApiControllers
 {
@@ -20,13 +22,13 @@ namespace doanNet.ApiControllers
         {
             return db.Accounts.ToList();
         }
-
-        public bool CheckingLogin([FromBody] LoginDTO loginTemp) {
-            if (db.Accounts.Where(row => row.Password == loginTemp.password && row.SinhVien.MSSV == loginTemp.account).FirstOrDefault()==null)
+        public IHttpActionResult CheckingLogin([FromBody] LoginDTO loginTemp) {
+            var Account = db.Accounts.Where(row=>row.SinhVien.MSSV == loginTemp.account).FirstOrDefault();
+            if (Account==null || !BCrypt.Net.BCrypt.Verify(Account.Password, loginTemp.password))
             {
-                return false;
+                return Content(HttpStatusCode.Unauthorized, "Sai Tài Khoản hoặc mật khẩu");
             }
-            return true;
+            return Ok("Login successful");
         }
 
         public Account GetByAccountId(int id)
@@ -36,17 +38,14 @@ namespace doanNet.ApiControllers
         [HttpPost]
         public IHttpActionResult AddingAccountStudent([FromBody] Account Account)
         {
-
+            Account.Password = BCrypt.Net.BCrypt.HashPassword(Account.Password);
+            Account.Available = 0;
+            Account.AccountTypeID = 1;
+            Account.DateBegin = DateTime.Now;
+            Account.Hide = 0;
             try
             {
                 db.Accounts.Add(Account);
-                var newAccountType=new AccountType();
-                newAccountType.TypeDescription = "Sinh viên";
-                newAccountType.IDAccount = Account.IDAccount;
-                newAccountType.IDType = 1;
-                newAccountType.DateBegin= DateTime.Now;
-                newAccountType.Hide = 0;
-                db.AccountTypes.Add(newAccountType);
                 db.SaveChangesAsync();
                 return Json(new { Message = "Data received successfully!" });
             }
@@ -60,34 +59,7 @@ namespace doanNet.ApiControllers
         {
             return db.Accounts.Any(e => e.IDAccount == id);
         }
-        public async Task<IHttpActionResult> PutAccount(int id, [FromBody] Account Account)
-        {
-
-            try
-            {
-                db.Entry(Account).State = EntityState.Modified;
-                try
-                {
-                    await db.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EntityExists(id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return StatusCode(HttpStatusCode.NoContent);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Message = "Adding Failed!Error: " + ex, });
-            }
-        }
+        
         [HttpPut]
         public IHttpActionResult HiddingAccount(int id)
         {
@@ -95,6 +67,25 @@ namespace doanNet.ApiControllers
             hideAccount.Hide = hideAccount.Hide == 0 ? 1 : 0;
             db.SaveChangesAsync();
             return Json(new { Message = "Hiding Succesfully!" });
+        }
+        [HttpPut]
+        public IHttpActionResult ChangingPassword(int id,string password)
+        {
+            Account AccountNeedToChange = db.Accounts.Where(row => row.IDAccount == id).FirstOrDefault();
+            AccountNeedToChange.Password = BCrypt.Net.BCrypt.HashPassword(password);
+            if (AccountNeedToChange.Available==0) {
+                AccountNeedToChange.Available = 1;
+            }
+            db.SaveChangesAsync();
+            return Json(new { Message = "Changing Succesfully!" });
+        }
+        [HttpPut]
+        public IHttpActionResult PromotingAccountType(int id)
+        {
+            Account AccountNeedToChange = db.Accounts.Where(row => row.IDAccount == id).FirstOrDefault();
+            AccountNeedToChange.AccountTypeID = 2;
+            db.SaveChangesAsync();
+            return Json(new { Message = "Promoting Succesfully!" });
         }
     }
 }

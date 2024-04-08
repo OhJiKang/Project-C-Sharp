@@ -25,13 +25,14 @@ namespace doanNet.ApiControllers
         {
             return db.Fees.Where(row => row.IDFee == id).FirstOrDefault();
         }
-        public List<Fee> GetAllByRoomID(int roomid)
+        public List<Fee> GetFeeByRoomID(int roomid)
         {
-            return db.Fees.Where(row => row.Room.IDRoom == roomid).ToList();
+            return db.Fees.Where(row => row.IDRoom == roomid).ToList();
         }
         public IHttpActionResult AddingFee([FromBody] Fee Fee)
         {
-
+            Fee.DateBegin= DateTime.Now;
+            Fee.Hide = 0;
             try
             {
                 db.Fees.Add(Fee);

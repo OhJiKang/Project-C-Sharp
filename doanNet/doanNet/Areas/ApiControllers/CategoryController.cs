@@ -27,7 +27,7 @@ namespace doanNet.ApiControllers
         {
             Category updateCategory = db.Categories.Where(row => row.IDCategory == Category.IDCategory).FirstOrDefault();
             updateCategory.CategoryTitle = Category.CategoryTitle;
-            updateCategory.CategoryDetail = Category.CategoryDetail;
+            updateCategory.CategoryDetail = "Thẻ này là thẻ "+ Category.CategoryTitle;
             updateCategory.ColorChip = Category.ColorChip;
             updateCategory.DateBegin = DateTime.Now;
             db.SaveChangesAsync();

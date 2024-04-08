@@ -10,6 +10,9 @@ namespace doanNet.Controllers.DTO
         public int IDFee { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        
+        public int Quantity { get; set; }
+
         public System.DateTime DateStart { get; set; }
         public System.DateTime DateEnd { get; set; }
         public byte[] Status { get; set; }

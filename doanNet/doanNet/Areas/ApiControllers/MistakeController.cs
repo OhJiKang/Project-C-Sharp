@@ -54,7 +54,13 @@ namespace doanNet.ApiControllers
 
             try
             {
-                db.Entry(Mistake).State = EntityState.Modified;
+                var MistakeNeedToFind= db.Mistakes.Where(row=>row.IDMistake==id).FirstOrDefault();
+                MistakeNeedToFind.TimeCaught = Mistake.TimeCaught;
+                MistakeNeedToFind.IDAccount = Mistake.IDAccount;
+                MistakeNeedToFind.BedID = Mistake.BedID;
+                MistakeNeedToFind.IDRoom = Mistake.IDRoom;
+                MistakeNeedToFind.MistakeDes= Mistake.MistakeDes;
+                MistakeNeedToFind.DateBegin = DateTime.Now;
                 try
                 {
                     await db.SaveChangesAsync();

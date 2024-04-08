@@ -21,10 +21,14 @@ namespace doanNet.ApiControllers
             return db.Attendances.ToList();
         }
 
-
         public Attendance GetByAttendanceId(int id)
         {
             return db.Attendances.Where(row => row.IDAttendance == id).FirstOrDefault();
+        }
+
+        public List<AttendanceBridge> GetAllAttendanceBySinhVienID(int SinhvienID)
+        {
+            return db.AttendanceBridges.Where(row=>row.IDSinhVien==SinhvienID).Include(attendance=>attendance.Attendance).ToList();
         }
         public IHttpActionResult AddingAttendance([FromBody] AttendanceDTO Attendance)
         {
@@ -79,9 +83,9 @@ namespace doanNet.ApiControllers
                 var Attendancemodifier = db.Attendances.Where(row => row.IDAttendance == id).FirstOrDefault();
                 Attendancemodifier.IsAttend = Attendance.IsAttend;
                 Attendancemodifier.Reason = Attendance.Reason;
-                //var AttendanceBridgemodifier = db.AttendanceBridges.Where(row => row.IDAttendance == id).FirstOrDefault();
-                //AttendanceBridgemodifier.IDAccount=Attendance.IDAccount;
-                db.Entry(Attendancemodifier).State = EntityState.Modified;
+                var AttendanceBridgemodifier = db.AttendanceBridges.Where(row => row.IDAttendance == id).FirstOrDefault();
+                AttendanceBridgemodifier.IDAccount=Attendance.IDAccount;
+                //db.Entry(Attendancemodifier).State = EntityState.Modified;
                 //db.Entry(AttendanceBridgemodifier).State = EntityState.Modified;
 
                 try

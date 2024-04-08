@@ -42,6 +42,5 @@ namespace doanNet.Models
         public virtual DbSet<Priority> Priorities { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<SinhVien> SinhViens { get; set; }
-        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     }
 }

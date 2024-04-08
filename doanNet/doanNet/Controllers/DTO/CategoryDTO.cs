@@ -10,7 +10,6 @@ namespace doanNet.Controllers.DTO
         public int IDCategory { get; set; }
         public string CategoryName { get; set; }
 
-        public string CategoryDescription { get; set; }
 
         public string ChipColor { get; set; }
     }
