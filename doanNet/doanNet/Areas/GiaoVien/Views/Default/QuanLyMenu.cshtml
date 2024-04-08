@@ -286,15 +286,29 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th></th>
-                    <td></td>
-                    <td><td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                @foreach (var item in ViewBag.Menus)
+                {
+                    var hide = "";
+                    <tr>
+                        <th>@item.Order</th>
+                        <td>@item.Meta</td>
+                        <td>@item.TextMenu</td>
+                        <td>@item.DateBegin</td>
+                        <td>
+                        @if (@item.Hide == 1)
+                        {
+                            hide = "Hiện";
+                        }
+                        else
+                        {
+                            hide = "Ẩn";
+                        }
+                        @hide
+                        </td>
+                        <td></td>
+                    </tr>
+                }
 
-                </tr>
 
             </tbody>
         </table>

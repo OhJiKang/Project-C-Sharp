@@ -326,19 +326,23 @@
                         <th scope="col">Tòa</th>
                         <th scope="col">Loại phòng</th>
                         <th scope="col">Giá phòng</th>
-                      
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      
-                    </tr>
+                    @foreach (var item in ViewBag.rooms)
+                    {
+                        <tr>
+                            <td>@item.IDRoom</td>
+                            <td>@item.Name</td>
+                            <td>@item.Floor</td>
+                            <td>@item.Building</td>
+                            <td>@item.RoomType</td>
+                            <td>@item.PriceRoom</td>
+                        </tr>
+                       
+                    }
+
                 </tbody>
             </table>
         </div>

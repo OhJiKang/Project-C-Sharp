@@ -375,6 +375,9 @@
     <Compile Include="Models\Contract.cs">
       <DependentUpon>KTXTDTU.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\database_firewall_rules.cs">
+      <DependentUpon>KTXTDTU.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Faculty.cs">
       <DependentUpon>KTXTDTU.tt</DependentUpon>
     </Compile>

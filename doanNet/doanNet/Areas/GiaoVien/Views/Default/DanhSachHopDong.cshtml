@@ -137,9 +137,12 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">Mã hợp đồng</th>
                     <th scope="col">MSSV</th>
                     <th scope="col">Họ và tên Sinh viên</th>
-                    <th scope="col">Học kỳ đăng ký</th>
+                    <th scope="col">Căn cước công dân</th>
+                    <th scope="col">Hồ sơ đi kèm</th>
+                    <th scope="col">Khu vực</th>
                     <th scope="col">Loại phòng</th>
                     <th scope="col">Đăng ký vào lúc</th>
                     <th scope="col">Xét duyệt</th>
@@ -148,42 +151,62 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>12341234</th>
-                    <td>Đặng Như Quỳnh</td>
-                    <td>Cả 2 học kỳ</td>
-                    <td>6 người</td>
-                    <td>05/05/2002 <br /> 14:06: 00</td>
-                    <td>
-                        <button class="btn btn-outline-primary" style="color: blue">
-                            <i class="fa-regular fa-circle-check" style="color: blue;"></i> Duyệt
-                        </button>
-                    </td>
-                    <td>
-                        <i class="fa-regular fa-eye" style="color: blue;"></i>
-                    </td>
-                    <td>
-                        <i class="fa-regular fa-pen-to-square" style="color: blue;"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th>12341234</th>
-                    <td>Ngô Chí Cường</td>
-                    <td>Cả 2 học kỳ</td>
-                    <td>6 người</td>
-                    <td>05/05/2002 <br /> 14:06: 00</td>
-                    <td>
-                        <button class="btn btn-outline-primary" style="color: blue">
-                            <i class="fa-regular fa-circle-check" style="color: blue;"></i> Duyệt
-                        </button>
-                    </td>
-                    <td>
-                        <i class="fa-regular fa-eye" style="color: blue;"></i>
-                    </td>
-                    <td>
-                        <i class="fa-regular fa-pen-to-square" style="color: blue;"></i>
-                    </td>
-                </tr>
+               
+                @foreach (var item in ViewBag.contracts)
+                {
+                    var hoso = "";
+                    var tenSV = "";
+                    var kv = "";
+                    <tr>
+                        <th>@item.IDContract</th>
+                        <td>@item.MSSV</td>
+                        <td>
+                             
+                            @foreach (var sinhvien in ViewBag.sinhviens)
+                            {
+                                if (sinhvien.MSSV == item.MSSV) {
+                                    tenSV = sinhvien.FullName;
+                                }
+                            }
+                            @tenSV
+                        </td>
+                        <td>@item.IDCitizen</td>
+                        <td>
+                            @if (item.ProfilePlace == 0)
+                            {
+                                hoso = "Không có";
+                            }
+                            else
+                            {
+                                hoso = "Có";
+                            }
+                            @hoso
+                        </td>
+                        <td>
+                            @foreach (var khuvuc in ViewBag.places)
+                            {
+                                if (khuvuc.IDPlace == item.IDPlace)
+                                {
+                                    kv = khuvuc.Description;
+                                }
+                            }
+                            @kv
+                        </td>
+                        <td>6 người</td>
+                        <td>05/05/2002 <br /> 14:06: 00</td>
+                        <td>
+                            <button class="btn btn-outline-primary" style="color: blue">
+                                <i class="fa-regular fa-circle-check" style="color: blue;"></i> Duyệt
+                            </button>
+                        </td>
+                        <td>
+                            <i class="fa-regular fa-eye" style="color: blue;"></i>
+                        </td>
+                        <td>
+                            <i class="fa-regular fa-pen-to-square" style="color: blue;"></i>
+                        </td>
+                    </tr>
+                }
 
             </tbody>
         </table>

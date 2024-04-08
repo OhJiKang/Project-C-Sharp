@@ -41,6 +41,7 @@
         <AssociationConnector Association="KTXTDTUModel.FK__Mistake__IDRoom__778AC167" />
         <AssociationConnector Association="KTXTDTUModel.FK__Mistake__IDSinhV__75A278F5" />
         <AssociationConnector Association="KTXTDTUModel.FK__SinhVien__IDRoom__6D0D32F4" />
+        <EntityTypeShape EntityType="KTXTDTUModel.database_firewall_rules" Width="1.5" PointX="10.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

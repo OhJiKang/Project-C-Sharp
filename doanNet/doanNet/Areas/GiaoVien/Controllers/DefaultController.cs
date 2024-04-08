@@ -1,4 +1,4 @@
-﻿using doanNet.Models;
+﻿    using doanNet.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -33,6 +33,18 @@ namespace doanNet.Areas.GiaoVien.Controllers
         }
         public ActionResult DanhSachHopDong()
         {
+            var contracts = db.Contracts.ToList();
+            ViewBag.contracts=contracts;
+
+            var places = db.Places.ToList();
+            ViewBag.places=places;
+
+            var priorities = db.Priorities.ToList();
+            ViewBag.priorities=priorities;
+
+            var sinhviens = db.SinhViens.ToList();
+            ViewBag.sinhviens= sinhviens;
+
             return View();
         }
         public ActionResult DanhSachHopDongTheoThang()
@@ -53,10 +65,13 @@ namespace doanNet.Areas.GiaoVien.Controllers
         }
         public ActionResult QuanLyMenu()
         {
+            var Menus = db.Menus.ToList();
+            ViewBag.Menus = Menus;
             return View();
         }
-        public ActionResult QuanLyPhong()
-        {
+        public ActionResult QuanLyPhong() { 
+            var rooms = db.Rooms.ToList();
+            ViewBag.rooms = rooms;
             return View();
         }
         public ActionResult QuanLyTaiKhoan()
