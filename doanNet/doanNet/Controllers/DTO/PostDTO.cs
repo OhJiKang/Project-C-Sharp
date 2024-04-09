@@ -10,7 +10,7 @@ namespace doanNet.Controllers.DTO
         public string PostTittle { get; set; }
         public string PostDetail { get; set; }
         
-        public HttpPostedFileBase CoverImage { get; set; }
+        public HttpPostedFileBase PostImage { get; set; }
         public int IDAccount { get; set; }
         public List<CategoryDTO> CategoryList { get; set; }
 
