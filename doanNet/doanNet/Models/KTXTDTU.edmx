@@ -191,6 +191,7 @@
           <Property Name="Meta" Type="text" />
           <Property Name="DateBegin" Type="datetime" Nullable="false" />
           <Property Name="Hide" Type="int" Nullable="false" />
+          <Property Name="PostImage" Type="text" />
         </EntityType>
         <EntityType Name="Priority">
           <Key>
@@ -871,6 +872,7 @@
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
+          <Property Name="PostImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Account" Relationship="KTXTDTUModel.FK__Post__IDAccount__7D439ABD" FromRole="Post" ToRole="Account" />
           <NavigationProperty Name="CategoryBridges" Relationship="KTXTDTUModel.FK__CategoryB__IDPos__02FC7413" FromRole="Post" ToRole="CategoryBridge" />
         </EntityType>
@@ -1352,6 +1354,7 @@
           <EntitySetMapping Name="Posts">
             <EntityTypeMapping TypeName="KTXTDTUModel.Post">
               <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="PostImage" ColumnName="PostImage" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
                 <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Meta" ColumnName="Meta" />

@@ -28,6 +28,7 @@ namespace doanNet.Models
         public string Meta { get; set; }
         public System.DateTime DateBegin { get; set; }
         public int Hide { get; set; }
+        public string PostImage { get; set; }
     
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

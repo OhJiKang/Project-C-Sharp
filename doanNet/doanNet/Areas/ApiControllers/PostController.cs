@@ -1,4 +1,5 @@
 ﻿using doanNet.Models;
+using System.Web;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using doanNet.Controllers.DTO;
 using System.Collections;
+using System.IO;
 
 namespace doanNet.ApiControllers
 {
@@ -27,11 +29,21 @@ namespace doanNet.ApiControllers
         {
             return db.Posts.Where(row => row.IDPost == id).FirstOrDefault();
         }
+        [HttpPost]
         public IHttpActionResult AddingPost([FromBody] PostDTO Post)
         {
-            try
+            var tempPost = new Post();
+
+            var file = Post.PostImage;
+            if (file != null && file.ContentLength > 0)
             {
-                var tempPost = new Post();
+                // Generate a unique server-side file name (e.g., using timestamp)
+                var serverFileName = $"{DateTime.Now.Ticks}_{Path.GetFileName(file.FileName)}";
+                // Save the file to the desired location (e.g., ~/App_Data/uploads/)
+                var uploadPath = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/upload/img"), serverFileName);
+                file.SaveAs(uploadPath);
+                tempPost.PostImage = uploadPath;
+            }
                 tempPost.PostTitle = Post.PostTittle;
                 tempPost.PostDetail = Post.PostDetail;
                 tempPost.DateBegin=DateTime.Now;

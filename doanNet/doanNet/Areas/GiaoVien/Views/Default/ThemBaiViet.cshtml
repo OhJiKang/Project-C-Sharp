@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/layoutteacher.cshtml";
 }
-<script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+<script src="dist/js/bootstrap-colorpicker.js"></script>
 
 <style>
     .modal {
@@ -59,8 +59,12 @@
     <input type='text' class='name_input_modifier secondary_input' />
 </div>
 <div class='container_body_address_input_'>
-    <label class='label_name_modifier base_label_inline'>Phân loại bài viết</label>
+    <label class='label_name_modifier base_label_inline'>Meta</label>
     <input type='text' class='name_input_modifier secondary_input' />
+</div>
+<div class='container_body_address_input_'>
+    <label class='label_name_modifier base_label_inline'>Ảnh bìa</label>
+    <input type="file" id="cover_image" accept=".png,.jpg,.jpeg" />
 </div>
 <div class='container_body_address_input_'>
     <label class='label_address_modifier base_label_inline'>Tag bài post</label>
@@ -81,10 +85,13 @@
 
     </button>
 </div>
+<script src="~/Areas/admin/Content/ckfinder/ckfinder.js"></script>
+<script src="~/Areas/admin/Content/ckeditor/ckeditor.js"></script>
+
 <label class='label_address_modifier base_label_inline' style="width:100%;text-align:center;margin-bottom:24px">Nội dung bài post</label>
 
 
-<div id="editor"></div>
+<textarea id="editor" class="ckeditor"></textarea>
 <div class="upload-container" style="width:100%;text-align:right">
     <button class="primary-btn" style="margin-top: 24px; margin-right: 24px"> Đăng</button>
 </div>
@@ -107,18 +114,20 @@
                     <button class="primary-btn" style="margin-top: 24px; margin-right: 24px" data-dismiss="modal"> Thêm thể loại </button>
                     <button class="primary-btn" style="width:150px;margin-top: 24px; margin-right: 24px"> Chọn xong thể loại </button>
                 </div>
-
+                <script>
+                    function showModal() {
+                        var myModal = new bootstrap.Modal(document.getElementById('ModalChooseCategory'));
+                        myModal.show();
+                    }
+                </script>
             </div>
         </div>
     </div>
 </div>
 
 
-
 <script>
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .catch(error => {
-            console.error(error);
-        });
+    var editor = CKEDITOR.replace(".ckeditor")
+    var editor = CKEDITOR.replace(".ckeditor", { height: '600px' });
+    customConfig: '~/Areas/admin/Content/ckeditor/config.js'
 </script>
