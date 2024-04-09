@@ -580,7 +580,7 @@
     <Folder Include="Areas\GiaoVien\Data\" />
     <Folder Include="Areas\SinhVienTuQuan\Data\" />
     <Folder Include="Content\CSS\" />
-    <Folder Include="Content\upload\img\" />
+    <Folder Include="Content\upload\img\news\" />
     <Folder Include="Views\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>

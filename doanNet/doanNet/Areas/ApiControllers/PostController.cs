@@ -32,6 +32,7 @@ namespace doanNet.ApiControllers
         [HttpPost]
         public IHttpActionResult AddingPost([FromBody] PostDTO Post)
         {
+            try { 
             var tempPost = new Post();
 
             var file = Post.PostImage;
@@ -40,10 +41,14 @@ namespace doanNet.ApiControllers
                 // Generate a unique server-side file name (e.g., using timestamp)
                 var serverFileName = $"{DateTime.Now.Ticks}_{Path.GetFileName(file.FileName)}";
                 // Save the file to the desired location (e.g., ~/App_Data/uploads/)
-                var uploadPath = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/upload/img"), serverFileName);
+                var uploadPath = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/upload/img/news"), serverFileName);
                 file.SaveAs(uploadPath);
                 tempPost.PostImage = uploadPath;
             }
+                else
+                {
+                    tempPost.PostImage = "~/Content/upload/img/news/default.png";
+                }
                 tempPost.PostTitle = Post.PostTittle;
                 tempPost.PostDetail = Post.PostDetail;
                 tempPost.DateBegin=DateTime.Now;
@@ -60,7 +65,7 @@ namespace doanNet.ApiControllers
                     db.CategoryBridges.Add(tempCategory);
                 }
                 return Json(new { Message = "Data received successfully!" });
-            }
+                }
             catch (DbEntityValidationException e)
             {
                 string mes = "";
