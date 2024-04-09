@@ -1,8 +1,10 @@
 ﻿@{
     Layout = "~/Views/Shared/layoutteacher.cshtml";
 }
-<script src="dist/js/bootstrap-colorpicker.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/2.0.3/js/dataTables.js" crossorigin="anonymous"></script>
+<link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" rel="stylesheet">
 <style>
     .modal {
         display: none;
@@ -53,19 +55,40 @@
         padding: 0;
         box-sizing: border-box;
     }
+
+    .img_update:hover {
+        cursor: pointer;
+    }
 </style>
 <div class='container_body_name_input_'>
     <label class='label_name_modifier base_label_inline'>Tựa đề bài post</label>
-    <input type='text' class='name_input_modifier secondary_input' />
+    <input type='text' class='name_input_modifier secondary_input post_tittle_place' />
 </div>
 <div class='container_body_address_input_'>
     <label class='label_name_modifier base_label_inline'>Meta</label>
-    <input type='text' class='name_input_modifier secondary_input' />
+    <input type='text' class='name_input_modifier secondary_input meta_place' />
 </div>
-<div class='container_body_address_input_'>
-    <label class='label_name_modifier base_label_inline'>Ảnh bìa</label>
-    <input type="file" id="cover_image" accept=".png,.jpg,.jpeg" />
+<div class='container_body_address_input_' style="display:flex;align-items:center">
+    <label class='label_name_modifier base_label_inline' style="margin-right:24px;">Ảnh bìa</label>
+    <label for="cover_image_upload">
+        <img src="~/Content/upload/img/news/default.png" class="img_update" style="width: 200px; height: 200px; padding: 20px; margin: auto" />
+    </label>
+    <input type="file" id="cover_image_upload" accept=".png,.jpg,.jpeg" value="~/Content/upload/img/news/default.png" style="outline:none;border:none;width:200px;height:200px;display:none" />
 </div>
+<script>
+    const fileUpload = document.querySelector("#cover_image_upload");
+    fileUpload.addEventListener("change", (event) => {
+        // Lấy thông tin tập tin được đăng tải
+        const files = event.target.files;
+        const reader = new FileReader();
+        // Đọc thông tin tập tin đã được đăng tải
+        reader.readAsDataURL(files[0]);
+        // Lắng nghe quá trình đọc tập tin hoàn thành
+        reader.addEventListener("load", (event) => {
+            document.querySelector(".img_update").src = `${reader.result}`;
+        });
+    });
+</script>
 <div class='container_body_address_input_'>
     <label class='label_address_modifier base_label_inline'>Tag bài post</label>
     <input type='text' class='address_input_modifier secondary_input' disabled />
@@ -91,9 +114,9 @@
 <label class='label_address_modifier base_label_inline' style="width:100%;text-align:center;margin-bottom:24px">Nội dung bài post</label>
 
 
-<textarea id="editor" class="ckeditor"></textarea>
+<textarea id="editor1" class="ckeditor"></textarea>
 <div class="upload-container" style="width:100%;text-align:right">
-    <button class="primary-btn" style="margin-top: 24px; margin-right: 24px"> Đăng</button>
+    <button class="primary-btn submit_btn" style="margin-top: 24px; margin-right: 24px"> Đăng</button>
 </div>
 </main>
 <div class="modal fade"
@@ -125,9 +148,39 @@
     </div>
 </div>
 
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/PostAPI.js")
 
 <script>
-    var editor = CKEDITOR.replace(".ckeditor")
-    var editor = CKEDITOR.replace(".ckeditor", { height: '600px' });
+    var editor = CKEDITOR.replace("editor1", { height: '600px' });
     customConfig: '~/Areas/admin/Content/ckeditor/config.js'
+    /*
+    public string PostTittle { get; set; }
+        public string PostDetail { get; set; }
+
+        public HttpPostedFileBase PostImage { get; set; }
+        public int IDAccount { get; set; }
+        public List<CategoryDTO> CategoryList { get; set; }
+
+    */
+    //CKEDITOR.instances.editor1.getData():Lay du lieu CKEditor
+    $(".submit_btn").click(async () => {
+        let PostImage;
+        console.log(document.querySelector('#cover_image_upload').files);
+        if (!document.querySelector('#cover_image_upload').files[0]) {
+                PostImage = null;
+            }
+        else {
+            PostImage = document.querySelector('#cover_image_upload').files[0];
+        }
+        const PostDetail = {
+            PostTittle: $(".post_tittle_place").val(),
+            PostDetail: CKEDITOR.instances.editor1.getData(),
+            meta: $(".meta_place").val(),
+            PostImage: PostImage,
+            IDAccount: JSON.parse(sessionStorage.getItem("IDAccount"))
+        }
+        console.log(PostDetail);
+        return;
+        const result = postPost(PostDetail);
+    })
 </script>

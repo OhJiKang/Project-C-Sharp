@@ -1,7 +1,7 @@
 ﻿let baseURL = "/api"
 const url = `${baseURL}/category`
 
-function putCategory(CategoryData, id) {
+async function putCategory(CategoryData, id) {
     let result = await fetch(`${url}/putCategory?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
@@ -11,7 +11,7 @@ function putCategory(CategoryData, id) {
     });
     result = await result.json();
 }
-function postCategory(CategoryData) {
+async function postCategory(CategoryData) {
     let result = await fetch(`${url}/postCategory`, {
         headers: {
             "Content-Type": "application/json"

@@ -1,7 +1,7 @@
 ﻿let baseURL = "/api"
 const url = `${baseURL}/mistake`
 
-function putMistake(MistakeData, id) {
+async function putMistake(MistakeData, id) {
     let result = await fetch(`${url}/PutMistake?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
@@ -11,7 +11,7 @@ function putMistake(MistakeData, id) {
     });
     result = await result.json();
 }
-function postMistake(MistakeData) {
+async function postMistake(MistakeData) {
     let result = await fetch(`${url}/PostMistake`, {
         headers: {
             "Content-Type": "application/json"
@@ -21,7 +21,7 @@ function postMistake(MistakeData) {
     });
     result = await result.json();
 }
-function hideMistake(id) {
+async function hideMistake(id) {
     let result = await fetch(`${url}/PostMistake?id=${id}`, {
         headers: {
             "Content-Type": "application/json"

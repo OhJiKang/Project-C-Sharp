@@ -1,7 +1,7 @@
 ﻿let baseURL = "/api"
 const url = `${baseURL}/attendance`
 
-function putAttendance(AttedanceData,id) {
+async function putAttendance(AttedanceData,id) {
     let result = await fetch(`${url}/PutAttendance?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
@@ -11,7 +11,7 @@ function putAttendance(AttedanceData,id) {
     });
     result = await result.json();
 }
-function postAttendance(AttedanceData) {
+async function postAttendance(AttedanceData) {
     let result = await fetch(`${url}/AddingAttendance`, {
         headers: {
             "Content-Type": "application/json"
@@ -21,7 +21,7 @@ function postAttendance(AttedanceData) {
     });
     result = await result.json();
 }
-function getAttendanceBySinhVienID(SinhVienID) {
+async function getAttendanceBySinhVienID(SinhVienID) {
     let result = await fetch(`${url}/GetAllAttendanceBySinhVienID?id=${SinhVienID}`, {
         headers: {
             "Content-Type": "application/json"

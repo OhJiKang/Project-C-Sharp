@@ -1,23 +1,23 @@
 ﻿let baseURL = "/api"
-const url = `${baseURL}/fee`
+const url = `${baseURL}/post`
 
-function putFee(FeeData, id) {
-    let result = await fetch(`${url}/putCategory?id=${id}`, {
+async function putPost(PostData, id) {
+    let result = await fetch(`${url}/PutPost?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
         },
         method: 'PUT',
-        body: JSON.stringify(FeeData),
+        body: JSON.stringify(PostData),
     });
     result = await result.json();
 }
-function addingFee(FeeData) {
-    let result = await fetch(`${url}/AddingFee`, {
+async function postPost(PostData) {
+    let result = await fetch(`${url}/AddingPost`, {
         headers: {
             "Content-Type": "application/json"
         },
         method: 'POST',
-        body: JSON.stringify(FeeData),
+        body: JSON.stringify(PostData),
     });
     result = await result.json();
 }

@@ -53,7 +53,7 @@ namespace doanNet.ApiControllers
                 tempPost.PostDetail = Post.PostDetail;
                 tempPost.DateBegin=DateTime.Now;
                 tempPost.Hide = 0;
-
+                tempPost.Meta = Post.meta;
                 db.Posts.Add(tempPost);
                 db.SaveChangesAsync();
                 foreach (var category in Post.CategoryList) {

@@ -1,6 +1,6 @@
 ﻿let baseURL = "/api"
 const url = `${baseURL}/account`
-function checkingLogin(username, password) {
+async function checkingLogin(username, password) {
     const logindata = {
         "username": username,
         "password": password
@@ -14,7 +14,7 @@ function checkingLogin(username, password) {
     });
     result = await result.json();
 }
-function changePassword(username, password) {
+async function changePassword(username, password) {
     const logindata = {
         "username": username,
         "password": password
