@@ -11,6 +11,5 @@ namespace doanNet.Controllers.DTO
         public string MSSV { get; set; }
 
         public string Password { get; set; }
-        public int IDSinhVien { get; set; }
-
+    }
 }

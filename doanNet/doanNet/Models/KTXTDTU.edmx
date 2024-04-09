@@ -96,6 +96,8 @@
           <Property Name="DateBegin" Type="datetime" Nullable="false" />
           <Property Name="Hide" Type="int" Nullable="false" />
           <Property Name="IDPriority" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="xetduyet" Type="bit" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
@@ -762,6 +764,8 @@
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
           <Property Name="IDPriority" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="xetduyet" Type="Boolean" />
           <NavigationProperty Name="Place" Relationship="KTXTDTUModel.FK__Contract__IDPlac__6477ECF3" FromRole="Contract" ToRole="Place" />
           <NavigationProperty Name="SinhViens" Relationship="KTXTDTUModel.FK__SinhVien__IDCont__6C190EBB" FromRole="Contract" ToRole="SinhVien" />
           <NavigationProperty Name="Priority" Relationship="KTXTDTUModel.FK_ContractPriority" FromRole="Contract" ToRole="Priority" />
@@ -1244,6 +1248,8 @@
           <EntitySetMapping Name="Contracts">
             <EntityTypeMapping TypeName="KTXTDTUModel.Contract">
               <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="xetduyet" ColumnName="xetduyet" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="IDPriority" ColumnName="IDPriority" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
                 <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />

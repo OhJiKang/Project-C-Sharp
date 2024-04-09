@@ -38,6 +38,7 @@ namespace doanNet.ApiControllers
         [HttpPost]
         public IHttpActionResult AddingAccountStudent([FromBody] Account Account)
         {
+            Account.IDSinhVien=db.SinhViens.Where(row=>row.MSSV==Account.MSSV).FirstOrDefault().IDSinhVien;
             Account.Password = BCrypt.Net.BCrypt.HashPassword(Account.Password);
             Account.Available = 0;
             Account.AccountTypeID = 1;

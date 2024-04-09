@@ -30,6 +30,8 @@ namespace doanNet.Models
         public System.DateTime DateBegin { get; set; }
         public int Hide { get; set; }
         public Nullable<int> IDPriority { get; set; }
+        public string Description { get; set; }
+        public Nullable<bool> xetduyet { get; set; }
     
         public virtual Place Place { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
