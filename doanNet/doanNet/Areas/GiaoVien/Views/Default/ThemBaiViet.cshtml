@@ -93,19 +93,10 @@
     <label class='label_address_modifier base_label_inline'>Tag bài post</label>
     <input type='text' class='address_input_modifier secondary_input' disabled />
     <!-- Colored mini FAB button -->
-    <button onclick="showModal()"
+    <button data-bs-target="#ModalChooseCategory" data-bs-toggle="modal" data-bs-dismiss="modal"
             class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
             style="background-color: #35d66c">
         <i class="fa-solid fa-plus" style="margin: 10px"></i>
-        <script>
-            // Hàm hiển thị modal
-            function showModal() {
-                var myModal = new bootstrap.Modal(document.getElementById('ModalChooseCategory'));
-                myModal.show();
-            }
-
-        </script>
-
     </button>
 </div>
 <script src="~/Areas/admin/Content/ckfinder/ckfinder.js"></script>
@@ -119,6 +110,7 @@
     <button class="primary-btn submit_btn" style="margin-top: 24px; margin-right: 24px"> Đăng</button>
 </div>
 </main>
+
 <div class="modal fade"
      id="ModalChooseCategory"
      tabindex="-1"
@@ -134,53 +126,90 @@
                     </li>
                 </ul>
                 <div class="button_container">
-                    <button class="primary-btn" style="margin-top: 24px; margin-right: 24px" data-dismiss="modal"> Thêm thể loại </button>
+                    <button class="primary-btn" style="margin-top: 24px; margin-right: 24px" data-bs-target="#ModalAddingCategory" data-bs-toggle="modal" data-bs-dismiss="modal"> Thêm thể loại </button>
                     <button class="primary-btn" style="width:150px;margin-top: 24px; margin-right: 24px"> Chọn xong thể loại </button>
                 </div>
-                <script>
-                    function showModal() {
-                        var myModal = new bootstrap.Modal(document.getElementById('ModalChooseCategory'));
-                        myModal.show();
-                    }
-                </script>
+
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade"
+     id="ModalAddingCategory"
+     tabindex="-1"
+     aria-labelledby="ModalAddUserLable"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xs">
+        <div class="modal-content p-3"">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="exampleModalFullscreenSmLabel">Thêm thể loại</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                    <div class='container_body_name_input_' style="margin-bottom: 12px; margin-left: 12px; margin-top: 12px;">
+                        <label class='label_name_modifier base_label_inline'>Tên thể loại</label>
+                        <input type='text' class='name_input_modifier secondary_input post_tittle_place' />
+                    </div>
+                    <div class="container_body_name_input_" style="margin-bottom:12px;margin-left:12px;margin-top:12px;">
+                        <label class='label_name_modifier base_label_inline'>Màu nền</label>
+                        <input type="color" class="color_place" style="width:100%" value="" />
+                        <div class="hex_value" style="text-align:right">
+                            <label class='label_name_modifier base_label_inline'>HEX:</label>
+                            <input type="text" class="secondary_input hex_value_place" style="width:10%" />
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button class="primary-btn" style="margin-top: 24px; margin-right: 24px" data-bs-target="#ModalChooseCategory" data-bs-toggle="modal" data-bs-dismiss="modal"> Thêm thể loại </button>
+                <button class="primary-btn" style="width:150px;margin-top: 24px; margin-right: 24px" data-bs-target="#ModalChooseCategory" data-bs-toggle="modal" data-bs-dismiss="modal"> Hủy </button>
+            </div>
+        </div>
+        
 
-@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/PostAPI.js")
+        <script>
+            $(".color_place").change((e) => {
+                $(".hex_value_place").val($(e.target).val());
+            });
+            $(".hex_value_place").change((e) => {
+                $(".color_place").val($(e.target).val());
+            })
+        </script>
 
-<script>
-    var editor = CKEDITOR.replace("editor1", { height: '600px' });
-    customConfig: '~/Areas/admin/Content/ckeditor/config.js'
-    /*
-    public string PostTittle { get; set; }
-        public string PostDetail { get; set; }
+    </div>
+    @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/PostAPI.js")
 
-        public HttpPostedFileBase PostImage { get; set; }
-        public int IDAccount { get; set; }
-        public List<CategoryDTO> CategoryList { get; set; }
+    <script>
+        var editor = CKEDITOR.replace("editor1", { height: '600px' });
+        customConfig: '~/Areas/admin/Content/ckeditor/config.js'
+        /*
+        public string PostTittle { get; set; }
+            public string PostDetail { get; set; }
 
-    */
-    //CKEDITOR.instances.editor1.getData():Lay du lieu CKEditor
-    $(".submit_btn").click(async () => {
-        let PostImage;
-        console.log(document.querySelector('#cover_image_upload').files);
-        if (!document.querySelector('#cover_image_upload').files[0]) {
+            public HttpPostedFileBase PostImage { get; set; }
+            public int IDAccount { get; set; }
+            public List<CategoryDTO> CategoryList { get; set; }
+
+        */
+        //CKEDITOR.instances.editor1.getData():Lay du lieu CKEditor
+        $(".submit_btn").click(async () => {
+            let PostImage;
+            console.log(document.querySelector('#cover_image_upload').files);
+            if (!document.querySelector('#cover_image_upload').files[0]) {
                 PostImage = null;
             }
-        else {
-            PostImage = document.querySelector('#cover_image_upload').files[0];
-        }
-        const PostDetail = {
-            PostTittle: $(".post_tittle_place").val(),
-            PostDetail: CKEDITOR.instances.editor1.getData(),
-            meta: $(".meta_place").val(),
-            PostImage: PostImage,
-            IDAccount: JSON.parse(sessionStorage.getItem("IDAccount"))
-        }
-        console.log(PostDetail);
-        return;
-        const result = postPost(PostDetail);
-    })
-</script>
+            else {
+                PostImage = document.querySelector('#cover_image_upload').files[0];
+            }
+            const PostDetail = {
+                PostTittle: $(".post_tittle_place").val(),
+                PostDetail: CKEDITOR.instances.editor1.getData(),
+                meta: $(".meta_place").val(),
+                PostImage: PostImage,
+                IDAccount: JSON.parse(sessionStorage.getItem("IDAccount"))
+            }
+            console.log(PostDetail);
+            return;
+            const result = postPost(PostDetail);
+        })
+    </script>
