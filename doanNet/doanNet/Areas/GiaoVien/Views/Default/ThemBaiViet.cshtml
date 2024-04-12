@@ -111,31 +111,7 @@
     <button class="primary-btn submit_btn" style="margin-top: 24px; margin-right: 24px"> Đăng</button>
 </div>
 
-<script>
-    function getCheckedCategorySpans() {
-                // Select all category checkboxes within the container
-                const checkboxes = document.querySelectorAll('.Category_Containter .category-checkbox');
 
-                // Array to store HTML of checked category spans
-                const checkedCategorySpans = [];
-
-                // Iterate over each checkbox
-                checkboxes.forEach((checkbox) => {
-                    // Check if the checkbox is checked
-                    if (checkbox.checked) {
-                        // Get the sibling <span> element (category span) of the checked checkbox
-                        const categorySpan = checkbox.parentElement.querySelector('span');
-            
-                        // Push the HTML of the category span into the array
-                        if (categorySpan) {
-                            checkedCategorySpans.push(categorySpan.outerHTML);
-                        }
-                    }
-                });
-                const allHTMLS=checkedCategorySpans.join("");
-                $("#tagContainer").html(allHTMLS);
-            }
-</script>
 <div class="modal fade"
      id="ModalChooseCategory"
      tabindex="-1"
@@ -149,12 +125,39 @@
                 </ul>
                 <div class="button_container">
                     <button class="primary-btn" style="margin-top: 24px; margin-right: 24px" data-bs-target="#ModalAddingCategory" data-bs-toggle="modal" data-bs-dismiss="modal"> Thêm thể loại </button>
-                    <button class="primary-btn" style="width:150px;margin-top: 24px; margin-right: 24px" onclick="getCheckedCategorySpans()"> Chọn xong thể loại </button>
+                    <button class="primary-btn" style="width:150px;margin-top: 24px; margin-right: 24px"  onclick="getCheckedCategorySpans()"> Chọn xong thể loại </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function getCheckedCategorySpans() {
+        // Select all category checkboxes within the container
+        const checkboxes = document.querySelectorAll('.Category_Containter .category-checkbox');
+
+        // Array to store HTML of checked category spans
+        const checkedCategorySpans = [];
+
+        // Iterate over each checkbox
+        checkboxes.forEach((checkbox) => {
+            // Check if the checkbox is checked
+            if (checkbox.checked) {
+                // Get the sibling <span> element (category span) of the checked checkbox
+                const categorySpan = checkbox.parentElement.querySelector('span');
+
+                // Push the HTML of the category span into the array
+                if (categorySpan) {
+                    checkedCategorySpans.push(categorySpan.outerHTML);
+                }
+            }
+        });
+        const allHTMLS = checkedCategorySpans.join("");
+        $("#tagContainer").html(allHTMLS);
+        $('#ModalChooseCategory').modal('hide');
+
+    }
+</script>
 <div class="modal fade"
      id="ModalAddingCategory"
      tabindex="-1"
@@ -167,10 +170,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
                 <div class='container_body_name_input_' style="margin-bottom: 12px; margin-left: 12px; margin-top: 12px;">
                     <label class='label_name_modifier base_label_inline'>Tên thể loại</label>
-                    <input type='text' class='name_input_modifier secondary_input post_tittle_place' />
+                    <input type='text' class='name_input_modifier secondary_input category_tittle_place' />
                 </div>
                 <div class="container_body_name_input_" style="margin-bottom:12px;margin-left:12px;margin-top:12px;">
                     <label class='label_name_modifier base_label_inline'>Màu nền</label>
@@ -181,8 +183,10 @@
                     </div>
                 </div>
             </div>
+            
+            
             <div class="modal-footer">
-                <button class="primary-btn" style="margin-top: 24px; margin-right: 24px" data-bs-target="#ModalChooseCategory" data-bs-toggle="modal" data-bs-dismiss="modal"> Thêm thể loại </button>
+                <button class="primary-btn adding_category_btn" style="margin-top: 24px; margin-right: 24px" > Thêm thể loại </button>
                 <button class="primary-btn" style="width:150px;margin-top: 24px; margin-right: 24px" data-bs-target="#ModalChooseCategory" data-bs-toggle="modal" data-bs-dismiss="modal"> Hủy </button>
             </div>
         </div>
@@ -202,7 +206,26 @@
     @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/CategoryAPI.js")
 
     <script>
+            /*
+                public int IDCategory { get; set; }
+                public string CategoryName { get; set; }
 
+
+                public string ChipColor { get; set; }
+                */
+            const addingCategory = async () => {
+                const CategoryData = {
+                    CategoryTitle: $(".category_tittle_place").val(),
+                    ColorChip: $(".hex_value_place").val(),
+                }
+                await postCategory(CategoryData);
+                $('#ModalAddingCategory').modal('hide');
+                $('#ModalChooseCategory').modal('show');
+
+            }
+        $(".adding_category_btn").click(async () => {
+            await addingCategory();
+        })
             function getOppositeColor(hexColor) {
                 // Remove '#' if present
                 hexColor = hexColor.replace('#', '');
@@ -223,8 +246,20 @@
                 }
            }
            
+        
+        function handleCheckboxChange(event) {
+            
+            const { id, checked } = event;
+            let storedIds = JSON.parse(sessionStorage.getItem('selectedIds') || '[]');
 
+            if (checked) {
+                storedIds.push(id); // Add ID to selectedIds array
+            } else {
+                storedIds = storedIds.filter(itemId => itemId !== id); // Remove ID from selectedIds array
+            }
 
+            sessionStorage.setItem('selectedIds', JSON.stringify(storedIds)); // Update sessionStorage
+        }
         const renderCategory=async ()=>{
             let CategoryData=await getAllCategory();
             let htmls="";
@@ -232,15 +267,29 @@
             CategoryData.forEach((item)=>{
                 const oppositeColorForText=getOppositeColor(item.ColorChip);
                 htmls+=`<li class="category-checkbox-parents" style="text-decoration:none;display:flex;align-items:center;margin:4px 0">
-                        <input class="category-checkbox" type="checkbox" />
+                        <input onchange="handleCheckboxChange(this)" class="category-checkbox" type="checkbox" id=${item["$id"]} />
                         <span class="badge badge-pill badge-primary" style="color: ${oppositeColorForText};margin-left:12px;background-color:${item.ColorChip}" id=${item["$id"]}>${item.CategoryTitle}</span>
                     </li>`
             })
             $(".Category_Containter").append(htmls);
+            
+        }
+        
+
+        // Function to restore checkbox state from sessionStorage
+        async function restoreCheckboxState() {
+            
+            const checkboxes = document.querySelectorAll('.category-checkbox');
+            const storedIds = JSON.parse(sessionStorage.getItem('selectedIds') || '[]');
+            console.log(checkboxes)
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = storedIds.includes(checkbox.id);
+            });
         }
         var ChoosingCategoryModal = document.getElementById('ModalChooseCategory')
-        ChoosingCategoryModal.addEventListener('shown.bs.modal', function () {
-          renderCategory();
+        ChoosingCategoryModal.addEventListener('shown.bs.modal', async function () {
+            await renderCategory();            
+            restoreCheckboxState();
         })
         ChoosingCategoryModal.addEventListener('hide.bs.modal', function () {
         $(".Category_Containter").html("");

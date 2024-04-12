@@ -8,9 +8,9 @@ namespace doanNet.Controllers.DTO
     public class CategoryDTO
     {
         public int IDCategory { get; set; }
-        public string CategoryName { get; set; }
+        public string CategoryTitle { get; set; }
 
 
-        public string ChipColor { get; set; }
+        public string ColorChip { get; set; }
     }
 }
