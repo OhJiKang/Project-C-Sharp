@@ -57,6 +57,14 @@ namespace doanNet.Areas.GiaoVien.Controllers
         }
         public ActionResult Mistake()
         {
+            var mistake = db.Mistakes.ToList();
+            ViewBag.mistakes=mistake;
+
+            var sinhvien = db.SinhViens.ToList();
+            ViewBag.sinhviens = sinhvien;
+
+            var rooms = db.Rooms.ToList();
+            ViewBag.rooms=rooms;
             return View();
         }
         public ActionResult Post()

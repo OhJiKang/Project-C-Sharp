@@ -1612,7 +1612,6 @@
     <Content Include="Areas\SinhVienTuQuan\Views\Shared\Layout2.cshtml" />
     <Content Include="Areas\SinhVienTuQuan\Views\web.config" />
     <Content Include="Areas\GiaoVien\Views\Default\QuanLyPhong.cshtml" />
-    <Content Include="Areas\GiaoVien\Views\Default\DanhSachHoaDonTheoThang .cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\DanhSachHopDongTheoThang.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\GhiLoiKTX.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\Mistake.cshtml" />

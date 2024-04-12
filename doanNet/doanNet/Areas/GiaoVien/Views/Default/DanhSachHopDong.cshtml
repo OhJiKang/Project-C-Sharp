@@ -143,7 +143,7 @@
                     <th scope="col">Căn cước công dân</th>
                     <th scope="col">Hồ sơ đi kèm</th>
                     <th scope="col">Khu vực</th>
-                    <th scope="col">Loại phòng</th>
+                    <th scope="col">Ưu tiên</th>
                     <th scope="col">Đăng ký vào lúc</th>
                     <th scope="col">Xét duyệt</th>
                     <th scope="col"></th>
@@ -157,6 +157,7 @@
                     var hoso = "";
                     var tenSV = "";
                     var kv = "";
+                    var ut = "";
                     <tr>
                         <th>@item.IDContract</th>
                         <td>@item.MSSV</td>
@@ -192,12 +193,30 @@
                             }
                             @kv
                         </td>
-                        <td>6 người</td>
-                        <td>05/05/2002 <br /> 14:06: 00</td>
                         <td>
-                            <button class="btn btn-outline-primary" style="color: blue">
-                                <i class="fa-regular fa-circle-check" style="color: blue;"></i> Duyệt
-                            </button>
+                            @foreach (var uutien in ViewBag.priorities)
+                            {
+                                if(uutien.IDPriority == item.IDPriority)
+                                {
+                                    ut = uutien.PriorityDescription;
+                                }
+                            }
+                            @ut
+                        </td>
+                        <td>@item.DateBegin</td>
+                        <td>
+                            @if (!item.xetduyet)
+                            {
+                                <button class="btn btn-outline-primary" style="color: blue">
+                                    <i class="fa-regular fa-circle-check" style="color: blue;"></i> Duyệt
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-outline-success" style="color: lawngreen">
+                                    Đã duyệt
+                                </button>
+                            }
                         </td>
                         <td>
                             <i class="fa-regular fa-eye" style="color: blue;"></i>

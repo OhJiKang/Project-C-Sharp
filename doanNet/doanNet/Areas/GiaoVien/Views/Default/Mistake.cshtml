@@ -210,23 +210,64 @@
         <table class="table">
             <thead>
                 <tr style="background-color: darkblue; color: white">
+                    <th scope="col">Mã lỗi</th>
+                    <th scope="col">Chi tiết lỗi</th>
                     <th scope="col">MSSV</th>
                     <th scope="col">Họ và tên Sinh viên</th>
                     <th scope="col">Tên người ghi nhận</th>
+                    <th scope="col">Số giường</th>
                     <th scope="col">Tên phòng</th>
+                    <th scope="col">Thời gian ghi nhận lỗi</th>
                     <th scope="col">Sinh viên xác nhận lỗi</th>
                     <th scope="col">HÌnh thức ghi nhận</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach (var item in ViewBag.mistakes)
+                {
+                    var tensv = "";
+                    var tenphong = "";
+                    <tr>
+                        <th>@item.IDMistake</th>
+                        <td>@item.MistakeDes</td>
+                        <td>@item.IDSinhVien</td>
+                        <td>
+                            @foreach(var sinhvien in ViewBag.sinhviens)
+                            {
+                                if (sinhvien.IDSinhvien == item.IDSinhvien)
+                                {
+                                    tensv = sinhvien.FullName;
+                                }
+                            }
+                            @tensv
+                        </td>
+                        <td>
+                            @foreach (var svtq in ViewBag.sinhviens)
+                            {
+                                if (svtq.IDSinhvien == item.IDAccount)
+                                {
+                                    tensv = svtq.FullName;
+                                }
+                            }
+                            @tensv
+                        </td>
+                        <td>@item.BedID</td>
+                        <td>
+                            @foreach (var room in ViewBag.rooms)
+                            {
+                                if (room.IDRoom == item.IDRoom)
+                                {
+                                    tenphong = room.Name;
+                                }
+                            }
+                            @tenphong
+                        </td>
+                        <td>@item.TimeCaught</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+
             </tbody>
         </table>
     </div>
