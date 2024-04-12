@@ -62,8 +62,7 @@
             <PropertyRef Name="IDCategory" />
           </Key>
           <Property Name="IDCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CategoryTitle" Type="text" Nullable="false" />
-          <Property Name="CategoryDetail" Type="text" Nullable="false" />
+          <Property Name="CategoryTitle" Type="nvarchar(max)" />
           <Property Name="ColorChip" Type="text" />
           <Property Name="Order" Type="int" />
           <Property Name="Meta" Type="text" />
@@ -728,8 +727,7 @@
             <PropertyRef Name="IDCategory" />
           </Key>
           <Property Name="IDCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CategoryDetail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ColorChip" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -1229,7 +1227,6 @@
                 <ScalarProperty Name="Meta" ColumnName="Meta" />
                 <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="ColorChip" ColumnName="ColorChip" />
-                <ScalarProperty Name="CategoryDetail" ColumnName="CategoryDetail" />
                 <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
                 <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
               </MappingFragment>

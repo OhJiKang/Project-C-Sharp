@@ -22,7 +22,6 @@ namespace doanNet.Models
     
         public int IDCategory { get; set; }
         public string CategoryTitle { get; set; }
-        public string CategoryDetail { get; set; }
         public string ColorChip { get; set; }
         public Nullable<int> Order { get; set; }
         public string Meta { get; set; }

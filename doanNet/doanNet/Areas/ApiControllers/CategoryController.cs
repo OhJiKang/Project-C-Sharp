@@ -11,9 +11,15 @@ namespace doanNet.ApiControllers
     public class CategoryController : ApiController
     {
         KTXTDTUEntities2 db = new KTXTDTUEntities2();
-        public List<Category> Get()
+        [HttpGet]
+        public List<Category> GetAll()
         {
             return db.Categories.ToList();
+        }
+        [HttpGet]
+        public Category GetCategoryByID(int id)
+        {
+            return db.Categories.Where(row => row.IDCategory == id).FirstOrDefault();
         }
         public Category PostCategory(Category Category)
         {
@@ -27,7 +33,6 @@ namespace doanNet.ApiControllers
         {
             Category updateCategory = db.Categories.Where(row => row.IDCategory == Category.IDCategory).FirstOrDefault();
             updateCategory.CategoryTitle = Category.CategoryTitle;
-            updateCategory.CategoryDetail = "Thẻ này là thẻ "+ Category.CategoryTitle;
             updateCategory.ColorChip = Category.ColorChip;
             updateCategory.DateBegin = DateTime.Now;
             db.SaveChangesAsync();
