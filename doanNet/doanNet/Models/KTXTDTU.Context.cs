@@ -18,8 +18,9 @@ namespace doanNet.Models
         public KTXTDTUEntities2()
             : base("name=KTXTDTUEntities2")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -45,3 +46,4 @@ namespace doanNet.Models
         public virtual DbSet<Menu> Menus { get; set; }
     }
 }
+

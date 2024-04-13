@@ -12,12 +12,17 @@ async function putPost(PostData, id) {
     result = await result.json();
 }
 async function postPost(PostData) {
+    var data = new FormData()
+    console.log(PostData)
+    data.append("PostTittle", PostData.PostTittle);
+    data.append("PostDetail", PostData.PostDetail)
+    data.append("meta", PostData.meta)
+    data.append("PostImage", PostData.PostImage)
+    data.append("CategoryList", PostData.CategoryList)
+    data.append("IDAccount", PostData.IDAccount)
     let result = await fetch(`${url}/AddingPost`, {
-        headers: {
-            "Content-Type": "application/json"
-        },
         method: 'POST',
-        body: JSON.stringify(PostData),
+        body: data,
     });
     result = await result.json();
 }

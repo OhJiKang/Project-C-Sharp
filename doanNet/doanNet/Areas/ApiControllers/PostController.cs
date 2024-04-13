@@ -12,6 +12,7 @@ using System.Web.Http;
 using doanNet.Controllers.DTO;
 using System.Collections;
 using System.IO;
+using System.Web.Mvc;
 
 namespace doanNet.ApiControllers
 {
@@ -29,70 +30,84 @@ namespace doanNet.ApiControllers
         {
             return db.Posts.Where(row => row.IDPost == id).FirstOrDefault();
         }
-        [HttpPost]
-        public IHttpActionResult AddingPost([FromBody] PostDTO Post)
+        
+        [System.Web.Http.HttpPost]
+        [ValidateInput(false)]
+        [ValidateAntiForgeryToken]
+        public async Task<IHttpActionResult> AddingPost(PostDTO Post)
         {
-            try { 
-            var tempPost = new Post();
-
-            var file = Post.PostImage;
-            if (file != null && file.ContentLength > 0)
+            try
             {
-                // Generate a unique server-side file name (e.g., using timestamp)
-                var serverFileName = $"{DateTime.Now.Ticks}_{Path.GetFileName(file.FileName)}";
-                // Save the file to the desired location (e.g., ~/App_Data/uploads/)
-                var uploadPath = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/upload/img/news"), serverFileName);
-                file.SaveAs(uploadPath);
-                tempPost.PostImage = uploadPath;
-            }
+                var tempPost = new Post();
+
+                // Handle file upload
+                if (Post.PostImage != null && Post.PostImage.ContentLength > 0)
+                {
+                    var serverFileName = $"{DateTime.Now.Ticks}_{Path.GetFileName(Post.PostImage.FileName)}";
+                    var uploadPath = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/upload/img/news"), serverFileName);
+                    Post.PostImage.SaveAs(uploadPath);
+                    tempPost.PostImage = serverFileName;
+                }
                 else
                 {
-                    tempPost.PostImage = "~/Content/upload/img/news/default.png";
+                    tempPost.PostImage = "default.png";
                 }
+
+                // Set other properties
                 tempPost.PostTitle = Post.PostTittle;
                 tempPost.PostDetail = Post.PostDetail;
-                tempPost.DateBegin=DateTime.Now;
+                tempPost.DateBegin = DateTime.Now;
                 tempPost.Hide = 0;
                 tempPost.Meta = Post.meta;
+
+                // Save the post
                 db.Posts.Add(tempPost);
-                db.SaveChangesAsync();
-                foreach (var category in Post.CategoryList) {
-                    var tempCategory = new CategoryBridge();
-                    tempCategory.IDCategory = category.IDCategory;
-                    tempCategory.IDPost = tempPost.IDPost;
-                    tempCategory.DateBegin = DateTime.Now;
-                    tempCategory.Hide = 0;
+                await db.SaveChangesAsync();
+
+                // Add category bridges
+                foreach (var category in Post.CategoryList)
+                {
+                    var tempCategory = new CategoryBridge
+                    {
+                        IDCategory = category.IDCategory,
+                        IDPost = tempPost.IDPost,
+                        DateBegin = DateTime.Now,
+                        Hide = 0
+                    };
                     db.CategoryBridges.Add(tempCategory);
+                    await db.SaveChangesAsync();
                 }
+
                 return Json(new { Message = "Data received successfully!" });
-                }
+            }
             catch (DbEntityValidationException e)
             {
-                string mes = "";
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    mes += $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:";
-
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        mes += $"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"";
-
-
-                    }
-
-
-                }
-
-                return Json(new { Message = mes });
+                // Handle validation errors
+                var errorMessage = GetValidationErrorMessage(e);
+                return Json(new { Message = errorMessage });
             }
         }
 
+        private string GetValidationErrorMessage(DbEntityValidationException e)
+        {
+            var errorMessage = "";
+            foreach (var eve in e.EntityValidationErrors)
+            {
+                errorMessage += $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:";
+
+                foreach (var ve in eve.ValidationErrors)
+                {
+                    errorMessage += $"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"";
+                }
+            }
+            return errorMessage;
+        }
         private bool EntityExists(int id)
         {
             return db.Posts.Any(e => e.IDPost == id);
         }
 
-        [HttpPut]
+        [System.Web.Mvc.HttpPut]
         public async Task<IHttpActionResult> PutPost(int? id, [FromBody] PostDTO Post)
         {
 
@@ -170,7 +185,7 @@ namespace doanNet.ApiControllers
                 return Json(new { Message = "Adding Failed!Error: " + ex, });
             }
         }
-        [HttpPut]
+        [System.Web.Mvc.HttpPut]
         public IHttpActionResult HiddingPost(int id)
         {
             Post hidePost = db.Posts.Where(row => row.IDPost == id).FirstOrDefault();

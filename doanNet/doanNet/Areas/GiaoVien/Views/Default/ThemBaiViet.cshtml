@@ -104,7 +104,6 @@
 <script src="~/Areas/admin/Content/ckeditor/ckeditor.js"></script>
 
 <label class='label_address_modifier base_label_inline' style="width:100%;text-align:center;margin-bottom:24px">Nội dung bài post</label>
-<
 
 <textarea id="editor1" class="ckeditor"></textarea>
 <div class="upload-container" style="width:100%;text-align:right">
@@ -132,20 +131,61 @@
     </div>
 </div>
 <script>
+    function formatKeywordsForSEO(inputArray) {
+        // Process each element in the input array to remove whitespace and format
+        let formattedKeywords = inputArray.map(keyword => {
+            // Remove diacritics and convert to lowercase
+            let normalizedKeyword = removeDiacritics(keyword).toLowerCase();
+
+            // Replace spaces within the normalized keyword with an empty string
+            let formattedKeyword = normalizedKeyword.replace(/\s+/g, '').replace(/đ/gi, 'd');;
+
+            // Return the formatted keyword
+            return formattedKeyword;
+        });
+
+        // Join the formatted keywords with a semicolon to form the final output string
+        let finalOutput = formattedKeywords.join(';');
+
+        return finalOutput;
+    }
+
+    // Function to remove Vietnamese diacritics
+    function removeDiacritics(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+    function updateMetaForCategory(categoryNameGet) {
+        const postName = $(".post_tittle_place").val() != "" ? $(".post_tittle_place").val() : "";        
+        let tempPostArr=[]
+        tempPostArr.push(postName);
+        let newFormatPost = formatKeywordsForSEO(tempPostArr)
+        const newMeta = `/${newFormatPost}`;
+        // Set the value of meta input field
+        $(".meta_place").val(newMeta);
+    }
+    function updateMeta(categoryNameGet) {
+        let categoryString = formatKeywordsForSEO(categoryNameGet)
+        const postName = $(".post_tittle_place").val() == "" ? $(".post_tittle_place").val() : "";
+        console.log(postName);
+        const newMeta = `${categoryString}/${postName}`;
+        // Set the value of meta input field
+        $(".meta_place").val(newMeta);
+    }
+    const categoryNameGet = []
     function getCheckedCategorySpans() {
         // Select all category checkboxes within the container
         const checkboxes = document.querySelectorAll('.Category_Containter .category-checkbox');
 
         // Array to store HTML of checked category spans
         const checkedCategorySpans = [];
-
+        
         // Iterate over each checkbox
         checkboxes.forEach((checkbox) => {
             // Check if the checkbox is checked
             if (checkbox.checked) {
                 // Get the sibling <span> element (category span) of the checked checkbox
                 const categorySpan = checkbox.parentElement.querySelector('span');
-
+                categoryNameGet.push(categorySpan.textContent);
                 // Push the HTML of the category span into the array
                 if (categorySpan) {
                     checkedCategorySpans.push(categorySpan.outerHTML);
@@ -155,8 +195,11 @@
         const allHTMLS = checkedCategorySpans.join("");
         $("#tagContainer").html(allHTMLS);
         $('#ModalChooseCategory').modal('hide');
-
+        updateMetaForCategory(categoryNameGet);
     }
+    $(".post_tittle_place").keyup(() => {
+        updateMetaForCategory(categoryNameGet);
+    })
 </script>
 <div class="modal fade"
      id="ModalAddingCategory"
@@ -206,6 +249,7 @@
     @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/CategoryAPI.js")
 
     <script>
+        
             /*
                 public int IDCategory { get; set; }
                 public string CategoryName { get; set; }
@@ -261,7 +305,8 @@
             sessionStorage.setItem('selectedIds', JSON.stringify(storedIds)); // Update sessionStorage
         }
         const renderCategory=async ()=>{
-            let CategoryData=await getAllCategory();
+            let CategoryData = await getAllCategory();
+            console.log(CategoryData);
             let htmls="";
             
             CategoryData.forEach((item)=>{
@@ -281,7 +326,6 @@
             
             const checkboxes = document.querySelectorAll('.category-checkbox');
             const storedIds = JSON.parse(sessionStorage.getItem('selectedIds') || '[]');
-            console.log(checkboxes)
             checkboxes.forEach(checkbox => {
                 checkbox.checked = storedIds.includes(checkbox.id);
             });
@@ -357,10 +401,9 @@
 
         */
         //CKEDITOR.instances.editor1.getData():Lay du lieu CKEditor
-
+        
         $(".submit_btn").click(async () => {
             let PostImage;
-            console.log(document.querySelector('#cover_image_upload').files);
             if (!document.querySelector('#cover_image_upload').files[0]) {
                 PostImage = null;
             }
@@ -376,8 +419,6 @@
                 CategoryList:CategoryList,
                 IDAccount: JSON.parse(sessionStorage.getItem("IDAccount"))
             }
-            console.log(PostDetail);
-            return;
             const result = postPost(PostDetail);
         })
     </script>
