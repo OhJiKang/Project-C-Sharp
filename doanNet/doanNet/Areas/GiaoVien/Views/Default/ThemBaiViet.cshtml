@@ -408,7 +408,7 @@
                 PostImage = null;
             }
             else {
-                PostImage = document.querySelector('#cover_image_upload').files[0];
+                PostImage = $('#cover_image_upload')[0].files[0]
             }
             const CategoryList=convertSpansToCategoryDTO();
             const PostDetail = {
@@ -419,6 +419,6 @@
                 CategoryList:CategoryList,
                 IDAccount: JSON.parse(sessionStorage.getItem("IDAccount"))
             }
-            const result = postPost(PostDetail);
+            await postPost(PostDetail);
         })
     </script>

@@ -13,6 +13,7 @@ using doanNet.Controllers.DTO;
 using System.Collections;
 using System.IO;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 
 namespace doanNet.ApiControllers
 {
@@ -30,51 +31,58 @@ namespace doanNet.ApiControllers
         {
             return db.Posts.Where(row => row.IDPost == id).FirstOrDefault();
         }
-        
-        [System.Web.Http.HttpPost]
-        [ValidateInput(false)]
-        [ValidateAntiForgeryToken]
-        public async Task<IHttpActionResult> AddingPost(PostDTO Post)
+
+        [System.Web.Mvc.HttpPost, ValidateInput(false)]
+        public async Task<IHttpActionResult> AddingPost()
         {
             try
             {
+                // Get form data from the request
+                HttpRequestBase request = new HttpContextWrapper(HttpContext.Current).Request;
                 var tempPost = new Post();
 
                 // Handle file upload
-                if (Post.PostImage != null && Post.PostImage.ContentLength > 0)
+                HttpPostedFileBase image = request.Files["PostImage"];
+                if (image != null && image.ContentLength > 0)
                 {
-                    var serverFileName = $"{DateTime.Now.Ticks}_{Path.GetFileName(Post.PostImage.FileName)}";
+                    var serverFileName = $"{DateTime.Now.Ticks}_{Path.GetFileName(image.FileName)}";
                     var uploadPath = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/upload/img/news"), serverFileName);
-                    Post.PostImage.SaveAs(uploadPath);
+                    image.SaveAs(uploadPath);
                     tempPost.PostImage = serverFileName;
                 }
                 else
                 {
                     tempPost.PostImage = "default.png";
                 }
-
-                // Set other properties
-                tempPost.PostTitle = Post.PostTittle;
-                tempPost.PostDetail = Post.PostDetail;
+                var PostDetail = request.Form["PostDetail"];
+                // Set other properties from form data
+                tempPost.PostTitle = request.Form["PostTitle"];
+                tempPost.PostDetail = PostDetail;
                 tempPost.DateBegin = DateTime.Now;
                 tempPost.Hide = 0;
-                tempPost.Meta = Post.meta;
+                tempPost.Meta = request.Form["Meta"];
 
                 // Save the post
                 db.Posts.Add(tempPost);
                 await db.SaveChangesAsync();
 
+                List<CategoryDTO> categories = JsonConvert.DeserializeObject<List<CategoryDTO>>(request.Form.GetValues("CategoryList")[0]);
                 // Add category bridges
-                foreach (var category in Post.CategoryList)
+                
+                if (categories != null)
                 {
-                    var tempCategory = new CategoryBridge
+                    foreach (var category in categories)
                     {
-                        IDCategory = category.IDCategory,
-                        IDPost = tempPost.IDPost,
-                        DateBegin = DateTime.Now,
-                        Hide = 0
-                    };
-                    db.CategoryBridges.Add(tempCategory);
+                        
+                        var tempCategory = new CategoryBridge
+                        {
+                            IDCategory = category.IDCategory,
+                            IDPost = tempPost.IDPost,
+                            DateBegin = DateTime.Now,
+                            Hide = 0
+                        };
+                        db.CategoryBridges.Add(tempCategory);
+                    }
                     await db.SaveChangesAsync();
                 }
 
@@ -82,9 +90,19 @@ namespace doanNet.ApiControllers
             }
             catch (DbEntityValidationException e)
             {
-                // Handle validation errors
-                var errorMessage = GetValidationErrorMessage(e);
-                return Json(new { Message = errorMessage });
+                string mes = "";
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    mes += $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:";
+
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        mes += $"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"";
+
+
+                    }
+                }
+                return Json(new { Message = mes });
             }
         }
 

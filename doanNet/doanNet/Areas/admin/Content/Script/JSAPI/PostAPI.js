@@ -14,15 +14,28 @@ async function putPost(PostData, id) {
 async function postPost(PostData) {
     var data = new FormData()
     console.log(PostData)
-    data.append("PostTittle", PostData.PostTittle);
+    data.append("PostTitle", PostData.PostTittle);
     data.append("PostDetail", PostData.PostDetail)
     data.append("meta", PostData.meta)
     data.append("PostImage", PostData.PostImage)
-    data.append("CategoryList", PostData.CategoryList)
-    data.append("IDAccount", PostData.IDAccount)
-    let result = await fetch(`${url}/AddingPost`, {
+    data.append("CategoryList", JSON.stringify(PostData.CategoryList))
+    data.append("IDAccount", PostData.IDAccount);
+    $.ajax({
+        type: "POST",
+        url: `${url}/AddingPost`,
+        contentType: false,
+        processData: false,
+        data: data,
+        success: function () {
+
+        },
+        error: function () {
+
+        }
+    });
+    /*let result = await fetch(`${url}/AddingPost`, {
         method: 'POST',
         body: data,
     });
-    result = await result.json();
+    result = await result.json();*/
 }
