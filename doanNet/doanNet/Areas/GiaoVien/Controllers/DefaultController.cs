@@ -28,6 +28,8 @@ namespace doanNet.Areas.GiaoVien.Controllers
         public ActionResult QuanLySinhVien()
         {
             var sinhviens = db.SinhViens.ToList();
+            var falcuties = db.Faculties.ToList();
+            ViewBag.falcuties = falcuties;
             ViewBag.sinhviens=sinhviens;
             return View();
         }

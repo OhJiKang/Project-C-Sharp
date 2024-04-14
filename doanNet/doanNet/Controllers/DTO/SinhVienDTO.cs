@@ -12,6 +12,8 @@ namespace doanNet.Controllers.DTO
         public string Address { get; set; }
         public DateTime BirthDay { get; set; }
         public DateTime AttendDate { get; set; }
+
+        public string FalcutyName { get; set; }
         public int AttendYear { get; set; }
         public int GraduateYear { get; set; }
         public string MSSV { get; set; }

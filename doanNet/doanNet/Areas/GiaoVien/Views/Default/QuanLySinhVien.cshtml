@@ -518,6 +518,7 @@
                     @{var number = 1; }
                     @foreach (var item in ViewBag.sinhviens)
                     {
+                        var falcutiesName = "";
                         <tr>
                             <td>@Html.Raw(number++)</td>
                             <td>@item.MSSV</td>
@@ -526,9 +527,18 @@
                             <td>@MyHelper.FormatDate(item.BirthDay)</td>
                             <td>@MyHelper.FormatDate(item.AttendDate)</td>
                             <td>@item.AttendYear - @item.GraduateYear</td>
-                            <td>@item.Faculty.NameFalculty</td>
-                            <td>@item.Contract.IDContract</td>
-                            <td>@item.Room.Name</td>
+                            <td>
+                                @foreach (var falcuty in ViewBag.falcuties)
+                                {
+                                    if (item.IDFalcuty == falcuty.IDFalcuty)
+                                    {
+                                        falcutiesName = falcuty.NameFalculty;
+                                    }
+                                }
+                                @falcutiesName
+                            </td>
+                            <td>@item.IDContract</td>
+                            <td>@item.IDRoom</td>
                             <td>
                                 <i class="fa-regular fa-pen-to-square edit_modal_open_btn" style="color: blue;" id="@item.IDSinhVien"></i>
                             </td>
