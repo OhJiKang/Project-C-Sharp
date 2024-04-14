@@ -16,23 +16,26 @@ namespace doanNet.ApiControllers
     public class SinhVienController : ApiController
     {
         KTXTDTUEntities2 db = new KTXTDTUEntities2();
-
-        public List<SinhVien> GetAll(int? page)
+        [HttpGet]
+        public List<SinhVien> GetAll()
         {
             return db.SinhViens.ToList();
         }
+        [HttpGet]
 
         public SinhVien GetByID(int? id)
         {
             return db.SinhViens.Where(row => row.IDSinhVien == id).FirstOrDefault();
         }
+        [HttpGet]
 
         public SinhVien GetByMSSV(string mssv)
         {
             return db.SinhViens.Where(row => row.MSSV == mssv).FirstOrDefault();
         }
+        [HttpGet]
 
-        public List<SinhVien> GetAllSinhVienByRoom(int roomid,int? page)
+        public List<SinhVien> GetAllSinhVienByRoom(int roomid)
         {
             return db.SinhViens.Where(row =>row.IDRoom==roomid).ToList();
         }

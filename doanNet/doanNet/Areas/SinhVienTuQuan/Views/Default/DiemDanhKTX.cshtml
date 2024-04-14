@@ -88,20 +88,62 @@
         <option value="1">Tầng 1</option>
     </select>
 </div>
-<div class="container-fluid" style="padding-top: 40px">
-    <div class="content" style="border: 2px solid black; padding: 10px; cursor: pointer" onclick="showModal()">
-        <input type="checkbox" style="padding: 20px" />
-        <h8 style="font-weight: bold; padding: 20px;">L111</h8>
-        <p style="background-color: blue; color: white; width: 35px; padding: 5px; margin: 0;">7/8</p>
-        <i class="fa-solid fa-arrow-right"></i>
-    </div>
-    <script>
-        function showModal() {
-            var myModal = new bootstrap.Modal(document.getElementById('ThemSinhVien'));
-            myModal.show();
-        }
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/SinhVienAPI.js")
+<script>
+    async function showModal(id, name) {
+        const IntroHTML = `Điểm danh phòng - ${name}`
+        $(".modal_heading").text(IntroHTML);
+        var myModal = new bootstrap.Modal(document.getElementById('ThemSinhVien'));
+        const SinhVienData = await getAllSinhVienByRoom(id);
+        let htmls = ``;
+        SinhVienData.forEach((sinhvien) => {
+            htmls += ` <div class="row" id=${sinhvien.IDSinhVien} style="padding: 10px">
+                            <div class="col-md-6 ps-5">
+                                <h6 class="mb-0 font-weight-bold">${sinhvien.FullName}</h6>
+                            </div>
+                            <div class="col-md-6 pe-5">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions${sinhvien.IDSinhVien}" id="inlineRadio1${sinhvien.IDSinhVien}" value="option1" onclick="khongphep(${sinhvien.IDSinhVien})">
+                                    <label class="form-check-label" for="inlineRadio1${sinhvien.IDSinhVien}">Không phép</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions${sinhvien.IDSinhVien}" id="inlineRadio2${sinhvien.IDSinhVien}" value="option2" onclick="cophep(${sinhvien.IDSinhVien})">
+                                    <label class="form-check-label" for="inlineRadio2${sinhvien.IDSinhVien}">Có phép</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions${sinhvien.IDSinhVien}" id="inlineRadio3${sinhvien.IDSinhVien}" value="option3" onclick="comat(${sinhvien.IDSinhVien})">
+                                    <label class="form-check-label" for="inlineRadio3${sinhvien.IDSinhVien}">Có mặt</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row reason-input" id=${sinhvien.IDSinhVien} style="background-color:white; text-align: center; font: 12px; color: grey; display: none">
+                        <div class="col-md-3 ps-5 d-flex justify-content-center align-items-center">
+                            <label for="reason">Lý do vắng</label>
+                        </div>
+                        <div class="col-md-9 pe-5">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="reason" placeholder="Nhập lý do vắng" style="border: none; border-bottom: 1px solid gray;">
+                            </div>
+                        </div>
+                    </div>
+                        `
+        })
+        $(".sinh_vien_container").html(htmls);
+        myModal.show();
+    }
 
-    </script>
+</script>
+<div class="container-fluid" style="padding-top: 40px">
+    @foreach (var room in ViewBag.RoomList)
+    {
+        <div class="content" style="border: 2px solid black; padding: 10px; cursor: pointer" onclick="showModal(@room.IDRoom,'@room.Name')">
+            <input type="checkbox" style="padding: 20px" />
+            <h8 style="font-weight: bold; padding: 20px;">@room.Name</h8>
+            <p style="background-color: blue; color: white; width: 35px; padding: 5px; margin: 0;">7/8</p>
+            <i class="fa-solid fa-arrow-right"></i>
+        </div>
+    }
+
     <div class="modal fade" id="ThemSinhVien" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -109,40 +151,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="padding: 40px">
-                    <h6 style="text-align: center; font-weight: bold; padding-bottom: 20px">Điểm danh phòng - L111</h6>
-                    <div class="row align-items-center pt-4 pb-3">
-                        <div class="row" id="background" style="padding: 10px">
-                            <div class="col-md-6 ps-5">
-                                <h6 class="mb-0 font-weight-bold">Nguyễn Trần Phúc Bảo Long</h6>
-                            </div>
-                            <div class="col-md-6 pe-5">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="khongphep()">
-                                    <label class="form-check-label" for="inlineRadio1">Không phép</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="cophep()">
-                                    <label class="form-check-label" for="inlineRadio2">Có phép</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" onclick="comat()">
-                                    <label class="form-check-label" for="inlineRadio3">Có mặt</label>
-                                </div>
-                            </div>
-                        </div>
+                    <h6 class="modal_heading" style="text-align: center; font-weight: bold; padding-bottom: 20px"></h6>
+                    <div class="row align-items-center pt-4 pb-3 sinh_vien_container">
+
                     </div>
-                        <div class="row" id="reasonInput" style="background-color:white; text-align: center; font: 12px; color: grey; display: none">
-                            <div class="col-md-3 ps-5 d-flex justify-content-center align-items-center">
-                                <label for="reason">Lý do vắng</label>
-                            </div>
-                            <div class="col-md-9 pe-5">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="reason" placeholder="Nhập lý do vắng" style="border: none; border-bottom: 1px solid gray;">
-                                </div>
-                            </div>
-                        </div>
-                   
-                       
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -151,26 +163,29 @@
 
         </div>
         <script>
-            function showReasonInput() {
-                document.getElementById('reasonInput').style.display = 'flex';
+            function showReasonInput(id) {
+                console.log(`.row.reason-input#${id}`);
+                document.querySelector(`.row.reason-input[id='${id}']`).style.display = 'flex';
             }
 
-            function hideReasonInput() {
-                document.getElementById('reasonInput').style.display = 'none';
+            function hideReasonInput(id) {
+                console.log(`.row#${id}`);
+                document.querySelector(`.row.reason-input[id='${id}']`).style.display = 'none';
             }
 
-            function comat() {
-                hideReasonInput();
-                document.querySelector('.modal-body .row.align-items-center').style.backgroundColor = '#c6f9d7';
+            function comat(id) {
+                hideReasonInput(id);
+                document.querySelector(`.modal-body .row[id='${id}']`).style.backgroundColor = '#c6f9d7';
             }
 
-            function cophep() {
-                showReasonInput();
-                document.querySelector('.modal-body .row.align-items-center').style.backgroundColor = '#d9d9d9';
+            function cophep(id) {
+                console.log(id)
+                showReasonInput(id);
+                document.querySelector(`.modal-body .row[id='${id}']`).style.backgroundColor = '#d9d9d9';
             }
-            function khongphep() {
-                hideReasonInput();
-                document.querySelector('.modal-body .row.align-items-center').style.backgroundColor = '#afadad';
+            function khongphep(id) {
+                hideReasonInput(id);
+                document.querySelector(`.modal-body .row[id='${id}']`).style.backgroundColor = '#afadad';
             }
         </script>
     </div>

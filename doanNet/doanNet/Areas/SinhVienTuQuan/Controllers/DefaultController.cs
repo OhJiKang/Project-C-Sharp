@@ -1,4 +1,5 @@
-﻿using System;
+﻿using doanNet.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace doanNet.Areas.SinhVienTuQuan.Controllers
 {
     public class DefaultController : Controller
     {
+        KTXTDTUEntities2 db = new KTXTDTUEntities2();
+
         // GET: SinhVienTuQuan/Default
         public ActionResult Index()
         {
@@ -19,6 +22,7 @@ namespace doanNet.Areas.SinhVienTuQuan.Controllers
         }
         public ActionResult DangKyLichGacCong()
         {
+
             return View();
         }
         public ActionResult GhiLoiKTX()
@@ -27,6 +31,10 @@ namespace doanNet.Areas.SinhVienTuQuan.Controllers
         }
         public ActionResult DiemDanhKTX()
         {
+            var RoomList = db.Rooms.ToList();
+            var SinhVienList = db.SinhViens.ToList();
+            ViewBag.RoomList = RoomList;
+            ViewBag.SinhVienList = SinhVienList;
             return View();
         }
     }

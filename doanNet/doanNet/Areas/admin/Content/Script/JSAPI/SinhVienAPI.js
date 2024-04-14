@@ -2,6 +2,16 @@
 
 const url = `${baseURL}/SinhVien`
 
+async function getAllSinhVienByRoom(roomid) {
+    let result = await fetch(`${url}/GetAllSinhVienByRoom?roomid=${roomid}`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: 'GET',
+    });
+    return result.json();
+    
+}
 async function PostSinhVien(SinhVienData) {
     let result = await fetch(`${url}/AddingSinhVien`, {
         headers: {
