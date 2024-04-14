@@ -165,25 +165,54 @@ body, .search-bar {
             <thead>
                 <tr style="background-color: darkblue; color: white">
                     <th scope="col">Tiêu đề</th>
-                    <th scope="col">Tên người đăng</th>
+                    <th scope="col">Chi tiết bài đăng</th>
+                    <th scope="col">Meta</th>
+                    <th scope="col">ID người đăng</th>
                     <th scope="col">Thời gian đăng</th>
                     <th scope="col">Lần cuối chỉnh sửa</th>
-                    <th scope="col">Tên Category</th>
-                    <th scope="col">Thẻ bài viết</th>
+                    <th scope="col">Tag bài đăng</th>
                     <th scope="col">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  
-                </tr>
+				@foreach (var item in ViewBag.posts)
+				{
+					List<int> categories = new List<int>();
+					List<string> categoriesName = new List<string>();
+					<tr>
+						<th>@item.PostTitle</th>
+						<td>@item.PostDetail</td>
+						<td>@item.Meta</td>
+						<td>@item.IDAccount</td>
+						<td>@item.DateBegin</td>
+						<td></td>
+                        <td>
+                            @foreach (var categorybridge in ViewBag.categoryBridges)
+                            {
+                                if (categorybridge.IDPost == item.IDPost)
+                                {
+                                    categories.Add(categorybridge.IDCategory);
+                                }
+                            }
+                            @foreach (var category in ViewBag.Categories)
+                            {
+                                foreach (int id in categories)
+                                {
+                                    if (category.IDCategory == id)
+                                    {
+                                        categoriesName.Add(category.CategoryTitle);
+                                    }
+                                }
+                            }
+                            @{
+                                String categoryString = string.Join(", ", categoriesName);
+                            }
+                            @categoryString
+                        </td>	
+						<td></td>
+					</tr>
+				}
+                
             </tbody>
         </table>
     </div>

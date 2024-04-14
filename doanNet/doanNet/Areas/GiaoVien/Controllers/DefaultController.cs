@@ -69,6 +69,14 @@ namespace doanNet.Areas.GiaoVien.Controllers
         }
         public ActionResult Post()
         {
+            var posts = db.Posts.ToList();
+            ViewBag.posts=posts;
+
+            var categogries = db.Categories.ToList();
+            ViewBag.categories = categogries;
+            
+            var categorybridge = db.CategoryBridges.ToList();
+            ViewBag.categoryBridges = categorybridge;
             return View();
         }
         public ActionResult QuanLyMenu()
