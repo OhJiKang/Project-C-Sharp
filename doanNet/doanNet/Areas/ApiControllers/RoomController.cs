@@ -16,6 +16,11 @@ namespace doanNet.ApiControllers
     {
         KTXTDTUEntities2 db = new KTXTDTUEntities2();
 
+        public List<Room> getAllRoomByFloor(int floorId)
+        {
+            return db.Rooms.Where(row=>row.Floor==floorId).ToList();
+
+        }
         public List<Room> GetAll()
         {
             return db.Rooms.ToList();

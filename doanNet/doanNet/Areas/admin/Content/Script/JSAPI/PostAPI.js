@@ -1,4 +1,4 @@
-﻿let baseURL = "/api"
+﻿let baseURL = ""
 const url = `${baseURL}/post`
 
 async function putPost(PostData, id) {
