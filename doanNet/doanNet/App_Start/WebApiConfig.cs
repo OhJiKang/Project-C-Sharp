@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -20,11 +21,18 @@ namespace doanNet
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            var json = config.Formatters.JsonFormatter;
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/plain"));
-            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            // Configure JSON formatter
+            var jsonFormatter = config.Formatters.JsonFormatter;
+            jsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            jsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/plain"));
+
+            // Configure JSON serializer settings
+            var serializerSettings = jsonFormatter.SerializerSettings;
+            serializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects; // Preserve object references
+            serializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; // Ignore circular references
+            // Remove XML formatter
             config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
+
     }
 }

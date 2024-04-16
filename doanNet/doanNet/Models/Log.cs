@@ -9,6 +9,7 @@
 
 namespace doanNet.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -23,8 +24,10 @@ namespace doanNet.Models
         public string Meta { get; set; }
         public System.DateTime DateBegin { get; set; }
         public int Hide { get; set; }
-    
+
+        [JsonIgnore]
         public virtual Fee Fee { get; set; }
+        [JsonIgnore]
         public virtual SinhVien SinhVien { get; set; }
     }
 }

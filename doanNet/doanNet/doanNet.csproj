@@ -1458,6 +1458,7 @@
     <Compile Include="Areas\ApiControllers\PriorityController.cs" />
     <Compile Include="Areas\ApiControllers\RoomController.cs" />
     <Compile Include="Areas\ApiControllers\SinhVienController.cs" />
+    <Compile Include="Areas\ApiControllers\TrucCongController.cs" />
     <Compile Include="Areas\GiaoVien\Controllers\DefaultController.cs" />
     <Compile Include="Areas\GiaoVien\Controllers\MenuController.cs" />
     <Compile Include="Areas\GiaoVien\GiaoVienAreaRegistration.cs" />

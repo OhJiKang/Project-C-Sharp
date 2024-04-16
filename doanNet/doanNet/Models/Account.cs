@@ -9,6 +9,7 @@
 
 namespace doanNet.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -33,16 +34,22 @@ namespace doanNet.Models
         public int Hide { get; set; }
         public Nullable<int> AccountTypeID { get; set; }
         public string MSSV { get; set; }
-    
+        [JsonIgnore]
+
         public virtual AccountType AccountType { get; set; }
+        [JsonIgnore]
         public virtual SinhVien SinhVien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<AttendanceBridge> AttendanceBridges { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<Mistake> Mistakes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<Post> Posts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<TrucCong> TrucCongs { get; set; }
     }
 }

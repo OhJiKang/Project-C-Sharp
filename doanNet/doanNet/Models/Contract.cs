@@ -9,6 +9,7 @@
 
 namespace doanNet.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -32,10 +33,12 @@ namespace doanNet.Models
         public Nullable<int> IDPriority { get; set; }
         public string Description { get; set; }
         public Nullable<bool> xetduyet { get; set; }
-    
+        [JsonIgnore]
         public virtual Place Place { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<SinhVien> SinhViens { get; set; }
+        [JsonIgnore]
         public virtual Priority Priority { get; set; }
     }
 }
