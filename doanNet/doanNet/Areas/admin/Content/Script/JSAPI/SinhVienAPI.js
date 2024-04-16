@@ -1,9 +1,8 @@
-﻿let baseURL = "/api"
-
-const url = `${baseURL}/SinhVien`
+﻿
+const SinhVienURL = `/api/SinhVien`
 
 async function getAllSinhVienByRoom(roomid) {
-    let result = await fetch(`${url}/GetAllSinhVienByRoom?roomid=${roomid}`, {
+    let result = await fetch(`${SinhVienURL}/GetAllSinhVienByRoom?roomid=${roomid}`, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -13,7 +12,7 @@ async function getAllSinhVienByRoom(roomid) {
     
 }
 async function PostSinhVien(SinhVienData) {
-    let result = await fetch(`${url}/AddingSinhVien`, {
+    let result = await fetch(`${SinhVienURL}/AddingSinhVien`, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -24,7 +23,7 @@ async function PostSinhVien(SinhVienData) {
     console.log(result)
 }
 async function findSinhVienById(id) {
-    let result = await fetch(`${url}/GetByID?id=${id}`, {
+    let result = await fetch(`${SinhVienURL}/GetByID?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -34,7 +33,7 @@ async function findSinhVienById(id) {
     return resulttosend;
 }
 async function PutSinhVien(id,SinhVienData) {
-    let result = await fetch(`${url}/PutSinhVien?id=${id}`, {
+    let result = await fetch(`${SinhVienURL}/PutSinhVien?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
         },

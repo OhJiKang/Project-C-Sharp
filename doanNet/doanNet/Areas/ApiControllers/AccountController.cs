@@ -17,7 +17,10 @@ namespace doanNet.ApiControllers
     public class AccountController : ApiController
     {
         KTXTDTUEntities2 db = new KTXTDTUEntities2();
-
+        public Account GetByID(int? id)
+        {
+            return db.Accounts.Where(row => row.IDAccount == id).FirstOrDefault();
+        }
         public List<Account> GetAll()
         {
             return db.Accounts.ToList();

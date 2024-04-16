@@ -1255,6 +1255,7 @@
     <Content Include="Areas\admin\Content\ckfinder\skins\v1\uipanel.css" />
     <Content Include="Areas\admin\Content\ckfinder\translations.txt" />
     <Content Include="Areas\admin\Content\CSS\GiaoVien.css" />
+    <Content Include="Areas\admin\Content\Script\JSAPI\TrucCongAPI.js" />
     <Content Include="Areas\SinhVienTuQuan\Views\bin\Antlr3.Runtime.dll" />
     <Content Include="Areas\SinhVienTuQuan\Views\bin\Antlr3.Runtime.pdb" />
     <Content Include="Areas\SinhVienTuQuan\Views\bin\doanNet.dll" />
@@ -1477,6 +1478,7 @@
     <Compile Include="Controllers\DTO\PostDTO.cs" />
     <Compile Include="Controllers\DTO\RoomDTO.cs" />
     <Compile Include="Controllers\DTO\SinhVienDTO.cs" />
+    <Compile Include="Controllers\DTO\TrucCongDTO.cs" />
     <Compile Include="Controllers\SinhVienTuQuanController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\MenuController.cs" />

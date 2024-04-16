@@ -1,12 +1,15 @@
-﻿using doanNet.Models;
+﻿using doanNet.Controllers.DTO;
+using doanNet.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Validation;
 using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace doanNet.Areas.ApiControllers
@@ -52,10 +55,38 @@ namespace doanNet.Areas.ApiControllers
             var trucCongs = db.TrucCongs
                             .Where(tc => tc.DateApply >= startDate && tc.DateApply <= endDate)
                             .ToList();
-
-
             return trucCongs;
         }
+        public async Task<IHttpActionResult> AddingTrucCong([FromBody] List<TrucCong> TrucCongs)
+        {
+            try
+            {
+                foreach (var item in TrucCongs)
+                {
+                    item.DateBegin=DateTime.Now;
+                    item.Hide = 0;
+                    db.TrucCongs.Add(item);
+                    await db.SaveChangesAsync();
+                }
+                return Json(new { Message = "Data received successfully!" });
+            }
+            catch (DbEntityValidationException e)
+            {
+                string mes = "";
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    mes += $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:";
 
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        mes += $"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"";
+
+
+                    }
+                }
+                return Json(new { Message = mes });
+            }
+
+        }
     }
 }
