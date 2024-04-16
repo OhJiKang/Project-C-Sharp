@@ -1254,6 +1254,7 @@
     <Content Include="Areas\admin\Content\ckfinder\skins\v1\skin.js" />
     <Content Include="Areas\admin\Content\ckfinder\skins\v1\uipanel.css" />
     <Content Include="Areas\admin\Content\ckfinder\translations.txt" />
+    <Content Include="Areas\admin\Content\CSS\GiaoVien.css" />
     <Content Include="Areas\SinhVienTuQuan\Views\bin\Antlr3.Runtime.dll" />
     <Content Include="Areas\SinhVienTuQuan\Views\bin\Antlr3.Runtime.pdb" />
     <Content Include="Areas\SinhVienTuQuan\Views\bin\doanNet.dll" />
@@ -1616,7 +1617,7 @@
     <Content Include="Areas\SinhVienTuQuan\Views\Shared\Layout2.cshtml" />
     <Content Include="Areas\SinhVienTuQuan\Views\web.config" />
     <Content Include="Areas\GiaoVien\Views\Default\QuanLyPhong.cshtml" />
-    <Content Include="Areas\GiaoVien\Views\Default\DanhSachHopDongTheoThang.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\DanhSachHoaDonTheoThang.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\GhiLoiKTX.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\Mistake.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\Post.cshtml" />
@@ -1645,6 +1646,7 @@
     <Content Include="Areas\admin\Content\ckeditor\skins\moonocolor\readme.md" />
     <Content Include="Areas\admin\Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Areas\admin\Content\ckfinder\userfiles\.htaccess" />
+    <Content Include="Areas\GiaoVien\Views\Default\DanhSachHoaDon.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\layout.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />

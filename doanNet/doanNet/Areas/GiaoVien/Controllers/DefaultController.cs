@@ -31,6 +31,8 @@ namespace doanNet.Areas.GiaoVien.Controllers
             var falcuties = db.Faculties.ToList();
             ViewBag.falcuties = falcuties;
             ViewBag.sinhviens=sinhviens;
+            var rooms = db.Rooms.ToList();
+            ViewBag.rooms = rooms;
             return View();
         }
         public ActionResult DanhSachHopDong()
@@ -49,7 +51,11 @@ namespace doanNet.Areas.GiaoVien.Controllers
 
             return View();
         }
-        public ActionResult DanhSachHopDongTheoThang()
+        public ActionResult DanhSachHoaDon()
+        {
+            return View();
+        }
+        public ActionResult DanhSachHoaDonTheoThang()
         {
             return View();
         }
