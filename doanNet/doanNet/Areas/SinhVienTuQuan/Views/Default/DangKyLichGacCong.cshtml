@@ -3,6 +3,10 @@
     ViewBag.Title = "DangKyLichGacCong";
     Layout = "~/Views/Shared/layout2.cshtml";
 }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/2.0.3/js/dataTables.js" crossorigin="anonymous"></script>
+<link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" rel="stylesheet">
 
 <div class="container">
     <div class="row">
@@ -10,14 +14,49 @@
             <h2 style="font-weight: bold; padding: 20px; color: darkblue">ĐĂNG KÝ LỊCH GÁC CỔNG</h2>
         </div>
     </div>
-    <script></script>
+    <script>
+        $(document).ready(() => {
+            function formatDate(date) {
+                // Format the date as "dd/mm/yyyy"
+                var day = date.getDate();
+                var month = date.getMonth() + 1; // Months are zero-based
+                var year = date.getFullYear();
+                return `${day}/${month}/${year}`;
+            }
+
+            function getDayOfWeekVietnamese(dayIndex) {
+                // Define an array of Vietnamese days of the week
+                var daysOfWeek = [
+                    "Chủ Nhật", // Sunday
+                    "Thứ Hai",   // Monday
+                    "Thứ Ba",    // Tuesday
+                    "Thứ Tư",    // Wednesday
+                    "Thứ Năm",   // Thursday
+                    "Thứ Sáu",   // Friday
+                    "Thứ Bảy"    // Saturday
+                ];
+                return daysOfWeek[dayIndex];
+            }
+
+            (function displayNext3Days() {
+                var today = new Date();
+                let htmls = `<th scope="col" >Ca trực/Ngày trực</th>`
+                // Get the next 3 days
+                for (var i = 0; i < 3; i++) {
+                    var nextDay = new Date(today);
+                    nextDay.setDate(today.getDate() + i + 1); // Add 1 day, then 2 days, then 3 days
+                    var dayOfWeek = nextDay.getDay(); // Get day of the week (0 = Sunday, 1 = Monday, ...)
+                    var dayOfWeekVietnamese = getDayOfWeekVietnamese(dayOfWeek);
+                    var formattedDate = formatDate(nextDay);
+                    htmls += `<th>${dayOfWeekVietnamese} <br /> ${formattedDate}</th>`
+                }
+                $(".date_container").html(htmls);
+            })();
+        })
+    </script>
     <table class="table" style="font-size: 12px">
         <thead>
-            <tr style="background-color: darkblue; color: white">
-                <th scope="col">Ca trực/Ngày trực</th>
-                <th>Thứ 2 <br /> 12/6/2020</th>
-                <th>Thứ 2 <br /> 12/6/2020</th>
-                <th>Thứ 2 <br /> 12/6/2020</th>
+            <tr class=date_container style="background-color: darkblue; color: white">
             </tr>
         </thead>
         <tbody>

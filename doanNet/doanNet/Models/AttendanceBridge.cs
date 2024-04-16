@@ -25,7 +25,7 @@ namespace doanNet.Models
 
         [JsonIgnore]
         public virtual Account Account { get; set; }
-        [JsonIgnore]
+        
         public virtual Attendance Attendance { get; set; }
         [JsonIgnore]
         public virtual SinhVien SinhVien { get; set; }
