@@ -22,7 +22,7 @@ namespace doanNet.Areas.SinhVienTuQuan.Controllers
         }
         public ActionResult DangKyLichGacCong()
         {
-
+            
             return View();
         }
         public ActionResult GhiLoiKTX()

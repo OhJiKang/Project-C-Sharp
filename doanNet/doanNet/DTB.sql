@@ -230,7 +230,16 @@ CREATE TABLE Log
   FOREIGN KEY (IDSinhVien) REFERENCES SinhVien(IDSinhVien),
   FOREIGN KEY (IDFee) REFERENCES Fee(IDFee)
 );
-
+create table TrucCong(
+	IDTruc INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	IDAccount INT,
+	DateApply datetime,
+	[Order] int,
+	[Meta] text,
+	DateBegin datetime NOT NULL,
+	Hide int NOT NULL,
+	FOREIGN KEY (IDAccount) REFERENCES Account(IDAccount)
+)
 -----Data-----
 USE [KTXTDTU]
 GO

@@ -20,6 +20,7 @@ namespace doanNet.Models
             this.AttendanceBridges = new HashSet<AttendanceBridge>();
             this.Mistakes = new HashSet<Mistake>();
             this.Posts = new HashSet<Post>();
+            this.TrucCongs = new HashSet<TrucCong>();
         }
     
         public int IDAccount { get; set; }
@@ -41,5 +42,7 @@ namespace doanNet.Models
         public virtual ICollection<Mistake> Mistakes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Posts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TrucCong> TrucCongs { get; set; }
     }
 }

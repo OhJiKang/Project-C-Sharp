@@ -183,7 +183,7 @@
             <PropertyRef Name="IDPost" />
           </Key>
           <Property Name="IDPost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PostTitle" Type="text" Nullable="false" />
+          <Property Name="PostTitle" Type="nvarchar(max)" />
           <Property Name="PostDetail" Type="text" Nullable="false" />
           <Property Name="IDAccount" Type="int" />
           <Property Name="Order" Type="int" />
@@ -233,6 +233,18 @@
           <Property Name="IDFalcuty" Type="int" Nullable="false" />
           <Property Name="IDContract" Type="int" Nullable="false" />
           <Property Name="IDRoom" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" />
+          <Property Name="Meta" Type="text" />
+          <Property Name="DateBegin" Type="datetime" Nullable="false" />
+          <Property Name="Hide" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrucCong">
+          <Key>
+            <PropertyRef Name="IDTruc" />
+          </Key>
+          <Property Name="IDTruc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDAccount" Type="int" />
+          <Property Name="DateApply" Type="datetime" />
           <Property Name="Order" Type="int" />
           <Property Name="Meta" Type="text" />
           <Property Name="DateBegin" Type="datetime" Nullable="false" />
@@ -454,6 +466,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__TrucCong__IDAcco__4F47C5E3">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="TrucCong" Type="Self.TrucCong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IDAccount" />
+            </Principal>
+            <Dependent Role="TrucCong">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ContractPriority">
           <End Role="Priority" Type="Self.Priority" Multiplicity="0..1" />
           <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
@@ -484,6 +508,7 @@
           <EntitySet Name="Priority" EntityType="Self.Priority" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SinhVien" EntityType="Self.SinhVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrucCong" EntityType="Self.TrucCong" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Account__Account__3D2915A8" Association="Self.FK__Account__Account__3D2915A8">
             <End Role="AccountType" EntitySet="AccountType" />
             <End Role="Account" EntitySet="Account" />
@@ -556,6 +581,10 @@
             <End Role="Room" EntitySet="Room" />
             <End Role="SinhVien" EntitySet="SinhVien" />
           </AssociationSet>
+          <AssociationSet Name="FK__TrucCong__IDAcco__4F47C5E3" Association="Self.FK__TrucCong__IDAcco__4F47C5E3">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="TrucCong" EntitySet="TrucCong" />
+          </AssociationSet>
           <AssociationSet Name="FK_ContractPriority" Association="Self.FK_ContractPriority">
             <End Role="Priority" EntitySet="Priority" />
             <End Role="Contract" EntitySet="Contract" />
@@ -583,6 +612,7 @@
           <EntitySet Name="Priorities" EntityType="KTXTDTUModel.Priority" />
           <EntitySet Name="Rooms" EntityType="KTXTDTUModel.Room" />
           <EntitySet Name="SinhViens" EntityType="KTXTDTUModel.SinhVien" />
+          <EntitySet Name="TrucCongs" EntityType="KTXTDTUModel.TrucCong" />
           <AssociationSet Name="FK__Account__Account__3D2915A8" Association="KTXTDTUModel.FK__Account__Account__3D2915A8">
             <End Role="AccountType" EntitySet="AccountTypes" />
             <End Role="Account" EntitySet="Accounts" />
@@ -602,6 +632,10 @@
           <AssociationSet Name="FK__Post__IDAccount__7D439ABD" Association="KTXTDTUModel.FK__Post__IDAccount__7D439ABD">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TrucCong__IDAcco__4F47C5E3" Association="KTXTDTUModel.FK__TrucCong__IDAcco__4F47C5E3">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="TrucCong" EntitySet="TrucCongs" />
           </AssociationSet>
           <AssociationSet Name="FK__Attendanc__IDAtt__07C12930" Association="KTXTDTUModel.FK__Attendanc__IDAtt__07C12930">
             <End Role="Attendance" EntitySet="Attendances" />
@@ -679,6 +713,7 @@
           <NavigationProperty Name="AttendanceBridges" Relationship="KTXTDTUModel.FK__Attendanc__IDAcc__09A971A2" FromRole="Account" ToRole="AttendanceBridge" />
           <NavigationProperty Name="Mistakes" Relationship="KTXTDTUModel.FK__Mistake__IDAccou__76969D2E" FromRole="Account" ToRole="Mistake" />
           <NavigationProperty Name="Posts" Relationship="KTXTDTUModel.FK__Post__IDAccount__7D439ABD" FromRole="Account" ToRole="Post" />
+          <NavigationProperty Name="TrucCongs" Relationship="KTXTDTUModel.FK__TrucCong__IDAcco__4F47C5E3" FromRole="Account" ToRole="TrucCong" />
         </EntityType>
         <EntityType Name="AccountType">
           <Key>
@@ -863,7 +898,7 @@
             <PropertyRef Name="IDPost" />
           </Key>
           <Property Name="IDPost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PostTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PostDetail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IDAccount" Type="Int32" />
           <Property Name="Order" Type="Int32" />
@@ -931,6 +966,19 @@
           <NavigationProperty Name="Mistakes" Relationship="KTXTDTUModel.FK__Mistake__IDSinhV__75A278F5" FromRole="SinhVien" ToRole="Mistake" />
           <NavigationProperty Name="Room" Relationship="KTXTDTUModel.FK__SinhVien__IDRoom__6D0D32F4" FromRole="SinhVien" ToRole="Room" />
         </EntityType>
+        <EntityType Name="TrucCong">
+          <Key>
+            <PropertyRef Name="IDTruc" />
+          </Key>
+          <Property Name="IDTruc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDAccount" Type="Int32" />
+          <Property Name="DateApply" Type="DateTime" Precision="3" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Hide" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="KTXTDTUModel.FK__TrucCong__IDAcco__4F47C5E3" FromRole="TrucCong" ToRole="Account" />
+        </EntityType>
         <Association Name="FK__Account__Account__3D2915A8">
           <End Type="KTXTDTUModel.AccountType" Role="AccountType" Multiplicity="0..1" />
           <End Type="KTXTDTUModel.Account" Role="Account" Multiplicity="*" />
@@ -987,6 +1035,18 @@
               <PropertyRef Name="IDAccount" />
             </Principal>
             <Dependent Role="Post">
+              <PropertyRef Name="IDAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TrucCong__IDAcco__4F47C5E3">
+          <End Type="KTXTDTUModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="KTXTDTUModel.TrucCong" Role="TrucCong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IDAccount" />
+            </Principal>
+            <Dependent Role="TrucCong">
               <PropertyRef Name="IDAccount" />
             </Dependent>
           </ReferentialConstraint>
@@ -1409,6 +1469,19 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrucCongs">
+            <EntityTypeMapping TypeName="KTXTDTUModel.TrucCong">
+              <MappingFragment StoreEntitySet="TrucCong">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="DateApply" ColumnName="DateApply" />
+                <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
+                <ScalarProperty Name="IDTruc" ColumnName="IDTruc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
