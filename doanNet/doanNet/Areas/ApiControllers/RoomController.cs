@@ -31,6 +31,12 @@ namespace doanNet.ApiControllers
         {
             return db.Rooms.Where(row => row.IDRoom == id).FirstOrDefault();
         }
+        public Room GetBySinhVienId(int id)
+        {
+            var SinhVien= db.SinhViens.Where(row=> row.IDSinhVien == id).FirstOrDefault();
+            var RoomID= SinhVien.IDRoom;
+;            return db.Rooms.Where(row => row.IDRoom == RoomID).FirstOrDefault();
+        }
         public IHttpActionResult PostRoom([FromBody] Room Room)
         {
             

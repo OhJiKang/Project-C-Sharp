@@ -23,6 +23,16 @@ async function findRoomById(id) {
     const resulttosend = await result.json();
     return resulttosend;
 }
+async function findRoomBySinhVienId(id) {
+    let result = await fetch(`${url}/GetBySinhVienId?id=${id}`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: 'GET',
+    });
+    const resulttosend = await result.json();
+    return resulttosend;
+}
 async function putRoom(id, RoomData) {
     let result = await fetch(`${url}/PutRoom?id=${id}`, {
         headers: {

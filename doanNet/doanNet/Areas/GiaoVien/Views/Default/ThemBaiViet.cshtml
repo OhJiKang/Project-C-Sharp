@@ -107,7 +107,6 @@
     function updateMeta(categoryNameGet) {
         let categoryString = formatKeywordsForSEO(categoryNameGet)
         const postName = $(".post_tittle_place").val() == "" ? $(".post_tittle_place").val() : "";
-        console.log(postName);
         const newMeta = `${categoryString}/${postName}`;
         // Set the value of meta input field
         $(".meta_place").val(newMeta);

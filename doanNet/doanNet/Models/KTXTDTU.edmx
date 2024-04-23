@@ -166,6 +166,7 @@
           <Property Name="Meta" Type="text" />
           <Property Name="DateBegin" Type="datetime" Nullable="false" />
           <Property Name="Hide" Type="int" Nullable="false" />
+          <Property Name="ImageDescription" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Place">
           <Key>
@@ -877,6 +878,7 @@
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
+          <Property Name="ImageDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Account" Relationship="KTXTDTUModel.FK__Mistake__IDAccou__76969D2E" FromRole="Mistake" ToRole="Account" />
           <NavigationProperty Name="Room" Relationship="KTXTDTUModel.FK__Mistake__IDRoom__778AC167" FromRole="Mistake" ToRole="Room" />
           <NavigationProperty Name="SinhVien" Relationship="KTXTDTUModel.FK__Mistake__IDSinhV__75A278F5" FromRole="Mistake" ToRole="SinhVien" />
@@ -1382,6 +1384,7 @@
           <EntitySetMapping Name="Mistakes">
             <EntityTypeMapping TypeName="KTXTDTUModel.Mistake">
               <MappingFragment StoreEntitySet="Mistake">
+                <ScalarProperty Name="ImageDescription" ColumnName="ImageDescription" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
                 <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Meta" ColumnName="Meta" />

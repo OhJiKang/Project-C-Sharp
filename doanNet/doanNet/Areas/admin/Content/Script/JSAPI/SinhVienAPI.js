@@ -32,6 +32,16 @@ async function findSinhVienById(id) {
     const resulttosend = await result.json();
     return resulttosend;
 }
+async function findSinhVienByMSSV(MSSV) {
+    let result = await fetch(`${SinhVienURL}/GetByMSSV?mssv=${MSSV}`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: 'GET',
+    });
+    const resulttosend = await result.json();
+    return resulttosend;
+}
 async function PutSinhVien(id,SinhVienData) {
     let result = await fetch(`${SinhVienURL}/PutSinhVien?id=${id}`, {
         headers: {
