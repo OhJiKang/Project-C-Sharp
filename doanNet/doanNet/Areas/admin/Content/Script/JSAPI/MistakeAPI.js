@@ -1,8 +1,7 @@
-﻿let baseURL = "/api"
-const url = `${baseURL}/mistake`
+﻿const mistakeURL = `/api/mistake`
 
 async function putMistake(MistakeData, id) {
-    let result = await fetch(`${url}/PutMistake?id=${id}`, {
+    let result = await fetch(`${mistakeURL}/PutMistake?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -11,18 +10,43 @@ async function putMistake(MistakeData, id) {
     });
     result = await result.json();
 }
+/*
+const MistakeData = {
+            MistakeDes: $(".Mistake_des_typing").val(),
+            IDRoom: $(".typing_room").attr("id"),
+            BedID: $('#mySelect').val(),
+            IDSinhVien: $(".typing_name").attr("id"),
+            IDAccount: sessionStorage.getItem("IDAccount") == null ? 1 : sessionStorage.getItem("IDAccount"),
+            ImageDescription: imagearr,
+        }
+*/
 async function postMistake(MistakeData) {
-    let result = await fetch(`${url}/PostMistake`, {
-        headers: {
-            "Content-Type": "application/json"
+    console.log(MistakeData);
+    var data = new FormData()
+    for (var i = 0; i < MistakeData.ImageDescription.length; i++) {
+        data.append(MistakeData.ImageDescription[i].name, MistakeData.ImageDescription[i]);
+    }
+    data.append("MistakeDes", MistakeData.MistakeDes);
+    data.append("IDRoom", MistakeData.IDRoom)
+    data.append("BedID", MistakeData.BedID)
+    data.append("IDSinhVien", MistakeData.IDSinhVien)
+    data.append("IDAccount", MistakeData.IDAccount);
+    $.ajax({
+        type: "POST",
+        url: `${mistakeURL}/PostMistake`,
+        contentType: false,
+        processData: false,
+        data: data,
+        success: function () {
+
         },
-        method: 'POST',
-        body: JSON.stringify(PostData),
+        error: function () {
+
+        }
     });
-    result = await result.json();
 }
 async function hideMistake(id) {
-    let result = await fetch(`${url}/PostMistake?id=${id}`, {
+    let result = await fetch(`${mistakeURL}/PostMistake?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
         },

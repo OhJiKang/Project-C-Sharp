@@ -13,7 +13,6 @@ async function putPost(PostData, id) {
 }
 async function postPost(PostData) {
     var data = new FormData()
-    console.log(PostData)
     data.append("PostTitle", PostData.PostTittle);
     data.append("PostDetail", PostData.PostDetail)
     data.append("meta", PostData.meta)
@@ -22,7 +21,7 @@ async function postPost(PostData) {
     data.append("IDAccount", PostData.IDAccount);
     $.ajax({
         type: "POST",
-        url: `${url}/AddingPost`,
+        url: `${mistakeURL}/AddingPost`,
         contentType: false,
         processData: false,
         data: data,

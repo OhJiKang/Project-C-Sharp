@@ -57,6 +57,7 @@
 </style>
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/SinhVienAPI.js")
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/RoomAPI.js")
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/MistakeAPI.js")
 
 <div class="container" style="padding: 20px">
     <h3 style="font-weight: bold; padding: 20px">GHI LỖI KÝ TÚC XÁ</h3>
@@ -74,7 +75,7 @@
     </div>
     <div class="mb-3">
         <label for="exampleFormControlInput2" class="form-label" style="font-weight: bold">Mã giường</label>
-       <select class="bedid_select" style="min-width:200px"></select>
+        <select class="bedid_select" style="min-width:200px"></select>
     </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label" style="font-weight: bold">Nội dung lỗi</label>
@@ -133,11 +134,11 @@
         const SinhVienData = await findSinhVienByMSSV(mssv);
         if (SinhVienData) {
             $(".typing_name").val(SinhVienData.FullName);
-            $(".typing_name").attr("id", SinhVienData["$id"]);
+            $(".typing_name").attr("id", SinhVienData["IDSinhVien"]);
 
             const RoomData = await findRoomById(SinhVienData.IDRoom);
             $(".typing_room").val(RoomData.Name);
-            $(".typing_room").attr("id", RoomData["$id"]);
+            $(".typing_room").attr("id", RoomData["IDRoom"]);
 
             for (let i = 1; i <= RoomData.RoomType; i++) {
                 addOption(`${RoomData.Name}-${i}`, `${RoomData.Name}-${i}`)
@@ -160,13 +161,21 @@
         public int IDRoom { get; set; }
     */
     $(".submit_btn").click(() => {
+        var images = $("#cover_image_upload")[0].files
+        var imagearr = [];
+        // Loop through each selected file
+        for (var i = 0; i < images.length; i++) {
+            imagearr.push(images[i]);
+            // You can perform other actions with the file here, like uploading to server etc.
+        }
         const MistakeData = {
             MistakeDes: $(".Mistake_des_typing").val(),
             IDRoom: $(".typing_room").attr("id"),
-            BedID: $('#mySelect').val(),
+            BedID: $('.bedid_select').val(),
             IDSinhVien: $(".typing_name").attr("id"),
-            IDAccount: sessionStorage.getItem("IDAccount") == null ? 1 : sessionStorage.getItem("IDAccount")
+            IDAccount: sessionStorage.getItem("IDAccount") == null ? 1 : sessionStorage.getItem("IDAccount"),
+            ImageDescription: imagearr,
         }
-        console.log(MistakeData);
+        postMistake(MistakeData)
     })
 </script>

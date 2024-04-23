@@ -8,6 +8,10 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.IO;
+using System.Web;
+using doanNet.Controllers.DTO;
+using Newtonsoft.Json;
 
 namespace doanNet.ApiControllers
 {
@@ -20,6 +24,22 @@ namespace doanNet.ApiControllers
             return db.Mistakes.ToList();
         }
 
+        private string HandleSubmitImage(HttpPostedFileBase file)
+        {
+            // Handle file upload
+            HttpPostedFileBase image = file;
+            if (image != null && image.ContentLength > 0)
+            {
+                var serverFileName = $"{DateTime.Now.Ticks}_{Path.GetFileName(image.FileName)}";
+                var uploadPath = Path.Combine(HttpContext.Current.Server.MapPath("~/Areas/admin/Content/mistake"), serverFileName);
+                image.SaveAs(uploadPath);
+                return serverFileName+" ";
+            }
+            else
+            {
+                return "default.png ";
+            }
+        }
 
         public Mistake GetByMistakeId(int id)
         {
@@ -30,13 +50,47 @@ namespace doanNet.ApiControllers
         {
             return db.Mistakes.Where(row => row.SinhVien.MSSV == mssv.ToString()).FirstOrDefault();
         }
-        public IHttpActionResult AddingMistake([FromBody] Mistake Mistake)
+        /*
+const MistakeData = {
+            MistakeDes: $(".Mistake_des_typing").val(),
+            IDRoom: $(".typing_room").attr("id"),
+            BedID: $('#mySelect').val(),
+            IDSinhVien: $(".typing_name").attr("id"),
+            IDAccount: sessionStorage.getItem("IDAccount") == null ? 1 : sessionStorage.getItem("IDAccount"),
+            ImageDescription: imagearr,
+        }
+*/
+        public async Task<IHttpActionResult> PostMistake()
         {
+            
+
+            HttpRequestBase request = new HttpContextWrapper(HttpContext.Current).Request;
 
             try
             {
-                db.Mistakes.Add(Mistake);
-                db.SaveChangesAsync();
+                var tempMistake = new Mistake();
+                var pathAllImage = "";
+                if (request.Files.Count > 0)
+                {
+                    HttpFileCollectionBase files = request.Files;
+                    for (int i = 0; i < files.Count; i++)
+                    {
+                        pathAllImage+=HandleSubmitImage(files[i]);
+                    }
+                }
+                    
+                // Set other properties from form data
+                tempMistake.MistakeDes = request.Form["MistakeDes"];
+                tempMistake.ImageDescription = pathAllImage;
+                tempMistake.IDRoom = int.Parse(request.Form["IDRoom"]);
+                tempMistake.BedID =request.Form["BedID"];
+                tempMistake.IDSinhVien = int.Parse(request.Form["IDSinhVien"]);
+                tempMistake.IDAccount = int.Parse(request.Form["IDAccount"]);
+                tempMistake.TimeCaught=DateTime.Now;
+                tempMistake.DateBegin = DateTime.Now;
+                tempMistake.Hide = 0;
+                db.Mistakes.Add(tempMistake);
+                await db.SaveChangesAsync();
                 return Json(new { Message = "Data received successfully!" });
             }
             catch (Exception ex)
