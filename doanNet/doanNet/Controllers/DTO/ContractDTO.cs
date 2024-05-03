@@ -7,12 +7,12 @@ namespace doanNet.Controllers.DTO
 {
     public class ContractDTO
     {
-        public string MSSV { get; set; }
+        public string IDSinhVien { get; set; }
         public string IDCitizen { get; set; }
-        public byte[] ProfilePlace { get; set; }
+        public int ProfilePlace { get; set; }
         public string IDPlace { get; set; }
-        public int Ending { get; set; }
-        
-        public int IDPriority { get;set; }
+        public string Description { get; set; }
+        public System.DateTime TimeExpired { get; set; }
+        public int IDPriority { get; set; }
     }
 }

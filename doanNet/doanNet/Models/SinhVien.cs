@@ -20,6 +20,7 @@ namespace doanNet.Models
         {
             this.Accounts = new HashSet<Account>();
             this.AttendanceBridges = new HashSet<AttendanceBridge>();
+            this.Contracts = new HashSet<Contract>();
             this.Logs = new HashSet<Log>();
             this.Mistakes = new HashSet<Mistake>();
         }
@@ -33,7 +34,6 @@ namespace doanNet.Models
         public int GraduateYear { get; set; }
         public string MSSV { get; set; }
         public int IDFalcuty { get; set; }
-        public int IDContract { get; set; }
         public int IDRoom { get; set; }
         public Nullable<int> Order { get; set; }
         public string Meta { get; set; }
@@ -46,8 +46,10 @@ namespace doanNet.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
         public virtual ICollection<AttendanceBridge> AttendanceBridges { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
-        public virtual Contract Contract { get; set; }
+        public virtual ICollection<Contract> Contracts { get; set; }
+        
         public virtual Faculty Faculty { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]

@@ -86,7 +86,6 @@
             <PropertyRef Name="IDContract" />
           </Key>
           <Property Name="IDContract" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MSSV" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="IDCitizen" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="ProfilePlace" Type="int" />
           <Property Name="IDPlace" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -97,6 +96,8 @@
           <Property Name="IDPriority" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="200" />
           <Property Name="xetduyet" Type="bit" />
+          <Property Name="TimeExpired" Type="datetime" />
+          <Property Name="IDSinhVien" Type="int" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
@@ -232,7 +233,6 @@
           <Property Name="GraduateYear" Type="int" Nullable="false" />
           <Property Name="MSSV" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IDFalcuty" Type="int" Nullable="false" />
-          <Property Name="IDContract" Type="int" Nullable="false" />
           <Property Name="IDRoom" Type="int" Nullable="false" />
           <Property Name="Order" Type="int" />
           <Property Name="Meta" Type="text" />
@@ -347,6 +347,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Contract__IDSinh__607251E5">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="IDSinhVien" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="IDSinhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Fee__IDRoom__7A672E12">
           <End Role="Room" Type="Self.Room" Multiplicity="1" />
           <End Role="Fee" Type="Self.Fee" Multiplicity="*" />
@@ -428,18 +440,6 @@
             </Principal>
             <Dependent Role="Post">
               <PropertyRef Name="IDAccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SinhVien__IDCont__6C190EBB">
-          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contract">
-              <PropertyRef Name="IDContract" />
-            </Principal>
-            <Dependent Role="SinhVien">
-              <PropertyRef Name="IDContract" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -542,6 +542,10 @@
             <End Role="Place" EntitySet="Place" />
             <End Role="Contract" EntitySet="Contract" />
           </AssociationSet>
+          <AssociationSet Name="FK__Contract__IDSinh__607251E5" Association="Self.FK__Contract__IDSinh__607251E5">
+            <End Role="SinhVien" EntitySet="SinhVien" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
           <AssociationSet Name="FK__Fee__IDRoom__7A672E12" Association="Self.FK__Fee__IDRoom__7A672E12">
             <End Role="Room" EntitySet="Room" />
             <End Role="Fee" EntitySet="Fee" />
@@ -569,10 +573,6 @@
           <AssociationSet Name="FK__Post__IDAccount__7D439ABD" Association="Self.FK__Post__IDAccount__7D439ABD">
             <End Role="Account" EntitySet="Account" />
             <End Role="Post" EntitySet="Post" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SinhVien__IDCont__6C190EBB" Association="Self.FK__SinhVien__IDCont__6C190EBB">
-            <End Role="Contract" EntitySet="Contract" />
-            <End Role="SinhVien" EntitySet="SinhVien" />
           </AssociationSet>
           <AssociationSet Name="FK__SinhVien__IDFalc__6B24EA82" Association="Self.FK__SinhVien__IDFalc__6B24EA82">
             <End Role="Faculty" EntitySet="Faculty" />
@@ -658,9 +658,9 @@
             <End Role="Place" EntitySet="Places" />
             <End Role="Contract" EntitySet="Contracts" />
           </AssociationSet>
-          <AssociationSet Name="FK__SinhVien__IDCont__6C190EBB" Association="KTXTDTUModel.FK__SinhVien__IDCont__6C190EBB">
-            <End Role="Contract" EntitySet="Contracts" />
+          <AssociationSet Name="FK__Contract__IDSinh__607251E5" Association="KTXTDTUModel.FK__Contract__IDSinh__607251E5">
             <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="Contract" EntitySet="Contracts" />
           </AssociationSet>
           <AssociationSet Name="FK_ContractPriority" Association="KTXTDTUModel.FK_ContractPriority">
             <End Role="Priority" EntitySet="Priorities" />
@@ -790,7 +790,6 @@
             <PropertyRef Name="IDContract" />
           </Key>
           <Property Name="IDContract" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MSSV" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="IDCitizen" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ProfilePlace" Type="Int32" />
           <Property Name="IDPlace" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -801,8 +800,10 @@
           <Property Name="IDPriority" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="xetduyet" Type="Boolean" />
+          <Property Name="TimeExpired" Type="DateTime" Precision="3" />
+          <Property Name="IDSinhVien" Type="Int32" />
           <NavigationProperty Name="Place" Relationship="KTXTDTUModel.FK__Contract__IDPlac__6477ECF3" FromRole="Contract" ToRole="Place" />
-          <NavigationProperty Name="SinhViens" Relationship="KTXTDTUModel.FK__SinhVien__IDCont__6C190EBB" FromRole="Contract" ToRole="SinhVien" />
+          <NavigationProperty Name="SinhVien" Relationship="KTXTDTUModel.FK__Contract__IDSinh__607251E5" FromRole="Contract" ToRole="SinhVien" />
           <NavigationProperty Name="Priority" Relationship="KTXTDTUModel.FK_ContractPriority" FromRole="Contract" ToRole="Priority" />
         </EntityType>
         <EntityType Name="Faculty">
@@ -954,7 +955,6 @@
           <Property Name="GraduateYear" Type="Int32" Nullable="false" />
           <Property Name="MSSV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IDFalcuty" Type="Int32" Nullable="false" />
-          <Property Name="IDContract" Type="Int32" Nullable="false" />
           <Property Name="IDRoom" Type="Int32" Nullable="false" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -962,7 +962,7 @@
           <Property Name="Hide" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Accounts" Relationship="KTXTDTUModel.FK__Account__IDSinhV__6FE99F9F" FromRole="SinhVien" ToRole="Account" />
           <NavigationProperty Name="AttendanceBridges" Relationship="KTXTDTUModel.FK__Attendanc__IDSin__08B54D69" FromRole="SinhVien" ToRole="AttendanceBridge" />
-          <NavigationProperty Name="Contract" Relationship="KTXTDTUModel.FK__SinhVien__IDCont__6C190EBB" FromRole="SinhVien" ToRole="Contract" />
+          <NavigationProperty Name="Contracts" Relationship="KTXTDTUModel.FK__Contract__IDSinh__607251E5" FromRole="SinhVien" ToRole="Contract" />
           <NavigationProperty Name="Faculty" Relationship="KTXTDTUModel.FK__SinhVien__IDFalc__6B24EA82" FromRole="SinhVien" ToRole="Faculty" />
           <NavigationProperty Name="Logs" Relationship="KTXTDTUModel.FK__Log__IDSinhVien__0C85DE4D" FromRole="SinhVien" ToRole="Log" />
           <NavigationProperty Name="Mistakes" Relationship="KTXTDTUModel.FK__Mistake__IDSinhV__75A278F5" FromRole="SinhVien" ToRole="Mistake" />
@@ -1113,15 +1113,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SinhVien__IDCont__6C190EBB">
-          <End Type="KTXTDTUModel.Contract" Role="Contract" Multiplicity="1" />
-          <End Type="KTXTDTUModel.SinhVien" Role="SinhVien" Multiplicity="*" />
+        <Association Name="FK__Contract__IDSinh__607251E5">
+          <End Type="KTXTDTUModel.SinhVien" Role="SinhVien" Multiplicity="0..1" />
+          <End Type="KTXTDTUModel.Contract" Role="Contract" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Contract">
-              <PropertyRef Name="IDContract" />
+            <Principal Role="SinhVien">
+              <PropertyRef Name="IDSinhVien" />
             </Principal>
-            <Dependent Role="SinhVien">
-              <PropertyRef Name="IDContract" />
+            <Dependent Role="Contract">
+              <PropertyRef Name="IDSinhVien" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1309,6 +1309,8 @@
           <EntitySetMapping Name="Contracts">
             <EntityTypeMapping TypeName="KTXTDTUModel.Contract">
               <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
+                <ScalarProperty Name="TimeExpired" ColumnName="TimeExpired" />
                 <ScalarProperty Name="xetduyet" ColumnName="xetduyet" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="IDPriority" ColumnName="IDPriority" />
@@ -1319,7 +1321,6 @@
                 <ScalarProperty Name="IDPlace" ColumnName="IDPlace" />
                 <ScalarProperty Name="ProfilePlace" ColumnName="ProfilePlace" />
                 <ScalarProperty Name="IDCitizen" ColumnName="IDCitizen" />
-                <ScalarProperty Name="MSSV" ColumnName="MSSV" />
                 <ScalarProperty Name="IDContract" ColumnName="IDContract" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1462,7 +1463,6 @@
                 <ScalarProperty Name="Meta" ColumnName="Meta" />
                 <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="IDRoom" ColumnName="IDRoom" />
-                <ScalarProperty Name="IDContract" ColumnName="IDContract" />
                 <ScalarProperty Name="IDFalcuty" ColumnName="IDFalcuty" />
                 <ScalarProperty Name="MSSV" ColumnName="MSSV" />
                 <ScalarProperty Name="GraduateYear" ColumnName="GraduateYear" />

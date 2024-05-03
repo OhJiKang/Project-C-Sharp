@@ -15,14 +15,7 @@ namespace doanNet.Models
     
     public partial class Contract
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Contract()
-        {
-            this.SinhViens = new HashSet<SinhVien>();
-        }
-    
         public int IDContract { get; set; }
-        public string MSSV { get; set; }
         public string IDCitizen { get; set; }
         public Nullable<int> ProfilePlace { get; set; }
         public string IDPlace { get; set; }
@@ -33,11 +26,13 @@ namespace doanNet.Models
         public Nullable<int> IDPriority { get; set; }
         public string Description { get; set; }
         public Nullable<bool> xetduyet { get; set; }
+        public Nullable<System.DateTime> TimeExpired { get; set; }
+        public Nullable<int> IDSinhVien { get; set; }
+
         [JsonIgnore]
         public virtual Place Place { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
-        public virtual ICollection<SinhVien> SinhViens { get; set; }
+        public virtual SinhVien SinhVien { get; set; }
         [JsonIgnore]
         public virtual Priority Priority { get; set; }
     }

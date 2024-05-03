@@ -45,14 +45,7 @@ namespace doanNet.ApiControllers
         {
             SinhVien.DateBegin = DateTime.Now;
             SinhVien.Hide = 0;
-            if(db.Contracts.Where(row=>row.MSSV == SinhVien.MSSV).FirstOrDefault() == null)
-            {
-                SinhVien.IDContract = 4;
-            }
-            else
-            {
-                SinhVien.IDContract = db.Contracts.Where(row => row.MSSV == SinhVien.MSSV).FirstOrDefault().IDContract;
-            }
+            
             try
             {
                 db.SinhViens.Add(SinhVien);

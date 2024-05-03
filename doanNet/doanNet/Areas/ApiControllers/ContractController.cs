@@ -11,6 +11,9 @@ using System.Web.Http;
 using System.Data.Entity.Validation;
 using Newtonsoft.Json.Linq;
 using Microsoft.Ajax.Utilities;
+using doanNet.Controllers.DTO;
+using System.IO;
+using System.Web;
 
 namespace doanNet.ApiControllers
 {
@@ -29,17 +32,68 @@ namespace doanNet.ApiControllers
             return db.Contracts.Where(row => row.IDContract == id).FirstOrDefault();
         }
 
-        public Contract GetContractByMSSV(string MSSV)
+        public Contract GetContractByIDSinhvien(int IDSinhVien)
         {
-            return db.Contracts.Where(row => row.MSSV == MSSV).FirstOrDefault();
+            return db.Contracts.Where(row => row.IDSinhVien == IDSinhVien).FirstOrDefault();
         }
-        public IHttpActionResult AddingContract([FromBody] Contract Contract)
+        [HttpPut]
+        public IHttpActionResult ApproveContract([FromBody] int ContractID)
+        {
+            var ContractNeedApprove = db.Contracts.Where(row => row.IDContract == ContractID).FirstOrDefault();
+            ContractNeedApprove.xetduyet = true;
+            db.SaveChangesAsync();
+            return Ok(ContractNeedApprove);
+        }
+
+        public async Task<IHttpActionResult> AddingContract()
         {
 
+            /*
+    public class ContractDTO
+                    {
+                        public string MSSV { get; set; }
+                        public string IDCitizen { get; set; }
+                        public int ProfilePlace { get; set; }
+                        public string IDPlace { get; set; }
+                        public string Description { get; set; }
+                        public System.DateTime TimeExpired { get; set; }
+                        public int IDPriority { get; set; }
+                    }
+    */
+            // Get form data from the request
+            HttpRequestBase request = new HttpContextWrapper(HttpContext.Current).Request;
+            var tempContract = new Contract();
+
+            // Handle file upload
+            HttpPostedFileBase PDFFile = request.Files["Description"];
+            if (PDFFile != null && PDFFile.ContentLength > 0)
+            {
+                var serverFileName = $"{DateTime.Now.Ticks}_{Path.GetFileName(PDFFile.FileName)}";
+                var uploadPath = Path.Combine(HttpContext.Current.Server.MapPath("~/Areas/admin/Content/contract"), serverFileName);
+                PDFFile.SaveAs(uploadPath);
+                tempContract.Description = serverFileName;
+            }
+            else
+            {
+                tempContract.Description = "default.png";
+            }
+            
+            // Set other properties from form data
+            tempContract.IDSinhVien = Int32.Parse(request.Form["IDSinhVien"]);
+            tempContract.IDCitizen = request.Form["IDCitizen"];
+            tempContract.IDPlace = request.Form["IDPlace"];
+            tempContract.ProfilePlace = Int32.Parse(request.Form["ProfilePlace"]);
+            tempContract.TimeExpired = DateTime.Parse(request.Form["TimeExpired"]);
+            tempContract.IDPriority = Int32.Parse(request.Form["IDPriority"]);
+            tempContract.xetduyet = false;
+            tempContract.DateBegin = DateTime.Now;
+            tempContract.Hide = 0;
+
+            // Save the post
             try
             {
-                db.Contracts.Add(Contract);
-                db.SaveChangesAsync();
+                db.Contracts.Add(tempContract);
+                await db.SaveChangesAsync();
                 return Json(new { Message = "Data received successfully!" });
             }
             catch (DbEntityValidationException e)

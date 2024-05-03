@@ -3,9 +3,13 @@
     ViewBag.Title = "DanhSachHopDong";
     Layout = "~/Views/Shared/layoutteacher.cshtml";
 }
+<script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/2.0.3/js/dataTables.js" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" type="text/css" href="~/Areas/admin/Content/CSS/GiaoVien.css">
-
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/SinhVienAPI.js")
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/RoomAPI.js")
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/ContractAPI.js")
 <div class="container">
     <div class="row">
         <div class="col-12 text-center" style="padding:20px">
@@ -23,13 +27,7 @@
                 <i class="fa-solid fa-plus" style="margin: 10px"></i>
             </button>
         </div>
-        <script>
-            function showModal() {
-                var myModal = new bootstrap.Modal(document.getElementById('ThemHopDong'));
-                myModal.show();
-            }
-
-        </script>
+       
     </div>
     <div class="modal fade" id="ThemHopDong" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -38,59 +36,167 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
                     <div class="row align-items-center pt-4 pb-3">
                         <div class="col-md-4 ps-5">
                             <h6 class="mb-0 font-weight-bold">MSSV</h6>
                         </div>
                         <div class="col-md-8 pe-5">
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control MSSV_Place" />
                         </div>
                         <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">Họ và tên Sinh viên</h6>
+                            <h6 class="mb-0 font-weight-bold">Họ và Tên sinh viên</h6>
                         </div>
                         <div class="col-md-8 pe-5">
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control typing_name" disabled />
                         </div>
                         <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">Học kỳ đăng ký</h6>
+                            <h6 class="mb-0 font-weight-bold">Căn cước công dân</h6>
                         </div>
                         <div class="col-md-8 pe-5">
-                            <select name="khoa" id="khoa" style="width: 100%">
-                                <option value="2">Cả 2 học kỳ</option>
+                            <input type="text" class="form-control ID_Citizen_Place" />
+                        </div>
+                        <div class="col-md-4 ps-5">
+                            <h6 class="mb-0 font-weight-bold">
+                                Hồ sơ ưu tiên đi kèm
+                            </h6>
+                        </div>
+                        <div class="col-md-8 pe-5">
+                            <select class="profile_place" id="profile_place" style="width: 100%">
+                                <option value="0" selected>Không</option>
+                                <option value="1">Có</option>
                             </select>
                         </div>
                         <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">Loại phòng</h6>
+                            <h6 class="mb-0 font-weight-bold">
+
+                                Khu vực
+                            </h6>
                         </div>
                         <div class="col-md-8 pe-5">
-                            <select name="hd" id="hd" style="width: 100%">
-                                <option value="6">6 người</option>
-                                <option value="8">8 người</option>
+                            <select class="place_id" id="place_id" style="width: 100%">
+                                @foreach (var item in ViewBag.places)
+                                {
+                                    <option value="@item.IDPlace" selected>@item.Description</option>
+                                }
+                            </select>
+
+                        </div>
+                        <div class="col-md-4 ps-5">
+                            <h6 class="mb-0 font-weight-bold">
+                                Loại ưu tiên
+                            </h6>
+                        </div>
+                        <div class="col-md-8 pe-5">
+                            <select class="priority_place" id="priority_place" style="width: 100%">
+                                @foreach (var item in ViewBag.priorities)
+                                {
+                                    <option value="@item.IDPriority" selected>@item.PriorityDescription</option>
+                                }
                             </select>
                         </div>
                         <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">Đăng ký vào lúc</h6>
+                            <h6 class="mb-0 font-weight-bold">
+                                Ngày hết hạn hợp đồng
+                            </h6>
                         </div>
                         <div class="col-md-8 pe-5">
-                            <input type="datetime" class="form-control" />
+                            <input type="date" class="form-control timeExpired-Place" />
                         </div>
+                        <div class="col-md-4 ps-5">
+                            <h6 class="mb-0 font-weight-bold">
+                                Bản hợp đồng đính kèm
+                            </h6>
+                        </div>
+
+                        <div class="col-md-8 pe-5">
+                            <input type="file" accept=".pdf" class="form-control fileUploaded-Place" />
+                        </div>
+                        <div class="preview_place row" style="margin-top:24px">
+                            <div class="col-md-4 ps-5">
+                                <h6 class="mb-0 font-weight-bold">
+                                    Hình ảnh hợp đồng đính kèm
+                                </h6>
+                            </div>
+                            <div class="col-md-8 pe-5">
+                                <div id="pdfViewer">
+                                    <!-- Embedded PDF will be displayed here -->
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <script>
+
+                            $('.fileUploaded-Place').on('change', function (event) {
+                                event.preventDefault();
+
+                                var file = $('.fileUploaded-Place')[0].files[0];
+
+                                if (file) {
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        $('#pdfViewer').html('<embed src="' + e.target.result + '" type="application/pdf" width="100%" height="600px" />');
+                                    };
+                                    reader.readAsDataURL(file);
+                                }
+                            })
+                        </script>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary">Thêm hợp đồng</button>
+                    <button type="button" class="btn btn-primary submit_btn">Thêm hợp đồng</button>
                 </div>
             </div>
+            <script>
+                function showModal() {
+                    var myModal = new bootstrap.Modal(document.getElementById('ThemHopDong'));
+                    myModal.show();
+                }
+                $(document).ready(() => {
+                    $(".MSSV_Place").blur(async () => {
+                        const mssv = $(".MSSV_Place").val();
+                        const SinhVienData = await findSinhVienByMSSV(mssv);
+                        if (SinhVienData) {
+                            $(".typing_name").val(SinhVienData.FullName);
+                            $(".typing_name").attr("id", SinhVienData["IDSinhVien"]);
+                        }
+                        else {
+                            $(".typing_name").val("Không tìm thấy sinh viên");
+                        }
+                    })
+                    /*
+                    
+                    */
+                    $(".submit_btn").click(() => {
+                        let ContractFile;
+                        if (!document.querySelector('.fileUploaded-Place').files[0]) {
+                            ContractFile = null;
+                        }
+                        else {
+                            ContractFile = $('.fileUploaded-Place')[0].files[0]
+                        }
+                        const ContractData = {
+                            IDSinhVien: $(".typing_name").attr("id"),
+                            IDCitizen: $(".ID_Citizen_Place").val(),
+                            ProfilePlace: $('.profile_place').val(),
+                            IDPlace: $('.place_id').val(),
+                            Description: ContractFile,
+                            TimeExpired: $(".timeExpired-Place").val(),
+                            IDPriority: $(".priority_place").val()
+                        }
+                        postContract(ContractData)
+                    })
+                })
 
+            </script>
         </div>
     </div>
     <div class="row">
-        <table class="table">
+        <table class="table" id="datatableform">
             <thead>
                 <tr>
                     <th scope="col">Mã hợp đồng</th>
-                    <th scope="col">MSSV</th>
                     <th scope="col">Họ và tên Sinh viên</th>
                     <th scope="col">Căn cước công dân</th>
                     <th scope="col">Hồ sơ đi kèm</th>
@@ -112,12 +218,11 @@
                     var ut = "";
                     <tr>
                         <th>@item.IDContract</th>
-                        <td>@item.MSSV</td>
                         <td>
 
                             @foreach (var sinhvien in ViewBag.sinhviens)
                             {
-                                if (sinhvien.MSSV == item.MSSV)
+                                if (sinhvien.IDSinhVien == item.IDSinhVien)
                                 {
                                     tenSV = sinhvien.FullName;
                                 }
@@ -160,15 +265,16 @@
                         <td>
                             @if (!item.xetduyet)
                             {
-                                <button class="btn btn-outline-primary" style="color: blue">
+                                <button class="btn btn-outline-primary btn_approve" id="@item.IDContract" style="color: blue">
                                     <i class="fa-regular fa-circle-check" style="color: blue;"></i> Duyệt
                                 </button>
                             }
                             else
                             {
-                                <button class="btn btn-outline-success" style="color: lawngreen">
+                                <button class="btn btn-success" style="color: white;width:80px; font-size:13px" disabled>
                                     Đã duyệt
                                 </button>
+
                             }
                         </td>
                         <td>
@@ -179,7 +285,13 @@
                         </td>
                     </tr>
                 }
-
+                <script>
+                    $(".btn_approve").click((event) => {
+                        const idContract = event.target.id;
+                        ApproveContract(idContract);
+                        window.location.reload();
+                    })
+                </script>
             </tbody>
         </table>
     </div>
