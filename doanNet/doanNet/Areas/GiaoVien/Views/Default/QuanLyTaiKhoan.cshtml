@@ -8,7 +8,8 @@
 <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js" crossorigin="anonymous"></script>
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/SinhVienAPI.js")
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/RoomAPI.js")
-@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/ContractAPI.js")
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/AccountAPI.js")
+
 <div class="container">
     <div class="modal fade" id="AddingAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -32,16 +33,10 @@
                             <input type="text" class="form-control typing_name" disabled />
                         </div>
                         <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">Tên tài khoản</h6>
-                        </div>
-                        <div class="col-md-8 pe-5">
-                            <input type="text" class="form-control Account_Place" />
-                        </div>
-                        <div class="col-md-4 ps-5">
                             <h6 class="mb-0 font-weight-bold">Password</h6>
                         </div>
                         <div class="col-md-8 pe-5">
-                            <input type="password" class="form-control Password_Place" />
+                            <input type="text" class="form-control Password_Place" />
                         </div>
                         <div class="col-md-4 ps-5">
                             <h6 class="mb-0 font-weight-bold">Loại tài khoản</h6>
@@ -50,31 +45,46 @@
                             <select class="AccountType_id" id="AccountType_id" style="width: 100%">
                                 @foreach (var item in ViewBag.AccountType)
                                 {
-                                    <option value="@item.IDAccountType" selected>@item.TypeDescription</option>
+                                    if (@item.IDAccountType != 4)
+                                    {
+                                        <option value="@item.IDAccountType">@item.TypeDescription</option>
+                                    }
+
                                 }
                             </select>
                         </div>
-                        <script>
-                            $(document).ready(() => {
-                                $(".MSSV_Place").blur(async () => {
-                                    const mssv = $(".MSSV_Place").val();
-                                    const SinhVienData = await findSinhVienByMSSV(mssv);
-                                    if (SinhVienData) {
-                                        $(".typing_name").val(SinhVienData.FullName);
-                                        $(".typing_name").attr("id", SinhVienData["IDSinhVien"]);
-                                    }
-                                    else {
-                                        $(".typing_name").val("Không tìm thấy sinh viên");
-                                    }
-                                })
-                            })
-                        </script>
+
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary add-student">Thêm sinh viên</button>
+                    <button type="button" class="btn btn-primary add_account_btn">Thêm tài khoản</button>
                 </div>
+                <script>
+                    $(document).ready(() => {
+                        $(".MSSV_Place").blur(async () => {
+                            const mssv = $(".MSSV_Place").val();
+                            const SinhVienData = await findSinhVienByMSSV(mssv);
+                            if (SinhVienData) {
+                                $(".typing_name").val(SinhVienData.FullName);
+                                $(".typing_name").attr("id", SinhVienData["IDSinhVien"]);
+                            }
+                            else {
+                                $(".typing_name").val("Không tìm thấy sinh viên");
+                            }
+                        })
+                        $(".add_account_btn").click(() => {
+
+                            const AccountData = {
+                                IDSinhVien: $(".typing_name").attr("id"),
+                                MSSV: $(".MSSV_Place").val(),
+                                Password: $('.Password_Place').val(),
+                                AccountTypeID: $('.AccountType_id').val(),
+                            }
+                            postAccountStudent(AccountData)
+                        })
+                    })
+                </script>
             </div>
 
         </div>

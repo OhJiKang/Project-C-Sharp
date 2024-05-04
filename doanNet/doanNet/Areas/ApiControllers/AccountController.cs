@@ -26,8 +26,8 @@ namespace doanNet.ApiControllers
             return db.Accounts.ToList();
         }
         public IHttpActionResult CheckingLogin([FromBody] LoginDTO loginTemp) {
-            var Account = db.Accounts.Where(row=>row.SinhVien.MSSV == loginTemp.account).FirstOrDefault();
-            if (Account==null || !BCrypt.Net.BCrypt.Verify(Account.Password, loginTemp.password))
+            var Account = db.Accounts.Where(row=>row.MSSV == loginTemp.account).FirstOrDefault();
+            if (Account==null || !BCrypt.Net.BCrypt.Verify(loginTemp.password, Account.Password))
             {
                 return Content(HttpStatusCode.Unauthorized, "Sai Tài Khoản hoặc mật khẩu");
             }
@@ -39,17 +39,19 @@ namespace doanNet.ApiControllers
             return db.Accounts.Where(row => row.IDAccount == id).FirstOrDefault();
         }
         [HttpPost]
-        public IHttpActionResult AddingAccountStudent([FromBody] Account Account)
+        public IHttpActionResult AddingAccountStudent([FromBody] AccountDTO Account)
         {
-            Account.IDSinhVien=db.SinhViens.Where(row=>row.MSSV==Account.MSSV).FirstOrDefault().IDSinhVien;
-            Account.Password = BCrypt.Net.BCrypt.HashPassword(Account.Password);
-            Account.Available = 0;
-            Account.AccountTypeID = 1;
-            Account.DateBegin = DateTime.Now;
-            Account.Hide = 0;
+            var tempAccount = new Account();
+            tempAccount.IDSinhVien=Account.IDSinhVien;
+            tempAccount.Password = BCrypt.Net.BCrypt.HashPassword(Account.Password);
+            tempAccount.Available = 0;
+            tempAccount.AccountTypeID = Account.AccountTypeID;
+            tempAccount.DateBegin = DateTime.Now;
+            tempAccount.Hide = 0;
+            tempAccount.MSSV=Account.MSSV;
             try
             {
-                db.Accounts.Add(Account);
+                db.Accounts.Add(tempAccount);
                 db.SaveChangesAsync();
                 return Json(new { Message = "Data received successfully!" });
             }

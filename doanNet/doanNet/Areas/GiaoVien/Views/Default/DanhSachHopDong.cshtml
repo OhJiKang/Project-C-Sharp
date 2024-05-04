@@ -76,7 +76,7 @@
                             <select class="place_id" id="place_id" style="width: 100%">
                                 @foreach (var item in ViewBag.places)
                                 {
-                                    <option value="@item.IDPlace" selected>@item.Description</option>
+                                    <option value="@item.IDPlace">@item.Description</option>
                                 }
                             </select>
 
@@ -90,7 +90,7 @@
                             <select class="priority_place" id="priority_place" style="width: 100%">
                                 @foreach (var item in ViewBag.priorities)
                                 {
-                                    <option value="@item.IDPriority" selected>@item.PriorityDescription</option>
+                                    <option value="@item.IDPriority">@item.PriorityDescription</option>
                                 }
                             </select>
                         </div>
@@ -285,15 +285,17 @@
                         </td>
                     </tr>
                 }
-                <script>
-                    $(".btn_approve").click((event) => {
-                        const idContract = event.target.id;
-                        ApproveContract(idContract);
-                        window.location.reload();
-                    })
-                </script>
+
             </tbody>
+
         </table>
+        <script>
+            $(".btn_approve").click((event) => {
+                const idContract = event.target.id;
+                ApproveContract(idContract);
+                window.location.reload();
+            })
+        </script>
     </div>
 </div>
 
