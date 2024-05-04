@@ -31,7 +31,7 @@ namespace doanNet.ApiControllers
             {
                 return Content(HttpStatusCode.Unauthorized, "Sai Tài Khoản hoặc mật khẩu");
             }
-            return Ok("Login successful");
+            return Ok(Account);
         }
 
         public Account GetByAccountId(int id)

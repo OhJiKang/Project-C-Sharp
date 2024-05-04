@@ -18,7 +18,7 @@ async function CheckingLogin(accountData) {
         method: 'POST',
         body: JSON.stringify(accountData),
     });
-    result = await result.json();
+    return result
 }
 async function getAccountByID(AccountID) {
     let result = await fetch(`${AccountURL}/GetByID?id=${AccountID}`, {
