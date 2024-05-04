@@ -25,7 +25,7 @@
             <PropertyRef Name="IDAccountType" />
           </Key>
           <Property Name="IDAccountType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TypeDescription" Type="text" Nullable="false" />
+          <Property Name="TypeDescription" Type="nvarchar(max)" />
           <Property Name="Order" Type="int" />
           <Property Name="Meta" Type="text" />
           <Property Name="DateBegin" Type="datetime" Nullable="false" />
@@ -721,7 +721,7 @@
             <PropertyRef Name="IDAccountType" />
           </Key>
           <Property Name="IDAccountType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypeDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />

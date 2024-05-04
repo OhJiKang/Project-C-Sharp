@@ -100,6 +100,12 @@ namespace doanNet.Areas.GiaoVien.Controllers
         }
         public ActionResult QuanLyTaiKhoan()
         {
+            var sinhviens = db.SinhViens.ToList();
+            var falcuties = db.Faculties.ToList();
+            ViewBag.falcuties = falcuties;
+            ViewBag.sinhviens = sinhviens;
+            var AccountType = db.AccountTypes.ToList();
+            ViewBag.AccountType = AccountType;
             return View();
         }
         public ActionResult RegisterPlace()

@@ -7,18 +7,18 @@
       <Diagram DiagramId="8dfb8f2f06194f8e965cae15f7d3dbd8" Name="Diagram1" ZoomLevel="73">
         <EntityTypeShape EntityType="KTXTDTUModel.Account" Width="1.5" PointX="8.25" PointY="12" />
         <EntityTypeShape EntityType="KTXTDTUModel.AccountType" Width="1.5" PointX="6" PointY="3.25" />
-        <EntityTypeShape EntityType="KTXTDTUModel.Attendance" Width="1.5" PointX="11.25" PointY="14.75" />
-        <EntityTypeShape EntityType="KTXTDTUModel.AttendanceBridge" Width="1.5" PointX="13.5" PointY="14.625" />
-        <EntityTypeShape EntityType="KTXTDTUModel.Category" Width="1.5" PointX="10.5" PointY="7.125" />
-        <EntityTypeShape EntityType="KTXTDTUModel.CategoryBridge" Width="1.5" PointX="12.75" PointY="11.125" />
+        <EntityTypeShape EntityType="KTXTDTUModel.Attendance" Width="1.5" PointX="8.25" PointY="7.75" />
+        <EntityTypeShape EntityType="KTXTDTUModel.AttendanceBridge" Width="1.5" PointX="10.5" PointY="10.625" />
+        <EntityTypeShape EntityType="KTXTDTUModel.Category" Width="1.5" PointX="10.5" PointY="21.875" />
+        <EntityTypeShape EntityType="KTXTDTUModel.CategoryBridge" Width="1.5" PointX="12.75" PointY="14.875" />
         <EntityTypeShape EntityType="KTXTDTUModel.Contract" Width="1.5" PointX="5.25" PointY="7" />
         <EntityTypeShape EntityType="KTXTDTUModel.Faculty" Width="1.5" PointX="0.75" PointY="8.75" />
         <EntityTypeShape EntityType="KTXTDTUModel.Fee" Width="1.5" PointX="3" PointY="22.625" />
         <EntityTypeShape EntityType="KTXTDTUModel.Log" Width="1.5" PointX="5.25" PointY="17.375" />
-        <EntityTypeShape EntityType="KTXTDTUModel.Menu" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="KTXTDTUModel.Menu" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="KTXTDTUModel.Mistake" Width="1.5" PointX="5.25" PointY="12.125" />
         <EntityTypeShape EntityType="KTXTDTUModel.Place" Width="1.5" PointX="3" PointY="2.5" />
-        <EntityTypeShape EntityType="KTXTDTUModel.Post" Width="1.5" PointX="10.5" PointY="10.875" />
+        <EntityTypeShape EntityType="KTXTDTUModel.Post" Width="1.5" PointX="10.5" PointY="14.5" />
         <EntityTypeShape EntityType="KTXTDTUModel.Priority" Width="1.5" PointX="3" PointY="6.375" />
         <EntityTypeShape EntityType="KTXTDTUModel.Room" Width="1.5" PointX="0.75" PointY="12.375" />
         <EntityTypeShape EntityType="KTXTDTUModel.SinhVien" Width="1.5" PointX="3" PointY="11.5" />
