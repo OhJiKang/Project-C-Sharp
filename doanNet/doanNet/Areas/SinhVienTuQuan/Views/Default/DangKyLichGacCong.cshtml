@@ -32,6 +32,9 @@
             if (month < 10) {
                 month = '0' + month; // prepend '0' to the month if it's less than 10
             }
+            if (day < 10) {
+                day = '0' + day; // prepend '0' to the day if it's less than 10
+            }
             var year = date.getFullYear();
             return `${year}-${month}-${day}`;
         }
