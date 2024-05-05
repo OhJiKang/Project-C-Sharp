@@ -21,13 +21,9 @@ namespace doanNet
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "TrangChu", action = "Index", id = UrlParameter.Optional }
-            );
-            routes.MapRoute(
-                name: "Menu",
-                url: "Menu/{action}/{id}",
-                defaults: new { controller = "Menu", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "YourNamespace.Controllers" }
+                defaults: new { controller = "TrangChu", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "doanNET.Controllers" }
+
             );
 
         }

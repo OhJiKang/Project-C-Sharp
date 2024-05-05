@@ -1,5 +1,5 @@
 ﻿const trucCongURL = `/api/truccong`
-async function getAllAttendanceBySinhVienIDNow(date) {
+async function getTrucCongByDate(date) {
     let result = await fetch(`${trucCongURL}/getByDate?dateString=${date}`, {
         headers: {
             "Content-Type": "application/json"

@@ -51,7 +51,7 @@
         }
         async function renderSinhVienGacCong(date) {
 
-            const AccountTrucCongData = await getAllAttendanceBySinhVienIDNow(date);
+            const AccountTrucCongData = await getTrucCongByDate(date);
             if (AccountTrucCongData.length == 0) {
                 return `<td class="date_item">
                           <div style="color: darkblue">
