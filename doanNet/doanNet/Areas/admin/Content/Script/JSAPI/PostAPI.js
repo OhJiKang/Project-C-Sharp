@@ -1,5 +1,4 @@
-﻿let baseURL = ""
-const url = `${baseURL}/post`
+﻿const url = `/api/post`
 
 async function putPost(PostData, id) {
     let result = await fetch(`${url}/PutPost?id=${id}`, {
@@ -21,7 +20,7 @@ async function postPost(PostData) {
     data.append("IDAccount", PostData.IDAccount);
     $.ajax({
         type: "POST",
-        url: `${mistakeURL}/AddingPost`,
+        url: `${url}/AddingPost`,
         contentType: false,
         processData: false,
         data: data,
