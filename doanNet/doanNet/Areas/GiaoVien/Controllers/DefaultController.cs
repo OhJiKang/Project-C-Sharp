@@ -116,6 +116,11 @@ namespace doanNet.Areas.GiaoVien.Controllers
         {
             return View();
         }
-
+        public ActionResult QuanLyHocPhi()
+        {
+            var sinhviens = db.SinhViens.ToList();
+            var fee = db.Fees.ToList();
+            return View();
+        }
     }
 }

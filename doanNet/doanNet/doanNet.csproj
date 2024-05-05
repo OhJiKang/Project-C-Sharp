@@ -1649,6 +1649,7 @@
     <Content Include="Areas\admin\Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Areas\admin\Content\ckfinder\userfiles\.htaccess" />
     <Content Include="Areas\GiaoVien\Views\Default\DanhSachHoaDon.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\QuanLyHocPhi.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\layout.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
