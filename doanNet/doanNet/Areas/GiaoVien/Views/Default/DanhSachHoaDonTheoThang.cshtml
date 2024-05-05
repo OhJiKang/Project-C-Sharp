@@ -44,6 +44,8 @@
             <thead>
                 <tr>
                     <th scope="col">Tên phòng</th>
+                    <th scope="col">Tên phí</th>
+                    <th scope="col">Chi tiết phí</th>
                     <th scope="col">Tổng Chi Phí</th>
                     <th scope="col">Hạn bắt đầu thanh toán</th>
                     <th scope="col">Hạn chót thanh toán</th>
@@ -66,6 +68,8 @@
                             }
                             @roomName
                         </th>
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
                         <td>@item.Quantity</td>
                         <td>@item.DateStart</td>
                         <td>@item.DateEnd</td>
@@ -83,7 +87,7 @@
                             }
                             else
                             {
-                                <i class="fa-regular fa-square-check" ></i>
+                                <i class="fa-regular fa-square-check"></i>
                             }
 
                         </td>
@@ -102,7 +106,7 @@
                             }
 
                         </td>
-                        
+
                     </tr>
                 }
 
