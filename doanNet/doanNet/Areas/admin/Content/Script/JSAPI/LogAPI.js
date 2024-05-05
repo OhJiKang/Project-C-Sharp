@@ -1,8 +1,7 @@
-﻿let baseURL = "/api"
-const url = `${baseURL}/log`
+﻿const Logurl = `${baseURL}/log`
 
 async function putLog(FeeData, id) {
-    let result = await fetch(`${url}/putLog?id=${id}`, {
+    let result = await fetch(`${Logurl}/putLog?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -11,8 +10,8 @@ async function putLog(FeeData, id) {
     });
     result = await result.json();
 }
-async function addingFee(FeeData) {
-    let result = await fetch(`${url}/AddingFee`, {
+async function AddingLog(FeeData) {
+    let result = await fetch(`${Logurl}/AddingLog`, {
         headers: {
             "Content-Type": "application/json"
         },

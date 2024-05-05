@@ -53,10 +53,33 @@ namespace doanNet.Areas.GiaoVien.Controllers
         }
         public ActionResult DanhSachHoaDon()
         {
+            var Fees = db.Fees.ToList();
+            ViewBag.Fees = Fees;
+
+            var places = db.Places.ToList();
+            ViewBag.places = places;
+
+            var priorities = db.Priorities.ToList();
+            ViewBag.priorities = priorities;
+
+            var sinhviens = db.SinhViens.ToList();
+            ViewBag.sinhviens = sinhviens;
+
             return View();
         }
         public ActionResult DanhSachHoaDonTheoThang()
         {
+            var Fees = db.Fees.ToList();
+            ViewBag.Fees = Fees;
+
+            var rooms = db.Rooms.ToList();
+            ViewBag.rooms = rooms;
+
+            var priorities = db.Priorities.ToList();
+            ViewBag.priorities = priorities;
+
+            var sinhviens = db.SinhViens.ToList();
+            ViewBag.sinhviens = sinhviens;
             return View();
         }
         public ActionResult GhiLoiKTX()

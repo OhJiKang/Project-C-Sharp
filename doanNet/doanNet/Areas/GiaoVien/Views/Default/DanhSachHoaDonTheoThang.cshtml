@@ -3,6 +3,9 @@
     ViewBag.Title = "DanhSachHopDongTheoThang";
     Layout = "~/Areas/GiaoVien/Views/Shared/layoutteacher.cshtml";
 }
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/SinhVienAPI.js")
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/RoomAPI.js")
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/LogAPI.js")
 <link rel="stylesheet" type="text/css" href="~/Areas/admin/Content/CSS/GiaoVien.css">
 <link href="~/Content/TeacherPage/ChoosingRoom.min.css" rel="stylesheet" />
 <div class="container">
@@ -41,60 +44,68 @@
             <thead>
                 <tr>
                     <th scope="col">Tên phòng</th>
-                    <th scope="col">Giá phòng</th>
-                    <th scope="col">Số điện</th>
-                    <th scope="col">Số nước</th>
-                    <th scope="col">Chi phí khác</th>
-                    <th scope="col">Tổng tiền</th>
+                    <th scope="col">Tổng Chi Phí</th>
+                    <th scope="col">Hạn bắt đầu thanh toán</th>
                     <th scope="col">Hạn chót thanh toán</th>
                     <th scope="col">Đánh dấu thanh toán</th>
-                    <th scope="col">Tình trạng thanh toán</th>
-                    <th scope="col">Thao tác</th>
+                    <th scope="col">Tình trạng thanh toán</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>H207</th>
-                    <td>4000000</td>
-                    <td>190</td>
-                    <td>22</td>
-                    <td>0</td>
-                    <td>792.000</td>
-                    <td>05/05/2024</td>
-                    <td style="text-align: center">
-                        <i class="fa-regular fa-square-check" onclick="showModelXacNhanThanhToan()"></i>
-                        <script>
-                            function showModelXacNhanThanhToan() {
-                                var myModal = new bootstrap.Modal(document.getElementById('XacNhanThanhToan'));
-                                myModal.show();
+                @foreach (var item in ViewBag.Fees)
+                {
+                    var roomName = "";
+                    <tr>
+                        <th>
+                            @foreach (var room in ViewBag.rooms)
+                            {
+                                if (room.IDRoom == item.IDRoom)
+                                {
+                                    roomName = room.Name;
+                                }
+                            }
+                            @roomName
+                        </th>
+                        <td>@item.Quantity</td>
+                        <td>@item.DateStart</td>
+                        <td>@item.DateEnd</td>
+                        <td style="text-align: center">
+                            @if (item.Status == 0)
+                            {
+                                <i class="fa-regular fa-square" onclick="showModelXacNhanThanhToan()"></i>
+                                <script>
+                                    function showModelXacNhanThanhToan() {
+                                        var myModal = new bootstrap.Modal(document.getElementById('XacNhanThanhToan'));
+                                        myModal.show();
+                                    }
+
+                                </script>
+                            }
+                            else
+                            {
+                                <i class="fa-regular fa-square-check" ></i>
                             }
 
-                        </script>
-                    </td>
-                    <td>
-                        <ul id="paymentStatus" class="green-dots">
-                            <li>Đã thanh toán</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <i class="fa-regular fa-eye" style="color: blue; padding-right: 10px; cursor: pointer" onclick="showModelChiTiet()"></i>
-                        <script>
-                            function showModelChiTiet() {
-                                var myModal = new bootstrap.Modal(document.getElementById('ChiTietSuDungDienNuoc'));
-                                myModal.show();
+                        </td>
+                        <td>
+                            @if (item.Status == 0)
+                            {
+                                <ul id="paymentStatus" class="red-dots">
+                                    <li>Chưa thanh toán</li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul id="paymentStatus" class="green-dots">
+                                    <li>Đã thanh toán</li>
+                                </ul>
                             }
 
-                        </script>
-                        <i class="fa-solid fa-download" style="color: blue; cursor: pointer" onclick="showModelHoaDon()"></i>
-                        <script>
-                            function showModelHoaDon() {
-                                var myModal = new bootstrap.Modal(document.getElementById('HoaDon'));
-                                myModal.show();
-                            }
+                        </td>
+                        
+                    </tr>
+                }
 
-                        </script>
-                    </td>
-                </tr>
 
             </tbody>
         </table>
@@ -202,6 +213,7 @@
 
             </div>
         </div>
+
         <div class="modal fade" id="XacNhanThanhToan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
@@ -213,38 +225,46 @@
                         <div class="row">
                             <h6 style="font-weight: bold; text-align: center"> XÁC NHẬN THANH TOÁN <br /> (Thu tiền phí phòng ở ký túc xá - Tháng 03/2024 <br /> Phòng : H207</h6>
                         </div>
-                        <table class="table" style="width:500px;margin: auto">
+                        <table class="table" style="width:500px;margin: auto;height:300px">
                             <tr>
-                                <th scope="row">Số tiền phải đóng:  </th>
-                                <td style="text-align: right">text</td>
-                                <td>VNĐ</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Họ tên người đóng: </th>
-                                <td>
-                                    <input type="text" />
+                                <th scope="row" style="text-align: center; vertical-align: middle;">MSSV:</th>
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <input type="text" class="MSSV_Place" style="padding:4px"/>
                                 </td>
                                 <td></td>
                             </tr>
-
-
                             <tr>
-                                <th scope="row">MSSV:  </th>
-                                <td>
-                                    <input type="text" />
+                                <th scope="row" style="text-align: center; vertical-align: middle;">Họ và tên Sinh Viên:  </th>
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <input type="text" class="typing_name" style="padding:4px" disabled/>
                                 </td>
                                 <td></td>
                             </tr>
 
                             <tr>
-                                <th scope="row">Số tiền đóng:  </th>
-                                <td>
-                                    <input type="text" />
+                                <th scope="row" style="text-align: center; vertical-align: middle;">Số tiền đóng:  </th>
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <input type="text" style="padding:4px"/>
                                 </td>
-                                <<td>VNĐ</td>
+                                <td style="text-align: center; vertical-align: middle;">VNĐ</td>
                             </tr>
                         </table>
                     </div>
+                    <script>
+                        $(document).ready(() => {
+                            $(".MSSV_Place").blur(async () => {
+                                const mssv = $(".MSSV_Place").val();
+                                const SinhVienData = await findSinhVienByMSSV(mssv);
+                                if (SinhVienData) {
+                                    $(".typing_name").val(SinhVienData.FullName);
+                                    $(".typing_name").attr("id", SinhVienData["IDSinhVien"]);
+                                }
+                                else {
+                                    $(".typing_name").val("Không tìm thấy sinh viên");
+                                }
+                            })
+                        })
+                    </script>
                     <div class="modal-footer">
 
                         <button type="button" class="btn btn-primary" style="margin: auto"><i class="fa-solid fa-file-pdf" style="padding-right: 5px"></i> In hoá đơn</button>
