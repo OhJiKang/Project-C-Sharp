@@ -22,7 +22,7 @@ namespace doanNet
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "TrangChu", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "doanNET.Controllers" }
+                namespaces: new[] { "doanNet.Controllers" }
 
             );
 
