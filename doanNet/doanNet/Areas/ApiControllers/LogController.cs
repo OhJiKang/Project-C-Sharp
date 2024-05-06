@@ -37,20 +37,31 @@ namespace doanNet.ApiControllers
                 FeeNeedToUpdate.Status = 1;
             }
         }
-        public IHttpActionResult AddingLog([FromBody] LogDTO Log)
+        public async Task<IHttpActionResult> AddingLog([FromBody] LogDTO Log)
         {
 
             try
             {
-                var LogNeedToAdd= new Log();
-                LogNeedToAdd.DateDone = Log.DateDone;
+                /*
+                    public int IDLog { get; set; }
+        public System.DateTime DateDone { get; set; }
+        public int Quantity { get; set; }
+
+        public int FeeID { get; set; }
+        public int IDSinhVien { get; set; }
+                    */
+                var LogNeedToAdd = new Log();
+                LogNeedToAdd.IDFee = Log.FeeID;
+                LogNeedToAdd.DateDone = DateTime.Now;
                 LogNeedToAdd.Quantity = Log.Quantity;
                 LogNeedToAdd.IDSinhVien = Log.IDSinhVien;
+
                 LogNeedToAdd.DateBegin=DateTime.Now;
                 LogNeedToAdd.Hide = 0;
                 db.Logs.Add(LogNeedToAdd);
-                db.SaveChangesAsync();
+                await db.SaveChangesAsync();
                 updateFeeWhenTransaction(Log.FeeID);
+                await db.SaveChangesAsync();
                 return Json(new { Message = "Data received successfully!" });
             }
             catch (Exception ex)
@@ -76,6 +87,7 @@ namespace doanNet.ApiControllers
                 LogNeedToChange.Hide = 0;
                 await db.SaveChangesAsync();
                 updateFeeWhenTransaction(id);
+                await db.SaveChangesAsync();
                 return Json(new { Message = "Data received successfully!" });
             }
             catch (Exception ex)

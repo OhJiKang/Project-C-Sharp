@@ -13,6 +13,5 @@ namespace doanNet.Controllers.DTO
 
         public int FeeID { get; set; }
         public int IDSinhVien { get; set; }
-        public string Note { get; set; }
     }
 }
