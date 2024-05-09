@@ -1,5 +1,4 @@
-﻿const Logurl = `${baseURL}/log`
-
+﻿const Logurl = `api/log`
 async function putLog(FeeData, id) {
     let result = await fetch(`${Logurl}/putLog?id=${id}`, {
         headers: {

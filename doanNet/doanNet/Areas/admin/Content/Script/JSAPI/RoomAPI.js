@@ -1,9 +1,7 @@
-﻿let baseURL = "/api"
-
-const url = `${baseURL}/Room`
+﻿const Roomurl = `api/Room`
 
 async function postRoom(RoomData) {
-    let result = await fetch(`${url}/PostRoom`, {
+    let result = await fetch(`${Roomurl}/PostRoom`, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -14,7 +12,7 @@ async function postRoom(RoomData) {
     console.log(result)
 }
 async function findRoomById(id) {
-    let result = await fetch(`${url}/GetByRoomID?id=${id}`, {
+    let result = await fetch(`${Roomurl}/GetByRoomID?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -24,7 +22,7 @@ async function findRoomById(id) {
     return resulttosend;
 }
 async function findRoomBySinhVienId(id) {
-    let result = await fetch(`${url}/GetBySinhVienId?id=${id}`, {
+    let result = await fetch(`${Roomurl}/GetBySinhVienId?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -34,7 +32,7 @@ async function findRoomBySinhVienId(id) {
     return resulttosend;
 }
 async function putRoom(id, RoomData) {
-    let result = await fetch(`${url}/PutRoom?id=${id}`, {
+    let result = await fetch(`${Roomurl}/PutRoom?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
         },

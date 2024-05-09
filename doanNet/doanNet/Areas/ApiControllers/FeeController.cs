@@ -9,12 +9,40 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using doanNet.Controllers.DTO;
+using System.Data.Entity.Validation;
 
 namespace doanNet.ApiControllers
 {
     public class FeeController : ApiController
     {
         KTXTDTUEntities2 db = new KTXTDTUEntities2();
+
+        
+
+        [HttpGet]
+        public IHttpActionResult GetFeesByMonth()
+        {
+            List<Fee> fees = db.Fees.ToList(); // Assuming you have some fees populated in this list
+            var feesByMonth = fees.GroupBy(fee => new { fee.DateStart.Year, fee.DateStart.Month })
+                                  .Select(group => new
+                                  {
+                                      group.Key.Month,
+                                      group.Key.Year,
+                                      FeesNumber = group.Select(fee => new
+                                      {
+                                          fee.IDFee,
+                                          fee.Name,
+                                          fee.Description,
+                                          fee.DateStart
+                                      }).Count(),
+                                      RoomCount = group.Select(fee => fee.IDRoom).Distinct().Count(),
+                                      UnCompleted = group.Count(fee => fee.Status == 0),
+                                      Completed = group.Count(fee => fee.Status == 1),
+                                      TotalQuantity = group.Sum(fee => fee.Quantity)
+                                  }) ;
+
+            return Ok(feesByMonth);
+        }
 
         public List<Fee> GetAll(int? page)
         {
@@ -29,19 +57,42 @@ namespace doanNet.ApiControllers
         {
             return db.Fees.Where(row => row.IDRoom == roomid).ToList();
         }
-        public IHttpActionResult AddingFee([FromBody] Fee Fee)
+        public async Task<IHttpActionResult> AddingFee([FromBody] FeeDTO Fee)
         {
-            Fee.DateBegin= DateTime.Now;
-            Fee.Hide = 0;
+            var TempFee = new Fee();
+            TempFee.Name = Fee.Name;
+            TempFee.Description = Fee.Description;
+            TempFee.Status = 0;
+            TempFee.DateStart=Fee.TimeBegin;
+            TempFee.DateEnd=Fee.TimeEnd;
+            TempFee.IDRoom=Fee.IDRoom;
+            TempFee.DateBegin= DateTime.Now;
+            TempFee.Quantity= Fee.Quantity;
+            TempFee.Hide = 0;
             try
             {
-                db.Fees.Add(Fee);
-                db.SaveChangesAsync();
+                db.Fees.Add(TempFee);
+                await db.SaveChangesAsync();
                 return Json(new { Message = "Data received successfully!" });
             }
-            catch (Exception ex)
+            catch (DbEntityValidationException e)
             {
-                return Json(new { Message = "Adding Failed!Error: " + ex, });
+                string mes = "";
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    mes += $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:";
+
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        mes += $"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"";
+
+
+                    }
+
+
+                }
+
+                return Json(new { Message = mes });
             }
         }
         [HttpPut]

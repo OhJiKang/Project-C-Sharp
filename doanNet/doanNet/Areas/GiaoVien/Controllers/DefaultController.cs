@@ -59,6 +59,9 @@ namespace doanNet.Areas.GiaoVien.Controllers
             var places = db.Places.ToList();
             ViewBag.places = places;
 
+            var rooms = db.Rooms.ToList();
+            ViewBag.rooms = rooms;
+
             var priorities = db.Priorities.ToList();
             ViewBag.priorities = priorities;
 
@@ -67,9 +70,9 @@ namespace doanNet.Areas.GiaoVien.Controllers
 
             return View();
         }
-        public ActionResult DanhSachHoaDonTheoThang()
+        public ActionResult DanhSachHoaDonTheoThang(int Year,int Month)
         {
-            var Fees = db.Fees.ToList();
+            var Fees = db.Fees.Where(fee => fee.DateStart.Year == Year && fee.DateStart.Month== Month).ToList();
             ViewBag.Fees = Fees;
 
             var rooms = db.Rooms.ToList();

@@ -13,8 +13,8 @@ namespace doanNet.Controllers.DTO
         
         public int Quantity { get; set; }
 
-        public System.DateTime DateStart { get; set; }
-        public System.DateTime DateEnd { get; set; }
+        public DateTime TimeBegin { get; set; }
+        public DateTime TimeEnd { get; set; }
         public byte[] Status { get; set; }
         public int IDRoom { get; set; }
     }

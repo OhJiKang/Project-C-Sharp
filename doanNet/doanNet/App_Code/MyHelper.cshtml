@@ -4,3 +4,9 @@
 
     @formattedDate
 }
+@helper FormatVND(decimal amount)
+{
+    string formattedAmount = amount.ToString("#,##0") + " VNĐ";
+
+    @formattedAmount
+}

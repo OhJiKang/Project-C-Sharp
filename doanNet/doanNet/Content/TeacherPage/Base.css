@@ -93,6 +93,7 @@ input[type='date'],
 input[type='email'],
 input[type='password'],
 input[type='file'],
+input[type='number'],
 input[type='datetime-local'] .selectize-control,
 .selectize-input,
 .modal select {
