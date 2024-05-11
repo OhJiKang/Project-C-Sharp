@@ -16,10 +16,25 @@
         </div>
     </div>
     <div class="filtering_place">
-        <select class="filtering_item" placeholder="Tầng">
-            <option value="" disabled selected>Tầng</option>
-            <option value="hurr">Durr</option>
+        <select name="tang" id="tang">
+            <option value="0" disabled selected>Tầng</option>
+            @foreach (var Floor in ViewBag.allFloor)
+            {
+
+                <option value="@Floor">Tầng @Floor</option>
+            }
         </select>
+        <script>
+            $(document).ready(() => {
+                $('#tang').on('change', function (e) {
+                    var tangVal = $(this).val();
+                    $('#tang').val(tangVal)
+                    //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
+                    var regex = '^.{1}' + tangVal + '.*$';
+                    table.column(0).search(regex, true, false).draw();
+                })
+            })
+        </script>
     </div>
     <div class="modal fade" id="XacNhanThanhToan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">

@@ -4,8 +4,6 @@
     Layout = "~/Areas/GiaoVien/Views/Shared/layoutteacher.cshtml";
 }
 <link rel="stylesheet" type="text/css" href="~/Areas/admin/Content/CSS/GiaoVien.css">
-<script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/2.0.3/js/dataTables.js" crossorigin="anonymous"></script>
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/SinhVienAPI.js")
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/FeeAPI.js")
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/RoomAPI.js")
@@ -131,7 +129,6 @@
             return String(number).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
         }
         $(".submit_btn").click(async () => {
-            var myModal = new bootstrap.Modal(document.getElementById('ThemHoaDon'));
             const FeeData = {
                 Name: $(".Name_Place").val(),
                 Description: $(".Description_Place").val(),
@@ -141,32 +138,38 @@
                 IDRoom: $(".Room_id").val(),
             }
             await addingFee(FeeData)
-            myModal.hide();
+            $('#ThemHoaDon').modal('hide');
             renderFeeByMonth();
         })
         async function renderFeeByMonth() {
             let allFee = await AnalysticFee();
-            let htmls=``
+            let htmls = ``
+            let table = new DataTable('#datatableform');
+            table.clear();
+
             allFee.forEach((value) => {
-                htmls += `
+                htmls = `
                 <tr>
-                    <th>${value.Month}/${value.Year}</th>
+                    <td>${value.Month}/${value.Year}</td>
                     <td>${value.RoomCount}</td>
                     <td>${value.Completed}</td>
                     <td>${value.UnCompleted}</td>
                     <td>${formatToVND(value.TotalQuantity)}</td>
-                    
                     <td>
-                    <a href="/GiaoVien/Default/DanhSachHoaDonTheoThang?Year=${value.Year}&Month=${value.Month}">
-                     <i class="fa-regular fa-eye" style="color: blue; padding-right: 10px; cursor: pointer"></i>                    
-                    <a/>
+                        <a href="/GiaoVien/Default/DanhSachHoaDonTheoThang?Year=${value.Year}&Month=${value.Month}">
+                            <i class="fa-regular fa-eye" style="color: blue; padding-right: 10px; cursor: pointer"></i>
+                        </a>
                     </td>
-                </tr>
-                `
+                </tr>`;
+            table.row.add($(htmls).get(0));
             })
-            console.log(htmls);
-            $(".table_fee_by_month").html(htmls)
+            table.draw();
         };
+        /*$('#datatableform').DataTable({
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });*/
         renderFeeByMonth();
     })
 

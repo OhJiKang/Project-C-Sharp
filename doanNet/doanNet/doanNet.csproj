@@ -1508,6 +1508,7 @@
     <Compile Include="Models\Contract.cs">
       <DependentUpon>KTXTDTU.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EFConfiguration.cs" />
     <Compile Include="Models\Faculty.cs">
       <DependentUpon>KTXTDTU.tt</DependentUpon>
     </Compile>

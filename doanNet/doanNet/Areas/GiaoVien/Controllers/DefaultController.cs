@@ -72,6 +72,12 @@ namespace doanNet.Areas.GiaoVien.Controllers
         }
         public ActionResult DanhSachHoaDonTheoThang(int Year,int Month)
         {
+
+            var allFloor = db.Rooms
+                            .Select(e => e.Floor)
+                            .Distinct()
+                            .ToList();
+            ViewBag.allFloor = allFloor;
             var Fees = db.Fees.Where(fee => fee.DateStart.Year == Year && fee.DateStart.Month== Month).ToList();
             ViewBag.Fees = Fees;
 
