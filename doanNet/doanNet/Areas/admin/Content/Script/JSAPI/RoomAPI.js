@@ -1,4 +1,4 @@
-﻿const Roomurl = `api/Room`
+﻿const Roomurl = `/api/Room`
 
 async function postRoom(RoomData) {
     let result = await fetch(`${Roomurl}/PostRoom`, {

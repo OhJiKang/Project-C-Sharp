@@ -113,24 +113,76 @@
         <table class="table" style="text-align: center">
             <thead>
                 <tr>
-                    <th scope="col">Tên đăng nhập</th>
-                    <th scope="col">Mật khẩu</th>
                     <th scope="col">MSSV</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Khóa</th>
-                    <th scope="col">Sinh viên tự quản</th>
+                    <th scope="col">Mật khẩu</th>
+                    <th scope="col">Tên Sinh Viên</th>
+                    <th scope="col">Loại tài khoản</th>
+                    <th scope="col">Tình trạng tài khoản</th>
+                    <th scope="col">Nâng lên tài khoản tự quản</th>
+
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>52100099</th>
-                    <td>nhquynh12</td>
-                    <td>52100099</td>
-                    <td>dd</td>
-                    <td><input type="checkbox" /></td>
-                    <td><input type="checkbox" /></td>
+                @foreach (var item in ViewBag.Account)
+                {
+                    var AccountTypeName = "";
+                    var tenSV = "";
+                   <tr>
+                       <th>@item.MSSV</th>
+                       <td>@item.Password</td>
 
-                </tr>
+                       <td>
+
+                           @foreach (var sinhvien in ViewBag.sinhviens)
+                           {
+                               if (sinhvien.IDSinhVien == item.IDSinhVien)
+                               {
+                                   tenSV = sinhvien.FullName;
+                               }
+                           }
+                           @tenSV
+                       </td>
+                       <td>
+                           @foreach (var AccountType in ViewBag.AccountType)
+                           {
+                               if (item.AccountTypeID == AccountType.IDAccountType)
+                               {
+                                   AccountTypeName = AccountType.TypeDescription;
+                               }
+                           }
+                           @AccountTypeName
+                       </td>
+                       @if (item.Available == 0)
+                       {
+                           <td>
+                               Tài khoản chưa mở khóa
+                           </td>
+                       }
+                       else
+                       {
+                           <td>
+                               Tài khoản đã mở khóa
+                           </td>
+                       }
+                       @if (item.AccountTypeID == 5)
+                       {
+                           <td>
+                               <button class="btn btn-primary btn_approve" id="@item.AccountTypeID">
+                                   Nâng lên sinh viên tự quản
+                               </button>
+                           </td>
+                       }
+                       else
+                       {
+                           <td>
+                               <button class="btn btn-primary btn_approve" id="@item.AccountTypeID">
+                                   Trở về sinh viên thường
+                               </button>
+                            </td>
+                               }
+                       </tr>
+                }
+                
             </tbody>
         </table>
     </div>

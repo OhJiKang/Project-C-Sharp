@@ -12,17 +12,14 @@ namespace doanNet.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
-
+    
     public partial class KTXTDTUEntities2 : DbContext
     {
         public KTXTDTUEntities2()
             : base("name=KTXTDTUEntities2")
         {
         }
-        
- 
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -45,7 +42,7 @@ namespace doanNet.Models
         public virtual DbSet<Priority> Priorities { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<SinhVien> SinhViens { get; set; }
+        public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TrucCong> TrucCongs { get; set; }
     }
-
 }

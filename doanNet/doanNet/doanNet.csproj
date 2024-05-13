@@ -1559,6 +1559,9 @@
       <DependentUpon>KTXTDTU.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs" />
+    <Compile Include="Models\Teacher.cs">
+      <DependentUpon>KTXTDTU.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TrucCong.cs">
       <DependentUpon>KTXTDTU.tt</DependentUpon>
     </Compile>

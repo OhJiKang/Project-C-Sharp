@@ -27,18 +27,22 @@ namespace doanNet.Models
         public int IDAccount { get; set; }
         public string Password { get; set; }
         public Nullable<int> Available { get; set; }
-        public int IDSinhVien { get; set; }
         public Nullable<int> Order { get; set; }
         public string Meta { get; set; }
         public System.DateTime DateBegin { get; set; }
         public int Hide { get; set; }
         public Nullable<int> AccountTypeID { get; set; }
         public string MSSV { get; set; }
-        [JsonIgnore]
-
+        public Nullable<int> IDSinhVien { get; set; }
+        public Nullable<int> IDTeacher { get; set; }
+    
+        
         public virtual AccountType AccountType { get; set; }
         [JsonIgnore]
         public virtual SinhVien SinhVien { get; set; }
+        [JsonIgnore]
+        
+        public virtual Teacher Teacher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
         public virtual ICollection<AttendanceBridge> AttendanceBridges { get; set; }

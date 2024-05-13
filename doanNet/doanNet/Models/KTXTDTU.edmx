@@ -12,13 +12,14 @@
           <Property Name="IDAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Password" Type="text" Nullable="false" />
           <Property Name="Available" Type="int" />
-          <Property Name="IDSinhVien" Type="int" Nullable="false" />
           <Property Name="Order" Type="int" />
           <Property Name="Meta" Type="text" />
           <Property Name="DateBegin" Type="datetime" Nullable="false" />
           <Property Name="Hide" Type="int" Nullable="false" />
           <Property Name="AccountTypeID" Type="int" />
           <Property Name="MSSV" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDSinhVien" Type="int" />
+          <Property Name="IDTeacher" Type="int" />
         </EntityType>
         <EntityType Name="AccountType">
           <Key>
@@ -239,6 +240,13 @@
           <Property Name="DateBegin" Type="datetime" Nullable="false" />
           <Property Name="Hide" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="IDTeacher" />
+          </Key>
+          <Property Name="IDTeacher" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="ntext" Nullable="false" />
+        </EntityType>
         <EntityType Name="TrucCong">
           <Key>
             <PropertyRef Name="IDTruc" />
@@ -263,8 +271,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Account__IDSinhV__6FE99F9F">
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+        <Association Name="FK__Account__IDSinhV__74794A92">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SinhVien">
@@ -272,6 +280,18 @@
             </Principal>
             <Dependent Role="Account">
               <PropertyRef Name="IDSinhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__IDTeach__793DFFAF">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="IDTeacher" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="IDTeacher" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -509,13 +529,18 @@
           <EntitySet Name="Priority" EntityType="Self.Priority" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SinhVien" EntityType="Self.SinhVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrucCong" EntityType="Self.TrucCong" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Account__Account__3D2915A8" Association="Self.FK__Account__Account__3D2915A8">
             <End Role="AccountType" EntitySet="AccountType" />
             <End Role="Account" EntitySet="Account" />
           </AssociationSet>
-          <AssociationSet Name="FK__Account__IDSinhV__6FE99F9F" Association="Self.FK__Account__IDSinhV__6FE99F9F">
+          <AssociationSet Name="FK__Account__IDSinhV__74794A92" Association="Self.FK__Account__IDSinhV__74794A92">
             <End Role="SinhVien" EntitySet="SinhVien" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__IDTeach__793DFFAF" Association="Self.FK__Account__IDTeach__793DFFAF">
+            <End Role="Teacher" EntitySet="Teacher" />
             <End Role="Account" EntitySet="Account" />
           </AssociationSet>
           <AssociationSet Name="FK__Attendanc__IDAcc__09A971A2" Association="Self.FK__Attendanc__IDAcc__09A971A2">
@@ -613,13 +638,18 @@
           <EntitySet Name="Priorities" EntityType="KTXTDTUModel.Priority" />
           <EntitySet Name="Rooms" EntityType="KTXTDTUModel.Room" />
           <EntitySet Name="SinhViens" EntityType="KTXTDTUModel.SinhVien" />
+          <EntitySet Name="Teachers" EntityType="KTXTDTUModel.Teacher" />
           <EntitySet Name="TrucCongs" EntityType="KTXTDTUModel.TrucCong" />
           <AssociationSet Name="FK__Account__Account__3D2915A8" Association="KTXTDTUModel.FK__Account__Account__3D2915A8">
             <End Role="AccountType" EntitySet="AccountTypes" />
             <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Account__IDSinhV__6FE99F9F" Association="KTXTDTUModel.FK__Account__IDSinhV__6FE99F9F">
+          <AssociationSet Name="FK__Account__IDSinhV__74794A92" Association="KTXTDTUModel.FK__Account__IDSinhV__74794A92">
             <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__IDTeach__793DFFAF" Association="KTXTDTUModel.FK__Account__IDTeach__793DFFAF">
+            <End Role="Teacher" EntitySet="Teachers" />
             <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
           <AssociationSet Name="FK__Attendanc__IDAcc__09A971A2" Association="KTXTDTUModel.FK__Attendanc__IDAcc__09A971A2">
@@ -702,15 +732,17 @@
           <Property Name="IDAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Available" Type="Int32" />
-          <Property Name="IDSinhVien" Type="Int32" Nullable="false" />
           <Property Name="Order" Type="Int32" />
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
           <Property Name="AccountTypeID" Type="Int32" />
           <Property Name="MSSV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDSinhVien" Type="Int32" />
+          <Property Name="IDTeacher" Type="Int32" />
           <NavigationProperty Name="AccountType" Relationship="KTXTDTUModel.FK__Account__Account__3D2915A8" FromRole="Account" ToRole="AccountType" />
-          <NavigationProperty Name="SinhVien" Relationship="KTXTDTUModel.FK__Account__IDSinhV__6FE99F9F" FromRole="Account" ToRole="SinhVien" />
+          <NavigationProperty Name="SinhVien" Relationship="KTXTDTUModel.FK__Account__IDSinhV__74794A92" FromRole="Account" ToRole="SinhVien" />
+          <NavigationProperty Name="Teacher" Relationship="KTXTDTUModel.FK__Account__IDTeach__793DFFAF" FromRole="Account" ToRole="Teacher" />
           <NavigationProperty Name="AttendanceBridges" Relationship="KTXTDTUModel.FK__Attendanc__IDAcc__09A971A2" FromRole="Account" ToRole="AttendanceBridge" />
           <NavigationProperty Name="Mistakes" Relationship="KTXTDTUModel.FK__Mistake__IDAccou__76969D2E" FromRole="Account" ToRole="Mistake" />
           <NavigationProperty Name="Posts" Relationship="KTXTDTUModel.FK__Post__IDAccount__7D439ABD" FromRole="Account" ToRole="Post" />
@@ -960,13 +992,21 @@
           <Property Name="Meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Accounts" Relationship="KTXTDTUModel.FK__Account__IDSinhV__6FE99F9F" FromRole="SinhVien" ToRole="Account" />
+          <NavigationProperty Name="Accounts" Relationship="KTXTDTUModel.FK__Account__IDSinhV__74794A92" FromRole="SinhVien" ToRole="Account" />
           <NavigationProperty Name="AttendanceBridges" Relationship="KTXTDTUModel.FK__Attendanc__IDSin__08B54D69" FromRole="SinhVien" ToRole="AttendanceBridge" />
           <NavigationProperty Name="Contracts" Relationship="KTXTDTUModel.FK__Contract__IDSinh__607251E5" FromRole="SinhVien" ToRole="Contract" />
           <NavigationProperty Name="Faculty" Relationship="KTXTDTUModel.FK__SinhVien__IDFalc__6B24EA82" FromRole="SinhVien" ToRole="Faculty" />
           <NavigationProperty Name="Logs" Relationship="KTXTDTUModel.FK__Log__IDSinhVien__0C85DE4D" FromRole="SinhVien" ToRole="Log" />
           <NavigationProperty Name="Mistakes" Relationship="KTXTDTUModel.FK__Mistake__IDSinhV__75A278F5" FromRole="SinhVien" ToRole="Mistake" />
           <NavigationProperty Name="Room" Relationship="KTXTDTUModel.FK__SinhVien__IDRoom__6D0D32F4" FromRole="SinhVien" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="IDTeacher" />
+          </Key>
+          <Property Name="IDTeacher" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="KTXTDTUModel.FK__Account__IDTeach__793DFFAF" FromRole="Teacher" ToRole="Account" />
         </EntityType>
         <EntityType Name="TrucCong">
           <Key>
@@ -993,8 +1033,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Account__IDSinhV__6FE99F9F">
-          <End Type="KTXTDTUModel.SinhVien" Role="SinhVien" Multiplicity="1" />
+        <Association Name="FK__Account__IDSinhV__74794A92">
+          <End Type="KTXTDTUModel.SinhVien" Role="SinhVien" Multiplicity="0..1" />
           <End Type="KTXTDTUModel.Account" Role="Account" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SinhVien">
@@ -1002,6 +1042,18 @@
             </Principal>
             <Dependent Role="Account">
               <PropertyRef Name="IDSinhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__IDTeach__793DFFAF">
+          <End Type="KTXTDTUModel.Teacher" Role="Teacher" Multiplicity="0..1" />
+          <End Type="KTXTDTUModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="IDTeacher" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="IDTeacher" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1230,13 +1282,14 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="KTXTDTUModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="IDTeacher" ColumnName="IDTeacher" />
+                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
                 <ScalarProperty Name="MSSV" ColumnName="MSSV" />
                 <ScalarProperty Name="AccountTypeID" ColumnName="AccountTypeID" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
                 <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
                 <ScalarProperty Name="Meta" ColumnName="Meta" />
                 <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
                 <ScalarProperty Name="Available" ColumnName="Available" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="IDAccount" ColumnName="IDAccount" />
@@ -1472,6 +1525,14 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="IDSinhVien" ColumnName="IDSinhVien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="KTXTDTUModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDTeacher" ColumnName="IDTeacher" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
