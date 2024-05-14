@@ -33,7 +33,7 @@ namespace doanNet.ApiControllers
                 var serverFileName = $"{DateTime.Now.Ticks}_{Path.GetFileName(image.FileName)}";
                 var uploadPath = Path.Combine(HttpContext.Current.Server.MapPath("~/Areas/admin/Content/mistake"), serverFileName);
                 image.SaveAs(uploadPath);
-                return serverFileName+" ";
+                return serverFileName+"+++...&&&";
             }
             else
             {
@@ -103,34 +103,37 @@ const MistakeData = {
         {
             return db.Mistakes.Any(e => e.IDMistake == id);
         }
-        public async Task<IHttpActionResult> PutMistake(int id, [FromBody] Mistake Mistake)
+        public async Task<IHttpActionResult> PutMistake(int id)
         {
-
+            HttpRequestBase request = new HttpContextWrapper(HttpContext.Current).Request;
             try
             {
-                var MistakeNeedToFind= db.Mistakes.Where(row=>row.IDMistake==id).FirstOrDefault();
-                MistakeNeedToFind.TimeCaught = Mistake.TimeCaught;
-                MistakeNeedToFind.IDAccount = Mistake.IDAccount;
-                MistakeNeedToFind.BedID = Mistake.BedID;
-                MistakeNeedToFind.IDRoom = Mistake.IDRoom;
-                MistakeNeedToFind.MistakeDes= Mistake.MistakeDes;
-                MistakeNeedToFind.DateBegin = DateTime.Now;
-                try
+                var tempMistake = db.Mistakes.Where(row=> id == row.IDMistake).FirstOrDefault();
+                var pathAllImage = "";
+                if (request.Files.Count > 0)
                 {
-                    await db.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EntityExists(id))
+                    HttpFileCollectionBase files = request.Files;
+                    for (int i = 0; i < files.Count; i++)
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        pathAllImage += HandleSubmitImage(files[i]);
                     }
                 }
-                return StatusCode(HttpStatusCode.NoContent);
+
+                // Set other properties from form data
+                tempMistake.MistakeDes = request.Form["MistakeDes"];
+                if (pathAllImage != "")
+                {
+                    tempMistake.ImageDescription = pathAllImage;
+                }
+                tempMistake.IDRoom = int.Parse(request.Form["IDRoom"]);
+                tempMistake.BedID = request.Form["BedID"];
+                tempMistake.IDSinhVien = int.Parse(request.Form["IDSinhVien"]);
+                tempMistake.IDAccount = int.Parse(request.Form["IDAccount"]);
+                tempMistake.TimeCaught = DateTime.Now;
+                tempMistake.DateBegin = DateTime.Now;
+                tempMistake.Hide = 0;
+                await db.SaveChangesAsync();
+                return Json(new { Message = "Data received successfully!" });
             }
             catch (Exception ex)
             {

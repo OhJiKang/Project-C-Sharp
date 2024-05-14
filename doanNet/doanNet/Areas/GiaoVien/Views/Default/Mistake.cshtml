@@ -4,7 +4,11 @@
     ViewBag.title = "Vi phạm";
     Layout = "~/Views/Shared/layoutteacher.cshtml";
 }
-
+<style>
+    .edit_mistake{
+        cursor:pointer;
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col-12 text-center" style="padding:20px">
@@ -27,28 +31,31 @@
         </div>
     </div>
     <div class="row">
-        <table class="table">
+        <table class="table" id="datatableform">
             <thead>
                 <tr style="background-color: darkblue; color: white">
-                    <th scope="col">Mã lỗi</th>
+                    <th scope="col">STT</th>
                     <th scope="col">Chi tiết lỗi</th>
                     <th scope="col">Họ và tên Sinh viên</th>
                     <th scope="col">Tên người ghi nhận</th>
                     <th scope="col">Số giường</th>
                     <th scope="col">Tên phòng</th>
                     <th scope="col">Thời gian ghi nhận lỗi</th>
+                    <th scope="col">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
+                @{var number = 1; }
+
                 @foreach (var item in ViewBag.mistakes)
                 {
                     var tensv = "";
                     var tenphong = "";
                     <tr>
-                        <th>@item.IDMistake</th>
+                        <th>@Html.Raw(number++)</th>
                         <td>@item.MistakeDes</td>
                         <td>
-                            @foreach(var sinhvien in ViewBag.sinhviens)
+                            @foreach (var sinhvien in ViewBag.sinhviens)
                             {
                                 if (sinhvien.IDSinhVien == item.IDSinhVien)
                                 {
@@ -79,6 +86,11 @@
                             @tenphong
                         </td>
                         <td>@item.TimeCaught</td>
+                        <td>
+                            <a href="@Url.Action("SuaLoiKTX", "Default", new {id = @item.IDMistake})">
+                                <i class="fa-regular fa-pen-to-square" style="color: blue;"></i>
+                            </a>
+                        </td>
                     </tr>
                 }
 

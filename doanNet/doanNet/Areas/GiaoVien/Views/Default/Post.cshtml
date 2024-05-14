@@ -26,7 +26,6 @@
                 <tr style="background-color: darkblue; color: white">
                     <th scope="col">Tiêu đề</th>
                     <th scope="col">Meta</th>
-                    <th scope="col">ID người đăng</th>
                     <th scope="col">Lần cuối chỉnh sửa</th>
                     <th scope="col">Tag bài đăng</th>
                     <th scope="col">Thao tác</th>
@@ -40,7 +39,6 @@
                     <tr>
                         <th>@item.PostTitle</th>
                         <td>@item.Meta</td>
-                        <td>@item.IDAccount</td>
                         <td>@item.DateBegin</td>
                         <td>
                             @foreach (var categorybridge in ViewBag.categoryBridges)
@@ -65,7 +63,11 @@
                             }
                             @categoryString
                         </td>
-                        <td></td>
+                        <td>
+                            <a href="#">
+                                <i class="fa-regular fa-pen-to-square" style="color: blue;"></i>
+                            </a>
+                        </td>
                     </tr>
                 }
 

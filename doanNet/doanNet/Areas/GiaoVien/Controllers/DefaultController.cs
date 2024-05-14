@@ -152,6 +152,20 @@ namespace doanNet.Areas.GiaoVien.Controllers
         {
             return View();
         }
+        public ActionResult SuaLoiKTX(int id)
+        {
+            var MistakeInfo = db.Mistakes.Where(row => id == row.IDMistake).FirstOrDefault();
+            var SinhVienID = MistakeInfo.IDSinhVien;
+            var SinhVienInfo = db.SinhViens.Where(row=> SinhVienID==row.IDSinhVien).FirstOrDefault();
+            var RoomInfo= db.Rooms.Where(row=>row.IDRoom==MistakeInfo.IDRoom).FirstOrDefault();
+            ViewBag.FileInfo = MistakeInfo.ImageDescription;
+
+            ViewBag.SinhVienInfo = SinhVienInfo;
+            ViewBag.MistakeInfo = MistakeInfo;
+            ViewBag.RoomInfo = RoomInfo;
+
+            return View();
+        }
         public ActionResult QuanLyHocPhi()
         {
             var sinhviens = db.SinhViens.ToList();

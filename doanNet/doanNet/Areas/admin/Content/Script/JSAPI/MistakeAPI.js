@@ -9,17 +9,33 @@ async function getMisTakesBySinhVienID(id) {
     });
     result = await result.json();
     return result;
-
 }
-async function putMistake(MistakeData, id) {
-    let result = await fetch(`${mistakeURL}/PutMistake?id=${id}`, {
-        headers: {
-            "Content-Type": "application/json"
+async function putMistake(id,MistakeData) {
+    var data = new FormData()
+    if (MistakeData.ImageDescription) {
+        for (var i = 0; i < MistakeData.ImageDescription.length; i++) {
+            data.append(MistakeData.ImageDescription[i].name, MistakeData.ImageDescription[i]);
+        }
+    }
+    
+    data.append("MistakeDes", MistakeData.MistakeDes);
+    data.append("IDRoom", MistakeData.IDRoom)
+    data.append("BedID", MistakeData.BedID)
+    data.append("IDSinhVien", MistakeData.IDSinhVien)
+    data.append("IDAccount", MistakeData.IDAccount);
+    $.ajax({
+        type: "PUT",
+        url: `${mistakeURL}/PutMistake?id=${id}`,
+        contentType: false,
+        processData: false,
+        data: data,
+        success: function () {
+
         },
-        method: 'PUT',
-        body: JSON.stringify(PostData),
+        error: function () {
+
+        }
     });
-    result = await result.json();
 }
 /*
 const MistakeData = {
@@ -32,7 +48,6 @@ const MistakeData = {
         }
 */
 async function postMistake(MistakeData) {
-    console.log(MistakeData);
     var data = new FormData()
     for (var i = 0; i < MistakeData.ImageDescription.length; i++) {
         data.append(MistakeData.ImageDescription[i].name, MistakeData.ImageDescription[i]);
