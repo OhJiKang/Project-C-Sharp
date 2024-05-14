@@ -1623,8 +1623,6 @@
     <Content Include="Areas\SinhVienTuQuan\Views\Shared\Layout2.cshtml" />
     <Content Include="Areas\SinhVienTuQuan\Views\web.config" />
     <Content Include="Areas\GiaoVien\Views\Default\QuanLyPhong.cshtml" />
-    <Content Include="Areas\GiaoVien\Views\Default\DanhSachHoaDonTheoThang.cshtml" />
-    <Content Include="Areas\GiaoVien\Views\Default\GhiLoiKTX.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\Mistake.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\Post.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\QuanLyMenu.cshtml" />
@@ -1653,7 +1651,8 @@
     <Content Include="Areas\admin\Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Areas\admin\Content\ckfinder\userfiles\.htaccess" />
     <Content Include="Areas\GiaoVien\Views\Default\DanhSachHoaDon.cshtml" />
-    <Content Include="Areas\GiaoVien\Views\Default\QuanLyHocPhi.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\GhiLoiKTX.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\DanhSachHoaDonTheoThang.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\layout.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
@@ -1689,11 +1688,9 @@
     <Content Include="Views\GiaoVien\ThemBaiViet.cshtml" />
     <Content Include="Views\GiaoVien\ChoosingRoom.cshtml" />
     <Content Include="Views\GiaoVien\RegisterPlace.cshtml" />
-    <Content Include="Views\SinhVien\Chat.cshtml" />
     <Content Include="Views\SinhVien\DangKyKyTucXa.cshtml" />
     <Content Include="Views\GiaoVien\DanhSachHopDong.cshtml" />
     <Content Include="Views\SinhVien\Index.cshtml" />
-    <Content Include="Views\SinhVien\QuanLyDon.cshtml" />
     <Content Include="Views\TrangChu\TrangChu.cshtml" />
     <Content Include="Views\GiaoVien\QuanLyMenu.cshtml" />
     <Content Include="Views\TrangChu\TinTuc.cshtml" />
@@ -1702,6 +1699,9 @@
     <Content Include="Views\SinhVienTuQuan\LichTrucTuan.cshtml" />
     <Content Include="Views\SinhVienTuQuan\DiemDanhKTX.cshtml" />
     <Content Include="Views\TrangChu\DoiMatKhau.cshtml" />
+    <Content Include="Views\SinhVien\DanhSachHoaDon.cshtml" />
+    <Content Include="Views\SinhVien\DanhSachHopDong.cshtml" />
+    <Content Include="Views\SinhVien\Mistake.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

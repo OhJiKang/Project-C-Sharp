@@ -29,5 +29,13 @@ namespace doanNet.Controllers
         {
             return View();
         }
+        public ActionResult DanhSachHoaDon()
+        {
+            return View();
+        }
+        public ActionResult QuanLyHocPhi()
+        {
+            return View();
+        }
     }
 }
