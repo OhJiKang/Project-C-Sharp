@@ -60,6 +60,28 @@ namespace doanNet.ApiControllers
                 return Json(new { Message = "Adding Failed!Error: " + ex, });
             }
         }
+
+        public IHttpActionResult AddingAccountGiaoVien([FromBody] AccountDTO Account)
+        {
+            var tempAccount = new Account();
+            tempAccount.IDTeacher = Account.IDTeacher;
+            tempAccount.Password = BCrypt.Net.BCrypt.HashPassword(Account.Password);
+            tempAccount.Available = 1;
+            tempAccount.AccountTypeID = 4;
+            tempAccount.DateBegin = DateTime.Now;
+            tempAccount.Hide = 0;
+            tempAccount.MSSV = Account.MSSV;
+            try
+            {
+                db.Accounts.Add(tempAccount);
+                db.SaveChangesAsync();
+                return Json(new { Message = "Data received successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Message = "Adding Failed!Error: " + ex, });
+            }
+        }
         [HttpPut]
         private bool EntityExists(int id)
         {

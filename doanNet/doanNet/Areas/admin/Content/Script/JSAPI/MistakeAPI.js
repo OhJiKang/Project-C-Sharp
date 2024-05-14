@@ -1,5 +1,16 @@
 ﻿const mistakeURL = `/api/mistake`
 
+async function getMisTakesBySinhVienID(id) {
+    let result = await fetch(`${mistakeURL}/getMisTakesBySinhVienID?IDSinhVien=${id}`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: 'GET',
+    });
+    result = await result.json();
+    return result;
+
+}
 async function putMistake(MistakeData, id) {
     let result = await fetch(`${mistakeURL}/PutMistake?id=${id}`, {
         headers: {

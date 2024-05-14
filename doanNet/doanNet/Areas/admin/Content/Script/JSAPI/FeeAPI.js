@@ -1,5 +1,15 @@
 ﻿const Feeurl = `/api/fee`
 
+async function getFeeBySinhVienID() {
+    let result = await fetch(`${Feeurl}/getFeesBySinhVienID?IDSinhVien=${id}`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: 'GET',
+    });
+    result = await result.json();
+    return result;
+}
 async function AnalysticFee() {
     let result = await fetch(`${Feeurl}/GetFeesByMonth`, {
         headers: {

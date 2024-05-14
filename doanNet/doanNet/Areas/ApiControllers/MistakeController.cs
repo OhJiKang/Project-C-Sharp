@@ -46,9 +46,9 @@ namespace doanNet.ApiControllers
             return db.Mistakes.Where(row => row.IDMistake == id).FirstOrDefault();
         }
 
-        public Mistake GetBySinhVien(int mssv)
+        public List<Mistake> getMisTakesBySinhVienID(int IDSinhVien)
         {
-            return db.Mistakes.Where(row => row.SinhVien.MSSV == mssv.ToString()).FirstOrDefault();
+            return db.Mistakes.Where(row => row.SinhVien.IDSinhVien == IDSinhVien).ToList();
         }
         /*
 const MistakeData = {

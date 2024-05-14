@@ -20,6 +20,7 @@ async function CheckingLogin(accountData) {
     });
     return result
 }
+
 async function getAccountByID(AccountID) {
     let result = await fetch(`${AccountURL}/GetByID?id=${AccountID}`, {
         headers: {

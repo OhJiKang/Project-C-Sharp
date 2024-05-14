@@ -32,9 +32,9 @@ namespace doanNet.ApiControllers
             return db.Contracts.Where(row => row.IDContract == id).FirstOrDefault();
         }
 
-        public Contract GetContractByIDSinhvien(int IDSinhVien)
+        public List<Contract> getContractsBySinhVienID(int IDSinhVien)
         {
-            return db.Contracts.Where(row => row.IDSinhVien == IDSinhVien).FirstOrDefault();
+            return db.Contracts.Where(row => row.IDSinhVien == IDSinhVien).ToList();
         }
         [HttpPut]
         public IHttpActionResult ApproveContract([FromBody] int ContractID)

@@ -25,7 +25,7 @@ namespace doanNet.Controllers
         {
             return View();
         }
-        public ActionResult Chat()
+        public ActionResult Mistake()
         {
             return View();
         }

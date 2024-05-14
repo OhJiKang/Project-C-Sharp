@@ -25,5 +25,12 @@
             </table>
 
         </div>
+    <script>
+        function formatVND(amount) {
+            var formattedAmount = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+
+            return formattedAmount;
+        }
+    </script>
     </div>
 

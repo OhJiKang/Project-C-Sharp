@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using doanNet.Controllers.DTO;
 using System.Data.Entity.Validation;
+using Microsoft.Ajax.Utilities;
 
 namespace doanNet.ApiControllers
 {
@@ -56,6 +57,13 @@ namespace doanNet.ApiControllers
         public List<Fee> GetFeeByRoomID(int roomid)
         {
             return db.Fees.Where(row => row.IDRoom == roomid).ToList();
+        }
+        public List<Fee> getFeeBySinhVienID(int sinhVienID)
+        {
+            var resultFee=new List<Fee>();
+            var DataSinhVien= db.SinhViens.Where(row => row.IDSinhVien == sinhVienID).FirstOrDefault();
+            List<Fee> feeList = db.Fees.Where(row => DataSinhVien.IDRoom == row.IDRoom).ToList();
+            return feeList;
         }
         public async Task<IHttpActionResult> AddingFee([FromBody] FeeDTO Fee)
         {

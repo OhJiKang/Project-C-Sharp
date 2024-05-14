@@ -1,5 +1,14 @@
 ﻿const ContractURL = `/api/contract`
-
+async function getContractBySinhVienID(id) {
+    let result = await fetch(`${ContractURL}/getContractsBySinhVienID?IDSinhVien=${id}`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: 'GET',
+    });
+    result = await result.json();
+    return result;
+}
 async function putContract(ContractData, id) {
     let result = await fetch(`${ContractURL}/PutContract?id=${id}`, {
         headers: {

@@ -8,6 +8,9 @@ namespace doanNet.Controllers.DTO
 {
     public class AccountDTO
     {
+
+        public int IDTeacher { get; set; }
+
         public int IDSinhVien { get; set; }
 
         public int AccountTypeID { get; set; }
