@@ -1352,6 +1352,7 @@
     <Content Include="Areas\admin\Content\Script\JSAPI\PostAPI.js" />
     <Content Include="Areas\admin\Content\Script\JSAPI\RoomAPI.js" />
     <Content Include="Areas\admin\Content\Script\JSAPI\SinhVienAPI.js" />
+    <Content Include="Content\CSS\Trangchu.css" />
     <Content Include="Content\upload\img\news\default.png" />
     <Content Include="Images\agreement.png" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -1718,7 +1719,6 @@
     <Folder Include="Areas\Content\" />
     <Folder Include="Areas\GiaoVien\Data\" />
     <Folder Include="Areas\SinhVienTuQuan\Data\" />
-    <Folder Include="Content\CSS\" />
     <Folder Include="Views\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>

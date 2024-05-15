@@ -1,4 +1,5 @@
-﻿using System;
+﻿using doanNet.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ namespace doanNet.Controllers
     public class TrangChuController : Controller
     {
         // GET: Home
+        KTXTDTUEntities2 db = new KTXTDTUEntities2();
         public ActionResult Index()
         {
             return View();
@@ -19,10 +21,18 @@ namespace doanNet.Controllers
         }
         public ActionResult HoatDong()
         {
+            var CategoryBridge = db.CategoryBridges.ToList();
+            ViewBag.CategoryBridge = CategoryBridge;
+            var Post = db.Posts.ToList();   
+            ViewBag.Post = Post;
             return View();
-        }
+        }   
         public ActionResult ThongBao()
         {
+            var CategoryBridge = db.CategoryBridges.ToList();
+            ViewBag.CategoryBridge = CategoryBridge;
+            var Post = db.Posts.ToList();
+            ViewBag.Post = Post;
             return View();
         }
         public ActionResult HuongDan()
@@ -35,6 +45,11 @@ namespace doanNet.Controllers
         }
         public ActionResult NoiQuy()
         {
+            var CategoryBridge = db.CategoryBridges.ToList();
+            ViewBag.CategoryBridge = CategoryBridge;
+            var Post = db.Posts.ToList();
+            ViewBag.Post = Post;
+       
             return View();
         }
         public ActionResult ChiTietBaiDang()
