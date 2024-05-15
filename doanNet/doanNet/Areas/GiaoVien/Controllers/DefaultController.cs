@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -119,6 +120,10 @@ namespace doanNet.Areas.GiaoVien.Controllers
             ViewBag.categoryBridges = categorybridge;
             return View();
         }
+        public ActionResult ReloadPost()
+        {
+            return RedirectToAction("Post");
+        }
         public ActionResult QuanLyMenu()
         {
             var Menus = db.Menus.ToList();
@@ -163,6 +168,16 @@ namespace doanNet.Areas.GiaoVien.Controllers
             ViewBag.SinhVienInfo = SinhVienInfo;
             ViewBag.MistakeInfo = MistakeInfo;
             ViewBag.RoomInfo = RoomInfo;
+
+            return View();
+        }
+        public ActionResult SuaBaiViet(int id)
+        {
+            var PostInfo = db.Posts.Where(row => id == row.IDPost).FirstOrDefault();
+            var CategoryInfo = db.CategoryBridges.Where(row=>row.IDPost==id).Select(e=> e.IDCategory).ToList();
+
+            ViewBag.CategoryInfo = CategoryInfo;
+            ViewBag.PostInfo = PostInfo;
 
             return View();
         }

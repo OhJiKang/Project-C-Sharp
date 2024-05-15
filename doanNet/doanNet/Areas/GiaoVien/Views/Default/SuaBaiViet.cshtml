@@ -1,5 +1,7 @@
-﻿@{
-    Layout = "~/Views/Shared/layoutteacher.cshtml";
+﻿
+@{
+    ViewBag.Title = "SuaBaiViet";
+    Layout = "~/Areas/GiaoVien/Views/Shared/layoutteacher.cshtml";
 }
 <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js" crossorigin="anonymous"></script>
@@ -8,18 +10,18 @@
 
 <div class='container_body_name_input_'>
     <label class='label_name_modifier base_label_inline'>Tựa đề bài post</label>
-    <input type='text' class='name_input_modifier secondary_input post_tittle_place' />
+    <input type='text' value="@ViewBag.PostInfo.PostTitle" class='name_input_modifier secondary_input post_tittle_place' />
 </div>
 <div class='container_body_address_input_'>
     <label class='label_name_modifier base_label_inline'>Meta</label>
-    <input type='text' class='name_input_modifier secondary_input meta_place' />
+    <input type='text' value="@ViewBag.PostInfo.Meta" class='name_input_modifier secondary_input meta_place' />
 </div>
 <div class='container_body_address_input_' style="display:flex;align-items:center">
     <label class='label_name_modifier base_label_inline' style="margin-right:24px;">Ảnh bìa</label>
     <label for="cover_image_upload">
-        <img src="~/Content/upload/img/news/default.png" class="img_update" style="width: 200px; height: 200px; padding: 20px; margin: auto" />
+        <img src="~/Content/upload/img/news/@ViewBag.PostInfo.PostImage" class="img_update" style="width: 200px; height: 200px; padding: 20px; margin: auto" />
     </label>
-    <input type="file" id="cover_image_upload" accept=".png,.jpg,.jpeg" value="~/Content/upload/img/news/default.png" style="outline:none;border:none;width:200px;height:200px;display:none" />
+    <input type="file" id="cover_image_upload" accept=".png,.jpg,.jpeg" style="outline:none;border:none;width:200px;height:200px;display:none" />
 </div>
 <script>
     const fileUpload = document.querySelector("#cover_image_upload");
@@ -125,6 +127,7 @@
 
         // Iterate over each checkbox
         checkboxes.forEach((checkbox) => {
+            console.log(checkbox.checked)
             // Check if the checkbox is checked
             if (checkbox.checked) {
                 // Get the sibling <span> element (category span) of the checked checkbox
@@ -258,7 +261,7 @@
             const oppositeColorForText = getOppositeColor(item.ColorChip);
             htmls += `<li class="category-checkbox-parents" style="text-decoration:none;display:flex;align-items:center;margin:4px 0">
                         <input onchange="handleCheckboxChange(this)" class="category-checkbox" type="checkbox" id=${item.IDCategory} />
-                        <span class="badge badge-pill badge-primary" style="color: ${oppositeColorForText};margin-left:12px;background-color:${item.ColorChip}"  id=${item.IDCategory}>${item.CategoryTitle}</span>
+                        <span class="badge badge-pill badge-primary" style="color: ${oppositeColorForText};margin-left:12px;background-color:${item.ColorChip}" id=${item.IDCategory}>${item.CategoryTitle}</span>
                     </li>`
         })
         $(".Category_Containter").append(htmls);
@@ -277,6 +280,7 @@
     }
     var ChoosingCategoryModal = document.getElementById('ModalChooseCategory')
     ChoosingCategoryModal.addEventListener('shown.bs.modal', async function () {
+        $(".Category_Containter").html("");
         await renderCategory();
         restoreCheckboxState();
     })
@@ -305,7 +309,17 @@
 
         return hexColor;
     }
+    $(document).ready(async () => {
+        const PostDetailInfo = "@Html.Raw(HttpUtility.JavaScriptStringEncode(ViewBag.PostInfo.PostDetail))";
 
+        CKEDITOR.instances["editor1"].setData(PostDetailInfo)
+        const CategoryInfo = JSON.parse('@Html.Raw(Json.Encode(@ViewBag.CategoryInfo))');
+        let NewCategoryInfo= CategoryInfo.map(String)
+        sessionStorage.setItem('selectedIds', JSON.stringify(NewCategoryInfo));
+        await renderCategory();
+        await restoreCheckboxState();
+        await getCheckedCategorySpans();
+    })
     // Function to convert HTML spans to CategoryDTO objects with hex color
     function convertSpansToCategoryDTO() {
         const tagContainer = document.getElementById('tagContainer');
@@ -364,7 +378,11 @@
             CategoryList: CategoryList,
             IDAccount: JSON.parse(sessionStorage.getItem("IDAccount"))
         }
-        console.log(CKEDITOR.instances.editor1.getData())
-        await postPost(PostDetail);
+        var PostID=parseInt(@ViewBag.PostInfo.IDPost)
+        await putPost(PostID,PostDetail);
+        sessionStorage.setItem("Reload-Post","1");
+        document.location.href="@Url.Action("ReloadPost", "Default")";
     })
 </script>
+
+

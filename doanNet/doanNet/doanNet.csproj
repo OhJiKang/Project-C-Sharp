@@ -1658,6 +1658,7 @@
     <Content Include="Areas\GiaoVien\Views\Default\GhiLoiKTX.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\DanhSachHoaDonTheoThang.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\SuaLoiKTX.cshtml" />
+    <Content Include="Areas\GiaoVien\Views\Default\SuaBaiViet.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\layout.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />

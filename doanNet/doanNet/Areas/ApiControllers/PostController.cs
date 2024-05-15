@@ -128,81 +128,79 @@ namespace doanNet.ApiControllers
         }
 
         [System.Web.Mvc.HttpPut]
-        public async Task<IHttpActionResult> PutPost(int? id, [FromBody] PostDTO Post)
+        public async Task<IHttpActionResult> PutPost(int id)
         {
 
             try
             {
-                var Postmodifier = db.Posts.Where(row => row.IDPost == id).FirstOrDefault();
-                Postmodifier.PostTitle = Post.PostTittle;
-                Postmodifier.PostDetail = Post.PostDetail;
-                Postmodifier.DateBegin = DateTime.Now;
-                Postmodifier.IDAccount = Post.IDAccount;
-                var oldCategories = db.CategoryBridges.Where(row => row.IDPost == id).ToList();
-               
-                // 1. Identify categories to hide in OldCategory:
-                var categoriesToHide = oldCategories
-                    .Where(oldCat => !Post.CategoryList.Any(newCat => newCat.IDCategory == oldCat.IDCategory))
-                    .ToList();
+                // Get form data from the request
+                HttpRequestBase request = new HttpContextWrapper(HttpContext.Current).Request;
+                var PostID = id;
+                var tempPost = db.Posts.Where(row=>row.IDPost==PostID).FirstOrDefault();
 
-                // 2. Update Hidden property:
-                foreach (var category in categoriesToHide)
+                // Handle file upload
+                HttpPostedFileBase image = request.Files["PostImage"];
+                if (image != null && image.ContentLength > 0)
                 {
-                    category.DateBegin= DateTime.Now;
-                    category.Hide = 1; // Set Hidden to true for categories not in NewCategory
+                    var serverFileName = $"{DateTime.Now.Ticks}_{Path.GetFileName(image.FileName)}";
+                    var uploadPath = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/upload/img/news"), serverFileName);
+                    image.SaveAs(uploadPath);
+                    tempPost.PostImage = serverFileName;
                 }
 
-                // 3. Identify new categories to add:
-                var categoriesToAdd = Post.CategoryList
-                    .Where(newCat => !oldCategories.Any(oldCat => oldCat.IDCategory == newCat.IDCategory))
-                    .ToList();
+                var PostDetail = request.Form["PostDetail"];
+                // Set other properties from form data
+                tempPost.PostTitle = request.Form["PostTitle"];
+                tempPost.PostDetail = PostDetail;
+                tempPost.DateBegin = DateTime.Now;
+                tempPost.Hide = 0;
+                tempPost.Meta = request.Form["Meta"];
 
-                // 4. Add new categories to database:
-                foreach (var category in categoriesToAdd)
-                {
-                    var tempCategory = new CategoryBridge();
-                    tempCategory.IDCategory = category.IDCategory;
-                    tempCategory.IDPost = Postmodifier.IDPost;
-                    tempCategory.DateBegin= DateTime.Now;
-                    tempCategory.Hide = 0;
-                    db.CategoryBridges.Add(tempCategory); // Use your database access method
-                }
+                // Save the post
+                await db.SaveChangesAsync();
 
-                // 5. Remove Hidden flag for categories in both lists:
-                foreach (var oldCat in oldCategories)
+
+                List<CategoryDTO> categories = JsonConvert.DeserializeObject<List<CategoryDTO>>(request.Form.GetValues("CategoryList")[0]);
+                // Add category bridges
+                db.CategoryBridges.RemoveRange(db.CategoryBridges.Where(x => x.IDPost == PostID));
+
+                await db.SaveChangesAsync();
+
+                if (categories != null)
                 {
-                    if (Post.CategoryList.Any(newCat => newCat.IDCategory == oldCat.IDCategory))
+
+                    foreach (var category in categories)
                     {
-                        oldCat.Hide = 0; // Set Hidden to false if category exists in both lists
-                    }
-                }
-                db.Entry(Postmodifier).State = EntityState.Modified;
-                try
-                {
-                    await db.SaveChangesAsync();
-                    return Json(new { Message = "Data received successfully!" });
-
-                }
-                catch (DbEntityValidationException e)
-                {
-                    string mes = "";
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        mes += $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:";
-
-                        foreach (var ve in eve.ValidationErrors)
+                        var tempCategory = new CategoryBridge
                         {
-                            mes += $"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"";
+                            IDCategory = category.IDCategory,
+                            IDPost = PostID,
+                            DateBegin = DateTime.Now,
+                            Hide = 0
+                        };
 
+                        db.CategoryBridges.Add(tempCategory);
+                        await db.SaveChangesAsync();
 
-                        }
                     }
-                    return Json(new { Message = mes });
                 }
+                return Json(new { Message = "Data received successfully!" });
             }
-            catch (Exception ex)
+            catch (DbEntityValidationException e)
             {
-                return Json(new { Message = "Adding Failed!Error: " + ex, });
+                string mes = "";
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    mes += $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:";
+
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        mes += $"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"";
+
+
+                    }
+                }
+                return Json(new { Message = mes });
             }
         }
         [System.Web.Mvc.HttpPut]

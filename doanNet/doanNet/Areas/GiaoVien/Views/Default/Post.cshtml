@@ -15,13 +15,20 @@
             <!-- Colored mini FAB button -->
             <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
                     style="background-color: #35d66c">
-                <i class="fa-solid fa-plus" style="margin: 10px"></i>
+                <a href="@Url.Action("ThemBaiViet","Default")">
+                    <i class="fa-solid fa-plus" style="margin: 10px"></i>
+                </a>
             </button>
         
         </div>
     </div>
+    <script>
+        $(document).ready(() => {
+            
+        })
+    </script>
     <div class="row">
-        <table class="table">
+        <table class="table" id="datatableform">
             <thead>
                 <tr style="background-color: darkblue; color: white">
                     <th scope="col">Tiêu đề</th>
@@ -64,7 +71,7 @@
                             @categoryString
                         </td>
                         <td>
-                            <a href="#">
+                            <a href="@Url.Action("SuaBaiViet", "Default", new {id = @item.IDPost})">
                                 <i class="fa-regular fa-pen-to-square" style="color: blue;"></i>
                             </a>
                         </td>

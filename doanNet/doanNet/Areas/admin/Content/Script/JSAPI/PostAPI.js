@@ -1,14 +1,26 @@
 ﻿const url = `/api/post`
 
-async function putPost(PostData, id) {
-    let result = await fetch(`${url}/PutPost?id=${id}`, {
-        headers: {
-            "Content-Type": "application/json"
+async function putPost(id,PostData) {
+    var data = new FormData()
+    data.append("PostTitle", PostData.PostTittle);
+    data.append("PostDetail", PostData.PostDetail)
+    data.append("meta", PostData.meta)
+    data.append("PostImage", PostData.PostImage)
+    data.append("CategoryList", JSON.stringify(PostData.CategoryList))
+    data.append("IDAccount", PostData.IDAccount);
+    $.ajax({
+        type: "PUT",
+        url: `${url}/PutPost?id=${id}`,
+        contentType: false,
+        processData: false,
+        data: data,
+        success: function () {
+
         },
-        method: 'PUT',
-        body: JSON.stringify(PostData),
+        error: function () {
+
+        }
     });
-    result = await result.json();
 }
 async function postPost(PostData) {
     var data = new FormData()
