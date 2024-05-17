@@ -10,187 +10,14 @@
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/SinhVienAPI.js")
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/RoomAPI.js")
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/ContractAPI.js")
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/PriorityAPI.js")
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/AccountAPI.js")
 <div class="container">
     <div class="row">
         <div class="col-12 text-center" style="padding:20px">
             <h2 style="font-weight: bold">DANH SÁCH HỢP ĐỒNG</h2>
         </div>
 
-    </div>
-    <div class="function_btn"
-         style=" display: flex;justify-content: end; margin-top: 8px; margin-bottom: 8px; margin-right: 32px;">
-        <div class="add_btn" style="margin: 10px">
-            <!-- Colored mini FAB button -->
-            <button onclick="showModal()"
-                    class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
-                    style="background-color: #35d66c">
-                <i class="fa-solid fa-plus" style="margin: 10px"></i>
-            </button>
-        </div>
-       
-    </div>
-    <div class="modal fade" id="ThemHopDong" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row align-items-center pt-4 pb-3">
-                        <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">MSSV</h6>
-                        </div>
-                        <div class="col-md-8 pe-5">
-                            <input type="text" class="form-control MSSV_Place" />
-                        </div>
-                        <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">Họ và Tên sinh viên</h6>
-                        </div>
-                        <div class="col-md-8 pe-5">
-                            <input type="text" class="form-control typing_name" disabled />
-                        </div>
-                        <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">Căn cước công dân</h6>
-                        </div>
-                        <div class="col-md-8 pe-5">
-                            <input type="text" class="form-control ID_Citizen_Place" />
-                        </div>
-                        <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">
-                                Hồ sơ ưu tiên đi kèm
-                            </h6>
-                        </div>
-                        <div class="col-md-8 pe-5">
-                            <select class="profile_place" id="profile_place" style="width: 100%">
-                                <option value="0" selected>Không</option>
-                                <option value="1">Có</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">
-
-                                Khu vực
-                            </h6>
-                        </div>
-                        <div class="col-md-8 pe-5">
-                            <select class="place_id" id="place_id" style="width: 100%">
-                                @foreach (var item in ViewBag.places)
-                                {
-                                    <option value="@item.IDPlace">@item.Description</option>
-                                }
-                            </select>
-
-                        </div>
-                        <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">
-                                Loại ưu tiên
-                            </h6>
-                        </div>
-                        <div class="col-md-8 pe-5">
-                            <select class="priority_place" id="priority_place" style="width: 100%">
-                                @foreach (var item in ViewBag.priorities)
-                                {
-                                    <option value="@item.IDPriority">@item.PriorityDescription</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">
-                                Ngày hết hạn hợp đồng
-                            </h6>
-                        </div>
-                        <div class="col-md-8 pe-5">
-                            <input type="date" class="form-control timeExpired-Place" />
-                        </div>
-                        <div class="col-md-4 ps-5">
-                            <h6 class="mb-0 font-weight-bold">
-                                Bản hợp đồng đính kèm
-                            </h6>
-                        </div>
-
-                        <div class="col-md-8 pe-5">
-                            <input type="file" accept=".pdf" class="form-control fileUploaded-Place" />
-                        </div>
-                        <div class="preview_place row" style="margin-top:24px">
-                            <div class="col-md-4 ps-5">
-                                <h6 class="mb-0 font-weight-bold">
-                                    Hình ảnh hợp đồng đính kèm
-                                </h6>
-                            </div>
-                            <div class="col-md-8 pe-5">
-                                <div id="pdfViewer">
-                                    <!-- Embedded PDF will be displayed here -->
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <script>
-
-                            $('.fileUploaded-Place').on('change', function (event) {
-                                event.preventDefault();
-
-                                var file = $('.fileUploaded-Place')[0].files[0];
-
-                                if (file) {
-                                    var reader = new FileReader();
-                                    reader.onload = function (e) {
-                                        $('#pdfViewer').html('<embed src="' + e.target.result + '" type="application/pdf" width="100%" height="600px" />');
-                                    };
-                                    reader.readAsDataURL(file);
-                                }
-                            })
-                        </script>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary submit_btn">Thêm hợp đồng</button>
-                </div>
-            </div>
-            <script>
-                function showModal() {
-                    var myModal = new bootstrap.Modal(document.getElementById('ThemHopDong'));
-                    myModal.show();
-                }
-                $(document).ready(() => {
-                    $(".MSSV_Place").blur(async () => {
-                        const mssv = $(".MSSV_Place").val();
-                        const SinhVienData = await findSinhVienByMSSV(mssv);
-                        if (SinhVienData) {
-                            $(".typing_name").val(SinhVienData.FullName);
-                            $(".typing_name").attr("id", SinhVienData["IDSinhVien"]);
-                        }
-                        else {
-                            $(".typing_name").val("Không tìm thấy sinh viên");
-                        }
-                    })
-                    /*
-                    
-                    */
-                    $(".submit_btn").click(() => {
-                        let ContractFile;
-                        if (!document.querySelector('.fileUploaded-Place').files[0]) {
-                            ContractFile = null;
-                        }
-                        else {
-                            ContractFile = $('.fileUploaded-Place')[0].files[0]
-                        }
-                        const ContractData = {
-                            IDSinhVien: $(".typing_name").attr("id"),
-                            IDCitizen: $(".ID_Citizen_Place").val(),
-                            ProfilePlace: $('.profile_place').val(),
-                            IDPlace: $('.place_id').val(),
-                            Description: ContractFile,
-                            TimeExpired: $(".timeExpired-Place").val(),
-                            IDPriority: $(".priority_place").val()
-                        }
-                        postContract(ContractData)
-                    })
-                })
-
-            </script>
-        </div>
     </div>
     <div class="row">
         <table class="table" id="datatableform">
@@ -209,94 +36,78 @@
                 </tr>
             </thead>
             <tbody>
-
-                @foreach (var item in ViewBag.contracts)
-                {
-                    var hoso = "";
-                    var tenSV = "";
-                    var kv = "";
-                    var ut = "";
-                    <tr>
-                        <th>@item.IDContract</th>
-                        <td>
-
-                            @foreach (var sinhvien in ViewBag.sinhviens)
-                            {
-                                if (sinhvien.IDSinhVien == item.IDSinhVien)
-                                {
-                                    tenSV = sinhvien.FullName;
-                                }
-                            }
-                            @tenSV
-                        </td>
-                        <td>@item.IDCitizen</td>
-                        <td>
-                            @if (item.ProfilePlace == 0)
-                            {
-                                hoso = "Không có";
-                            }
-                            else
-                            {
-                                hoso = "Có";
-                            }
-                            @hoso
-                        </td>
-                        <td>
-                            @foreach (var khuvuc in ViewBag.places)
-                            {
-                                if (khuvuc.IDPlace == item.IDPlace)
-                                {
-                                    kv = khuvuc.Description;
-                                }
-                            }
-                            @kv
-                        </td>
-                        <td>
-                            @foreach (var uutien in ViewBag.priorities)
-                            {
-                                if (uutien.IDPriority == item.IDPriority)
-                                {
-                                    ut = uutien.PriorityDescription;
-                                }
-                            }
-                            @ut
-                        </td>
-                        <td>@item.DateBegin</td>
-                        <td>
-                            @if (!item.xetduyet)
-                            {
-                                <button class="btn btn-outline-primary btn_approve" id="@item.IDContract" style="color: blue">
-                                    <i class="fa-regular fa-circle-check" style="color: blue;"></i> Duyệt
-                                </button>
-                            }
-                            else
-                            {
-                                <button class="btn btn-success" style="color: white;width:80px; font-size:13px" disabled>
-                                    Đã duyệt
-                                </button>
-
-                            }
-                        </td>
-                        <td>
-                            <i class="fa-regular fa-eye" style="color: blue;"></i>
-                        </td>
-                        <td>
-                            <i class="fa-regular fa-pen-to-square" style="color: blue;"></i>
-                        </td>
-                    </tr>
-                }
-
             </tbody>
-
         </table>
-        <script>
-            $(".btn_approve").click((event) => {
-                const idContract = event.target.id;
-                ApproveContract(idContract);
-                window.location.reload();
-            })
-        </script>
     </div>
+    <script>
+        $(document).ready(async () => {
+            function formatDateTime(datetimeString) {
+                var dateTime = new Date(datetimeString);
+                var formattedDate = dateTime.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                var formattedTime = dateTime.toLocaleTimeString('en-GB', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+                return formattedDate + ' ';
+            }
+            async function renderContractByStudent(ContractDataToRender) {
+                let htmls = ``
+                let table = new DataTable('#datatableform');
+                table.clear();
+
+                ContractDataToRender.forEach(async (contract) => {
+                    let PriorityInfo = await findPriorityById(contract.IDPriority);
+                    let SinhVienInfo = await findSinhVienById(contract.IDSinhVien)
+
+                    htmls = `
+                    <tr>
+                        <td>${contract.IDContract}</td>
+                        <td>${SinhVienInfo.FullName}</td>
+                        <td>${contract.IDCitizen}</td>
+                        <td>${contract.ProfilePlace == 0 ? 'Không có' : 'Có'}</td>
+                        <td>${contract.IDPlace}</td>
+                        <td>${PriorityInfo.PriorityDescription}</td>
+                        <td>${formatDateTime(contract.TimeExpired)}</td>
+                    </tr>`;
+                    table.row.add($(htmls).get(0));
+                    table.draw();
+                })
+                console.log(MistakeDataToRender)
+
+            };
+            /*$('#datatableform').DataTable({
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+
+            SELECT TOP (1000) [IDContract]
+      ,[IDCitizen]
+      ,[ProfilePlace]
+      ,[IDPlace]
+      ,[Order]
+      ,[Meta]
+      ,[DateBegin]
+      ,[Hide]
+      ,[IDPriority]
+      ,[Description]
+      ,[xetduyet]
+      ,[TimeExpired]
+      ,[IDSinhVien]
+  FROM [dbo].[Contract]
+
+            */
+
+            if (!sessionStorage.getItem("IDAccount")) {
+                window.location.href = "@Url.Action("DangNhapSinhVien", "TrangChu")"
+            }
+            else {
+                const IDAccount = sessionStorage.getItem("IDAccount")
+                let AccountInfo = await getAccountByID(IDAccount)
+                const IDSinhVien = AccountInfo.IDSinhVien
+                let ContractInfo = await getContractBySinhVienID(IDSinhVien);
+                renderContractByStudent(ContractInfo)
+            }
+        })
+    </script>
 </div>
 
 

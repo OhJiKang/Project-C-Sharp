@@ -17,6 +17,11 @@ namespace doanNet.ApiControllers
         {
             return db.Priorities.ToList();
         }
+
+        public Priority GetByPrioriryId(int id)
+        {
+            return db.Priorities.Where(row => row.IDPriority == id).FirstOrDefault();
+        }
         public Priority PostPriority(Priority priority) {
             db.Priorities.Add(priority);
             db.SaveChangesAsync();

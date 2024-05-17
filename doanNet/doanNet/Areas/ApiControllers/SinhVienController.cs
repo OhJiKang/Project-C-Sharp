@@ -3,6 +3,7 @@ using doanNet.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
@@ -28,7 +29,7 @@ namespace doanNet.ApiControllers
             return db.SinhViens.Where(row => row.IDSinhVien == id).FirstOrDefault();
         }
         [HttpGet]
-
+        
         public SinhVien GetByMSSV(string mssv)
         {
             return db.SinhViens.Where(row => row.MSSV == mssv).FirstOrDefault();
@@ -39,7 +40,6 @@ namespace doanNet.ApiControllers
         {
             return db.SinhViens.Where(row =>row.IDRoom==roomid).ToList();
         }
-
         [HttpPost]
         public IHttpActionResult AddingSinhVien([FromBody] SinhVien SinhVien)
         {

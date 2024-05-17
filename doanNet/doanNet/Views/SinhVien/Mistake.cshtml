@@ -15,16 +15,7 @@
             <h2 style="font-weight: bold">DANH SÁCH LỖI</h2>
         </div>
     </div>
-    <div class="function_btn" style="display: flex; justify-content: end; margin-top: 8px; margin-bottom: 8px; margin-right: 32px;">
-        <div class="add_btn" style="margin: 10px">
-            <!-- Colored mini FAB button -->
-            <script>
-                function redirectToPage(url) {
-                    window.location.href = url;
-                }
-            </script>
-        </div>
-    </div>
+   
     <div class="row">
         <table class="table" id="datatableform">
             <thead>
@@ -55,7 +46,7 @@
                 table.clear();
 
                 MistakeDataToRender.forEach(async (mistake) => {
-                    let RoomInfo = await findRoomById(mistake.IDRoom);
+                        let RoomInfo = await findRoomById(mistake.IDRoom);
                     htmls = `
                     <tr>
                         <td>${mistake[`$id`]}</td>
@@ -63,7 +54,7 @@
                         <td>${mistake.BedID}</td>
                         <td>${RoomInfo.Name}</td>
                         <td>${formatDateTime(mistake.TimeCaught)}</td>
-                    </tr>`;
+                    </tr>`; 
                     table.row.add($(htmls).get(0));
                     table.draw();
                 })

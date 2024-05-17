@@ -11,6 +11,7 @@ async function getAllSinhVienByRoom(roomid) {
     return result.json();
     
 }
+
 async function PostSinhVien(SinhVienData) {
     let result = await fetch(`${SinhVienURL}/AddingSinhVien`, {
         headers: {
@@ -20,7 +21,7 @@ async function PostSinhVien(SinhVienData) {
         body: JSON.stringify(SinhVienData),
     });
     result = await result.json();
-    console.log(result)
+    console.log(result) 
 }
 async function findSinhVienById(id) {
     let result = await fetch(`${SinhVienURL}/GetByID?id=${id}`, {

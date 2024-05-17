@@ -1258,6 +1258,7 @@
     <Content Include="Areas\admin\Content\ckfinder\skins\v1\uipanel.css" />
     <Content Include="Areas\admin\Content\ckfinder\translations.txt" />
     <Content Include="Areas\admin\Content\CSS\GiaoVien.css" />
+    <Content Include="Areas\admin\Content\Script\JSAPI\PriorityAPI.js" />
     <Content Include="Areas\admin\Content\Script\JSAPI\TrucCongAPI.js" />
     <Content Include="Areas\SinhVienTuQuan\Views\bin\Antlr3.Runtime.dll" />
     <Content Include="Areas\SinhVienTuQuan\Views\bin\Antlr3.Runtime.pdb" />
@@ -1696,7 +1697,6 @@
     <Content Include="Views\GiaoVien\RegisterPlace.cshtml" />
     <Content Include="Views\SinhVien\DangKyKyTucXa.cshtml" />
     <Content Include="Views\GiaoVien\DanhSachHopDong.cshtml" />
-    <Content Include="Views\SinhVien\Index.cshtml" />
     <Content Include="Views\TrangChu\TrangChu.cshtml" />
     <Content Include="Views\GiaoVien\QuanLyMenu.cshtml" />
     <Content Include="Views\TrangChu\TinTuc.cshtml" />
@@ -1705,7 +1705,7 @@
     <Content Include="Views\SinhVienTuQuan\LichTrucTuan.cshtml" />
     <Content Include="Views\SinhVienTuQuan\DiemDanhKTX.cshtml" />
     <Content Include="Views\TrangChu\DoiMatKhau.cshtml" />
-    <Content Include="Views\SinhVien\DanhSachHoaDon.cshtml" />
+    <Content Include="Views\SinhVien\DanhSachHoaDonTheoThang.cshtml" />
     <Content Include="Views\SinhVien\DanhSachHopDong.cshtml" />
     <Content Include="Views\SinhVien\Mistake.cshtml" />
     <None Include="Web.Debug.config">
