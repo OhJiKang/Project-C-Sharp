@@ -9,15 +9,32 @@ async function getContractBySinhVienID(id) {
     result = await result.json();
     return result;
 }
-async function putContract(ContractData, id) {
-    let result = await fetch(`${ContractURL}/PutContract?id=${id}`, {
-        headers: {
-            "Content-Type": "application/json"
+async function putContract(ContractData) {
+    var data = new FormData()
+    data.append("ContractID", ContractData.ContractID);
+    data.append("IDSinhVien", ContractData.IDSinhVien);
+    data.append("IDCitizen", ContractData.IDCitizen)
+    data.append("ProfilePlace", ContractData.ProfilePlace)
+    data.append("IDPlace", ContractData.IDPlace)
+    data.append("Description", ContractData.Description)
+    data.append("TimeExpired", ContractData.TimeExpired);
+    data.append("IDPriority", ContractData.IDPriority);
+    /*
+    ${ContractURL}/AddingContract
+    */
+    $.ajax({
+        type: "PUT",
+        url: `${ContractURL}/PutContract`,
+        contentType: false,
+        processData: false,
+        data: data,
+        success: function () {
+            window.location.reload();
         },
-        method: 'PUT',
-        body: JSON.stringify(ContractData),
+        error: function () {
+
+        }
     });
-    result = await result.json();
 }
 async function postContract(ContractData) {
     
@@ -54,6 +71,15 @@ async function GetContractByIDSinhvien(IDSinhVien) {
         method: 'GET',
     });
     result = await result.json();
+}
+async function GetContractById(IDContract) {
+    let result = await fetch(`${ContractURL}/GetByContractId?id=${IDContract}`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: 'GET',
+    });
+    return await result.json();
 }
 async function ApproveContract(ContractID) {
     let result = await fetch(`${ContractURL}/ApproveContract`, {

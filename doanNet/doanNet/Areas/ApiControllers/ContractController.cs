@@ -122,42 +122,60 @@ namespace doanNet.ApiControllers
             return db.Contracts.Any(e => e.IDContract == id);
         }
         [HttpPut]
-        public async Task<IHttpActionResult> PutContract(int? id,[FromBody] Contract Contract)
+        public async Task<IHttpActionResult> PutContract()
         {
+            HttpRequestBase request = new HttpContextWrapper(HttpContext.Current).Request;
 
+            var IDContract = Int32.Parse(request.Form["ContractID"]);
+            // Get form data from the request
+            var ContractModifier = db.Contracts.Where(row=>row.IDContract== IDContract).FirstOrDefault();
+
+            // Handle file upload
+            HttpPostedFileBase PDFFile = request.Files["Description"];
+            if (PDFFile != null && PDFFile.ContentLength > 0)
+            {
+                var serverFileName = $"{DateTime.Now.Ticks}_{Path.GetFileName(PDFFile.FileName)}";
+                var uploadPath = Path.Combine(HttpContext.Current.Server.MapPath("~/Areas/admin/Content/contract"), serverFileName);
+                PDFFile.SaveAs(uploadPath);
+                ContractModifier.Description = serverFileName;
+            }
+
+
+            // Set other properties from form data
+            ContractModifier.IDSinhVien = Int32.Parse(request.Form["IDSinhVien"]);
+            ContractModifier.IDCitizen = request.Form["IDCitizen"];
+            ContractModifier.IDPlace = request.Form["IDPlace"];
+            ContractModifier.ProfilePlace = Int32.Parse(request.Form["ProfilePlace"]);
+            ContractModifier.TimeExpired = DateTime.Parse(request.Form["TimeExpired"]);
+            ContractModifier.IDPriority = Int32.Parse(request.Form["IDPriority"]);
+            ContractModifier.xetduyet = false;
+            ContractModifier.DateBegin = DateTime.Now;
+            ContractModifier.Hide = 0;
+
+            // Save the post
             try
             {
-                var contractmodifier=db.Contracts.Where(row => row.IDContract == id).FirstOrDefault();
-                contractmodifier.IDCitizen = Contract.IDCitizen;
-                contractmodifier.IDPlace = Contract.IDPlace;
-                contractmodifier.ProfilePlace= Contract.ProfilePlace;
-                db.Entry(contractmodifier).State = EntityState.Modified;
-                try
-                {
-                    await db.SaveChangesAsync();
-                    return Json(new { Message = "Data received successfully!" });
-
-                }
-                catch (DbEntityValidationException e)
-                {
-                    string mes = "";
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        mes += $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:";
-
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            mes += $"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"";
-
-
-                        }
-                    }
-                    return Json(new { Message = mes });
-                }
+                await db.SaveChangesAsync();
+                return Json(new { Message = "Data received successfully!" });
             }
-            catch (Exception ex)
+            catch (DbEntityValidationException e)
             {
-                return Json(new { Message = "Adding Failed!Error: " + ex, });
+                string mes = "";
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    mes += $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:";
+
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        mes += $"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"";
+
+
+                    }
+
+
+                }
+
+                return Json(new { Message = mes });
             }
         }
         [HttpPut]
