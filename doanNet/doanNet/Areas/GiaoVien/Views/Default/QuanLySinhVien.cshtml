@@ -25,7 +25,6 @@
                     var myModal = new bootstrap.Modal(document.getElementById('ThemSinhVien'));
                     myModal.show();
                 }
-
             </script>
 
         </div>
@@ -91,8 +90,10 @@
                             </div>
                             <div class="col-md-8 pe-5">
                                 <select name="khoa" id="khoa" class="IDFalcuty-Place" style="width: 100%">
-                                    <option value="5">Công nghệ thông tin</option>
-                                    <option value="4">Ngôn ngữ Anh</option>
+                                    @foreach (var item in ViewBag.falcuties)
+                                    {
+                                        <option value="@item.IDFalcuty">@item.NameFalculty</option>
+                                    }
                                 </select>
                             </div>
                             <div class="col-md-4 ps-5">
@@ -216,8 +217,10 @@
                             </div>
                             <div class="col-md-8 pe-5">
                                 <select name="khoa" id="khoa" class="IDFalcuty-Place" style="width: 100%">
-                                    <option value="4">Ngôn ngữ Anh</option>
-                                    <option value="5">Công nghệ thông tin</option>
+                                    @foreach (var item in ViewBag.falcuties)
+                                    {
+                                        <option value="@item.IDFalcuty">@item.NameFalculty</option>
+                                    }
                                 </select>
                             </div>
                             <div class="col-md-4 ps-5">
@@ -288,7 +291,6 @@
                         <th scope="col">Thời gian vào KTX</th>
                         <th scope="col">Năm học</th>
                         <th scope="col">Khoa</th>
-                        <th scope="col">Mã số hợp đồng</th>
                         <th scope="col">Phòng</th>
                         <th scope="col"></th>
                     </tr>
@@ -317,7 +319,6 @@
                                 }
                                 @falcutiesName
                             </td>
-                            <td>@item.IDContract</td>
                             <td>
                                 @foreach (var room in ViewBag.rooms)
                                 {

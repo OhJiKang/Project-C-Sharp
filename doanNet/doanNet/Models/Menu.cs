@@ -19,5 +19,6 @@ namespace doanNet.Models
         public System.DateTime DateBegin { get; set; }
         public int Hide { get; set; }
         public string TextMenu { get; set; }
+        public Nullable<int> FatherID { get; set; }
     }
 }
