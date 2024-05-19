@@ -18,7 +18,7 @@ namespace doanNet.ApiControllers
             return db.Priorities.ToList();
         }
 
-        public Priority GetByPrioriryId(int id)
+        public Priority GetByPriorityId(int id)
         {
             return db.Priorities.Where(row => row.IDPriority == id).FirstOrDefault();
         }

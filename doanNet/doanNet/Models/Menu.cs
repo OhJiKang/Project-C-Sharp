@@ -20,5 +20,6 @@ namespace doanNet.Models
         public int Hide { get; set; }
         public string TextMenu { get; set; }
         public Nullable<int> FatherID { get; set; }
+        public List<Menu> Children { get; internal set; }
     }
 }

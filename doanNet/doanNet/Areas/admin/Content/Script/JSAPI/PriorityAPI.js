@@ -1,7 +1,7 @@
 const Priorityurl = `/api/priority`
 
 async function findPriorityById(id) {
-    let result = await fetch(`${Priorityurl}/GetByPrioriryId?IDPriority=${id}`, {
+    let result = await fetch(`${Priorityurl}/GetByPriorityId?id=${id}`, {
         headers: {
             "Content-Type": "application/json"
         },

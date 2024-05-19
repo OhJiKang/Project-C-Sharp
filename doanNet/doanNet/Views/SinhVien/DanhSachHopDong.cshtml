@@ -31,8 +31,6 @@
                     <th scope="col">Ưu tiên</th>
                     <th scope="col">Đăng ký vào lúc</th>
                     <th scope="col">Xét duyệt</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -56,7 +54,7 @@
                 ContractDataToRender.forEach(async (contract) => {
                     let PriorityInfo = await findPriorityById(contract.IDPriority);
                     let SinhVienInfo = await findSinhVienById(contract.IDSinhVien)
-
+                    console.log(PriorityInfo)
                     htmls = `
                     <tr>
                         <td>${contract.IDContract}</td>
@@ -64,38 +62,17 @@
                         <td>${contract.IDCitizen}</td>
                         <td>${contract.ProfilePlace == 0 ? 'Không có' : 'Có'}</td>
                         <td>${contract.IDPlace}</td>
-                        <td>${PriorityInfo.PriorityDescription}</td>
+                        <td>${contract.IDPriority}</td>
                         <td>${formatDateTime(contract.TimeExpired)}</td>
+                        <td>${contract.xetduyet == 0 ? '<button class="btn btn-outline-primary btn_approve" style="color: blue" <i class="fa-regular fa-circle-check" style="color: blue;"></i> Duyệt </button>' : '<button class="btn btn-success" style="color: white;width:80px; font-size:13px" disabled>Đã duyệt</button>'}</td>
                     </tr>`;
                     table.row.add($(htmls).get(0));
                     table.draw();
                 })
-                console.log(MistakeDataToRender)
+
 
             };
-            /*$('#datatableform').DataTable({
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
-            });
-
-            SELECT TOP (1000) [IDContract]
-      ,[IDCitizen]
-      ,[ProfilePlace]
-      ,[IDPlace]
-      ,[Order]
-      ,[Meta]
-      ,[DateBegin]
-      ,[Hide]
-      ,[IDPriority]
-      ,[Description]
-      ,[xetduyet]
-      ,[TimeExpired]
-      ,[IDSinhVien]
-  FROM [dbo].[Contract]
-
-            */
-
+            
             if (!sessionStorage.getItem("IDAccount")) {
                 window.location.href = "@Url.Action("DangNhapSinhVien", "TrangChu")"
             }

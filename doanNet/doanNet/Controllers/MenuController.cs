@@ -37,5 +37,6 @@ namespace doanNet.Controllers
             // Thực hiện các xử lý khác nếu cần
             return PartialView("GenerateMenu3");
            }
+
     }
 }
