@@ -17,7 +17,20 @@
         <div class="col-12 text-center" style="padding:20px">
             <h2 style="font-weight: bold">DANH SÁCH HỢP ĐỒNG</h2>
         </div>
+    </div>
+    <div class="filtering_place">
+            <input type="date" class="date_filtering_place"/>
+            <select class="status" id="status">
+                <option value="0" disabled selected>Trạng thái</option>
+                <option value="1"  >Đã duyệt</option>
+                <option value="2"  >Chưa duyệt</option>
 
+            </select>
+        <script>
+            $(document).ready(() => {
+                
+            })
+        </script>
     </div>
     <div class="row">
         <table class="table" id="datatableform">
@@ -64,7 +77,7 @@
                         <td>${contract.IDPlace}</td>
                         <td>${contract.IDPriority}</td>
                         <td>${formatDateTime(contract.TimeExpired)}</td>
-                        <td>${contract.xetduyet == 0 ? '<button class="btn btn-outline-primary btn_approve" style="color: blue" <i class="fa-regular fa-circle-check" style="color: blue;"></i> Duyệt </button>' : '<button class="btn btn-success" style="color: white;width:80px; font-size:13px" disabled>Đã duyệt</button>'}</td>
+                        <td>${contract.xetduyet == 0 ? `Đã duyệt` : `Chưa duyệt`}</td>
                     </tr>`;
                     table.row.add($(htmls).get(0));
                     table.draw();
@@ -72,7 +85,7 @@
 
 
             };
-            
+
             if (!sessionStorage.getItem("IDAccount")) {
                 window.location.href = "@Url.Action("DangNhapSinhVien", "TrangChu")"
             }
@@ -83,6 +96,45 @@
                 let ContractInfo = await getContractBySinhVienID(IDSinhVien);
                 renderContractByStudent(ContractInfo)
             }
+            
+
+            // Push the custom search function to the DataTables search array
+
+            $('.date_filtering_place').on('change', function (e) {
+                var dateVal = $(this).val();
+                var regex = /\b(\d{4})-(\d{2})-(\d{2})\b/;
+
+                // Check if the dateVal matches the regex pattern
+                var match = dateVal.match(regex);
+
+                if (match) {
+                    // Extract year, month, and day from the matched groups
+                    var year = match[1];
+                    var month = match[2];
+                    var day = match[3];
+
+                    // Construct the new date string in the DD-MM-YYYY format
+                    var newDateString = day + "/" + month + "/" + year;
+
+                } else {
+                    console.log("Invalid date format.");
+                }
+                //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
+                table.column(6).search(newDateString, true, false).draw();
+            })
+            $('.status').on('change', function (e) {
+                var statusval = $(this).val();
+                if (statusval == 1) {
+                    //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
+                    table.column(7).search("Đã duyệt").draw();
+
+                }
+                if (statusval == 2) {
+                    //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
+                    table.column(7).search("Chưa duyệt").draw();
+                }
+
+            })
         })
     </script>
 </div>
