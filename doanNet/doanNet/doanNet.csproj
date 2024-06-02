@@ -1688,6 +1688,10 @@
     <Content Include="Views\TrangChu\TrangChu.cshtml" />
     <Content Include="Views\TrangChu\TinTuc.cshtml" />
     <Content Include="Views\TrangChu\DoiMatKhau.cshtml" />
+    <Content Include="Views\SinhVien\DangKyKyTucXa.cshtml" />
+    <Content Include="Views\SinhVien\DanhSachHoaDonTheoThang.cshtml" />
+    <Content Include="Views\SinhVien\DanhSachHopDong.cshtml" />
+    <Content Include="Views\SinhVien\Mistake.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
