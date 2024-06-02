@@ -110,7 +110,7 @@
             </script>
 
         </div>
-        <table class="table" style="text-align: center">
+        <table class="table" id="datatableform" style="text-align: center">
             <thead>
                 <tr>
                     <th scope="col">MSSV</th>
@@ -127,63 +127,92 @@
                 {
                     var AccountTypeName = "";
                     var tenSV = "";
-                   <tr>
-                       <th>@item.MSSV</th>
-                       <td>@item.Password</td>
+                    <tr>
+                        <th>@item.MSSV</th>
+                        <td>@item.Password</td>
 
-                       <td>
+                        <td>
 
-                           @foreach (var sinhvien in ViewBag.sinhviens)
-                           {
-                               if (sinhvien.IDSinhVien == item.IDSinhVien)
-                               {
-                                   tenSV = sinhvien.FullName;
-                               }
-                           }
-                           @tenSV
-                       </td>
-                       <td>
-                           @foreach (var AccountType in ViewBag.AccountType)
-                           {
-                               if (item.AccountTypeID == AccountType.IDAccountType)
-                               {
-                                   AccountTypeName = AccountType.TypeDescription;
-                               }
-                           }
-                           @AccountTypeName
-                       </td>
-                       @if (item.Available == 0)
-                       {
-                           <td>
-                               Tài khoản chưa mở khóa
-                           </td>
-                       }
-                       else
-                       {
-                           <td>
-                               Tài khoản đã mở khóa
-                           </td>
-                       }
-                       @if (item.AccountTypeID == 5)
-                       {
-                           <td>
-                               <button class="btn btn-primary btn_approve" id="@item.AccountTypeID">
-                                   Nâng lên sinh viên tự quản
-                               </button>
-                           </td>
-                       }
-                       else
-                       {
-                           <td>
-                               <button class="btn btn-primary btn_approve" id="@item.AccountTypeID">
-                                   Trở về sinh viên thường
-                               </button>
+                            @foreach (var sinhvien in ViewBag.sinhviens)
+                            {
+                                if (sinhvien.IDSinhVien == item.IDSinhVien)
+                                {
+                                    tenSV = sinhvien.FullName;
+                                }
+                            }
+                            @tenSV
+                        </td>
+                        <td>
+                            @foreach (var AccountType in ViewBag.AccountType)
+                            {
+                                if (item.AccountTypeID == AccountType.IDAccountType)
+                                {
+                                    AccountTypeName = AccountType.TypeDescription;
+                                }
+                            }
+                            @AccountTypeName
+                        </td>
+                        @if (item.Available == 0)
+                        {
+                            <td>
+                                <i class="fa-solid fa-lock pointer-event" onclick="showModal()"></i>
+
                             </td>
-                               }
-                       </tr>
+                        }
+                        else
+                        {
+                            <td>
+                                <i class="fa-solid fa-lock-open pointer-event" onclick="showModal()"></i>
+                            </td>
+                        }
+                        @if (item.AccountTypeID == 6)
+                        {
+                            <td>
+                                <button class="btn btn_approve pointer-event" id="@item.AccountTypeID">
+                                   <img style="width:20px" src="~/Images/up-arrow.png" />
+                                </button>
+                            </td>
+                        }
+                        else if (item.AccountTypeID == 4)
+                        {
+                            <td>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <button class="btn btn_approve pointer-event" id="@item.AccountTypeID">
+                                    <img style="width:20px" src="~/Images/refresh.png" />
+                                </button>
+                            </td>
+                        }
+                    </tr>
                 }
-                
+
             </tbody>
         </table>
     </div>
 </div>
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Xác nhận</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn thay đổi tình trạng tài khoản này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="confirmChange">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function showModal() {
+        var myModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+        myModal.show();
+    }
+</script>

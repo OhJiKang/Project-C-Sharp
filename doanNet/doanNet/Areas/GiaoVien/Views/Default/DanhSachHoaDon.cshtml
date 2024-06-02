@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "DanhSachHoaDon";
     Layout = "~/Areas/GiaoVien/Views/Shared/layoutteacher.cshtml";
 }
@@ -11,6 +10,9 @@
 <div class="container">
     <div class="col-12 text-center" style="padding:20px">
         <h2 class="fw-bold">DANH SÁCH HÓA ĐƠN</h2>
+    </div>
+    <div class="filtering_place">
+        <input type="month" class="date_filtering_place" />
     </div>
     <div class="function_btn" style="display: flex; justify-content: end; margin-top: 8px; margin-bottom: 8px; margin-right: 32px;">
         <div class="add_btn" style="margin: 10px">
@@ -28,7 +30,6 @@
                     }
                     $(".add-fee-btn").click(showModal);
                 })
-                
             </script>
         </div>
     </div>
@@ -76,7 +77,7 @@
                             </h6>
                         </div>
                         <div class="col-md-8 pe-5">
-                            <input type="number" class="form-control Quantity_Place" min="1000"/>
+                            <input type="number" class="form-control Quantity_Place" min="1000" />
                         </div>
                         <div class="col-md-4 ps-5">
                             <h6 class="mb-0 font-weight-bold">Phòng thanh toán</h6>
@@ -95,32 +96,30 @@
                         <button type="button" class="btn btn-primary submit_btn">Xác nhận thanh toán</button>
                     </div>
                 </div>
-             </div>
             </div>
-        </div>
-
-        <div class="row">
-            <table class="table text-center" id="datatableform">
-                <thead>
-                    <tr>
-                        <th scope="col">Thời gian</th>
-                        <th scope="col">Số phòng</th>
-                        <th scope="col">Đã thanh toán</th>
-                        <th scope="col">Chưa thanh toán</th>
-                        <th scope="col">Tổng tiền</th>
-                        <th scope="col">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody class="table_fee_by_month">
-                </tbody>
-            </table>
-
         </div>
     </div>
 
+    <div class="row">
+        <table class="table text-center" id="datatableform">
+            <thead>
+                <tr>
+                    <th scope="col">Thời gian</th>
+                    <th scope="col">Số phòng</th>
+                    <th scope="col">Đã thanh toán</th>
+                    <th scope="col">Chưa thanh toán</th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody class="table_fee_by_month">
+            </tbody>
+        </table>
+
+    </div>
+</div>
 
 <script>
-    
     $(document).ready(() => {
         function redirectToPage(url) {
             window.location.href = url;
@@ -137,20 +136,19 @@
                 Quantity: $(".Quantity_Place").val(),
                 IDRoom: $(".Room_id").val(),
             }
-            await addingFee(FeeData)
+            await addingFee(FeeData);
             $('#ThemHoaDon').modal('hide');
             renderFeeByMonth();
-        })
+        });
         async function renderFeeByMonth() {
             let allFee = await AnalysticFee();
-            let htmls = ``
             let table = new DataTable('#datatableform');
             table.clear();
 
             allFee.forEach((value) => {
-                htmls = `
+                let html = `
                 <tr>
-                    <td>${value.Month}/${value.Year}</td>
+                    <td>${String(value.Month).padStart(2, '0')}/${value.Year}</td>
                     <td>${value.RoomCount}</td>
                     <td>${value.Completed}</td>
                     <td>${value.UnCompleted}</td>
@@ -161,16 +159,30 @@
                         </a>
                     </td>
                 </tr>`;
-            table.row.add($(htmls).get(0));
-            })
+                table.row.add($(html).get(0));
+            });
             table.draw();
         };
-        /*$('#datatableform').DataTable({
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });*/
         renderFeeByMonth();
-    })
 
+        $('.date_filtering_place').on('change', function (e) {
+            var dateVal = $(this).val();
+            var regex = /\b(\d{4})-(\d{2})\b/;
+            console.log('change')
+            // Check if the dateVal matches the regex pattern
+            var match = dateVal.match(regex);
+
+            if (match) {
+                // Extract year and month from the matched groups
+                var year = match[1];
+                var month = match[2];
+
+                // Construct the new date string in the MM/YYYY format
+                var newDateString = month + "/" + year;
+            } else {
+                console.log("Invalid date format.");
+            }
+            table.column(0).search(newDateString, true, false).draw();
+        });
+    });
 </script>

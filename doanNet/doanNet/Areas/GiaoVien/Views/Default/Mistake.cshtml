@@ -15,6 +15,9 @@
             <h2 style="font-weight: bold">DANH SÁCH LỖI</h2>
         </div>
     </div>
+    <div class="filtering_place">
+        <input type="date" class="date_filtering_place" />
+    </div>
     <div class="function_btn" style="display: flex; justify-content: end; margin-top: 8px; margin-bottom: 8px; margin-right: 32px;">
         <div class="add_btn" style="margin: 10px">
             <!-- Colored mini FAB button -->
@@ -45,6 +48,16 @@
                 </tr>
             </thead>
             <tbody>
+                @functions {
+                    // Define the formatDateTime function
+                    string formatDateTime(DateTime dateTime)
+                    {
+                        // Implement your logic here to format the datetime string
+                        // For example:
+
+                        return dateTime.ToString("dd/MM/yyyy");
+                    }
+                }
                 @{var number = 1; }
 
                 @foreach (var item in ViewBag.mistakes)
@@ -85,7 +98,7 @@
                             }
                             @tenphong
                         </td>
-                        <td>@item.TimeCaught</td>
+                        <td>@formatDateTime(item.TimeCaught)</td>
                         <td>
                             <a href="@Url.Action("SuaLoiKTX", "Default", new {id = @item.IDMistake})">
                                 <i class="fa-regular fa-pen-to-square" style="color: blue;"></i>
@@ -98,5 +111,28 @@
         </table>
     </div>
 </div>
+<script>
+    $('.date_filtering_place').on('change', function (e) {
+        var dateVal = $(this).val();
+        var regex = /\b(\d{4})-(\d{2})-(\d{2})\b/;
 
+        // Check if the dateVal matches the regex pattern
+        var match = dateVal.match(regex);
+
+        if (match) {
+            // Extract year, month, and day from the matched groups
+            var year = match[1];
+            var month = match[2];
+            var day = match[3];
+
+            // Construct the new date string in the DD-MM-YYYY format
+            var newDateString = day + "/" + month + "/" + year;
+
+        } else {
+            console.log("Invalid date format.");
+        }
+        //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
+        table.column(6).search(newDateString, true, false).draw();
+    })
+</script>
 

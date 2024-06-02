@@ -9,6 +9,17 @@
     <div class="col-12 text-center" style="padding:20px">
         <h2 style="font-weight: bold">QUẢN LÝ SINH VIÊN</h2>
     </div>
+    <select name="khoa" id="khoa">
+        <option value="0" disabled selected>Khoa</option>
+        @foreach (var Khoa in ViewBag.falcuties)
+        {
+
+            <option value="@Khoa.NameFalculty">@Khoa.NameFalculty</option>
+        }
+    </select>
+    <div class="filtering_place">
+        <input type="date" class="date_filtering_place" />
+    </div>
     <div class="row">
         <div class="function_btn"
              style=" display: flex;justify-content: end; margin-top: 8px; margin-bottom: 8px; margin-right: 32px;">
@@ -108,21 +119,21 @@
                                 const SinhVienData = JSON.parse(sessionStorage.getItem("StudentTempData"))
                                 if (SinhVienData && SinhVienData.RoomID) {
                                     const editHTML = `
-                                        <input type="text" value=${SinhVienData.RoomName} id=${SinhVienData.RoomID} style="width:20%;margin-top:0; margin-right:12px" class="form-control IDRoom-Place" readonly />
-                                        <div class="Choosing_Place">
-                                            <a href="#" class="Edit-Choosing-Btn">
-                                                <button type="button" class="btn btn-primary Choosing_Room">Chọn lại phòng</button>
-                                            </a>
-                                        </div>
-                                        `
+                                                                                                <input type="text" value=${SinhVienData.RoomName} id=${SinhVienData.RoomID} style="width:20%;margin-top:0; margin-right:12px" class="form-control IDRoom-Place" readonly />
+                                                                                                <div class="Choosing_Place">
+                                                                                                    <a href="#" class="Edit-Choosing-Btn">
+                                                                                                        <button type="button" class="btn btn-primary Choosing_Room">Chọn lại phòng</button>
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                                `
                                     $(".room-function-place").append(editHTML);
                                 }
                                 else {
                                     const ChoosingHTML = `
-                                        <a href="#">
-                                        <button type="button" class="btn btn-primary Choosing_Room">Chọn phòng</button>
-                                        </a>
-                                        `
+                                                                                                <a href="#">
+                                                                                                <button type="button" class="btn btn-primary Choosing_Room">Chọn phòng</button>
+                                                                                                </a>
+                                                                                                `
                                     $(".room-function-place").append(ChoosingHTML);
                                 }
                             </script>
@@ -296,6 +307,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @functions {
+                        // Define the formatDateTime function
+                        string formatDateTime(DateTime dateTime)
+                        {
+                            // Implement your logic here to format the datetime string
+                            // For example:
+
+                            return dateTime.ToString("dd/MM/yyyy");
+                        }
+                    }
                     @{var number = 1; }
                     @foreach (var item in ViewBag.sinhviens)
                     {
@@ -307,7 +328,7 @@
                             <td>@item.FullName</td>
                             <td>@item.Address</td>
                             <td>@MyHelper.FormatDate(item.BirthDay)</td>
-                            <td>@MyHelper.FormatDate(item.AttendDate)</td>
+                            <td>@formatDateTime(item.AttendDate)</td>
                             <td>@item.AttendYear - @item.GraduateYear</td>
                             <td>
                                 @foreach (var falcuty in ViewBag.falcuties)
@@ -451,5 +472,31 @@
             document.location.reload();
         }
         $(".confirm-change").click(changeStudent)
+    })
+    $('#khoa').on('change', function (e) {
+        var statusval = $(this).val();
+        table.column(7).search(statusval).draw();
+    })
+    $('.date_filtering_place').on('change', function (e) {
+        var dateVal = $(this).val();
+        var regex = /\b(\d{4})-(\d{2})-(\d{2})\b/;
+
+        // Check if the dateVal matches the regex pattern
+        var match = dateVal.match(regex);
+
+        if (match) {
+            // Extract year, month, and day from the matched groups
+            var year = match[1];
+            var month = match[2];
+            var day = match[3];
+
+            // Construct the new date string in the DD-MM-YYYY format
+            var newDateString = day + "/" + month + "/" + year;
+
+        } else {
+            console.log("Invalid date format.");
+        }
+        //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
+        table.column(5).search(newDateString, true, false).draw();
     })
 </script>

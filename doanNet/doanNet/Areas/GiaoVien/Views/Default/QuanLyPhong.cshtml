@@ -10,6 +10,30 @@
         <h2 style="font-weight: bold">QUẢN LÝ PHÒNG</h2>
     </div>
     <div class="row">
+        <div class="col-1">
+            <select name="tang" id="tang">
+                <option value="0" disabled selected>Tầng</option>
+                @foreach (var Floor in ViewBag.allFloor)
+                {
+
+                    <option value="@Floor">Tầng @Floor</option>
+                }
+            </select>
+        </div>
+        <div class="col-1">
+            <select name="toa" id="toa">
+                <option value="0" disabled selected>Toà</option>
+                @foreach (var Building in ViewBag.allFloor2)
+                {
+                    <option value="@Building">Toà @Building</option>
+                  
+                }
+            </select>
+        </div>
+    </div>
+  
+  
+    <div class="row">
         <div class="function_btn"
              style=" display: flex;justify-content: end; margin-top: 8px; margin-bottom: 8px; margin-right: 32px;">
             <div class="add_btn" style="margin: 10px">
@@ -38,10 +62,10 @@
 
                         <div class="row align-items-center pt-4 pb-3">
                             <div class="col-md-4 ps-5">
-                                <h6 class="mb-0 font-weight-bold">ID Phòng</h6>
+                                <h6 class="mb-0 font-weight-bold" hidden>ID Phòng</h6>
                             </div>
                             <div class="col-md-8 pe-5">
-                                <input type="text" class="form-control" disabled />
+                                <input type="text" class="form-control" hidden />
                             </div>
                             <div class="col-md-4 ps-5">
                                 <h6 class="mb-0 font-weight-bold">Tên phòng</h6>
@@ -96,7 +120,7 @@
 
 
         <div class="row">
-            <table class="table">
+            <table class="table" id="datatableform">
                 <thead>
                     <tr>
                         <th scope="col">ID phòng</th>
@@ -127,6 +151,15 @@
         </div>
     </div>
 </div>
-
+<script>
+    $('#tang').on('change', function (e) {
+        var statusval = $(this).val();
+        table.column(2).search(statusval).draw();
+    })
+    $('#toa').on('change', function (e) {
+        var statusval = $(this).val();
+        table.column(3).search(statusval).draw();
+    })
+</script>
 
 

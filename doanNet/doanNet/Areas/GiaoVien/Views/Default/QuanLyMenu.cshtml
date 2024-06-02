@@ -8,6 +8,13 @@
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/MenuAPI.js")
 
 <div class="container">
+    <div class="col-12 text-center" style="padding:20px">
+        <h2 class="fw-bold">DANH SÁCH HÓA ĐƠN</h2>
+    </div>
+    <div class="filtering_place">
+        <input type="date" class="date_filtering_place" />
+    </div>
+
     <div class="d-flex justify-content-end mb-3" style="padding: 20px;">
         <button style="background-color: darkblue; color: white; padding-right: 20px" onclick="showModal()">
             <i class="fa-solid fa-plus" style="padding: 10px;"></i> Tạo menu mới
@@ -81,7 +88,7 @@
         </div>
     </div>
     <div class="row" style="padding: 20px">
-        <table class="table">
+        <table class="table" id="datatableform">
             <thead>
                 <tr>
                     <th scope="col">Mã menu</th>
@@ -95,6 +102,16 @@
             <tbody>
                 @foreach (var item in ViewBag.Menus)
                 {
+                    @functions {
+                        // Define the formatDateTime function
+                        string formatDateTime(DateTime dateTime)
+                        {
+                            // Implement your logic here to format the datetime string
+                            // For example:
+
+                            return dateTime.ToString("dd/MM/yyyy");
+                        }
+                    }
                     var hide = "";
                     var FatherID = "";
 
@@ -102,17 +119,17 @@
                         <th>@item.Order</th>
                         <td>@item.Meta</td>
                         <td>@item.TextMenu</td>
-                        <td>@item.DateBegin</td>
+                        <td>@formatDateTime(item.DateBegin)</td>
                         <td>
                             @if (item.Order > 6)
                             {
-                                if (@item.Hide == 1)
+                                if (@item.Hide == 0)
                                 {
-                                    hide = "Hiện";
+                                    hide = "Ẩn";
                                 }
                                 else
                                 {
-                                    hide = "Ẩn";
+                                    hide = "Hiện";
                                 }
                                 @hide
                             }
@@ -143,5 +160,28 @@
         </table>
     </div>
 </div>
+<script>
+    $('.date_filtering_place').on('change', function (e) {
+        var dateVal = $(this).val();
+        var regex = /\b(\d{4})-(\d{2})-(\d{2})\b/;
 
+        // Check if the dateVal matches the regex pattern
+        var match = dateVal.match(regex);
+
+        if (match) {
+            // Extract year, month, and day from the matched groups
+            var year = match[1];
+            var month = match[2];
+            var day = match[3];
+
+            // Construct the new date string in the DD-MM-YYYY format
+            var newDateString = day + "/" + month + "/" + year;
+
+        } else {
+            console.log("Invalid date format.");
+        }
+        //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
+        table.column(3).search(newDateString, true, false).draw();
+    })
+</script>
 

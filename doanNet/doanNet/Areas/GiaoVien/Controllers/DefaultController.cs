@@ -130,9 +130,47 @@ namespace doanNet.Areas.GiaoVien.Controllers
             ViewBag.Menus = Menus;
             return View();
         }
-        public ActionResult QuanLyPhong() { 
+        public ActionResult QuanLyPhong(string tang) { 
             var rooms = db.Rooms.ToList();
             ViewBag.rooms = rooms;
+
+            if (tang == null)
+            {
+                var allFloor = db.Rooms
+                             .Select(e => e.Floor)
+                             .Distinct()
+                             .ToList();
+                var allFloor2 = db.Rooms
+                           .Select(e => e.Building)
+                           .Distinct()
+                           .ToList();
+                var RoomList = db.Rooms.ToList();
+                var SinhVienList = db.SinhViens.ToList();
+                ViewBag.RoomList = RoomList;
+                ViewBag.SinhVienList = SinhVienList;
+                ViewBag.allFloor = allFloor;
+                ViewBag.allFloor2 = allFloor2;
+                return View();
+            }
+            else
+            {
+                var allFloor = db.Rooms
+                            .Select(e => e.Floor)
+                            .Distinct()
+                            .ToList();
+                var allFloor2 = db.Rooms
+                            .Select(e => e.Building)
+                            .Distinct()
+                            .ToList();
+                var tangNum = Int32.Parse(tang);
+                var RoomList = db.Rooms.Where(row => row.Floor == tangNum).ToList();
+                var SinhVienList = db.SinhViens.ToList();
+                ViewBag.RoomList = RoomList;
+                ViewBag.SinhVienList = SinhVienList;
+                ViewBag.allFloor = allFloor;
+                ViewBag.allFloor2 = allFloor2;
+            }
+
             return View();
         }
         public ActionResult QuanLyTaiKhoan()
@@ -179,12 +217,6 @@ namespace doanNet.Areas.GiaoVien.Controllers
             ViewBag.CategoryInfo = CategoryInfo;
             ViewBag.PostInfo = PostInfo;
 
-            return View();
-        }
-        public ActionResult QuanLyHocPhi()
-        {
-            var sinhviens = db.SinhViens.ToList();
-            var fee = db.Fees.ToList();
             return View();
         }
     }

@@ -9,11 +9,21 @@
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/RoomAPI.js")
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/LogAPI.js")
 <link rel="stylesheet" type="text/css" href="~/Areas/admin/Content/CSS/GiaoVien.css">
+
 <div class="container">
     <div class="row">
         <div class="col-12 text-center" style="padding:20px">
             <h2 style="font-weight: bold">DANH SÁCH HOÁ ĐƠN THÁNG 3-2024</h2>
         </div>
+    </div>
+    <div class="filtering_place">
+        <input type="date" class="date_filtering_place" />
+        <select class="status" id="status">
+            <option value="0" disabled selected>Trạng thái</option>
+            <option value="1">Chưa thanh toán</option>
+            <option value="2">Đã thanh toán</option>
+        </select>
+
     </div>
     <div class="filtering_place">
         <select name="tang" id="tang">
@@ -114,6 +124,7 @@
             })
             myModal.show();
         }
+     
     </script>
     <div class="row">
         <table class="table" id="datatableform">
@@ -129,55 +140,72 @@
                     <th scope="col">Tình trạng thanh toán</th>
                 </tr>
             </thead>
+            
             <tbody>
+
                 @foreach (var item in ViewBag.Fees)
                 {
+                    @functions {
+                        // Define the formatDateTime function
+                        string formatDateTime(DateTime dateTime)
+                        {
+                            // Implement your logic here to format the datetime string
+                            // For example:
+
+                            return dateTime.ToString("dd/MM/yyyy");
+                        }
+                    }
+
                     var roomName = "";
-                    <tr>
-                        <th>
-                            @foreach (var room in ViewBag.rooms)
+                    var dateEnd = item.DateEnd;
+                <tr>
+                    <th>
+                        @foreach (var room in ViewBag.rooms)
+                        {
+                            if (room.IDRoom == item.IDRoom)
                             {
-                                if (room.IDRoom == item.IDRoom)
-                                {
-                                    roomName = room.Name;
-                                }
+                                roomName = room.Name;
                             }
-                            @roomName
-                        </th>
-                        <td>@item.Name</td>
-                        <td>@item.Description</td>
-                        <td>@MyHelper.FormatVND(@item.Quantity)</td>
-                        <td>@MyHelper.FormatDate(@item.DateStart)</td>
-                        <td>@MyHelper.FormatDate(@item.DateEnd)</td>
-                        <td style="text-align: center">
-                            @if (item.Status == 0)
-                            {
-                                <i class="fa-regular fa-square" onclick="showModelXacNhanThanhToan(@item.IDFee,`@item.Description`,`@roomName`)"></i>
+                        }
+                        @roomName
+                    </th>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
 
-                            }
-                            else
-                            {
-                                <i class="fa-regular fa-square-check"></i>
-                            }
+                    <td>@MyHelper.FormatVND(@item.Quantity)</td>
+                    <td>@item.DateStart</td>
+                    <td>@formatDateTime(item.DateEnd)</td>
 
-                        </td>
-                        <td>
-                            @if (item.Status == 0)
-                            {
-                                <ul id="paymentStatus" class="red-dots">
-                                    <li>Chưa thanh toán</li>
-                                </ul>
-                            }
-                            else
-                            {
-                                <ul id="paymentStatus" class="green-dots">
-                                    <li>Đã thanh toán</li>
-                                </ul>
-                            }
 
-                        </td>
+                    <td style="text-align: center">
+                        @if (item.Status == 0)
+                        {
+                            <i class="fa-regular fa-square" onclick="showModelXacNhanThanhToan(@item.IDFee,`@item.Description`,`@roomName`)"></i>
 
-                    </tr>
+                        }
+                        else
+                        {
+                            <i class="fa-regular fa-square-check"></i>
+                        }
+
+                    </td>
+                    <td>
+                        @if (item.Status == 0)
+                        {
+                            <ul id="paymentStatus" class="red-dots">
+                                <li>Chưa thanh toán</li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul id="paymentStatus" class="green-dots">
+                                <li>Đã thanh toán</li>
+                            </ul>
+                        }
+
+                    </td>
+
+                </tr>
                 }
 
 
@@ -251,7 +279,7 @@
             </div>
         </div>
         <div class="modal fade" id="HoaDon" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            
+
         </div>
 
 
@@ -273,4 +301,41 @@
             statusList.innerHTML = "<li>Chưa thanh toán</li>";
         }
     }
+
+    $('.date_filtering_place').on('change', function (e) {
+        var dateVal = $(this).val();
+        var regex = /\b(\d{4})-(\d{2})-(\d{2})\b/;
+
+        // Check if the dateVal matches the regex pattern
+        var match = dateVal.match(regex);
+
+        if (match) {
+            // Extract year, month, and day from the matched groups
+            var year = match[1];
+            var month = match[2];
+            var day = match[3];
+
+            // Construct the new date string in the DD-MM-YYYY format
+            var newDateString = day + "/" + month + "/" + year;
+
+        } else {
+            console.log("Invalid date format.");
+        }
+        //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
+        table.column(5).search(newDateString, true, false).draw();
+    })
+    $('.status').on('change', function (e) {
+        var statusval = $(this).val();
+        if (statusval == 1) {
+            //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
+            table.column(7).search("Chưa thanh toán").draw();
+
+        }
+        if (statusval == 2) {
+            //dataTable.column(6).search('\\s' + status + '\\s', true, false, true).draw();
+            table.column(7).search("Đã thanh toán").draw();
+        }
+
+    })
+
 </script>

@@ -1412,6 +1412,7 @@
     <Content Include="Images\parking.png" />
     <Content Include="Images\permission.png" />
     <Content Include="Images\profile.png" />
+    <Content Include="Images\refresh.png" />
     <Content Include="Images\regulation.png" />
     <Content Include="Images\reset-password.png" />
     <Content Include="Images\running.png" />
@@ -1426,6 +1427,7 @@
     <Content Include="Images\team.png" />
     <Content Include="Images\teamrules.png" />
     <Content Include="Images\tennis.png" />
+    <Content Include="Images\up-arrow.png" />
     <Content Include="Images\users.png" />
     <Content Include="Images\volleyball.png" />
     <Content Include="Images\working.png" />
@@ -1632,7 +1634,6 @@
     <Content Include="Areas\GiaoVien\Views\Default\Post.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\QuanLyMenu.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\QuanLyTaiKhoan.cshtml" />
-    <Content Include="Areas\GiaoVien\Views\Default\RegisterPlace.cshtml" />
     <Content Include="Areas\GiaoVien\Views\Default\ThemBaiViet.cshtml" />
     <Content Include="Areas\admin\Content\ckeditor\CHANGES.md" />
     <Content Include="Areas\admin\Content\ckeditor\LICENSE.md" />
@@ -1683,31 +1684,10 @@
     <Content Include="Views\TrangChu\DangNhap.cshtml" />
     <Content Include="Views\TrangChu\DangNhapGiaoVien.cshtml" />
     <Content Include="Views\TrangChu\DangNhapSinhVien.cshtml" />
-    <Content Include="Views\GiaoVien\GhiLoiKTX.cshtml" />
-    <Content Include="Views\GiaoVien\QuanLySinhVien.cshtml" />
-    <Content Include="Views\GiaoVien\DanhSachHoaDonTheoThang.cshtml" />
-    <Content Include="Views\GiaoVien\QuanLyPhong.cshtml" />
-    <Content Include="Views\GiaoVien\DanhSachHoaDon.cshtml" />
-    <Content Include="Views\GiaoVien\QuanLyTaiKhoan.cshtml" />
     <None Include="Views\Shared\layoutteacher.cshtml" />
-    <Content Include="Views\GiaoVien\Mistake.cshtml" />
-    <Content Include="Views\GiaoVien\Post.cshtml" />
-    <Content Include="Views\GiaoVien\ThemBaiViet.cshtml" />
-    <Content Include="Views\GiaoVien\ChoosingRoom.cshtml" />
-    <Content Include="Views\GiaoVien\RegisterPlace.cshtml" />
-    <Content Include="Views\SinhVien\DangKyKyTucXa.cshtml" />
-    <Content Include="Views\GiaoVien\DanhSachHopDong.cshtml" />
     <Content Include="Views\TrangChu\TrangChu.cshtml" />
-    <Content Include="Views\GiaoVien\QuanLyMenu.cshtml" />
     <Content Include="Views\TrangChu\TinTuc.cshtml" />
-    <Content Include="Views\SinhVienTuQuan\DangKyLichGacCong.cshtml" />
-    <Content Include="Views\SinhVienTuQuan\GhiLoiKTX.cshtml" />
-    <Content Include="Views\SinhVienTuQuan\LichTrucTuan.cshtml" />
-    <Content Include="Views\SinhVienTuQuan\DiemDanhKTX.cshtml" />
     <Content Include="Views\TrangChu\DoiMatKhau.cshtml" />
-    <Content Include="Views\SinhVien\DanhSachHoaDonTheoThang.cshtml" />
-    <Content Include="Views\SinhVien\DanhSachHopDong.cshtml" />
-    <Content Include="Views\SinhVien\Mistake.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
