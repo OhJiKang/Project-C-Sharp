@@ -95,14 +95,14 @@
              style=" display: flex;justify-content: end; margin-top: 8px; margin-bottom: 8px; margin-right: 32px;">
             <div class="add_btn" style="margin: 10px">
                 <!-- Colored mini FAB button -->
-                <button onclick="showModal()"
+                <button onclick="showModalAdding()"
                         class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
                         style="background-color: #35d66c">
                     <i class="fa-solid fa-plus" style="margin: 10px"></i>
                 </button>
             </div>
             <script>
-                function showModal() {
+                function showModalAdding() {
                     var myModal = new bootstrap.Modal(document.getElementById('AddingAccount'));
                     myModal.show();
                 }
@@ -152,23 +152,23 @@
                             }
                             @AccountTypeName
                         </td>
-                        @if (item.Available == 0)
+                        @if (item.Hide == 0)
                         {
                             <td>
-                                <i class="fa-solid fa-lock pointer-event" onclick="showModal()"></i>
+                                <i class="fa-solid fa-lock pointer-event" id="@item.IDAccount" onclick="showModal(this.id)"></i>
 
                             </td>
                         }
                         else
                         {
                             <td>
-                                <i class="fa-solid fa-lock-open pointer-event" onclick="showModal()"></i>
+                                <i class="fa-solid fa-lock-open pointer-event"  id="@item.IDAccount" onclick="showModal(this.id)"></i>
                             </td>
                         }
                         @if (item.AccountTypeID == 6)
                         {
                             <td>
-                                <button class="btn btn_approve pointer-event" id="@item.AccountTypeID">
+                                <button class="btn btn_approve pointer-event upgrade_account"  id="@item.AccountTypeID">
                                    <img style="width:20px" src="~/Images/up-arrow.png" />
                                 </button>
                             </td>
@@ -205,14 +205,27 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary" id="confirmChange">Xác nhận</button>
+                <button type="button" class="btn btn-primary changing_status_btn" id="confirmChange">Xác nhận</button>
             </div>
         </div>
     </div>
 </div>
 <script>
-    function showModal() {
+    var BtnStatusClicked=0;
+    function showModal(id) {
         var myModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+        BtnStatusClicked=id
         myModal.show();
     }
+    $(".upgrade_account").click(async function (){
+        var IDAccount = $(this).attr("id");
+        await promotedAccountByAccountID(IDAccount);
+        window.location.reload();
+    })
+    $(".changing_status_btn").click(async function () {
+        var IDAccount = BtnStatusClicked;
+        await changingStatus(IDAccount);
+        window.location.reload();
+
+    })
 </script>

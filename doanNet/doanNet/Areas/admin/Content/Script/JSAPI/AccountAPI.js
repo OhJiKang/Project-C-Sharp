@@ -31,3 +31,23 @@ async function getAccountByID(AccountID) {
     return result.json();
 }
 
+async function promotedAccountByAccountID(AccountID) {
+    let result = await fetch(`${AccountURL}/PromotingAccountType?id=${AccountID}`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: 'PUT',
+    });
+    return result.json();
+}
+async function changingStatus(AccountID) {
+    let result = await fetch(`${AccountURL}/ChangingStatus?id=${AccountID}`, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: 'PUT',
+    });
+    return result.json();
+}
+
+

@@ -96,7 +96,10 @@
                                     let response = await CheckingLogin(loginData);
                                     if (response.status == 200) {
                                         const AccountDetail = await response.json();
-
+                                        if (AccountDetail.Hide == 1) {
+                                            alert("Tài khoản sinh viên đã bị khóa");
+                                            return;
+                                        }
                                         if (AccountDetail) {
                                             sessionStorage.setItem("IDAccount", AccountDetail.IDAccount)
                                             if (AccountDetail.AccountTypeID == 6) {

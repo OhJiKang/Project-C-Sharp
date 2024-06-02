@@ -176,7 +176,7 @@ namespace doanNet.Areas.GiaoVien.Controllers
         public ActionResult QuanLyTaiKhoan()
         {
             var sinhviens = db.SinhViens.ToList();
-            var Account = db.Accounts.ToList();
+            var Account = db.Accounts.Where(row=>row.AccountTypeID!=4).ToList();
 
             var falcuties = db.Faculties.ToList();
             ViewBag.falcuties = falcuties;

@@ -111,9 +111,18 @@ namespace doanNet.ApiControllers
         public IHttpActionResult PromotingAccountType(int id)
         {
             Account AccountNeedToChange = db.Accounts.Where(row => row.IDAccount == id).FirstOrDefault();
-            AccountNeedToChange.AccountTypeID = 2;
+            AccountNeedToChange.AccountTypeID = 5;
             db.SaveChangesAsync();
             return Json(new { Message = "Promoting Succesfully!" });
+        }
+        
+        [HttpPut]
+        public IHttpActionResult ChangingStatus(int id)
+        {
+            Account AccountNeedToChange = db.Accounts.Where(row => row.IDAccount == id).FirstOrDefault();
+            AccountNeedToChange.Hide = AccountNeedToChange.Hide==0?1:0;
+            db.SaveChangesAsync();
+            return Json(new { Message = "Changing Status Succesfully!" });
         }
     }
 }
