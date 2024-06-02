@@ -50,7 +50,7 @@ async function changingStatus(AccountID) {
     return result.json();
 }
 async function changingPassword(AccountID,Password) {
-    let result = await fetch(`${AccountURL}/ChangingStatus?id=${AccountID}&password=${Password}`, {
+    let result = await fetch(`${AccountURL}/ChangingPassword?id=${AccountID}&password=${Password}`, {
         headers: {
             "Content-Type": "application/json"
         },
