@@ -9,24 +9,24 @@ using System.Web.Mvc;
 
 namespace doanNet.Areas.GiaoVien.Controllers
 {
-    public class DefaultController : Controller
+    public class QuanLyController : Controller
     {
         KTXTDTUEntities2 db = new KTXTDTUEntities2();
         // GET: GiaoVien/Default
         public ActionResult ChoosingRoom()
         {
             var rooms = db.Rooms.ToList();
-            var ArrNumOfStudent =new List<int>();
-            foreach(var room in rooms)
+            var ArrNumOfStudent = new List<int>();
+            foreach (var room in rooms)
             {
-                int NumberStudentOfRoom=db.SinhViens.Where(row=>row.IDRoom==room.IDRoom).Count(); ;
+                int NumberStudentOfRoom = db.SinhViens.Where(row => row.IDRoom == room.IDRoom).Count(); ;
                 ArrNumOfStudent.Add(NumberStudentOfRoom);
             }
             ViewBag.ArrNumOfStudent = ArrNumOfStudent;
             ViewBag.rooms = rooms;
             return View();
         }
-        public ActionResult QuanLySinhVien()
+        public ActionResult SinhVien()
         {
             var sinhviens = db.SinhViens.ToList();
             var falcuties = db.Faculties.ToList();
@@ -96,7 +96,7 @@ namespace doanNet.Areas.GiaoVien.Controllers
         {
             return View();
         }
-        public ActionResult Mistake()
+        public ActionResult Loi()
         {
             var mistake = db.Mistakes.ToList();
             ViewBag.mistakes=mistake;
@@ -108,7 +108,7 @@ namespace doanNet.Areas.GiaoVien.Controllers
             ViewBag.rooms=rooms;
             return View();
         }
-        public ActionResult Post()
+        public ActionResult BaiViet()
         {
             var posts = db.Posts.ToList();
             ViewBag.posts=posts;
@@ -122,15 +122,15 @@ namespace doanNet.Areas.GiaoVien.Controllers
         }
         public ActionResult ReloadPost()
         {
-            return RedirectToAction("Post");
+            return RedirectToAction("BaiViet");
         }
-        public ActionResult QuanLyMenu()
+        public ActionResult Menu()
         {
             var Menus = db.Menus.ToList();
             ViewBag.Menus = Menus;
             return View();
         }
-        public ActionResult QuanLyPhong(string tang) { 
+        public ActionResult Phong(string tang) { 
             var rooms = db.Rooms.ToList();
             ViewBag.rooms = rooms;
 
@@ -173,7 +173,7 @@ namespace doanNet.Areas.GiaoVien.Controllers
 
             return View();
         }
-        public ActionResult QuanLyTaiKhoan()
+        public ActionResult TaiKhoan()
         {
             var sinhviens = db.SinhViens.ToList();
             var Account = db.Accounts.Where(row=>row.AccountTypeID!=4).ToList();
@@ -185,10 +185,6 @@ namespace doanNet.Areas.GiaoVien.Controllers
             ViewBag.AccountType = AccountType;
             ViewBag.Account = Account;
 
-            return View();
-        }
-        public ActionResult RegisterPlace()
-        {
             return View();
         }
         public ActionResult ThemBaiViet()

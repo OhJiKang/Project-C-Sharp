@@ -21,7 +21,7 @@
     <div class="function_btn" style="display: flex; justify-content: end; margin-top: 8px; margin-bottom: 8px; margin-right: 32px;">
         <div class="add_btn" style="margin: 10px">
             <!-- Colored mini FAB button -->
-            <button onclick="redirectToPage('/GiaoVien/Default/GhiLoiKTX')"
+            <button onclick="redirectToPage('/GiaoVien/QuanLy/GhiLoiKTX')"
                     class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
                     style="background-color: #35d66c">
                 <i class="fa-solid fa-plus" style="margin: 10px"></i>
@@ -100,7 +100,7 @@
                         </td>
                         <td>@formatDateTime(item.TimeCaught)</td>
                         <td>
-                            <a href="@Url.Action("SuaLoiKTX", "Default", new {id = @item.IDMistake})">
+                            <a href="@Url.Action("SuaLoiKTX", "QuanLy", new {id = @item.IDMistake})">
                                 <i class="fa-regular fa-pen-to-square" style="color: blue;"></i>
                             </a>
                         </td>

@@ -161,7 +161,7 @@
                         MSSV: $(".MSSV-Place").val(),
                         IDFalcuty: $(".IDFalcuty-Place").val(),
                     }
-                hrefChoosingRoom='@Url.Action("ChoosingRoom", "Default")';
+                hrefChoosingRoom='@Url.Action("ChoosingRoom", "QuanLy")';
                 window.sessionStorage.setItem("StudentTempData", JSON.stringify(SinhVienData));
                 window.location.href = hrefChoosingRoom;
             })
@@ -269,7 +269,7 @@
                      MSSV: $("#EditSinhVien .MSSV-Place").val(),
                      IDFalcuty: $("#EditSinhVien .IDFalcuty-Place").val(),
                     }
-                hrefChoosingRoom='@Url.Action("ChoosingRoom", "Default")';
+                hrefChoosingRoom='@Url.Action("ChoosingRoom", "QuanLy")';
                 window.sessionStorage.setItem("StudentTempDataEdit", JSON.stringify(SinhVienData));
                 window.location.href = hrefChoosingRoom;
             })
@@ -285,7 +285,7 @@
                         MSSV: $(".MSSV-Place").val(),
                         IDFalcuty: $(".IDFalcuty-Place").val(),
                     }
-                hrefChoosingRoom='@Url.Action("ChoosingRoom", "Default")';
+                hrefChoosingRoom='@Url.Action("ChoosingRoom", "QuanLy")';
                 window.sessionStorage.setItem("StudentTempData", JSON.stringify(SinhVienData));
                 window.location.href = hrefChoosingRoom;
             })

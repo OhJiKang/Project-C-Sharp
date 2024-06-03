@@ -1,60 +1,11 @@
 ﻿
 @{
     ViewBag.Title = "GhiLoiKTX";
-    Layout = "~/Views/Shared/layout2.cshtml";
+    Layout = "~/Views/Shared/layoutteacher.cshtml";
 }
 <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js" crossorigin="anonymous"></script>
 <link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" rel="stylesheet">
-<style>
-    .imagePreview {
-        width: 100%;
-        height: 180px;
-        background-position: center center;
-        background: url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
-        background-color: #fff;
-        background-size: cover;
-        background-repeat: no-repeat;
-        display: inline-block;
-        box-shadow: 0px -3px 6px 2px rgba(0,0,0,0.2);
-    }
-
-    .btn-primary {
-        display: block;
-        border-radius: 0px;
-        box-shadow: 0px 4px 6px 2px rgba(0,0,0,0.2);
-        margin-top: -5px;
-    }
-
-    .imgUp {
-        margin-bottom: 15px;
-    }
-
-    .del {
-        position: absolute;
-        top: 0px;
-        right: 15px;
-        width: 30px;
-        height: 30px;
-        text-align: center;
-        line-height: 30px;
-        background-color: rgba(255,255,255,0.6);
-        cursor: pointer;
-    }
-
-    .imgAdd {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: #4bd7ef;
-        color: #fff;
-        text-align: center;
-        line-height: 30px;
-        margin-top: 0px;
-        cursor: pointer;
-        font-size: 15px;
-    }
-</style>
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/SinhVienAPI.js")
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/RoomAPI.js")
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/MistakeAPI.js")

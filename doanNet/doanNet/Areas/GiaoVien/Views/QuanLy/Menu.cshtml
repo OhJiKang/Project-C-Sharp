@@ -9,25 +9,26 @@
 
 <div class="container">
     <div class="col-12 text-center" style="padding:20px">
-        <h2 class="fw-bold">DANH SÁCH HÓA ĐƠN</h2>
+        <h2 class="fw-bold">DANH SÁCH MENU</h2>
     </div>
     <div class="filtering_place">
         <input type="date" class="date_filtering_place" />
     </div>
 
     <div class="d-flex justify-content-end mb-3" style="padding: 20px;">
-        <button style="background-color: darkblue; color: white; padding-right: 20px" onclick="showModal()">
-            <i class="fa-solid fa-plus" style="padding: 10px;"></i> Tạo menu mới
+        <button onclick="showModal()" class="add-menu-btn" style="background-color: darkblue; color: white; padding-right: 20px" >
+            <i class="fa-solid fa-plus " style="padding: 10px;"></i> Tạo menu mới
         </button>
 
     </div>
     <script>
-        // Hàm hiển thị modal
-        function showModal() {
-            var myModal = new bootstrap.Modal(document.getElementById('taomenu'));
-            myModal.show();
-        }
-
+        $(document).ready(() => {
+            function showModal() {
+                var myModal = new bootstrap.Modal(document.getElementById('taomenu'));
+                myModal.show();
+            }
+            $(".add-menu-btn").click(showModal);
+        })
     </script>
     <div class="modal fade" id="taomenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

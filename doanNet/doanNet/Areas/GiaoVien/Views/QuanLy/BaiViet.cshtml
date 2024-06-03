@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 text-center" style="padding:20px">
-            <h2 style="font-weight: bold">DANH SÁCH BÀI ĐĂNG</h2>
+            <h2 style="font-weight: bold">DANH SÁCH BÀI VIẾT</h2>
         </div>
     </div>
     <div class="filtering_place">
@@ -18,7 +18,7 @@
             <!-- Colored mini FAB button -->
             <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
                     style="background-color: #35d66c">
-                <a href="@Url.Action("ThemBaiViet","Default")">
+                <a href="@Url.Action("ThemBaiViet","QuanLy")">
                     <i class="fa-solid fa-plus" style="margin: 10px"></i>
                 </a>
             </button>
@@ -102,7 +102,7 @@
                             }
                         </td>
                         <td>
-                            <a href="@Url.Action("SuaBaiViet", "Default", new {id = @item.IDPost})">
+                            <a href="@Url.Action("SuaBaiViet", "QuanLy", new {id = @item.IDPost})">
                                 <i class="fa-regular fa-pen-to-square" style="color: blue;"></i>
                             </a>
                         </td>

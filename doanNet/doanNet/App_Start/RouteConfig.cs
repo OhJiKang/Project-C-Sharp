@@ -25,7 +25,6 @@ namespace doanNet
                 namespaces: new[] { "doanNet.Controllers" }
 
             );
-
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿@{
     ViewBag.Title = "DanhSachHoaDon";
-    Layout = "~/Areas/GiaoVien/Views/Shared/layoutteacher.cshtml";
+    Layout = "~/Views/Shared/layoutteacher.cshtml";
 }
-<link rel="stylesheet" type="text/css" href="~/Areas/admin/Content/CSS/GiaoVien.css">
+
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/SinhVienAPI.js")
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/FeeAPI.js")
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/RoomAPI.js")
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/LogAPI.js")
+<link rel="stylesheet" type="text/css" href="~/Areas/admin/Content/CSS/GiaoVien.css">
 <div class="container">
     <div class="col-12 text-center" style="padding:20px">
         <h2 class="fw-bold">DANH SÁCH HÓA ĐƠN</h2>
@@ -93,7 +94,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary submit_btn">Xác nhận thanh toán</button>
+                        <button type="button" class="btn btn-primary submit_btn">Thêm hoá đơn</button>
                     </div>
                 </div>
             </div>
@@ -154,7 +155,7 @@
                     <td>${value.UnCompleted}</td>
                     <td>${formatToVND(value.TotalQuantity)}</td>
                     <td>
-                        <a href="/GiaoVien/Default/DanhSachHoaDonTheoThang?Year=${value.Year}&Month=${value.Month}">
+                        <a href="/GiaoVien/QuanLy/DanhSachHoaDonTheoThang?Year=${value.Year}&Month=${value.Month}">
                             <i class="fa-regular fa-eye" style="color: blue; padding-right: 10px; cursor: pointer"></i>
                         </a>
                     </td>
