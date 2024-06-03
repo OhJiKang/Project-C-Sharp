@@ -41,6 +41,10 @@ namespace doanNet.Controllers
         }
         public ActionResult TinTuc()
         {
+            var CategoryBridge = db.CategoryBridges.ToList();
+            ViewBag.CategoryBridge = CategoryBridge;
+            var Post = db.Posts.ToList();
+            ViewBag.Post = Post;
             return View();
         }
         public ActionResult NoiQuy()
@@ -52,8 +56,17 @@ namespace doanNet.Controllers
        
             return View();
         }
-        public ActionResult ChiTietBaiDang()
+        public ActionResult ChiTietBaiDang(String Meta)
         {
+            var posts = db.Posts.Where(post => post.Meta == Meta).ToList();
+            ViewBag.Posts = posts;
+            var categoryBridges = db.CategoryBridges.ToList();
+            ViewBag.categoryBridges = categoryBridges;
+            var Category = db.Categories.ToList();
+            ViewBag.Category = Category;
+            var allPosts = db.Posts.ToList();
+            ViewBag.allPosts = allPosts;
+
             return View();
         }
         public ActionResult DangNhap()
