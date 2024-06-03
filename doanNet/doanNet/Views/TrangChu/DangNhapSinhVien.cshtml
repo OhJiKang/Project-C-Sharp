@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/layout3.cshtml";
 }
 @using System.Web.Optimization
-<script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/2.0.3/js/dataTables.js" crossorigin="anonymous"></script>
 @Scripts.Render("~/Areas/admin/Content/Script/JSAPI/AccountAPI.js")
 <style>
     body {
@@ -34,8 +32,13 @@
         align-items: center;
     }
 
-    .form-right i {
-        font-size: 100px;
+    
+    .divider:after,
+    .divider:before {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #eee;
     }
 </style>
 
@@ -44,89 +47,89 @@
     <h1 style="font-weight: bold; color: white; text-align: center; padding-top: 50px;">Đăng nhập</h1>
     <img src="~/Images/graduates.png" class="corner-image">
 </div>
+<section class="vh-90">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                     class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
 
-<div class="login-page">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1">
-
-                <div class="bg-white">
-                    <div class="row">
-                        <div class="col-md-12 pe-0">
-                            <div class="form-left h-100 py-5 px-5">
-                                <div class="col-12">
-                                    <label>Username<span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <div class="input-group-text"><i class="fa-solid fa-user"></i></div>
-                                        <input type="text" class="form-control mssv_place" placeholder="Nhập MSSV">
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label>Password<span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <div class="input-group-text"><i class="fa-solid fa-lock"></i></div>
-                                        <input type="password" class="form-control password_place" placeholder="Nhập Password">
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineFormCheck">
-                                        <label class="form-check-label" for="inlineFormCheck">Remember me</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <a href="#" class="float-end text-primary">Forgot Password?</a>
-                                </div>
-
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary px-4 float-end mt-4 btn_login">login</button>
-                                </div>
-                            </div>
-                        </div>
-                        <script>
-                            $(document).ready(() => {
-                                $(".btn_login").click(async () => {
-                                    const loginData = {
-                                        account: $(".mssv_place").val(),
-                                        password: $(".password_place").val(),
-                                    }
-                                    let response = await CheckingLogin(loginData);
-                                    if (response.status == 200) {
-                                        const AccountDetail = await response.json();
-                                        if (AccountDetail.Hide == 1) {
-                                            alert("Tài khoản sinh viên đã bị khóa");
-                                            return;
-                                        }
-                                        if (AccountDetail) {
-                                            sessionStorage.setItem("IDAccount", AccountDetail.IDAccount)
-                                            if (AccountDetail.Available == 0) {
-                                                window.location.href = "@Url.Action("DoiMatKhau", "TrangChu")"
-                                            }
-                                            else {
-                                                 if (AccountDetail.AccountTypeID == 6) {
-                                                    window.location.href="@Url.Action("MisTake", "SinhVien")"
-                                                }
-                                                if (AccountDetail.AccountTypeID == 5) {
-                                                    window.location.href="/SinhVienTuQuan/Default/DiemDanhKTX"
-                                                }
-                                            }
-
-                                        }
-                                    }
-                                    else {
-                                        alert("Đăng nhập thất bại")
-                                    }
-                            })
-                            })
-
-                        </script>
-                    </div>
+                <!-- Email input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="email" id="form1Example13" class="form-control form-control-lg mssv_place" />
+                    <label class="form-label" for="form1Example13">Email address</label>
                 </div>
 
+                <!-- Password input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="form1Example23" class="form-control form-control-lg password_place" />
+                    <label class="form-label" for="form1Example23">Password</label>
+                </div>
+
+                <div class="d-flex justify-content-around align-items-center mb-4">
+                    <!-- Checkbox -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                        <label class="form-check-label" for="form1Example3"> Remember me </label>
+                    </div>
+                    <a href="#!">Forgot password?</a>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block btn_login">Sign in</button>
+
+                <div class="divider d-flex align-items-center my-4">
+                    <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                </div>
+
+                <a data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"
+                   role="button">
+                    <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
+                </a>
+                <a data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!"
+                   role="button">
+                    <i class="fab fa-twitter me-2"></i>Continue with Twitter
+                </a>
+                <script>
+                     $(document).ready(() => {
+                         $(".btn_login").click(async () => {
+                             const loginData = {
+                                 account: $(".mssv_place").val(),
+                                 password: $(".password_place").val(),
+                             }
+                             let response = await CheckingLogin(loginData);
+                             if (response.status == 200) {
+                                 const AccountDetail = await response.json();
+                                 if (AccountDetail.Hide == 1) {
+                                     alert("Tài khoản sinh viên đã bị khóa");
+                                     return;
+                                 }
+                                 if (AccountDetail) {
+                                     sessionStorage.setItem("IDAccount", AccountDetail.IDAccount)
+                                     if (AccountDetail.Available == 0) {
+                                         window.location.href = "@Url.Action("DoiMatKhau", "TrangChu")"
+                                     }
+                                     else {
+                                          if (AccountDetail.AccountTypeID == 6) {
+                                             window.location.href="@Url.Action("Loi", "SinhVien")"
+                                         }
+                                         if (AccountDetail.AccountTypeID == 5) {
+                                             window.location.href="/SinhVienTuQuan/Default/DiemDanhKTX"
+                                         }
+                                     }
+
+                                 }
+                             }
+                             else {
+                                 alert("Đăng nhập thất bại")
+                             }
+                     })
+                     })
+
+                </script>
             </div>
         </div>
     </div>
-</div>
+</section>

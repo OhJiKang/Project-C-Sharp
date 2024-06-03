@@ -27,7 +27,7 @@ namespace doanNet.Controllers
         {
             return View();
         }
-        public ActionResult Mistake()
+        public ActionResult Loi()
         {
             return View();
         }
