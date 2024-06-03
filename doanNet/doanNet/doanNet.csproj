@@ -1688,6 +1688,7 @@
     <Content Include="Views\TrangChu\DangNhapGiaoVien.cshtml" />
     <Content Include="Views\TrangChu\DangNhapSinhVien.cshtml" />
     <Content Include="Views\Shared\layoutstudent.cshtml" />
+    <Content Include="Views\Shared\layoutSVTQ.cshtml" />
     <None Include="Views\Shared\layoutteacher.cshtml" />
     <Content Include="Views\TrangChu\TrangChu.cshtml" />
     <Content Include="Views\TrangChu\TinTuc.cshtml" />
