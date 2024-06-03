@@ -1,9 +1,11 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "DoiMatKhau";
     Layout = "~/Views/Shared/layout3.cshtml";
 }
-
+@using System.Web.Optimization
+<script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/2.0.3/js/dataTables.js" crossorigin="anonymous"></script>
+@Scripts.Render("~/Areas/admin/Content/Script/JSAPI/AccountAPI.js")
 <style>
     body {
         margin: 0;
@@ -53,12 +55,12 @@
                     <div class="row">
                         <div class="col-md-12 pe-0">
                             <div class="form-left h-100 py-5 px-5">
-                                <form action="" class="row g-4">
+                             
                                     <div class="col-12">
                                         <label>Tên đăng nhập<span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <div class="input-group-text"><i class="fa-solid fa-user"></i></div>
-                                            <input type="text" class="form-control" placeholder="Nhập tên đăng nhập">
+                                            <input type="text" class="form-control mssv_place" placeholder="Nhập tên đăng nhập">
                                         </div>
                                     </div>
 
@@ -66,23 +68,48 @@
                                         <label>Mật khẩu cũ<span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <div class="input-group-text"><i class="fa-solid fa-lock"></i></div>
-                                            <input type="text" class="form-control" placeholder="Nhập mật khẩu cũ">
+                                            <input type="password" class="form-control password_place" placeholder="Nhập mật khẩu cũ">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <label>Mật khẩu mới<span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <div class="input-group-text"><i class="fa-solid fa-lock"></i></div>
-                                            <input type="text" class="form-control" placeholder="Nhập mật khẩu mới">
+                                            <input type="password" class="form-control password_new_place" placeholder="Nhập mật khẩu mới">
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-primary px-4 float-end mt-4">Đổi mật khẩu </button>
+                                        <button type="button" class="btn btn-primary px-4 float-end mt-4 btn_change">Đổi mật khẩu </button>
                                     </div>
-                                </form>
+                            
                             </div>
                         </div>
-
+                        <script>
+                            $(document).ready(() => {
+                                $(".btn_change").click(async () => {
+                                    const loginData = {
+                                        account: $(".mssv_place").val(),
+                                        password: $(".password_place").val(),
+                                    }
+                                    let response = await CheckingLogin(loginData);
+                                    if (response.status == 200) {
+                                        const AccountDetail = await response.json();
+                                        if (AccountDetail.Hide == 1) {
+                                            alert("Tài khoản sinh viên đã bị khóa");
+                                            return;
+                                        }
+                                        if (AccountDetail) {
+                                            alert("Đổi mật khẩu thành công");
+                                            sessionStorage.setItem("IDAccount", AccountDetail.IDAccount)
+                                            await changingPassword(AccountDetail.IDAccount, $(".password_new_place").val());
+                                        }
+                                    }
+                                    else {
+                                        alert("Đăng nhập thất bại")
+                                    }
+                                })
+                            })
+                        </script>
                     </div>
                 </div>
 
