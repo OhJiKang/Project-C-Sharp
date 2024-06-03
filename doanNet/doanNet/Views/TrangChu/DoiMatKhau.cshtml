@@ -55,27 +55,18 @@
                     <div class="row">
                         <div class="col-md-12 pe-0">
                             <div class="form-left h-100 py-5 px-5">
-                             
                                     <div class="col-12">
-                                        <label>Tên đăng nhập<span class="text-danger">*</span></label>
-                                        <div class="input-group">
-                                            <div class="input-group-text"><i class="fa-solid fa-user"></i></div>
-                                            <input type="text" class="form-control mssv_place" placeholder="Nhập tên đăng nhập">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label>Mật khẩu cũ<span class="text-danger">*</span></label>
+                                        <label>Mật khẩu mới<span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <div class="input-group-text"><i class="fa-solid fa-lock"></i></div>
-                                            <input type="password" class="form-control password_place" placeholder="Nhập mật khẩu cũ">
+                                            <input type="password" class="form-control password_place" placeholder="Mật khẩu mới">
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <label>Mật khẩu mới<span class="text-danger">*</span></label>
+                                        <label>Xác nhận mật khẩu<span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <div class="input-group-text"><i class="fa-solid fa-lock"></i></div>
-                                            <input type="password" class="form-control password_new_place" placeholder="Nhập mật khẩu mới">
+                                            <input type="password" class="form-control password_new_place" placeholder="Xác nhận mật khẩu">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -87,26 +78,18 @@
                         <script>
                             $(document).ready(() => {
                                 $(".btn_change").click(async () => {
-                                    const loginData = {
-                                        account: $(".mssv_place").val(),
-                                        password: $(".password_place").val(),
+                                    if ($(".password_new_place").val() == $(".password_place").val()) {
+                                        const IDAccount = sessionStorage.getItem("IDAccount")
+                                        await changingPassword(IDAccount, $(".password_new_place").val());
+                                    const AccountTypeID = sessionStorage.getItem("AccountTypeID")
+                                        if (AccountTypeID == 6) {
+                                             window.location.href="@Url.Action("Loi", "SinhVien")"
+                                         }
+                                        if (AccountTypeID == 5) {
+                                             window.location.href="/SinhVienTuQuan/Default/DiemDanhKTX"
+                                         }
                                     }
-                                    let response = await CheckingLogin(loginData);
-                                    if (response.status == 200) {
-                                        const AccountDetail = await response.json();
-                                        if (AccountDetail.Hide == 1) {
-                                            alert("Tài khoản sinh viên đã bị khóa");
-                                            return;
-                                        }
-                                        if (AccountDetail) {
-                                            alert("Đổi mật khẩu thành công");
-                                            sessionStorage.setItem("IDAccount", AccountDetail.IDAccount)
-                                            await changingPassword(AccountDetail.IDAccount, $(".password_new_place").val());
-                                        }
-                                    }
-                                    else {
-                                        alert("Đăng nhập thất bại")
-                                    }
+
                                 })
                             })
                         </script>

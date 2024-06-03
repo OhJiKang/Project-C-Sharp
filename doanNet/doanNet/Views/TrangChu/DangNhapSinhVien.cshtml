@@ -108,6 +108,8 @@
                                  }
                                  if (AccountDetail) {
                                      sessionStorage.setItem("IDAccount", AccountDetail.IDAccount)
+                                     sessionStorage.setItem("AccountTypeID", AccountDetail.AccountTypeID)
+
                                      if (AccountDetail.Available == 0) {
                                          window.location.href = "@Url.Action("DoiMatKhau", "TrangChu")"
                                      }
