@@ -159,7 +159,7 @@
         public int IDAccount { get; set; }
         public int IDRoom { get; set; }
     */
-    $(".submit_btn").click(() => {
+    $(".submit_btn").click(async () => {
         var images = $("#cover_image_upload")[0].files
         var imagearr = [];
         // Loop through each selected file
@@ -175,7 +175,7 @@
             IDAccount: sessionStorage.getItem("IDAccount") == null ? 1 : sessionStorage.getItem("IDAccount"),
             ImageDescription: imagearr,
         }
-        postMistake(MistakeData)
+        await postMistake(MistakeData)
         document.location.href="@Url.Action("Loi", "QuanLy")";
     })
 </script>

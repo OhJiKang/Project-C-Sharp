@@ -19,9 +19,9 @@
     </div>
 </nav>
 <script>
-    /*$(document).ready(() => {
-        if (window.sessionStorage.getItem("IDAccount")) {
-            $(".IDAccount_Place").text()
+    $(document).ready(() => {
+        if (!window.sessionStorage.getItem("IDAccount")) {
+            window.location.href ="/TrangChu/DangNhapGiaoVien"
         }
-    })*/
+    })
 </script>
